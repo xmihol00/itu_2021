@@ -35,3 +35,7 @@ lib/
 
 appsettings.Development.json
 mono_crash*
+shell_config.sh
+DatabaseReset.sh
+reset_DB.sh
+DB_reset.sql

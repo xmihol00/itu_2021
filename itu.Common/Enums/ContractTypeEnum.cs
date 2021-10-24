@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace itu.DAL.Entities
+namespace itu.Common.Enums
 {
-    public class UserRoleEntity
+    public enum ContractTypeEnum
     {
     }
 }

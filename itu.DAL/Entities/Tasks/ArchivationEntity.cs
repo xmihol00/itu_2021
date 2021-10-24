@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using itu.Common.Enums;
 
 namespace itu.DAL.Entities.Tasks
 {
     public class ArchivationEntity : TaskEntity
     {
+        public LocationEnum Location { get; set; } 
+        public int Number { get; set; }
+        public DateTime Cancallation { get; set; }
     }
 }

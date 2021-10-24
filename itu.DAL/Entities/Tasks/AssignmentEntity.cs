@@ -8,5 +8,9 @@ namespace itu.DAL.Entities.Tasks
 {
     public class AssignmentEntity : TaskEntity
     {
+        public string FormId { get; set; }
+        public string Reason { get; set; }
+        public string OrderName { get; set; }
+        public double Price { get; set; }
     }
 }

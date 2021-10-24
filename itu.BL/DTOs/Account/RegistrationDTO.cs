@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace itu.DAL.Entities
+namespace itu.BL.DTOs.Account
 {
-    public class UserEntity
+    public class RegistrationDTO
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
+        public string Surrname { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public string ReturnURL { get; set; }
     }
 }

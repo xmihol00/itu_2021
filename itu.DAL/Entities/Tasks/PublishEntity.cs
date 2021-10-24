@@ -8,5 +8,8 @@ namespace itu.DAL.Entities.Tasks
 {
     public class PublishEntity : TaskEntity
     {
+        public string PublishId { get; set; }
+        public DateTime PublishStart { get; set; }
+        public DateTime PublishEnd { get; set; }
     }
 }

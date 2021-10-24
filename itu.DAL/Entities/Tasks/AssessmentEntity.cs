@@ -8,5 +8,7 @@ namespace itu.DAL.Entities.Tasks
 {
     public class AssessmentEntity : TaskEntity
     {
+        public string AssessmentId { get; set; }
+        public string Conclusion { get; set; }
     }
 }
