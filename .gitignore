@@ -31,3 +31,7 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+lib/
+
+appsettings.Development.json
+mono_crash*
