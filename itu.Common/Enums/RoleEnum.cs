@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace itu.Common.Enums
 {
-    public enum PriorityEnum
+    public enum RoleEnum
     {
-        Low,
-        Normal,
-        High,
-        Urgent,
+        Assigner,
+        Acceptor,
+        Lawyer,
+        Publisher,
+        Estimator,
+        Archivator,
+        Reviewer,
     }
 }

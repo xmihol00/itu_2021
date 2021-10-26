@@ -8,5 +8,6 @@ namespace itu.DAL.Entities
 {
     public class AgendaEntity
     {
+        public int Id { get; set; }
     }
 }

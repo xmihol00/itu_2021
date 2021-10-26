@@ -19,6 +19,11 @@ namespace itu.DAL
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<TaskEntity>().HasKey(x => x.Id);
+            modelBuilder.Entity<TaskEntity>().HasOne(x => x.Previous).WithOne(x => x.Next).HasForeignKey<TaskEntity>(x => x.PreviousId);
+            modelBuilder.Entity<TaskEntity>().HasOne(x => x.Next).WithOne(x => x.Previous).HasForeignKey<TaskEntity>(x => x.NextId);
+            modelBuilder.Entity<TaskEntity>().HasOne(x => x.User).WithMany(x => x.Tasks).HasForeignKey(x => x.UserId);
+
             modelBuilder.Entity<ContractEntity>().ToTable("Contracts");
             modelBuilder.Entity<AcceptationEntity>().ToTable("Acceptations");
             modelBuilder.Entity<ArchivationEntity>().ToTable("Archivations");
@@ -26,6 +31,8 @@ namespace itu.DAL
             modelBuilder.Entity<AssignmentEntity>().ToTable("Assignments");
             modelBuilder.Entity<EstimateEntity>().ToTable("Estimates");
             modelBuilder.Entity<PublishEntity>().ToTable("Publishes");
+
+            modelBuilder.Entity<UserAgendaEntity>().HasKey(x => new { x.AgendaId, x.UserId, x.Role });
         }
     }
 }
