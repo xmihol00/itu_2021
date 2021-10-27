@@ -14,5 +14,6 @@ namespace itu.DAL.Entities
         public string UserName { get; set; }
         public string Password { get; set; }
         public List<TaskEntity> Tasks { get; set; }
+        public List<AgendaRoleEntity> AgendaRoles { get; set; }
     }
 }

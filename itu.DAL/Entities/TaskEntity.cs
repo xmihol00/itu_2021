@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using itu.Common.Enums;
+using itu.DAL.Entities.Tasks;
 
 namespace itu.DAL.Entities
 {
@@ -23,5 +24,39 @@ namespace itu.DAL.Entities
         public TaskEntity Next { get; set; }
         public int UserId { get; set; }
         public UserEntity User { get; set; }
+        public int WorkflowId { get; set; }
+        public WorkflowEntity Workflow { get; set; }
+        public List<FileEntity> Files { get; set; }
+
+
+        public static TaskEntity Factory(TaskTypeEnum type)
+        {
+            switch (type)
+            {
+                case TaskTypeEnum.Acceptation:
+                    return new AcceptationEntity();
+                
+                case TaskTypeEnum.Archivation:
+                    return new ArchivationEntity();
+                
+                case TaskTypeEnum.Assessment:
+                    return new AssessmentEntity();
+
+                case TaskTypeEnum.Assignment:
+                    return new AssignmentEntity();
+                
+                case TaskTypeEnum.Contract:
+                    return new ContractEntity();
+                
+                case TaskTypeEnum.Estimate:
+                    return new EstimateEntity();
+
+                case TaskTypeEnum.Publish:
+                    return new PublishEntity();
+                
+                default:
+                    return new TaskEntity();
+            }
+        }
     }
 }

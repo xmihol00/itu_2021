@@ -1,5 +1,6 @@
 ﻿using itu.DAL.Entities;
 using itu.DAL.Entities.Tasks;
+using itu.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,17 @@ namespace itu.DAL
     {
         public ItuDbContext(DbContextOptions<ItuDbContext> options) : base(options) { }
 
+        public DbSet<WorkflowEntity> Workflows { get; set; }
+        public DbSet<NoteEntity> Notes { get; set; }
+        public DbSet<AgendaEntity> Agendas { get; set; }
+        public DbSet<AgendaRoleEntity> AgendaRoles { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<ModelWorkflowEntity> ModelWorkflows { get; set; }
+        public DbSet<ModelWorkflowTaskEntity> ModelWorkflowTasks { get; set; }
+        public DbSet<ModelTaskEntity> ModelTasks { get; set; }
         public DbSet<TaskEntity> Tasks { get; set; }
+        public DbSet<FileEntity> Files { get; set; }
+        public DbSet<FileDataEntity> FileData { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,7 +43,30 @@ namespace itu.DAL
             modelBuilder.Entity<EstimateEntity>().ToTable("Estimates");
             modelBuilder.Entity<PublishEntity>().ToTable("Publishes");
 
-            modelBuilder.Entity<UserAgendaEntity>().HasKey(x => new { x.AgendaId, x.UserId, x.Role });
+            modelBuilder.Entity<ModelTaskEntity>().HasKey(x => x.Id);
+            modelBuilder.Entity<ModelTaskEntity>().HasMany(x => x.WorkflowTasks).WithOne(x => x.ModelTask).HasForeignKey(x => x.ModelTaskId);
+
+            modelBuilder.Entity<NoteEntity>().HasKey(x => x.Id);
+            modelBuilder.Entity<NoteEntity>().HasOne(x => x.Workflow).WithMany(x => x.Notes).HasForeignKey(x => x.WorkflowId);
+
+            modelBuilder.Entity<WorkflowEntity>().HasKey(x => x.Id);
+            modelBuilder.Entity<WorkflowEntity>().HasOne(x => x.Agenda).WithMany(x => x.Workflows).HasForeignKey(x => x.AgendaId);
+            modelBuilder.Entity<WorkflowEntity>().HasMany(x => x.Tasks).WithOne(x => x.Workflow).HasForeignKey(x => x.WorkflowId);
+            modelBuilder.Entity<WorkflowEntity>().HasOne(x => x.ModelWorkflow).WithMany(x => x.Worflows).HasForeignKey(x => x.ModelWorkflowId);
+
+            modelBuilder.Entity<ModelWorkflowTaskEntity>().HasKey(x => new { x.ModelTaskId, x.ModelWorkflowId });
+
+            modelBuilder.Entity<ModelWorkflowEntity>().HasKey(x => x.Id);
+            modelBuilder.Entity<ModelWorkflowEntity>().HasMany(x => x.WorkflowTasks).WithOne(x => x.ModelWorkflow).HasForeignKey(x => x.ModelWorkflowId);
+
+            modelBuilder.Entity<UserEntity>().HasKey(x => x.Id);
+            modelBuilder.Entity<UserEntity>().HasMany(x => x.AgendaRoles).WithOne(x => x.User).HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<FileEntity>().HasOne(x => x.Task).WithMany(x => x.Files).HasForeignKey(x => x.TaskId);
+            modelBuilder.Entity<FileEntity>().HasOne(x => x.Data).WithOne(x => x.File).HasForeignKey<FileEntity>(x => x.FileDataId);
+
+            modelBuilder.SeedModelTasks();
+            modelBuilder.SeedModelWorkflows();
         }
     }
 }

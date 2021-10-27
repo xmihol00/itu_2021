@@ -8,5 +8,8 @@ namespace itu.DAL.Entities
 {
     public class FileDataEntity
     {
+        public int Id { get; set; }
+        public byte[] Data { get; set; }
+        public FileEntity File { get; set; }
     }
 }
