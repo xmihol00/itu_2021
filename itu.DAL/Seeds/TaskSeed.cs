@@ -17,32 +17,85 @@ namespace itu.DAL.Seeds
             new AssignmentEntity()
             {
                 Id = 1,
-                Active = true,
-                DelayReason = "",
-                OrderName = "First Order",
-                Start = DateTime.Now.AddDays(-3),
-                End = DateTime.Now.AddDays(8),
-                Name = "Order Assignment",
-                PreviousId = null,
-                NextId = 2,
-                Reason = "We need this!",
-                FormNumber = "855AAVFS66",
-                Note = "This is just an ordinary order.",
-                Price = 56_251.50,
-                Priority = PriorityEnum.Normal,
                 UserId = 1,
+                WorkflowId = 1,
+                Name = "Testovací zadání",
+                Active = true,
+                End = DateTime.Now.AddDays(3),
+                NextId = 2,
+                PreviousId = null,
+                Priority = PriorityEnum.Low,
             },
 
             new AcceptationEntity()
             {
                 Id = 2,
-                Active = false,
-                DelayReason = "",
-                Name = "Acceptition Order",
-                Accepted = false,
-                Priority = PriorityEnum.Low,
                 UserId = 1,
-            }
+                WorkflowId = 1,
+                Name = "Testovací schválení",
+                Active = false,
+                End = DateTime.Now.AddDays(25),
+                PreviousId = 1,
+                NextId = 3,
+                Priority = PriorityEnum.Medium,
+            },
+
+            new AssessmentEntity()
+            {
+                Id = 3,
+                UserId = 1,
+                WorkflowId = 1,
+                Name = "Testovací externí posouzení",
+                Active = false,
+                PreviousId = 2,
+                NextId = 4,
+                Priority = PriorityEnum.High,
+            },
+
+            new EstimateEntity()
+            {
+                Id = 4,
+                UserId = 1,
+                WorkflowId = 1,
+                Name = "Testovací odhad ceny",
+                Active = false,
+                PreviousId = 3,
+                NextId = 5,
+                Priority = PriorityEnum.Urgent,
+            },
+
+            new ContractEntity()
+            {
+                Id = 5,
+                UserId = 1,
+                WorkflowId = 1,
+                Name = "Testovací tvorba smlouvy",
+                Active = false,
+                PreviousId = 4,
+                NextId = 6,
+            },
+
+            new PublishEntity()
+            {
+                Id = 6,
+                UserId = 1,
+                WorkflowId = 1,
+                Name = "Testovací zveřejnění",
+                Active = false,
+                PreviousId = 5,
+                NextId = 7,
+            },
+
+            new PublishEntity()
+            {
+                Id = 7,
+                UserId = 1,
+                WorkflowId = 1,
+                Name = "Testovací archivace",
+                Active = false,
+                PreviousId = 6,
+                NextId = null,
+            },
         };
 
         public static void SeedTasks(this ModelBuilder modelBuilder)

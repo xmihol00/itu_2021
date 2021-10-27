@@ -10,7 +10,7 @@ namespace itu.DAL.Entities
     public class WorkflowEntity
     {
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
         public DateTime Creation { get; set; }
         public DateTime ExpectedEnd { get; set; }
         public WorkflowStateEnum State { get; set; }

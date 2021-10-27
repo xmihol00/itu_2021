@@ -58,5 +58,41 @@ namespace itu.DAL.Entities
                     return new TaskEntity();
             }
         }
+
+        public static string ToLabel(Type type)
+        {
+            if (type == typeof(AcceptationEntity))
+            {
+                return "Schválení";
+            }
+            else if (type == typeof(AssignmentEntity))
+            {
+                return "Zadání";
+            }
+            else if (type == typeof(AssessmentEntity))
+            {
+                return "Posouzení";
+            }
+            else if (type == typeof(ArchivationEntity))
+            {
+                return "Archivace";
+            }
+            else if (type == typeof(PublishEntity))
+            {
+                return "Zveřejnění";
+            }
+            else if (type == typeof(ContractEntity))
+            {
+                return "Tvorba smlouvy";
+            }
+            else if (type == typeof(EstimateEntity))
+            {
+                return "Odhad ceny";
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
 }

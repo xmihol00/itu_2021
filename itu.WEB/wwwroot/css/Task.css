@@ -1,0 +1,39 @@
+
+.container {
+    width: 80%;
+    max-width: 1500px;
+    min-width: 1000px;
+}
+
+.ov-btn-width {
+    width: 80px;
+}
+
+
+.priority {
+    width: 85px;
+    margin-top: -4px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 15px;
+    color: var(--color-text-inverted);
+    padding: 4px 12px;
+    text-align: center;
+}
+
+.Low {
+    background-color: var(--color-prio-low);
+}
+
+.Medium {
+    background-color: var(--color-prio-medium);
+}
+
+.High {
+    background-color: var(--color-prio-high);
+}
+
+.Urgent {
+    background-color: var(--color-prio-urgent);
+}

@@ -11,7 +11,7 @@ namespace itu.DAL.Entities
     {
         public int Id { get; set; }
         public TaskTypeEnum Type { get; set; }
-        public TimeSpan Difficulty { get; set; }
+        public int Difficulty { get; set; }
         public List<ModelWorkflowTaskEntity> WorkflowTasks { get; set; }
     }
 }

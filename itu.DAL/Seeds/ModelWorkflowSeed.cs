@@ -50,10 +50,7 @@ namespace itu.DAL.Seeds
 
         public static void SeedModelWorkflows(this ModelBuilder modelBuilder)
         {
-            foreach (ModelWorkflowEntity modelWorkflow in _modelWorkflows)
-            {
-                modelBuilder.Entity<ModelWorkflowEntity>().HasData(modelWorkflow);
-            }
+            modelBuilder.Entity<ModelWorkflowEntity>().HasData(_modelWorkflows);
         }
     }
 }

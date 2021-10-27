@@ -11,9 +11,16 @@ namespace itu.WEB.Controllers
     [Authorize]
     public class TaskController : BaseController
     {
+        private readonly TaskFacade _facade;
+
+        public TaskController(TaskFacade facade)
+        {
+            _facade = facade;
+        }
+
         public async Task<IActionResult> Overview()
         {
-            return View();
+            return View(await _facade.AllOfUser(ViewBag.Id));
         }
     }
 }

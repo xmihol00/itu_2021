@@ -14,5 +14,7 @@ namespace itu.DAL.Entities
         public DateTime Creation { get; set; }
         public List<WorkflowEntity> Workflows { get; set; }
         public List<AgendaRoleEntity> AgendaRoles { get; set; }
+        public int AdministratorId { get; set; }
+        public UserEntity Administrator { get; set; }
     }
 }

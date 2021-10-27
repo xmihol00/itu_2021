@@ -168,10 +168,7 @@ namespace itu.DAL.Seeds
 
         public static void SeedModelWorkflowTasks(this ModelBuilder modelBuilder)
         {
-            foreach (ModelWorkflowTaskEntity modelWorkflowTaks in _workflowTasks)
-            {
-                modelBuilder.Entity<ModelWorkflowTaskEntity>().HasData(modelWorkflowTaks);
-            }
+            modelBuilder.Entity<ModelWorkflowTaskEntity>().HasData(_workflowTasks);
         }
     }
 }

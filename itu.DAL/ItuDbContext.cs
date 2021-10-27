@@ -31,9 +31,10 @@ namespace itu.DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<TaskEntity>().HasKey(x => x.Id);
-            modelBuilder.Entity<TaskEntity>().HasOne(x => x.Previous).WithOne(x => x.Next).HasForeignKey<TaskEntity>(x => x.PreviousId);
-            modelBuilder.Entity<TaskEntity>().HasOne(x => x.Next).WithOne(x => x.Previous).HasForeignKey<TaskEntity>(x => x.NextId);
+            modelBuilder.Entity<TaskEntity>().HasOne(x => x.Previous).WithOne(x => x.Next).HasForeignKey<TaskEntity>(x => x.PreviousId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<TaskEntity>().HasOne(x => x.Next).WithOne(x => x.Previous).HasForeignKey<TaskEntity>(x => x.NextId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<TaskEntity>().HasOne(x => x.User).WithMany(x => x.Tasks).HasForeignKey(x => x.UserId);
+            modelBuilder.Entity<TaskEntity>().HasOne(x => x.Workflow).WithMany(x => x.Tasks).HasForeignKey(x => x.WorkflowId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ContractEntity>().ToTable("Contracts");
             modelBuilder.Entity<AcceptationEntity>().ToTable("Acceptations");
@@ -51,7 +52,6 @@ namespace itu.DAL
 
             modelBuilder.Entity<WorkflowEntity>().HasKey(x => x.Id);
             modelBuilder.Entity<WorkflowEntity>().HasOne(x => x.Agenda).WithMany(x => x.Workflows).HasForeignKey(x => x.AgendaId);
-            modelBuilder.Entity<WorkflowEntity>().HasMany(x => x.Tasks).WithOne(x => x.Workflow).HasForeignKey(x => x.WorkflowId);
             modelBuilder.Entity<WorkflowEntity>().HasOne(x => x.ModelWorkflow).WithMany(x => x.Worflows).HasForeignKey(x => x.ModelWorkflowId);
 
             modelBuilder.Entity<ModelWorkflowTaskEntity>().HasKey(x => new { x.ModelTaskId, x.ModelWorkflowId });
@@ -65,8 +65,22 @@ namespace itu.DAL
             modelBuilder.Entity<FileEntity>().HasOne(x => x.Task).WithMany(x => x.Files).HasForeignKey(x => x.TaskId);
             modelBuilder.Entity<FileEntity>().HasOne(x => x.Data).WithOne(x => x.File).HasForeignKey<FileEntity>(x => x.FileDataId);
 
+            modelBuilder.Entity<AgendaEntity>().HasKey(x => x.Id);
+            modelBuilder.Entity<AgendaEntity>().HasOne(x => x.Administrator).WithMany(x => x.Agendas).HasForeignKey(x => x.AdministratorId);
+
+            modelBuilder.Entity<AgendaRoleEntity>().HasKey(x => x.Id);
+            modelBuilder.Entity<AgendaRoleEntity>().HasOne(x => x.Agenda).WithMany(x => x.AgendaRoles).HasForeignKey(x => x.AgendaId);
+            modelBuilder.Entity<AgendaRoleEntity>().HasOne(x => x.User).WithMany(x => x.AgendaRoles).HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<FileDataEntity>().HasKey(x => x.Id);
+
             modelBuilder.SeedModelTasks();
             modelBuilder.SeedModelWorkflows();
+            modelBuilder.SeedModelWorkflowTasks();
+            modelBuilder.SeedUsers();
+            modelBuilder.SeedAgendas();
+            modelBuilder.SeedTasks();
+            modelBuilder.SeedWorkflows();
         }
     }
 }

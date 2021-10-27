@@ -41,11 +41,13 @@ namespace itu.WEB
 
             services.AddDbContext<ItuDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DB")));
 
-            services.AddAutoMapper(typeof(UserProfiles));
+            services.AddAutoMapper(typeof(UserProfiles), typeof(TaskProfiles));
 
             services.AddScoped<UserRepository>();
+            services.AddScoped<TaskRepository>();
 
             services.AddScoped<UserFacade>();
+            services.AddScoped<TaskFacade>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

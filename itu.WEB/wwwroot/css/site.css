@@ -1,5 +1,25 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿:root {
+  --color-bg: #fff;
+  --color-bg-transparent: rgba(255, 255, 255, 0.8);
+  --color-bg-light: #f0f0f0;
+  --color-bg-dark: #343a40;
+  --color-text-default: #000;
+  --color-text-inverted: #fff;
+  --color-text-accent: #1b75bb;
+  --color-text-accent-inverted: #000;
+  --color-focus: #1b75bb;
+  --color-border: #dcdcdc;
+  --color-border-focus: #1861ac;
+  --color-border-dark: #343a40;
+  --color-warning: #fc6a00;
+  --color-required: #750000;
+  --color-bg-success: #28a745;
+  --color-border-success: #018f5b;
+  --color-prio-low: #007bff;
+  --color-prio-medium: #fc6a00;
+  --color-prio-high: #cf0000;
+  --color-prio-urgent: #4c00ff;
+}
 
 a.navbar-brand {
   white-space: normal;
@@ -7,7 +27,6 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
 }
@@ -24,8 +43,6 @@ a {
   border-color: #1861ac;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
 html {
   font-size: 14px;
 }
@@ -68,4 +85,74 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.signin-box {
+  width: 450px;
+  padding: 10px;
+  border: var(--color-border) solid 1px;
+  border-radius: 4px;
+  background-color: var(--color-bg-light);
+}
+
+.signin-headline {
+  text-align: center;
+  margin-top: 8%;
+  margin-bottom: 1%;
+}
+
+
+.page-name {
+  color: var(--color-text-inverted);
+  background: var(--color-bg-dark);
+  border-radius: 10px;
+  width: fit-content;
+  padding: 3px 10px;
+}
+
+.page-title-line
+{
+  margin-top: -2px;
+  margin-bottom: 0px;
+}
+
+.card {
+  margin: 10px;
+  padding: 10px 10px 0px 10px;
+  color: black;
+  border-color: var(--color-border);
+  border-width: 2px;
+  background: var(--color-bg-light);
+}
+
+.card-focus {
+  border-color: var(--color-border-focus);
+  border-width: 2px;
+  border-style: dashed;
+}
+
+/*.card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 5px 10px rgba(37, 33, 82, 0.12), 0 2px 4px rgba(37, 33, 82, 0.06);
+}*/
+
+.fit {
+  width: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.date-green {
+  color: green;
+  min-width: 116px;
+}
+
+.date-orange {
+  color: var(--color-prio-medium);
+  min-width: 116px;
+}
+
+.date-red {
+  color: var(--color-prio-high);
+  min-width: 116px;
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using itu.BL.DTOs.Account;
+using itu.DAL.Entities;
 using itu.DAL.Repositories;
 
 namespace itu.BL.Facades
@@ -17,6 +19,11 @@ namespace itu.BL.Facades
         {
             _repository = repository;
             _mapper = mapper;
+        }
+
+        public Task<UserEntity> Authenticate(SignInDTO model)
+        {
+            return _repository.Authenticate(model.UserName, model.Password);
         }
     }
 }
