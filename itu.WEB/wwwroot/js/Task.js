@@ -23,15 +23,13 @@ function SolveTask(element)
             CountDown();
 
             document.getElementById("Card" + SelectedId).classList.remove("card-selected");
-            document.getElementById(SelectedId).style.display = "block";
-            document.getElementById("WF" + SelectedId).classList.remove("float-right");
-            document.getElementById("Prio" + SelectedId).classList.remove("priority-selected");
+            document.getElementById("Select" + SelectedId).style.display = "none";
+            document.getElementById("Unselect" + SelectedId).style.display = "block";
 
             SelectedId = element.id;
-            document.getElementById(SelectedId).style.display = "none";
-            document.getElementById("WF" + SelectedId).classList.add("float-right")
             document.getElementById("Card" + SelectedId).classList.add("card-selected");
-            document.getElementById("Prio" + SelectedId).classList.add("priority-selected");
+            document.getElementById("Select" + SelectedId).style.display = "block";
+            document.getElementById("Unselect" + SelectedId).style.display = "none";
         })
         .fail(function (result)
         {

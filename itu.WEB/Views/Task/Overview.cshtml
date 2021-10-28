@@ -33,7 +33,7 @@
                     <h1>@first.WorkflowName</h1>
                 </div>
                 <div id=@($"Unselect{first.Id}") class="dis-none">
-                    <span id=@($"Prio{first.Id}") class="priority priority-selected @first.Priority">@first.Priority.ToLabel()</span>
+                    <span class="priority @first.Priority">@first.Priority.ToLabel()</span>
                     <div class="d-flex justify-content-between mb-2">
                         <h5 class="fit ml-1">@first.Type</h5>
                         @if (first.End.Date > DateTime.Now.Date.AddDays(3))
@@ -54,8 +54,8 @@
                     </div>
                     <div class="mb-2">
                         <a href="~/Agenda/Detail/@first.AgendaId" class="btn btn-sm btn-primary ov-btn-width">Agenda</a>
-                        <a id=@($"WF{first.Id}") href="~/Workflow/Detail/@first.WorkflowId" class="btn btn-sm btn-primary ov-btn-width ml-1 float-right">Workflow</a>
-                        <button id="@first.Id" onclick="SolveTask(this)" class="btn btn-sm btn-primary ov-btn-width float-right dis-none">
+                        <a href="~/Workflow/Detail/@first.WorkflowId" class="btn btn-sm btn-primary ov-btn-width ml-1">Workflow</a>
+                        <button id="@first.Id" onclick="SolveTask(this)" class="btn btn-sm btn-primary ov-btn-width float-right">
                             Řešit <i class="fas fa-arrow-right ml-2"></i>
                         </button>
                     </div>
@@ -65,31 +65,36 @@
         @foreach (AllTaskDTO task in Model.Tasks.Skip(1))
         {
             <div id=@($"Card{task.Id}") class="card">
-                <span id=@($"Prio{task.Id}") class="priority @task.Priority">@task.Priority.ToLabel()</span>
-                <div class="d-flex justify-content-between mb-2">
-                    <h5 class="fit ml-1">@task.Type</h5>
-                    @if (task.End.Date > DateTime.Now.Date.AddDays(3))
-                    {
-                        <h5 class="fit date-green">@task.End.ToString("dd. MM. yyyy")</h5>
-                    }
-                    else if (task.End.Date >= DateTime.Now.Date)
-                    {
-                        <h5 class="fit date-orange">@task.End.ToString("dd. MM. yyyy")</h5>
-                    }
-                    else
-                    {
-                        <h5 class="fit date-red">@task.End.ToString("dd. MM. yyyy")</h5>
-                    }
+                <div id=@($"Select{task.Id}") class="dis-none">
+                    <h1>@task.WorkflowName</h1>
                 </div>
-                <div class="d-flex justify-content-center mb-3">
-                    <h3 class="fit">@task.WorkflowName</h3>
-                </div>
-                <div class="mb-2">
-                    <a href="~/Agenda/Detail/@task.AgendaId" class="btn btn-sm btn-primary ov-btn-width">Agenda</a>
-                    <a id=@($"WF{task.Id}") href="~/Workflow/Detail/@task.WorkflowId" class="btn btn-sm btn-primary ov-btn-width ml-1">Workflow</a>
-                    <button id="@task.Id" onclick="SolveTask(this)" class="btn btn-sm btn-primary ov-btn-width float-right">
-                        Řešit <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                <div id=@($"Unselect{task.Id}")>
+                    <span class="priority @task.Priority">@task.Priority.ToLabel()</span>
+                    <div class="d-flex justify-content-between mb-2">
+                        <h5 class="fit ml-1">@task.Type</h5>
+                        @if (task.End.Date > DateTime.Now.Date.AddDays(3))
+                        {
+                            <h5 class="fit date-green">@task.End.ToString("dd. MM. yyyy")</h5>
+                        }
+                        else if (task.End.Date >= DateTime.Now.Date)
+                        {
+                            <h5 class="fit date-orange">@task.End.ToString("dd. MM. yyyy")</h5>
+                        }
+                        else
+                        {
+                            <h5 class="fit date-red">@task.End.ToString("dd. MM. yyyy")</h5>
+                        }
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <h3 class="fit">@task.WorkflowName</h3>
+                    </div>
+                    <div class="mb-2">
+                        <a href="~/Agenda/Detail/@task.AgendaId" class="btn btn-sm btn-primary ov-btn-width">Agenda</a>
+                        <a href="~/Workflow/Detail/@task.WorkflowId" class="btn btn-sm btn-primary ov-btn-width ml-1">Workflow</a>
+                        <button id="@task.Id" onclick="SolveTask(this)" class="btn btn-sm btn-primary ov-btn-width float-right">
+                            Řešit <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         }
