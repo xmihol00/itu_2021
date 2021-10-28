@@ -1,5 +1,7 @@
 @model List<AllTaskDTO>
 
+<script src="/js/Task.js"></script>
+
 <link rel="stylesheet" href="~/css/Task.css" />
     
 <div class="d-flex justify-content-between">
@@ -44,12 +46,14 @@
                 <div class="mb-2">
                     <a href="~/Agenda/Detail/@task.AgendaId" class="btn btn-sm btn-primary ov-btn-width">Agenda</a>
                     <a href="~/Workflow/Detail/@task.WorkflowId" class="btn btn-sm btn-primary ov-btn-width ml-1">Workflow</a>
-                    <button class="btn btn-sm btn-success ov-btn-width float-right">Řešit <i class="fas fa-arrow-right ml-2"></i></button>
+                    <button id="@task.Id" onclick="SolveTask(this)" class="btn btn-sm btn-primary ov-btn-width float-right">
+                        Řešit <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
                 </div>
             </div>
         }
     </div>
-    <div class="col-md-7">
+    <div id="DetailDiv" class="col-md-7">
 
     </div>
 </div>

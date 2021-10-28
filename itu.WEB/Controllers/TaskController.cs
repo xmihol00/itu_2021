@@ -22,5 +22,10 @@ namespace itu.WEB.Controllers
         {
             return View(await _facade.AllOfUser(ViewBag.Id));
         }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            return PartialView(await _facade.Detail(ViewBag.Id, id));
+        }
     }
 }

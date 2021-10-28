@@ -49,7 +49,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 9, 27, 20, 5, 32, 357, DateTimeKind.Local).AddTicks(7273),
+                            Creation = new DateTime(2021, 9, 28, 17, 35, 3, 706, DateTimeKind.Local).AddTicks(3079),
                             Description = "Agenda správující jednoduchuché nákupy bez vúběrových řízení",
                             Name = "Nákupy"
                         },
@@ -57,7 +57,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             AdministratorId = 2,
-                            Creation = new DateTime(2021, 10, 22, 20, 5, 32, 358, DateTimeKind.Local).AddTicks(9377),
+                            Creation = new DateTime(2021, 10, 23, 17, 35, 3, 707, DateTimeKind.Local).AddTicks(1108),
                             Description = "Agenda spravující menší a střední zakázky",
                             Name = "Malé a střední zakázky"
                         },
@@ -65,7 +65,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 8, 28, 20, 5, 32, 358, DateTimeKind.Local).AddTicks(9406),
+                            Creation = new DateTime(2021, 8, 29, 17, 35, 3, 707, DateTimeKind.Local).AddTicks(1131),
                             Description = "Agenda spravující důležité velké zakázky",
                             Name = "Velké zakázky"
                         });
@@ -761,15 +761,18 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             Active = false,
-                            End = new DateTime(2021, 11, 21, 20, 5, 32, 360, DateTimeKind.Local).AddTicks(2441),
+                            DelayReason = "dovolená",
+                            End = new DateTime(2021, 11, 22, 17, 35, 3, 708, DateTimeKind.Local).AddTicks(1306),
                             Name = "Testovací schválení",
                             NextId = 3,
+                            Note = "Přijato bez výhrad",
                             PreviousId = 1,
                             Priority = 1,
                             Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1,
                             WorkflowId = 1,
-                            Accepted = false
+                            Accepted = true,
+                            Reason = "Pěkně vypracováno"
                         });
                 });
 
@@ -840,14 +843,19 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            End = new DateTime(2021, 10, 30, 20, 5, 32, 360, DateTimeKind.Local).AddTicks(992),
+                            DelayReason = "Testovací důvod vrácení",
+                            End = new DateTime(2021, 10, 31, 17, 35, 3, 707, DateTimeKind.Local).AddTicks(9673),
                             Name = "Testovací zadání",
                             NextId = 2,
+                            Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
                             Priority = 0,
-                            Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Start = new DateTime(2021, 10, 25, 17, 35, 3, 708, DateTimeKind.Local).AddTicks(908),
                             UserId = 1,
                             WorkflowId = 1,
-                            Price = 0.0
+                            FormNumber = "AXLO9854ZZ",
+                            OrderName = "Testovcí úkol",
+                            Price = 8523.5,
+                            Reason = "Testovací důvod vypsání tohoto úkolu."
                         });
                 });
 

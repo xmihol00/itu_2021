@@ -24,5 +24,10 @@ namespace itu.BL.Facades
         {
             return _mapper.Map<List<AllTaskDTO>>(await _repository.AllOfUser(userId));
         }
+
+        public async Task<DetailTaskDTO> Detail(int userId, int taskId)
+        {
+            return _mapper.Map<DetailTaskDTO>(await _repository.Detail(userId, taskId));
+        }
     }
 }

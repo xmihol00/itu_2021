@@ -1,0 +1,12 @@
+@model DetailTaskDTO
+
+<h1>@Model.Name</h1>
+@switch (Model)
+{
+    case IAssignmentDTO assignment:
+        <h2>@assignment.OrderName</h2>
+        break;
+
+    default:
+        break;
+}

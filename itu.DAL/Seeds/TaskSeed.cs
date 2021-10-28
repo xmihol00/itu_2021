@@ -25,6 +25,13 @@ namespace itu.DAL.Seeds
                 NextId = 2,
                 PreviousId = null,
                 Priority = PriorityEnum.Low,
+                DelayReason = "Testovací důvod vrácení",
+                FormNumber = "AXLO9854ZZ",
+                Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
+                OrderName = "Testovcí úkol",
+                Price = 8523.5,
+                Start = DateTime.Now.AddDays(-3),
+                Reason = "Testovací důvod vypsání tohoto úkolu."
             },
 
             new AcceptationEntity()
@@ -38,6 +45,10 @@ namespace itu.DAL.Seeds
                 PreviousId = 1,
                 NextId = 3,
                 Priority = PriorityEnum.Medium,
+                Accepted = true,
+                Note = "Přijato bez výhrad",
+                Reason = "Pěkně vypracováno",
+                DelayReason = "dovolená"
             },
 
             new AssessmentEntity()

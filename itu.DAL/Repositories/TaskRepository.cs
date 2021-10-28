@@ -16,5 +16,11 @@ namespace itu.DAL.Repositories
         {
             return _dbSet.Where(x => x.UserId == userId).ToListAsync();
         }
+
+        public Task<TaskEntity> Detail(int userId, int taskId)
+        {
+            return _dbSet.Include(x => x.Files)
+                         .FirstAsync(x => x.Id == taskId && x.UserId == userId);
+        }
     }
 }
