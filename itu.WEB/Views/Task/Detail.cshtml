@@ -1,12 +1,28 @@
 @model DetailTaskDTO
 
-<h1>@Model.Name</h1>
-@switch (Model)
-{
-    case IAssignmentDTO assignment:
-        <h2>@assignment.OrderName</h2>
-        break;
+<script>
+    var EndDate = new Date('@Model.End.ToString("yyyy-MM-ddTHH:mm:ss")');
+    var CountDownInterval = null;
+</script>
 
-    default:
-        break;
-}
+<div class="task-detail">
+<div>
+    <span id="CDD"></span> <span id="CDH"></span>:<span id="CDM"></span>:<span id="CDS"></span>
+</div>
+    <h1>@Model.Name</h1>
+    @switch (Model)
+    {
+        case IAssignmentDTO assignment:
+            <h2>@assignment.OrderName</h2>
+            break;
+        
+        case IAcceptationDTO acceptation:
+            <h2>@acceptation.Reason</h2>
+            break;
+
+        default:
+            break;
+    }
+</div>
+
+<span id="EndDate" class="dis-none">@Model.End.ToString("yyyy-MM-ddTHH:mm:ss")</span>

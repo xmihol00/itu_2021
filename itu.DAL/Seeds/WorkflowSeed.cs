@@ -17,7 +17,7 @@ namespace itu.DAL.Seeds
             {
                 Id = 1,
                 AgendaId = 2,
-                Name = "Testovací workflow",
+                Name = "Testovací úkol",
                 State = WorkflowStateEnum.Active,
                 ModelWorkflowId = 1
             }

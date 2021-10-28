@@ -1,13 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using itu.BL.DTOs.Task.Interfaces;
 using itu.Common.Enums;
 
-namespace itu.DAL.Entities.Tasks
+namespace itu.BL.DTOs.Task
 {
-    public class ContractEntity : TaskEntity
+    public class ContractDTO : DetailTaskDTO, IContractDTO
     {
         public string ContractId { get; set; }
         public double FinalPrice { get; set; }

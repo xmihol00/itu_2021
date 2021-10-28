@@ -11,15 +11,19 @@
 
 
 .priority {
-    width: 85px;
+    width: 84px;
     margin-top: -4px;
     position: absolute;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-42px, 0);
     border-radius: 15px;
     color: var(--color-text-inverted);
     padding: 4px 12px;
     text-align: center;
+}
+
+.priority-selected {
+    transform: translate(-49px, 0);
 }
 
 .Low {
@@ -36,4 +40,17 @@
 
 .Urgent {
     background-color: var(--color-prio-urgent);
+}
+
+.task-detail {
+    margin-top: 10px;
+    border-color: var(--color-border-focus);
+    border-width: 2px;
+    border-style: dashed;
+    border-radius: 0.25rem;
+    height: 100%;
+    padding: 1rem;
+    margin-left: -30px;
+    margin-right: 10px;
+    background: var(--color-bg-light);
 }

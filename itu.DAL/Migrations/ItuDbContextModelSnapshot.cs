@@ -49,7 +49,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 9, 28, 17, 35, 3, 706, DateTimeKind.Local).AddTicks(3079),
+                            Creation = new DateTime(2021, 9, 28, 22, 39, 47, 13, DateTimeKind.Local).AddTicks(5852),
                             Description = "Agenda správující jednoduchuché nákupy bez vúběrových řízení",
                             Name = "Nákupy"
                         },
@@ -57,7 +57,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             AdministratorId = 2,
-                            Creation = new DateTime(2021, 10, 23, 17, 35, 3, 707, DateTimeKind.Local).AddTicks(1108),
+                            Creation = new DateTime(2021, 10, 23, 22, 39, 47, 14, DateTimeKind.Local).AddTicks(8849),
                             Description = "Agenda spravující menší a střední zakázky",
                             Name = "Malé a střední zakázky"
                         },
@@ -65,7 +65,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 8, 29, 17, 35, 3, 707, DateTimeKind.Local).AddTicks(1131),
+                            Creation = new DateTime(2021, 8, 29, 22, 39, 47, 14, DateTimeKind.Local).AddTicks(8878),
                             Description = "Agenda spravující důležité velké zakázky",
                             Name = "Velké zakázky"
                         });
@@ -739,7 +739,7 @@ namespace itu.DAL.Migrations
                             Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModelWorkflowId = 1,
-                            Name = "Testovací workflow",
+                            Name = "Testovací úkol",
                             State = 0
                         });
                 });
@@ -762,7 +762,7 @@ namespace itu.DAL.Migrations
                             Id = 2,
                             Active = false,
                             DelayReason = "dovolená",
-                            End = new DateTime(2021, 11, 22, 17, 35, 3, 708, DateTimeKind.Local).AddTicks(1306),
+                            End = new DateTime(2021, 11, 22, 22, 39, 47, 16, DateTimeKind.Local).AddTicks(4632),
                             Name = "Testovací schválení",
                             NextId = 3,
                             Note = "Přijato bez výhrad",
@@ -844,12 +844,12 @@ namespace itu.DAL.Migrations
                             Id = 1,
                             Active = true,
                             DelayReason = "Testovací důvod vrácení",
-                            End = new DateTime(2021, 10, 31, 17, 35, 3, 707, DateTimeKind.Local).AddTicks(9673),
+                            End = new DateTime(2021, 10, 31, 22, 39, 47, 16, DateTimeKind.Local).AddTicks(1070),
                             Name = "Testovací zadání",
                             NextId = 2,
                             Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
                             Priority = 0,
-                            Start = new DateTime(2021, 10, 25, 17, 35, 3, 708, DateTimeKind.Local).AddTicks(908),
+                            Start = new DateTime(2021, 10, 25, 22, 39, 47, 16, DateTimeKind.Local).AddTicks(3765),
                             UserId = 1,
                             WorkflowId = 1,
                             FormNumber = "AXLO9854ZZ",
@@ -866,14 +866,14 @@ namespace itu.DAL.Migrations
                     b.Property<string>("ContractId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ContractType")
+                        .HasColumnType("int");
+
                     b.Property<double>("FinalPrice")
                         .HasColumnType("float");
 
                     b.Property<string>("PriceChangeReason")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
 
                     b.ToTable("Contracts");
 
@@ -890,8 +890,8 @@ namespace itu.DAL.Migrations
                             Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1,
                             WorkflowId = 1,
-                            FinalPrice = 0.0,
-                            Type = 0
+                            ContractType = 0,
+                            FinalPrice = 0.0
                         });
                 });
 

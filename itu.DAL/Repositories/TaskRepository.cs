@@ -14,7 +14,8 @@ namespace itu.DAL.Repositories
 
         public Task<List<TaskEntity>> AllOfUser(int userId)
         {
-            return _dbSet.Where(x => x.UserId == userId).ToListAsync();
+            return _dbSet.Include(x => x.Workflow)
+                         .Where(x => x.UserId == userId).ToListAsync();
         }
 
         public Task<TaskEntity> Detail(int userId, int taskId)

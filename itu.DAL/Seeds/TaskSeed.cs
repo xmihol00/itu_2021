@@ -48,7 +48,7 @@ namespace itu.DAL.Seeds
                 Accepted = true,
                 Note = "Přijato bez výhrad",
                 Reason = "Pěkně vypracováno",
-                DelayReason = "dovolená"
+                DelayReason = "dovolená",
             },
 
             new AssessmentEntity()

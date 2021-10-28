@@ -10,7 +10,7 @@ namespace itu.BL.DTOs.Task
     public class AllTaskDTO
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string WorkflowName { get; set; }
         public string Type { get; set; }
         public DateTime End { get; set; }
         public PriorityEnum Priority { get; set; }
