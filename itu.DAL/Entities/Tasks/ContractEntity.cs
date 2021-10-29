@@ -9,7 +9,6 @@ namespace itu.DAL.Entities.Tasks
 {
     public class ContractEntity : TaskEntity
     {
-        public string ContractId { get; set; }
         public double FinalPrice { get; set; }
         public string PriceChangeReason { get; set; }
         public ContractTypeEnum ContractType { get; set; }

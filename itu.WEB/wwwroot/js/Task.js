@@ -42,12 +42,12 @@ function SolveTask(element)
 
 function CountDown()
 {
-    let timeLeft = (Date.parse(EndDate) - Date.parse(new Date)) / 1000;
+    let timeLeft = (Date.parse(EndDate) - Date.parse(new Date)) / 1000 - 3600;
     let days = Math.floor(timeLeft / 86400); 
     let hours = Math.floor((timeLeft - days * 86400) / 3600);
     let minutes = Math.floor((timeLeft - days * 86400 - hours * 3600) / 60);
     let seconds = Math.floor(timeLeft - days * 86400 - hours * 3600 - minutes * 60);
-
+    
     if (days < 10 && days >= 0)
     {
         days = "0" + days;
@@ -83,4 +83,73 @@ function CountDown()
     document.getElementById("CDH").innerHTML = hours + "<span class='clk-span-hr'>hodiny</span>";
     document.getElementById("CDM").innerHTML = minutes + "<span class='clk-span-min'>minuty</span>";
     document.getElementById("CDS").innerHTML = seconds + "<span class='clk-span-sec'>sekundy</span>";
+}
+
+function FormatPriceDown(event, element)
+{
+    value = event.key;
+
+    if (value == ',' || value == '.')
+    {
+        if (element.value.indexOf('.') != -1)
+        {
+            event.preventDefault();
+        }
+    }
+    else if (value != "Backspace" && (value < '0' || value > '9') && value != "ArrowRight" && value != "ArrowLeft")
+    {
+        event.preventDefault();
+    }
+}
+
+function FormatPriceInput(element)
+{
+    let last = element.value.slice(-1);
+    element.value = element.value.replace(/,/g, '.');
+    element.value = element.value.replace(/\s/g, '');
+    values = element.value.split('.');
+    values[0] = values[0].replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
+
+    if (values.length > 1)
+    {
+        element.value = values[0] + '.' + values[1].slice(0, 2);
+        return;
+    }
+
+    element.value = values[0] + (last == '.' ? '.' : '');
+}
+
+function FileChosen(element)
+{
+    let fileName = element.value.split('\\').pop();
+    document.getElementById("UpFile").innerText = fileName;
+    document.getElementById("UpBtn").disabled = false;
+}
+
+function UploadFile()
+{
+    if (window.FormData == undefined)
+    {
+        return;
+    }
+    else 
+    {
+        let files = document.getElementById("Upload").files;
+        let fileData = new FormData();
+        fileData.append(files[0].name, files[0]);
+
+        $.ajax({
+            url: '/Task/Upload/1',
+            type: 'POST',
+            datatype: 'json',
+            contentType: false,
+            processData: false,
+            async: true,
+            data: fileData,
+        })
+        .done(function(result)
+        {
+            console.log(result);
+        });
+    }
 }

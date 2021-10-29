@@ -11,8 +11,8 @@ namespace itu.DAL.Entities
     public class TaskEntity
     {
         public int Id { get; set; }
-        public string Name { get; set; }
         public string Note { get; set; }
+        public string Description { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public PriorityEnum Priority { get; set; }
@@ -27,7 +27,6 @@ namespace itu.DAL.Entities
         public int WorkflowId { get; set; }
         public WorkflowEntity Workflow { get; set; }
         public List<FileEntity> Files { get; set; }
-
 
         public static TaskEntity Factory(TaskTypeEnum type)
         {

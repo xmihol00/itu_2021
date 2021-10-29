@@ -9,9 +9,7 @@ namespace itu.BL.DTOs.Task.Interfaces
 {
     public interface IPublishDTO : IDetailTaskDTO
     {
-        public string PublishId { get; set; }
         public DateTime PublishStart { get; set; }
         public DateTime PublishEnd { get; set; }
-
     }
 }

@@ -9,7 +9,6 @@ namespace itu.BL.DTOs.Task.Interfaces
 {
     public interface IAssesmentDTO : IDetailTaskDTO
     {
-        public string AssessmentId { get; set; }
         public string Conclusion { get; set; }
     }
 }

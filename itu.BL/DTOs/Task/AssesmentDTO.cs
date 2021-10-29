@@ -10,7 +10,6 @@ namespace itu.BL.DTOs.Task
 {
     public class AssesmentDTO : DetailTaskDTO, IAssesmentDTO
     {
-        public string AssessmentId { get; set; }
         public string Conclusion { get; set; }
     }
 }

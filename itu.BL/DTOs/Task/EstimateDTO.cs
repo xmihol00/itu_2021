@@ -10,7 +10,6 @@ namespace itu.BL.DTOs.Task
 {
     public class EstimateDTO : DetailTaskDTO, IEstimateDTO
     {
-        public string EstimateId { get; set; }
         public double EstimatePrice { get; set; }
         public double MaxPrice { get; set; }
     }

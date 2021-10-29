@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using itu.BL.Facades;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace itu.WEB.Controllers
@@ -18,14 +19,31 @@ namespace itu.WEB.Controllers
             _facade = facade;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Overview()
         {
             return View(await _facade.AllOfUser(ViewBag.Id));
         }
 
+        [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
             return PartialView(await _facade.Detail(ViewBag.Id, id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(int id)
+        {
+            try
+            {
+                IFormFile file = Request.Form.Files[0];
+                await _facade.Upload(id, file.FileName, file.OpenReadStream());
+                return Ok("Ok");
+            }
+            catch (Exception e)
+            {
+                return Json("error" + e.Message);
+            }
         }
     }
 }

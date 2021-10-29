@@ -8,7 +8,6 @@ namespace itu.DAL.Entities.Tasks
 {
     public class EstimateEntity : TaskEntity 
     {
-        public string EstimateId { get; set; }
         public double EstimatePrice { get; set; }
         public double MaxPrice { get; set; }
     }

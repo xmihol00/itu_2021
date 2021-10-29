@@ -11,9 +11,10 @@ namespace itu.DAL.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Number { get; set; }
         public FileTypeEnum Type { get; set; }
         public int FileDataId { get; set; }
-        public FileDataEntity Data { get; set; }
+        public FileDataEntity FileData { get; set; }
         public int TaskId { get; set; }
         public TaskEntity Task { get; set; }
     }

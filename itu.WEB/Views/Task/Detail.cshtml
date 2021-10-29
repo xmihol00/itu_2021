@@ -8,7 +8,6 @@
 <span id="EndDate" class="dis-none">@Model.End.ToString("yyyy-MM-ddTHH:mm:ss")</span>
 <div class="task-detail">
     <div class="d-flex justify-content-between mb-3 btn-div">
-        <span class="priority-detail @Model.Priority">@Model.Priority.ToLabel() priorita</span>
         <div>
             <button class="btn btn-danger">Zahodit změny</button>
         </div>
@@ -17,50 +16,89 @@
             <button class="btn btn-success save-btn">Vyřešit</button>
         </div>
     </div>
-    <div>
-        <div class="d-flex justify-content-between mb-2">
-            <h4 class="fit ml-1">Zadáno: @Model.Start.ToString("dd. MM. yyyy")</h4>
-            @if (Model.End.Date > DateTime.Now.Date.AddDays(3))
-            {
-                <h4 class="fit date-green"><span style="color: black;">Ukončení:</span> @Model.End.ToString("dd. MM. yyyy")</h4>
-            }
-            else if (Model.End.Date >= DateTime.Now.Date)
-            {
-                <h4 class="fit date-orange"><span style="color: black;">Ukončení:</span> @Model.End.ToString("dd. MM. yyyy")</h4>
-            }
-            else
-            {
-                <h4 class="fit date-red"><span style="color: black;">Ukončení:</span> @Model.End.ToString("dd. MM. yyyy")</h4>
-            }
-        </div>
-        <div class="row pl-1 pr-1">
-            <div class="col-md-4">
-                <span>
-                    Druh úkolu: @Model.Type
-                </span>
-            </div>
-            <div class="col-md-4">
-                <span style="align-content: center;">
-                    Workflow: <a href="~/Workflow/Detail/@Model.WorkflowId" >@Model.WorkflowName</a>
-                </span>
-            </div>
-            <div class="col-md-4">
-                <span class="float-right">
-                    Agenda: <a href="~/Agenda/Detail/@Model.AgendaId">@Model.AgendaName</a>
-                </span>
+    <div class="d-flex justify-content-between mb-3">
+        <span class="priority-detail @Model.Priority">@Model.Priority.ToLabel() priorita</span>
+        <h5 class="fit ml-1">Zadáno: @Model.Start.ToString("dd. MM. yyyy")</h5>
+        @if (Model.End.Date > DateTime.Now.Date.AddDays(3))
+        {
+            <h5 class="fit date-green"><span style="color: black;">Ukončení:</span> @Model.End.ToString("dd. MM. yyyy")</h5>
+        }
+        else if (Model.End.Date >= DateTime.Now.Date)
+        {
+            <h5 class="fit date-orange"><span style="color: black;">Ukončení:</span> @Model.End.ToString("dd. MM. yyyy")</h5>
+        }
+        else
+        {
+            <h5 class="fit date-red"><span style="color: black;">Ukončení:</span> @Model.End.ToString("dd. MM. yyyy")</h5>
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-3 d-flex justify-content-center mt-1">
+            <div> 
+                <a href="~/Agenda/Detail/@Model.AgendaId" class="center">Agenda <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
-        <div class="d-flex justify-content-center mb-1">
-            <h1 class="fit">@Model.WorkflowName</h1>
+        <div class="col-md-6 d-flex justify-content-center mt-1">
+            <div>
+                <a href="~/Workflow/Detail/@Model.WorkflowId" class="center">Workflow <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
-        <div class="mb-2">
-            
-            
+        <div class="col-md-3 d-flex justify-content-center">
+            <div>
+                Druh úkolu 
+            </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 d-flex justify-content-center">
+            <div class="task-headline" style="font-size: 22px">
+                <span class="center">@Model.AgendaName</span>
+            </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center">
+            <div class="task-headline" style="font-size: 40px; margin-top -2px">
+                <span class="center">@Model.WorkflowName</span>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex justify-content-center">
+            <div class="task-headline" style="font-size: 25px">
+                <span class="center">@Model.Type</span>
+            </div>
+        </div>
+    </div>
+    <hr class="head-hr">
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <label class="input-group-text task-prep-wdth">Zadání</label>
+        </div>
+        <p class="form-control text-uneditable">@Model.Description</p>
     </div>
     @switch (Model)
     {
         case IAssignmentDTO assignment:
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth">Odhad ceny</label>
+                </div>
+                <input class="form-control" value="@assignment.PriceGues.ToPrice()" 
+                       onkeydown="FormatPriceDown(arguments[0], this)"
+                       oninput="FormatPriceInput(this)" />
+                <div class="input-group-append">
+                    <select class="input-group-text" >
+                        @foreach (CurrencyEnum value in Enum.GetValues(typeof(CurrencyEnum)))
+                        {
+                            @if (value == assignment.Currency)
+                            {
+                                <option selected>@value</option>
+                            }
+                            else
+                            {
+                                <option>@value</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>  
             break;
         
         case IAcceptationDTO acceptation:
@@ -69,5 +107,30 @@
          default:
             break;
     }
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <label class="input-group-text task-prep-wdth">Soubor</label>
+        </div>
+        <input id="Upload" type="file" onchange="FileChosen(this)"/>
+        <span id="UpFile" class="form-control uneditable"></span>
+        <div class="input-group-append">
+            <label for="Upload" class="input-group-text" style="cursor: pointer;">
+                <i class="fas fa-folder-open mr-2"></i> Vybrat soubor
+            </label>
+            <button id="UpBtn" onclick="UploadFile()" class="btn btn-success" disabled>Nahrát <i class="fas fa-upload ml-2"></i></button>
+        </div>
+    </div>
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <label class="input-group-text task-prep-wdth">Požadavky</label>
+        </div>
+        <textarea class="form-control">@Model.Requirements</textarea>
+    </div>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <label class="input-group-text task-prep-wdth">Poznámka</label>
+        </div>
+        <textarea class="form-control">@Model.Note</textarea>
+    </div>
 </div>
 

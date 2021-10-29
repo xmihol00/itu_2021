@@ -10,7 +10,7 @@ namespace itu.BL.DTOs.Task.Interfaces
     public interface IDetailTaskDTO
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Description { get; set; }
         public string Type { get; set; }
         public string Note { get; set; }
         public DateTime Start { get; set; }

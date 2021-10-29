@@ -10,7 +10,6 @@ namespace itu.BL.DTOs.Task
 {
     public class ContractDTO : DetailTaskDTO, IContractDTO
     {
-        public string ContractId { get; set; }
         public double FinalPrice { get; set; }
         public string PriceChangeReason { get; set; }
         public ContractTypeEnum ContractType { get; set; }

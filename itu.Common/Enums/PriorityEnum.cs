@@ -30,7 +30,7 @@ namespace itu.Common.Enums
                     return "vysoká";
 
                 case PriorityEnum.Urgent:
-                    return "urgentní";
+                    return "nejvyšší";
                 
                 default:
                     return "";

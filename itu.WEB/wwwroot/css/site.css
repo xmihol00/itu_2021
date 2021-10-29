@@ -31,6 +31,15 @@ a {
   color: #0366d6;
 }
 
+a:hover {
+  text-decoration: none;
+  color: var(--color-bg-dark);
+}
+
+.mb--2 {
+  margin-bottom: -2px;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -144,7 +153,7 @@ body {
 }
 
 .fit {
-  width: fit-content;
+  width: fit-content !important;
   margin-top: auto;
   margin-bottom: auto;
 }
@@ -170,4 +179,28 @@ body {
 
 .dis-block {
   display: block;
+}
+
+.input-group-text {
+  color: var(--color-text-inverted);
+  background-color: var(--color-bg-dark);
+  border-color: var(--color-bg-dark);
+}
+
+.b-radius-r, .b-radius-r:hover, .b-radius-r::selection, .b-radius-r:active {
+  border-radius: 0px 4px 4px 0px !important;
+}
+
+.b-radius-none {
+  border-radius: 0px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  cursor: pointer;
 }

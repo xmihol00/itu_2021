@@ -9,9 +9,7 @@ namespace itu.BL.DTOs.Task.Interfaces
 {
     public interface IAssignmentDTO : IDetailTaskDTO
     {
-        public string FormNumber { get; set; }
-        public string Reason { get; set; }
-        public string OrderName { get; set; }
-        public double Price { get; set; }
+        public double PriceGues { get; set; }
+        public CurrencyEnum Currency { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using itu.DAL;
 namespace itu.DAL.Migrations
 {
     [DbContext(typeof(ItuDbContext))]
-    [Migration("20211029055125_init")]
+    [Migration("20211029210616_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 9, 29, 7, 51, 25, 372, DateTimeKind.Local).AddTicks(8905),
+                            Creation = new DateTime(2021, 9, 29, 23, 6, 15, 891, DateTimeKind.Local).AddTicks(9936),
                             Description = "Agenda správující jednoduchuché nákupy bez vúběrových řízení",
                             Name = "Nákupy"
                         },
@@ -59,7 +59,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             AdministratorId = 2,
-                            Creation = new DateTime(2021, 10, 24, 7, 51, 25, 373, DateTimeKind.Local).AddTicks(6551),
+                            Creation = new DateTime(2021, 10, 24, 23, 6, 15, 893, DateTimeKind.Local).AddTicks(2263),
                             Description = "Agenda spravující menší a střední zakázky",
                             Name = "Malé a střední zakázky"
                         },
@@ -67,7 +67,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 8, 30, 7, 51, 25, 373, DateTimeKind.Local).AddTicks(6574),
+                            Creation = new DateTime(2021, 8, 30, 23, 6, 15, 893, DateTimeKind.Local).AddTicks(2293),
                             Description = "Agenda spravující důležité velké zakázky",
                             Name = "Velké zakázky"
                         });
@@ -141,6 +141,9 @@ namespace itu.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TaskId")
@@ -581,11 +584,11 @@ namespace itu.DAL.Migrations
                     b.Property<string>("DelayReason")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("NextId")
                         .HasColumnType("int");
@@ -807,8 +810,7 @@ namespace itu.DAL.Migrations
                             Id = 2,
                             Active = false,
                             DelayReason = "dovolená",
-                            End = new DateTime(2021, 11, 23, 7, 51, 25, 374, DateTimeKind.Local).AddTicks(5914),
-                            Name = "Testovací schválení",
+                            End = new DateTime(2021, 11, 23, 23, 6, 15, 894, DateTimeKind.Local).AddTicks(7034),
                             NextId = 3,
                             Note = "Přijato bez výhrad",
                             PreviousId = 1,
@@ -841,9 +843,6 @@ namespace itu.DAL.Migrations
                 {
                     b.HasBaseType("itu.DAL.Entities.TaskEntity");
 
-                    b.Property<string>("AssessmentId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Conclusion")
                         .HasColumnType("nvarchar(max)");
 
@@ -855,7 +854,6 @@ namespace itu.DAL.Migrations
                             Id = 3,
                             Active = false,
                             End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Testovací externí posouzení",
                             NextId = 4,
                             PreviousId = 2,
                             Priority = 2,
@@ -869,13 +867,10 @@ namespace itu.DAL.Migrations
                 {
                     b.HasBaseType("itu.DAL.Entities.TaskEntity");
 
-                    b.Property<string>("FormNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Currency")
+                        .HasColumnType("int");
 
-                    b.Property<string>("OrderName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
+                    b.Property<double>("PriceGues")
                         .HasColumnType("float");
 
                     b.Property<string>("Reason")
@@ -889,17 +884,16 @@ namespace itu.DAL.Migrations
                             Id = 1,
                             Active = true,
                             DelayReason = "Testovací důvod vrácení",
-                            End = new DateTime(2021, 11, 1, 7, 51, 25, 374, DateTimeKind.Local).AddTicks(4290),
-                            Name = "Testovací zadání",
+                            Description = "Vytvořit zadání zakázky.",
+                            End = new DateTime(2021, 11, 1, 23, 6, 15, 894, DateTimeKind.Local).AddTicks(3969),
                             NextId = 2,
                             Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
                             Priority = 0,
-                            Start = new DateTime(2021, 10, 26, 7, 51, 25, 374, DateTimeKind.Local).AddTicks(5519),
+                            Start = new DateTime(2021, 10, 26, 23, 6, 15, 894, DateTimeKind.Local).AddTicks(6208),
                             UserId = 1,
                             WorkflowId = 1,
-                            FormNumber = "AXLO9854ZZ",
-                            OrderName = "Testovcí úkol",
-                            Price = 8523.5,
+                            Currency = 1,
+                            PriceGues = 4368.1999999999998,
                             Reason = "Testovací důvod vypsání tohoto úkolu."
                         });
                 });
@@ -907,9 +901,6 @@ namespace itu.DAL.Migrations
             modelBuilder.Entity("itu.DAL.Entities.Tasks.ContractEntity", b =>
                 {
                     b.HasBaseType("itu.DAL.Entities.TaskEntity");
-
-                    b.Property<string>("ContractId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ContractType")
                         .HasColumnType("int");
@@ -928,7 +919,6 @@ namespace itu.DAL.Migrations
                             Id = 5,
                             Active = false,
                             End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Testovací tvorba smlouvy",
                             NextId = 6,
                             PreviousId = 4,
                             Priority = 0,
@@ -944,9 +934,6 @@ namespace itu.DAL.Migrations
                 {
                     b.HasBaseType("itu.DAL.Entities.TaskEntity");
 
-                    b.Property<string>("EstimateId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("EstimatePrice")
                         .HasColumnType("float");
 
@@ -961,7 +948,6 @@ namespace itu.DAL.Migrations
                             Id = 4,
                             Active = false,
                             End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Testovací odhad ceny",
                             NextId = 5,
                             PreviousId = 3,
                             Priority = 3,
@@ -980,9 +966,6 @@ namespace itu.DAL.Migrations
                     b.Property<DateTime>("PublishEnd")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PublishId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("PublishStart")
                         .HasColumnType("datetime2");
 
@@ -994,7 +977,6 @@ namespace itu.DAL.Migrations
                             Id = 6,
                             Active = false,
                             End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Testovací zveřejnění",
                             NextId = 7,
                             PreviousId = 5,
                             Priority = 0,
@@ -1009,7 +991,6 @@ namespace itu.DAL.Migrations
                             Id = 7,
                             Active = false,
                             End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Testovací archivace",
                             PreviousId = 6,
                             Priority = 0,
                             Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1050,7 +1031,7 @@ namespace itu.DAL.Migrations
 
             modelBuilder.Entity("itu.DAL.Entities.FileEntity", b =>
                 {
-                    b.HasOne("itu.DAL.Entities.FileDataEntity", "Data")
+                    b.HasOne("itu.DAL.Entities.FileDataEntity", "FileData")
                         .WithOne("File")
                         .HasForeignKey("itu.DAL.Entities.FileEntity", "FileDataId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1062,7 +1043,7 @@ namespace itu.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Data");
+                    b.Navigation("FileData");
 
                     b.Navigation("Task");
                 });

@@ -10,9 +10,7 @@ namespace itu.BL.DTOs.Task
 {
     public class PublishDTO : DetailTaskDTO, IPublishDTO
     {
-        public string PublishId { get; set; }
         public DateTime PublishStart { get; set; }
         public DateTime PublishEnd { get; set; }
-
     }
 }
