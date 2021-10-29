@@ -12,6 +12,8 @@ namespace itu.BL.DTOs.Task
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string WorkflowName { get; set; }
+        public string AgendaName { get; set; }
         public string Type { get; set; }
         public string Note { get; set; }
         public DateTime Start { get; set; }
@@ -21,5 +23,7 @@ namespace itu.BL.DTOs.Task
         public bool Active { get; set; }
         public int? PreviousId { get; set; }
         public int? NextId { get; set; }
+        public int WorkflowId { get; set; }
+        public int AgendaId { get; set; }
     }
 }

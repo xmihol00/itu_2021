@@ -49,7 +49,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 9, 28, 22, 39, 47, 13, DateTimeKind.Local).AddTicks(5852),
+                            Creation = new DateTime(2021, 9, 29, 7, 51, 25, 372, DateTimeKind.Local).AddTicks(8905),
                             Description = "Agenda správující jednoduchuché nákupy bez vúběrových řízení",
                             Name = "Nákupy"
                         },
@@ -57,7 +57,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             AdministratorId = 2,
-                            Creation = new DateTime(2021, 10, 23, 22, 39, 47, 14, DateTimeKind.Local).AddTicks(8849),
+                            Creation = new DateTime(2021, 10, 24, 7, 51, 25, 373, DateTimeKind.Local).AddTicks(6551),
                             Description = "Agenda spravující menší a střední zakázky",
                             Name = "Malé a střední zakázky"
                         },
@@ -65,7 +65,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 8, 29, 22, 39, 47, 14, DateTimeKind.Local).AddTicks(8878),
+                            Creation = new DateTime(2021, 8, 30, 7, 51, 25, 373, DateTimeKind.Local).AddTicks(6574),
                             Description = "Agenda spravující důležité velké zakázky",
                             Name = "Velké zakázky"
                         });
@@ -109,6 +109,23 @@ namespace itu.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FileData");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Data = new byte[] { 5, 7, 8, 9, 10 }
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Data = new byte[] { 5, 7, 8, 9, 10 }
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Data = new byte[] { 5, 7, 8, 9, 10 }
+                        });
                 });
 
             modelBuilder.Entity("itu.DAL.Entities.FileEntity", b =>
@@ -138,6 +155,32 @@ namespace itu.DAL.Migrations
                     b.HasIndex("TaskId");
 
                     b.ToTable("Files");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FileDataId = 1,
+                            Name = "test soubor",
+                            TaskId = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FileDataId = 2,
+                            Name = "soubor1",
+                            TaskId = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FileDataId = 3,
+                            Name = "soubor ABC",
+                            TaskId = 1,
+                            Type = 0
+                        });
                 });
 
             modelBuilder.Entity("itu.DAL.Entities.ModelTaskEntity", b =>
@@ -762,7 +805,7 @@ namespace itu.DAL.Migrations
                             Id = 2,
                             Active = false,
                             DelayReason = "dovolená",
-                            End = new DateTime(2021, 11, 22, 22, 39, 47, 16, DateTimeKind.Local).AddTicks(4632),
+                            End = new DateTime(2021, 11, 23, 7, 51, 25, 374, DateTimeKind.Local).AddTicks(5914),
                             Name = "Testovací schválení",
                             NextId = 3,
                             Note = "Přijato bez výhrad",
@@ -844,12 +887,12 @@ namespace itu.DAL.Migrations
                             Id = 1,
                             Active = true,
                             DelayReason = "Testovací důvod vrácení",
-                            End = new DateTime(2021, 10, 31, 22, 39, 47, 16, DateTimeKind.Local).AddTicks(1070),
+                            End = new DateTime(2021, 11, 1, 7, 51, 25, 374, DateTimeKind.Local).AddTicks(4290),
                             Name = "Testovací zadání",
                             NextId = 2,
                             Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
                             Priority = 0,
-                            Start = new DateTime(2021, 10, 25, 22, 39, 47, 16, DateTimeKind.Local).AddTicks(3765),
+                            Start = new DateTime(2021, 10, 26, 7, 51, 25, 374, DateTimeKind.Local).AddTicks(5519),
                             UserId = 1,
                             WorkflowId = 1,
                             FormNumber = "AXLO9854ZZ",

@@ -135,7 +135,7 @@ body {
   border-color: var(--color-border-focus);
   border-width: 2px;
   border-style: dashed;
-  margin-right: -4px;
+  margin-right: -3px;
   padding-right: 23px;
   border-right: solid var(--color-bg-light) 2px;
   border-top-right-radius: 0px;

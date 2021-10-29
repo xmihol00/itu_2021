@@ -81,6 +81,8 @@ namespace itu.DAL
             modelBuilder.SeedAgendas();
             modelBuilder.SeedTasks();
             modelBuilder.SeedWorkflows();
+            modelBuilder.SeedFiles();
+            modelBuilder.SeedFileData();
         }
     }
 }

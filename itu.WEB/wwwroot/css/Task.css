@@ -11,19 +11,32 @@
 
 
 .priority {
-    width: 84px;
+    width: 140px;
     margin-top: -4px;
     position: absolute;
     left: 50%;
-    transform: translate(-42px, 0);
+    transform: translate(-70px, 0);
     border-radius: 15px;
     color: var(--color-text-inverted);
     padding: 4px 12px;
     text-align: center;
 }
 
-.priority-selected {
-    transform: translate(-49px, 0);
+h4 {
+    color: black;
+}
+
+.priority-detail {
+    width: 190;
+    margin-top: 2px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-85px, 0);
+    border-radius: 15px;
+    color: var(--color-text-inverted);
+    padding: 4px 12px;
+    text-align: center;
+    font-size: 18px;
 }
 
 .Low {
@@ -49,8 +62,59 @@
     border-style: dashed;
     border-radius: 0.25rem;
     height: 100%;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     margin-left: -30px;
-    margin-right: 10px;
+    margin-right: 0.5rem;
     background: var(--color-bg-light);
+}
+
+.clk-div {
+    line-height: 1;
+    padding: 0px 15px 15px 15px;
+    font-size: 45px;
+}
+
+.clk-span-day {
+    display: block;
+    font-size: 20px;
+    color: var(--color-bg-dark);
+    margin-left: 8px;
+}
+
+.clk-span-hr {
+    display: block;
+    font-size: 20px;
+    color: var(--color-bg-dark);
+    margin-left: -5px;
+}
+
+.clk-span-min {
+    display: block;
+    font-size: 20px;
+    color: var(--color-bg-dark);
+    margin-left: -5px;
+}
+
+.clk-span-sec {
+    display: block;
+    font-size: 20px;
+    color: var(--color-bg-dark);
+    margin-left: -12px;
+}
+
+.text-center {
+    align-content: center;
+    margin-right: 10px;
+}
+
+.save-btn {
+    width: 80px;
+}
+
+.btn-div {
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+    padding: 3px;
+    margin-left: -3px;
+    margin-right: -3px;
 }

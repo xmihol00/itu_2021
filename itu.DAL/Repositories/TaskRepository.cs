@@ -21,6 +21,8 @@ namespace itu.DAL.Repositories
         public Task<TaskEntity> Detail(int userId, int taskId)
         {
             return _dbSet.Include(x => x.Files)
+                         .Include(x => x.Workflow)
+                            .ThenInclude(x => x.Agenda)
                          .FirstAsync(x => x.Id == taskId && x.UserId == userId);
         }
     }

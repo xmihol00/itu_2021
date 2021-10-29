@@ -21,25 +21,46 @@ namespace itu.BL.Profiles
                 .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name));
             
             CreateMap<AssignmentEntity, AssignmentDTO>()
-                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())));
+                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
+                .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
+                .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
             
             CreateMap<AcceptationEntity, AcceptationDTO>()
-                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())));
+                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
+                .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
+                .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
             
             CreateMap<AssessmentEntity, AssesmentDTO>()
-                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())));
+                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
+                .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
+                .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
 
             CreateMap<ArchivationEntity, ArchivationDTO>()
-                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())));
+                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
+                .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
+                .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
 
             CreateMap<ContractEntity, ContractDTO>()
-                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())));
+                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
+                .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
+                .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
 
             CreateMap<EstimateEntity, EstimateDTO>()
-                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())));
+                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
+                .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
+                .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
 
             CreateMap<PublishEntity, PublishDTO>()
-                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())));
+                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
+                .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
+                .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
 
             CreateMap<TaskEntity, DetailTaskDTO>()
                 .Include<AssignmentEntity, AssignmentDTO>()
@@ -49,7 +70,10 @@ namespace itu.BL.Profiles
                 .Include<ContractEntity, ContractDTO>()
                 .Include<EstimateEntity, EstimateDTO>()
                 .Include<PublishEntity, PublishDTO>()
-                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())));
+                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
+                .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
+                .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
         }
     }
 }

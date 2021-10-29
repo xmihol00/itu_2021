@@ -18,8 +18,9 @@ function SolveTask(element)
             document.getElementById("DetailDiv").innerHTML = result;
             
             let ed = document.getElementById("EndDate");
-            EndDate = new Date(ed.innerText);
+            EndDate = new Date(ed.innerHTML);
             ed.remove();
+            let clk = document.getElementById("CLK");
             CountDown();
 
             document.getElementById("Card" + SelectedId).classList.remove("card-selected");
@@ -28,7 +29,9 @@ function SolveTask(element)
 
             SelectedId = element.id;
             document.getElementById("Card" + SelectedId).classList.add("card-selected");
-            document.getElementById("Select" + SelectedId).style.display = "block";
+            let select = document.getElementById("Select" + SelectedId);
+            select.style.display = "block";
+            select.appendChild(clk);
             document.getElementById("Unselect" + SelectedId).style.display = "none";
         })
         .fail(function (result)
@@ -45,17 +48,9 @@ function CountDown()
     let minutes = Math.floor((timeLeft - days * 86400 - hours * 3600) / 60);
     let seconds = Math.floor(timeLeft - days * 86400 - hours * 3600 - minutes * 60);
 
-    if (days == 1)
+    if (days < 10 && days >= 0)
     {
-        days += " den";
-    }
-    else if (days == 2 || days == 3 || days == 4)
-    {
-        days += " dny";
-    }
-    else
-    {
-        days += " dnů"
+        days = "0" + days;
     }
     if (hours < 10) 
     { 
@@ -70,15 +65,22 @@ function CountDown()
         seconds = "0" + seconds; 
     }
 
-    if (days == 0)
+    let clk = document.getElementById("CLK");
+    if (days < 0)
     {
-        document.getElementById("CDD").innerText = "";
+        clk.style.color = "#cf0000"
+    }
+    else if (days < 3)
+    {
+        clk.style.color = "#fc6a00"
     }
     else
     {
-        document.getElementById("CDD").innerText = days;
+        clk.style.color = "green"
     }
-    document.getElementById("CDH").innerText = hours;
-    document.getElementById("CDM").innerText = minutes;
-    document.getElementById("CDS").innerText = seconds;
+
+    document.getElementById("CDD").innerHTML = days + "<span class='clk-span-day'>dny</span>";
+    document.getElementById("CDH").innerHTML = hours + "<span class='clk-span-hr'>hodiny</span>";
+    document.getElementById("CDM").innerHTML = minutes + "<span class='clk-span-min'>minuty</span>";
+    document.getElementById("CDS").innerHTML = seconds + "<span class='clk-span-sec'>sekundy</span>";
 }

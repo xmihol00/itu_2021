@@ -9,7 +9,7 @@
 
 @{ AllTaskDTO first = Model.Tasks?[0]; }
 
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between mr-2 ml-2">
     <h1 class="page-name">Aktivní úkoly</h1>
     <div id="Buttons" class="mt-auto mb-auto d-flex">
         <a href="~/Task/Done" class="btn btn-primary ml-1" style="white-space: nowrap">
@@ -28,12 +28,18 @@
     <div class="col-md-5">
         @if (first != null)
         {
-            <div id=@($"Card{first.Id}") class="card card-selected">
-                <div id=@($"Select{first.Id}") >
-                    <h1>@first.WorkflowName</h1>
+            <div id=@($"Card{first.Id}") class="card card-selected ">
+                <div id=@($"Select{first.Id}")>
+                    <h4 class="text-center">Vyřešit do</h4>
+                    <div id="CLK" class="d-flex justify-content-center mb-1" >
+                        <div id="CDD" class="clk-div"></div>
+                        <div id="CDH" class="clk-div"></div>
+                        <div id="CDM" class="clk-div"></div>
+                        <div id="CDS" class="clk-div"></div>
+                    </div>
                 </div>
                 <div id=@($"Unselect{first.Id}") class="dis-none">
-                    <span class="priority @first.Priority">@first.Priority.ToLabel()</span>
+                    <span class="priority @first.Priority">@first.Priority.ToLabel() priorita</span>
                     <div class="d-flex justify-content-between mb-2">
                         <h5 class="fit ml-1">@first.Type</h5>
                         @if (first.End.Date > DateTime.Now.Date.AddDays(3))
@@ -49,7 +55,7 @@
                             <h5 class="fit date-red">@first.End.ToString("dd. MM. yyyy")</h5>
                         }
                     </div>
-                    <div class="d-flex justify-content-center mb-3">
+                    <div class="d-flex justify-content-center mb-2">
                         <h3 class="fit">@first.WorkflowName</h3>
                     </div>
                     <div class="mb-2">
@@ -66,10 +72,10 @@
         {
             <div id=@($"Card{task.Id}") class="card">
                 <div id=@($"Select{task.Id}") class="dis-none">
-                    <h1>@task.WorkflowName</h1>
+                    <h4 class="text-center">Vyřešit do</h4>
                 </div>
                 <div id=@($"Unselect{task.Id}")>
-                    <span class="priority @task.Priority">@task.Priority.ToLabel()</span>
+                    <span class="priority @task.Priority">@task.Priority.ToLabel() priorita</span>
                     <div class="d-flex justify-content-between mb-2">
                         <h5 class="fit ml-1">@task.Type</h5>
                         @if (task.End.Date > DateTime.Now.Date.AddDays(3))
@@ -85,7 +91,7 @@
                             <h5 class="fit date-red">@task.End.ToString("dd. MM. yyyy")</h5>
                         }
                     </div>
-                    <div class="d-flex justify-content-center mb-3">
+                    <div class="d-flex justify-content-center mb-2">
                         <h3 class="fit">@task.WorkflowName</h3>
                     </div>
                     <div class="mb-2">
@@ -99,7 +105,7 @@
             </div>
         }
     </div>
-    <div id="DetailDiv" class="col-md-7">
+    <div id="DetailDiv" class="col-md-7 mb-2">
         @await Html.PartialAsync("Detail", Model.Detail)
     </div>
 </div>
