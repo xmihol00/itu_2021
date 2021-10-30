@@ -6,6 +6,7 @@ using itu.BL.Facades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace itu.WEB.Controllers
 {
@@ -36,9 +37,13 @@ namespace itu.WEB.Controllers
         {
             try
             {
-                IFormFile file = Request.Form.Files[0];
-                await _facade.Upload(id, file.FileName, file.OpenReadStream());
-                return Ok("Ok");
+                IDbContextTransaction transaction = await _facade.Transaction();
+                foreach(IFormFile file in Request.Form.Files)
+                {
+                    await _facade.Upload(id, file.FileName, file.OpenReadStream());
+                }
+                await transaction.CommitAsync();
+                return Ok();
             }
             catch (Exception e)
             {

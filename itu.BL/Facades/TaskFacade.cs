@@ -27,6 +27,11 @@ namespace itu.BL.Facades
             _mapper = mapper;
         }
 
+        public async Task<IDbContextTransaction> Transaction()
+        {
+            return await _repository.CreateTransaction();
+        }
+
         public async Task<OverviewDTO> AllOfUser(int userId)
         {
             OverviewDTO overview = new OverviewDTO();

@@ -1,8 +1,11 @@
 
+var DefaultHeight = 0;
+
 document.addEventListener("DOMContentLoaded", function()
 {
     CountDown();
     CountDownInterval = setInterval(CountDown, 1000);
+    DefaultHeight = document.getElementById("UpFile").scrollHeight + 2;
 });
 
 function SolveTask(element)
@@ -121,9 +124,24 @@ function FormatPriceInput(element)
 
 function FileChosen(element)
 {
-    let fileName = element.value.split('\\').pop();
-    document.getElementById("UpFile").innerText = fileName;
-    document.getElementById("UpBtn").disabled = false;
+    let files = element.files;
+    let fileSpan = document.getElementById("UpFile");
+    document.getElementById("UpBtn").disabled = true;
+    console.log(files);
+    if (files.length == 0)
+    {
+        fileSpan.style.height = DefaultHeight + "px";
+        fileSpan.innerText = "";
+        return;
+    }
+    fileSpan.innerText = files[0].name;
+
+    for (let i = 1; i < files.length; i++)
+    {
+        fileSpan.innerText += ", " + files[i].name;
+    }
+
+    fileSpan.style.height = (fileSpan.scrollHeight + 10) + "px";
 }
 
 function UploadFile()
@@ -136,7 +154,10 @@ function UploadFile()
     {
         let files = document.getElementById("Upload").files;
         let fileData = new FormData();
-        fileData.append(files[0].name, files[0]);
+        for (let i = 0; i < files.length; i++)
+        {
+            fileData.append(files[i].name, files[i]);
+        }
 
         $.ajax({
             url: '/Task/Upload/1',

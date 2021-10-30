@@ -39,3 +39,4 @@ shell_config.sh
 DatabaseReset.sh
 reset_DB.sh
 DB_reset.sql
+notes*
