@@ -352,6 +352,7 @@ namespace itu.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Number = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Version = table.Column<int>(type: "int", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     FileDataId = table.Column<int>(type: "int", nullable: false),
                     TaskId = table.Column<int>(type: "int", nullable: false)
@@ -466,9 +467,9 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "AdministratorId", "Creation", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 2, 2, new DateTime(2021, 10, 24, 23, 6, 15, 893, DateTimeKind.Local).AddTicks(2263), "Agenda spravující menší a střední zakázky", "Malé a střední zakázky" },
-                    { 1, 1, new DateTime(2021, 9, 29, 23, 6, 15, 891, DateTimeKind.Local).AddTicks(9936), "Agenda správující jednoduchuché nákupy bez vúběrových řízení", "Nákupy" },
-                    { 3, 1, new DateTime(2021, 8, 30, 23, 6, 15, 893, DateTimeKind.Local).AddTicks(2293), "Agenda spravující důležité velké zakázky", "Velké zakázky" }
+                    { 2, 2, new DateTime(2021, 10, 26, 23, 25, 51, 160, DateTimeKind.Local).AddTicks(8459), "Agenda spravující menší a střední zakázky", "Malé a střední zakázky" },
+                    { 1, 1, new DateTime(2021, 10, 1, 23, 25, 51, 159, DateTimeKind.Local).AddTicks(7051), "Agenda správující jednoduchuché nákupy bez vúběrových řízení", "Nákupy" },
+                    { 3, 1, new DateTime(2021, 9, 1, 23, 25, 51, 160, DateTimeKind.Local).AddTicks(8480), "Agenda spravující důležité velké zakázky", "Velké zakázky" }
                 });
 
             migrationBuilder.InsertData(
@@ -560,7 +561,7 @@ namespace itu.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Tasks",
                 columns: new[] { "Id", "Active", "DelayReason", "Description", "End", "NextId", "Note", "PreviousId", "Priority", "Start", "UserId", "WorkflowId" },
-                values: new object[] { 2, false, "dovolená", null, new DateTime(2021, 11, 23, 23, 6, 15, 894, DateTimeKind.Local).AddTicks(7034), 3, "Přijato bez výhrad", 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 });
+                values: new object[] { 2, false, "dovolená", null, new DateTime(2021, 11, 25, 23, 25, 51, 162, DateTimeKind.Local).AddTicks(4801), 3, "Přijato bez výhrad", 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "Acceptations",
@@ -570,7 +571,7 @@ namespace itu.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Tasks",
                 columns: new[] { "Id", "Active", "DelayReason", "Description", "End", "NextId", "Note", "PreviousId", "Priority", "Start", "UserId", "WorkflowId" },
-                values: new object[] { 1, true, "Testovací důvod vrácení", "Vytvořit zadání zakázky.", new DateTime(2021, 11, 1, 23, 6, 15, 894, DateTimeKind.Local).AddTicks(3969), 2, "Testovaci předvyplněný úkol obsahující i poznámku.", null, 0, new DateTime(2021, 10, 26, 23, 6, 15, 894, DateTimeKind.Local).AddTicks(6208), 1, 1 });
+                values: new object[] { 1, true, "Testovací důvod vrácení", "Vytvořit zadání zakázky.", new DateTime(2021, 11, 3, 23, 25, 51, 162, DateTimeKind.Local).AddTicks(1255), 2, "Testovaci předvyplněný úkol obsahující i poznámku.", null, 0, new DateTime(2021, 10, 28, 23, 25, 51, 162, DateTimeKind.Local).AddTicks(3939), 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "Assignments",
@@ -579,12 +580,12 @@ namespace itu.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Files",
-                columns: new[] { "Id", "FileDataId", "Name", "Number", "TaskId", "Type" },
+                columns: new[] { "Id", "FileDataId", "Name", "Number", "TaskId", "Type", "Version" },
                 values: new object[,]
                 {
-                    { 1, 1, "test soubor", null, 1, 0 },
-                    { 2, 2, "soubor1", null, 1, 0 },
-                    { 3, 3, "soubor ABC", null, 1, 0 }
+                    { 1, 1, "test soubor", null, 1, 0, 0 },
+                    { 2, 2, "soubor1", null, 1, 0, 0 },
+                    { 3, 3, "soubor ABC", null, 1, 0, 0 }
                 });
 
             migrationBuilder.CreateIndex(

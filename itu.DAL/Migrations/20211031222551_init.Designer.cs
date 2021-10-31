@@ -10,7 +10,7 @@ using itu.DAL;
 namespace itu.DAL.Migrations
 {
     [DbContext(typeof(ItuDbContext))]
-    [Migration("20211029210616_init")]
+    [Migration("20211031222551_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 9, 29, 23, 6, 15, 891, DateTimeKind.Local).AddTicks(9936),
+                            Creation = new DateTime(2021, 10, 1, 23, 25, 51, 159, DateTimeKind.Local).AddTicks(7051),
                             Description = "Agenda správující jednoduchuché nákupy bez vúběrových řízení",
                             Name = "Nákupy"
                         },
@@ -59,7 +59,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             AdministratorId = 2,
-                            Creation = new DateTime(2021, 10, 24, 23, 6, 15, 893, DateTimeKind.Local).AddTicks(2263),
+                            Creation = new DateTime(2021, 10, 26, 23, 25, 51, 160, DateTimeKind.Local).AddTicks(8459),
                             Description = "Agenda spravující menší a střední zakázky",
                             Name = "Malé a střední zakázky"
                         },
@@ -67,7 +67,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 8, 30, 23, 6, 15, 893, DateTimeKind.Local).AddTicks(2293),
+                            Creation = new DateTime(2021, 9, 1, 23, 25, 51, 160, DateTimeKind.Local).AddTicks(8480),
                             Description = "Agenda spravující důležité velké zakázky",
                             Name = "Velké zakázky"
                         });
@@ -152,6 +152,9 @@ namespace itu.DAL.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FileDataId")
@@ -168,7 +171,8 @@ namespace itu.DAL.Migrations
                             FileDataId = 1,
                             Name = "test soubor",
                             TaskId = 1,
-                            Type = 0
+                            Type = 0,
+                            Version = 0
                         },
                         new
                         {
@@ -176,7 +180,8 @@ namespace itu.DAL.Migrations
                             FileDataId = 2,
                             Name = "soubor1",
                             TaskId = 1,
-                            Type = 0
+                            Type = 0,
+                            Version = 0
                         },
                         new
                         {
@@ -184,7 +189,8 @@ namespace itu.DAL.Migrations
                             FileDataId = 3,
                             Name = "soubor ABC",
                             TaskId = 1,
-                            Type = 0
+                            Type = 0,
+                            Version = 0
                         });
                 });
 
@@ -810,7 +816,7 @@ namespace itu.DAL.Migrations
                             Id = 2,
                             Active = false,
                             DelayReason = "dovolená",
-                            End = new DateTime(2021, 11, 23, 23, 6, 15, 894, DateTimeKind.Local).AddTicks(7034),
+                            End = new DateTime(2021, 11, 25, 23, 25, 51, 162, DateTimeKind.Local).AddTicks(4801),
                             NextId = 3,
                             Note = "Přijato bez výhrad",
                             PreviousId = 1,
@@ -885,11 +891,11 @@ namespace itu.DAL.Migrations
                             Active = true,
                             DelayReason = "Testovací důvod vrácení",
                             Description = "Vytvořit zadání zakázky.",
-                            End = new DateTime(2021, 11, 1, 23, 6, 15, 894, DateTimeKind.Local).AddTicks(3969),
+                            End = new DateTime(2021, 11, 3, 23, 25, 51, 162, DateTimeKind.Local).AddTicks(1255),
                             NextId = 2,
                             Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
                             Priority = 0,
-                            Start = new DateTime(2021, 10, 26, 23, 6, 15, 894, DateTimeKind.Local).AddTicks(6208),
+                            Start = new DateTime(2021, 10, 28, 23, 25, 51, 162, DateTimeKind.Local).AddTicks(3939),
                             UserId = 1,
                             WorkflowId = 1,
                             Currency = 1,

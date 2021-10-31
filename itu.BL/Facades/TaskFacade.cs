@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using itu.BL.DTOs.File;
 using itu.BL.DTOs.Task;
 using itu.DAL.Entities;
 using itu.DAL.Repositories;
@@ -44,18 +45,36 @@ namespace itu.BL.Facades
             return overview;
         }
 
+        public async Task Upload(FileUploadDTO upload)
+        {
+            FileEntity newFile = new FileEntity()
+            {
+                TaskId = upload.TaskId,
+                Name = upload.Name,
+                Number = upload.Number,
+                FileData = new FileDataEntity()
+            };
+
+            MemoryStream memStream = new MemoryStream();
+            await upload.File.OpenReadStream().CopyToAsync(memStream);
+            newFile.FileData.Data = memStream.ToArray();
+
+            await _fileRepository.Create(newFile);
+            await _fileRepository.Save();
+        }
+
         public async Task<DetailTaskDTO> Detail(int userId, int taskId)
         {
-            var test = await _repository.Detail(userId, taskId);
             return _mapper.Map<DetailTaskDTO>(await _repository.Detail(userId, taskId));
         }
 
-        public async Task Upload(int taskId, string fileName, Stream file)
+        public async Task Upload(int taskId, string name, string number, Stream file)
         {
             FileEntity newFile = new FileEntity()
             {
                 TaskId = taskId,
-                Name = fileName,
+                Name = name,
+                Number = number,
                 FileData = new FileDataEntity()
             };
 

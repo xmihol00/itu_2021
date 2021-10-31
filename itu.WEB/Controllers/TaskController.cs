@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using itu.BL.DTOs.File;
 using itu.BL.Facades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -37,17 +38,13 @@ namespace itu.WEB.Controllers
         {
             try
             {
-                IDbContextTransaction transaction = await _facade.Transaction();
-                foreach(IFormFile file in Request.Form.Files)
-                {
-                    await _facade.Upload(id, file.FileName, file.OpenReadStream());
-                }
-                await transaction.CommitAsync();
+                IFormFile file = Request.Form.Files[0];
+                await _facade.Upload(id, file.FileName, file.Name, file.OpenReadStream());
                 return Ok();
             }
             catch (Exception e)
             {
-                return Json("error" + e.Message);
+                return Json("Error: " + e.Message);
             }
         }
     }

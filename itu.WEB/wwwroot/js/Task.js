@@ -1,5 +1,6 @@
 
 var DefaultHeight = 0;
+var Files = [];
 
 document.addEventListener("DOMContentLoaded", function()
 {
@@ -124,53 +125,133 @@ function FormatPriceInput(element)
 
 function FileChosen(element)
 {
-    let files = element.files;
+    let fileDiv = element.parentNode;
+    for (let i = 0; i < element.files.length; i++)
+    {
+        if (document.getElementById(element.files[i].name) == null)
+        {
+            Files.push(element.files[i]);
+            fileDiv.parentNode.insertBefore(CreateFileNumberDiv(element.files[i].name), fileDiv);
+        }
+    }
+}
+
+function UpdateFileSpan()
+{
     let fileSpan = document.getElementById("UpFile");
-    document.getElementById("UpBtn").disabled = true;
-    console.log(files);
-    if (files.length == 0)
+    if (Files.length == 0)
     {
         fileSpan.style.height = DefaultHeight + "px";
         fileSpan.innerText = "";
         return;
     }
-    fileSpan.innerText = files[0].name;
-
-    for (let i = 1; i < files.length; i++)
+    fileSpan.innerText = Files[0].name;
+    
+    for (let i = 1; i < Files.length; i++)
     {
-        fileSpan.innerText += ", " + files[i].name;
+        fileSpan.innerText += ", " + Files[i].name;
     }
-
-    fileSpan.style.height = (fileSpan.scrollHeight + 10) + "px";
+    
+    fileSpan.style.height = (fileSpan.scrollHeight > DefaultHeight ? (fileSpan.scrollHeight + 10) : DefaultHeight) + "px";
 }
 
-function UploadFile()
+function UploadFile(element)
 {
-    if (window.FormData == undefined)
-    {
-        return;
-    }
-    else 
-    {
-        let files = document.getElementById("Upload").files;
-        let fileData = new FormData();
-        for (let i = 0; i < files.length; i++)
-        {
-            fileData.append(files[i].name, files[i]);
-        }
+    let upload = Files.find(x => x.name = element.id);    
+    let fileData = new FormData();
+    fileData.append(element.childNodes[1].value, upload);
 
-        $.ajax({
-            url: '/Task/Upload/1',
-            type: 'POST',
-            datatype: 'json',
-            contentType: false,
-            processData: false,
-            async: true,
-            data: fileData,
-        })
-        .done(function(result)
-        {
-            console.log(result);
-        });
+    $.ajax({
+        url: "/Task/Upload/" + TaskId,
+        type: "POST",
+        datatype: "json",
+        contentType: false,
+        processData: false,
+        async: true,
+        data: fileData,
+    })
+    .done(function(result)
+    {
+        Files = Files.filter(x => x.name != element.id);
+        element.remove();
+    });
+}
+
+function CreateFileNumberDiv(fileName)
+{
+    const inputDiv = document.createElement("div");
+    inputDiv.classList.add("input-group");
+    inputDiv.classList.add("mb-2");
+
+    const prepDiv = document.createElement("div");
+    prepDiv.classList.add("input-group-prepend");
+
+    const label = document.createElement("label");
+    label.classList.add("input-group-text");
+    label.classList.add("task-prep-wdth");
+    label.innerText = fileName;
+
+    prepDiv.appendChild(label);
+    inputDiv.appendChild(prepDiv);
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.classList.add("form-control");
+
+    inputDiv.appendChild(input);
+
+    const appDiv = document.createElement("div");
+    appDiv.classList.add("input-group-append");
+    
+    const upBtn = document.createElement("button");
+    upBtn.disabled = true;
+    upBtn.classList.add("btn");
+    upBtn.classList.add("btn-success");
+    upBtn.innerText = "Nahrát";
+    
+    const upIcon = document.createElement("i");
+    upIcon.classList.add("fas");
+    upIcon.classList.add("fa-upload");
+    upIcon.classList.add("ml-2");
+    
+    const delBtn = document.createElement("button");
+    delBtn.classList.add("btn");
+    delBtn.classList.add("btn-danger");
+    
+    const crossIcon = document.createElement("i")
+    crossIcon.classList.add("fas");
+    crossIcon.classList.add("fa-times");
+    crossIcon.classList.add("ml-1");
+    crossIcon.classList.add("mr-1");
+    
+    upBtn.appendChild(upIcon);
+    delBtn.appendChild(crossIcon);
+    appDiv.appendChild(upBtn);
+    appDiv.appendChild(delBtn);
+    inputDiv.appendChild(appDiv);
+    
+    inputDiv.id = fileName;
+    delBtn.onclick = () => newFileRemoved(inputDiv);
+    upBtn.onclick = () => UploadFile(inputDiv);
+    input.oninput = () => BtnChangeState(input, upBtn);
+
+    return inputDiv;
+}
+
+function newFileRemoved(element)
+{
+    Files = Files.filter(x => x.name != element.id);
+    element.remove();
+}
+
+function BtnChangeState(input, button)
+{
+    if (input.value && input.value.trim())
+    {
+        button.disabled = false;
+    }
+    else
+    {
+        button.disabled = true;
     }
 }
