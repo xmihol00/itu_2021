@@ -32,20 +32,5 @@ namespace itu.WEB.Controllers
         {
             return PartialView(await _facade.Detail(ViewBag.Id, id));
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Upload(int id)
-        {
-            try
-            {
-                IFormFile file = Request.Form.Files[0];
-                await _facade.Upload(id, file.FileName, file.Name, file.OpenReadStream());
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return Json("Error: " + e.Message);
-            }
-        }
     }
 }

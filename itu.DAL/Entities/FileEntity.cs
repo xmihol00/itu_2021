@@ -12,6 +12,7 @@ namespace itu.DAL.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Number { get; set; }
+        public string MIME { get; set; }
         public int Version { get; set; }
         public FileTypeEnum Type { get; set; }
         public int FileDataId { get; set; }

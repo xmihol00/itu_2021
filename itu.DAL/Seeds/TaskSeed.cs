@@ -19,7 +19,6 @@ namespace itu.DAL.Seeds
                 Id = 1,
                 UserId = 1,
                 WorkflowId = 1,
-                Description = "Vytvořit zadání zakázky.",
                 Active = true,
                 End = DateTime.Now.AddDays(3),
                 Currency = CurrencyEnum.EUR,

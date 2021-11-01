@@ -69,11 +69,11 @@
             </div>
         </div>
     </div>
-    <div class="input-group mb-2">
-        <div class="input-group-prepend">
-            <label class="input-group-text task-prep-wdth">Zadání</label>
+    <div class="mb-2 border-dark">
+        <div class="task-description">
+            Zadání
         </div>
-        <p class="form-control text-uneditable">@Model.Description</p>
+        <p class="ml-2 mr-2 mt-1 mb-1">@Model.Description</p>
     </div>
     @switch (Model)
     {
@@ -121,39 +121,10 @@
                 </label>
             </div>
         </div>
-        <div class="d-flex mb-2">
-            <div class="text-vertical-div">
-                <div class="text-vertical">verze 1</div>
-            </div>
-            <div class="d-flex file-version">
-                <div class="file">
-                    <h5>jmeno souboru</h5>
-                    <span>cislo souboru</span>
-                </div>
-                <div class="file">
-                    <h5>jmeno souboru</h5>
-                    <span>cislo souboru</span>
-                </div>
-                <div class="file">
-                    <h5>jmeno souboru</h5>
-                    <span>cislo souboru</span>
-                </div>
-                <div class="file">
-                    <h5>jmeno souboru</h5>
-                    <span>cislo souboru</span>
-                </div>
-            </div>
+        <div id="NewFilesId" class="new-files" >
         </div>
-        <div class="d-flex mb-2">
-            <div class="text-vertical-div">
-                <div class="text-vertical">verze 2</div>
-            </div>
-            <div class="d-flex file-version">
-                <div class="file">
-                    <h5>jmeno souboru</h5>
-                    <span>cislo souboru</span>
-                </div>
-            </div>
+        <div id="FilesId">
+            @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
         </div>
     </div>
     <div class="input-group mb-2">

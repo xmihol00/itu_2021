@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using itu.BL.DTOs.File;
 using itu.BL.DTOs.Task.Interfaces;
 using itu.Common.Enums;
 
@@ -26,5 +27,6 @@ namespace itu.BL.DTOs.Task
         public int? NextId { get; set; }
         public int WorkflowId { get; set; }
         public int AgendaId { get; set; }
+        public List<AllFileDTO> Files { get; set; }
     }
 }

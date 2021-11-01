@@ -14,23 +14,22 @@ namespace itu.DAL.Seeds
             new FileEntity()
             {
                 Id = 1,
-                Name = "test soubor",
+                Name = "test soubor.c",
+                Number = "ID_852",
+                MIME = "text/plain",
                 TaskId = 1,
+                Version = 1,
                 FileDataId = 1,
             },
             new FileEntity()
             {
                 Id = 2,
-                Name = "soubor1",
+                Name = "soubor1.txt",
+                Number = "ID_7823",
+                MIME = "text/plain",
                 TaskId = 1,
+                Version = 1,
                 FileDataId = 2,
-            },
-            new FileEntity()
-            {
-                Id = 3,
-                Name = "soubor ABC",
-                TaskId = 1,
-                FileDataId = 3,
             },
         };
 

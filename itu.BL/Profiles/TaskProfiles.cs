@@ -24,43 +24,50 @@ namespace itu.BL.Profiles
                 .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
                 .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
                 .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
-                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))
+                .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Workflow.Description));
             
             CreateMap<AcceptationEntity, AcceptationDTO>()
                 .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
                 .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
                 .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
-                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))
+                .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Workflow.Description));
             
             CreateMap<AssessmentEntity, AssesmentDTO>()
                 .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
                 .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
                 .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
-                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))
+                .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Workflow.Description));
 
             CreateMap<ArchivationEntity, ArchivationDTO>()
                 .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
                 .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
                 .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
-                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))
+                .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Workflow.Description));
 
             CreateMap<ContractEntity, ContractDTO>()
                 .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
                 .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
                 .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
-                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))
+                .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Workflow.Description));
 
             CreateMap<EstimateEntity, EstimateDTO>()
                 .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
                 .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
                 .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
-                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))
+                .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Workflow.Description));
 
             CreateMap<PublishEntity, PublishDTO>()
                 .ForMember(dst => dst.Type, opt => opt.MapFrom(src => TaskEntity.ToLabel(src.GetType())))
                 .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
                 .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
-                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId));
+                .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))
+                .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Workflow.Description));
 
             CreateMap<TaskEntity, DetailTaskDTO>()
                 .Include<AssignmentEntity, AssignmentDTO>()

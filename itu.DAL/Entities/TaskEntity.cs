@@ -12,7 +12,6 @@ namespace itu.DAL.Entities
     {
         public int Id { get; set; }
         public string Note { get; set; }
-        public string Description { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public PriorityEnum Priority { get; set; }

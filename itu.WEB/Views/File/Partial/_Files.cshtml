@@ -1,0 +1,55 @@
+@model List<AllFileDTO>
+
+@{ int version = 0; }
+
+@if (Model != null && Model.Count > 0)
+{
+    @foreach (var group in Model.GroupBy(x => x.Version).OrderBy(x => x.Key))
+    {
+        if (++version != group.Key)
+        {
+            <div class="mb-2 w-50 hidden-version" style="display: none;">
+                <div class="text-vertical-div">
+                    <div class="text-vertical">verze @version</div>
+                </div>
+                <div class="d-flex file-version w-100" data-version="@(version++)" 
+                     ondrop="FileDropped(event)" ondragover="DragOver(event)" ondragenter="DragEntered(this)" ondragleave="DragLeave(this, event)">
+                
+                </div>
+            </div>
+        }
+
+        <div class="d-flex mb-2">
+            <div class="text-vertical-div">
+                <div class="text-vertical">verze @group.Key</div>
+            </div>
+            <div class="d-flex file-version" data-version="@group.Key" 
+                 ondrop="FileDropped(event)" ondragover="DragOver(event)" ondragenter="DragEntered(this)" ondragleave="DragLeave(this, event)">
+                @foreach (AllFileDTO file in group)
+                {
+                    <div id="@file.Id" class="file" 
+                         ondragstart="FileDragged(event)" draggable="true" ondragend="DragEnded(event)">
+                        <div class="file-name">
+                            <span class="center">@file.Name</span>
+                        </div>
+                        <span class="mr-2 ml-2"><strong>Identifikátor: </strong>@file.Number</span>
+                        <div class="d-flex justify-content-around mb-1">
+                            <a type="button" href="~/File/Download/@file.Id" class="btn btn-sm btn-primary mr-1 ml-2">Stáhnout <i class="fas fa-download ml-1"></i></a>
+                            <button type="button" onclick="DeleteFile(@(file.Id.ToString()))" class="btn btn-sm btn-danger ml-1 mr-2">Smazat <i class="fas fa-times ml-1"></i></button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="mb-2 hidden-version" style="display: none;">
+        <div class="text-vertical-div">
+            <div class="text-vertical">verze @(++version)</div>
+        </div>
+        <div class="d-flex file-version" data-version="@version" 
+             ondrop="FileDropped(event)" ondragover="DragOver(event)" ondragenter="DragEntered(this)" ondragleave="DragLeave(this, event)">
+
+        </div>
+    </div>
+}

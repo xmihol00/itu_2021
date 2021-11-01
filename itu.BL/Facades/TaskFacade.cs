@@ -67,23 +67,5 @@ namespace itu.BL.Facades
         {
             return _mapper.Map<DetailTaskDTO>(await _repository.Detail(userId, taskId));
         }
-
-        public async Task Upload(int taskId, string name, string number, Stream file)
-        {
-            FileEntity newFile = new FileEntity()
-            {
-                TaskId = taskId,
-                Name = name,
-                Number = number,
-                FileData = new FileDataEntity()
-            };
-
-            MemoryStream memStream = new MemoryStream();
-            await file.CopyToAsync(memStream);
-            newFile.FileData.Data = memStream.ToArray();
-
-            await _fileRepository.Create(newFile);
-            await _fileRepository.Save();
-        }
     }
 }

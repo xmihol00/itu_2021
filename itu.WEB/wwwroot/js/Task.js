@@ -1,12 +1,11 @@
 
-var DefaultHeight = 0;
 var Files = [];
+var Dropped = false;
 
 document.addEventListener("DOMContentLoaded", function()
 {
     CountDown();
     CountDownInterval = setInterval(CountDown, 1000);
-    DefaultHeight = document.getElementById("UpFile").scrollHeight + 2;
 });
 
 function SolveTask(element)
@@ -125,15 +124,16 @@ function FormatPriceInput(element)
 
 function FileChosen(element)
 {
-    let fileDiv = element.parentNode;
+    let fileDiv = document.getElementById("NewFilesId");
     for (let i = 0; i < element.files.length; i++)
     {
         if (document.getElementById(element.files[i].name) == null)
         {
             Files.push(element.files[i]);
-            fileDiv.parentNode.insertBefore(CreateFileNumberDiv(element.files[i].name), fileDiv);
+            fileDiv.appendChild(CreateFileNumberDiv(element.files[i].name), fileDiv);
         }
     }
+    element.files = new DataTransfer().files;
 }
 
 function UpdateFileSpan()
@@ -162,7 +162,7 @@ function UploadFile(element)
     fileData.append(element.childNodes[1].value, upload);
 
     $.ajax({
-        url: "/Task/Upload/" + TaskId,
+        url: "/File/Upload/" + TaskId,
         type: "POST",
         datatype: "json",
         contentType: false,
@@ -173,23 +173,38 @@ function UploadFile(element)
     .done(function(result)
     {
         Files = Files.filter(x => x.name != element.id);
-        element.remove();
+        document.getElementById("FilesId").innerHTML = result;
+        element.parentNode.remove();
     });
 }
 
 function CreateFileNumberDiv(fileName)
 {
+    const mainDiv = document.createElement("div");
+    mainDiv.classList.add("new-file-div");
+    mainDiv.classList.add("mb-2");
+
+    const nameDiv = document.createElement("div");
+    nameDiv.classList.add("task-headline");
+    nameDiv.classList.add("file-name");
+
+    const nameSpan = document.createElement("span");
+    nameSpan.classList.add("center");
+    nameSpan.innerText = fileName;
+
+    nameDiv.appendChild(nameSpan);
+    mainDiv.appendChild(nameDiv);
+
     const inputDiv = document.createElement("div");
     inputDiv.classList.add("input-group");
-    inputDiv.classList.add("mb-2");
+    inputDiv.classList.add("new-file-input");
 
     const prepDiv = document.createElement("div");
     prepDiv.classList.add("input-group-prepend");
 
     const label = document.createElement("label");
     label.classList.add("input-group-text");
-    label.classList.add("task-prep-wdth");
-    label.innerText = fileName;
+    label.innerText = "Identifikátor";
 
     prepDiv.appendChild(label);
     inputDiv.appendChild(prepDiv);
@@ -200,8 +215,8 @@ function CreateFileNumberDiv(fileName)
 
     inputDiv.appendChild(input);
 
-    const appDiv = document.createElement("div");
-    appDiv.classList.add("input-group-append");
+    const btnDiv = document.createElement("div");
+    btnDiv.classList.add("new-file-btns");
     
     const upBtn = document.createElement("button");
     upBtn.disabled = true;
@@ -217,31 +232,32 @@ function CreateFileNumberDiv(fileName)
     const delBtn = document.createElement("button");
     delBtn.classList.add("btn");
     delBtn.classList.add("btn-danger");
+    delBtn.innerText = "Zrušit";
     
     const crossIcon = document.createElement("i")
     crossIcon.classList.add("fas");
     crossIcon.classList.add("fa-times");
-    crossIcon.classList.add("ml-1");
-    crossIcon.classList.add("mr-1");
+    crossIcon.classList.add("ml-2");
     
     upBtn.appendChild(upIcon);
     delBtn.appendChild(crossIcon);
-    appDiv.appendChild(upBtn);
-    appDiv.appendChild(delBtn);
-    inputDiv.appendChild(appDiv);
+    btnDiv.appendChild(upBtn);
+    btnDiv.appendChild(delBtn);
+    mainDiv.appendChild(inputDiv);
+    mainDiv.appendChild(btnDiv);
     
     inputDiv.id = fileName;
     delBtn.onclick = () => newFileRemoved(inputDiv);
     upBtn.onclick = () => UploadFile(inputDiv);
     input.oninput = () => BtnChangeState(input, upBtn);
 
-    return inputDiv;
+    return mainDiv;
 }
 
 function newFileRemoved(element)
 {
     Files = Files.filter(x => x.name != element.id);
-    element.remove();
+    element.parentNode.remove();
 }
 
 function BtnChangeState(input, button)
@@ -253,5 +269,101 @@ function BtnChangeState(input, button)
     else
     {
         button.disabled = true;
+    }
+}
+
+function DeleteFile(id)
+{
+    $.ajax({
+        url: "/File/Delete/" + id,
+        type: "POST",
+        async: true,
+    })
+    .done(function(result)
+    {
+        document.getElementById("FilesId").innerHTML = result;
+    });    
+}
+
+function FileDragged(event)
+{
+    let element = event.target;
+    event.dataTransfer.setData("Id", element.id);
+
+    let oldTopPos = element.getBoundingClientRect().top;
+
+    for (let item of document.getElementsByClassName("hidden-version"))
+    {
+        item.style.display = "flex";
+    }
+
+    for (let item of document.getElementsByClassName("file-version"))
+    {
+        item.style.borderColor = "var(--color-prio-urgent)";
+    }
+
+    let newTopPos = element.getBoundingClientRect().top + window.scrollY;
+    window.scroll(window.scrollX, newTopPos - oldTopPos);
+}
+
+function FileDropped(event)
+{
+    Dropped = true;
+    let target = event.target;
+    while(target.getAttribute("data-version") == undefined)
+    {
+        target = target.parentNode;
+    }
+
+    event.preventDefault();
+    
+    $.ajax({
+        url: "/File/ChangeVersion",
+        type: "POST",
+        async: true,
+        data: { FileId: event.dataTransfer.getData("Id"), Version: target.getAttribute("data-version") }
+    })
+    .done(function(result)
+    {
+        document.getElementById("FilesId").innerHTML = result;
+    }); 
+}
+
+function DragOver(event)
+{
+    event.preventDefault();
+}
+
+function DragEnded()
+{
+    setTimeout(function() 
+    {
+        if (!Dropped)
+        {
+            for (let item of document.getElementsByClassName("hidden-version"))
+            {
+                item.style.display = "none";
+            }
+
+            for (let item of document.getElementsByClassName("file-version"))
+            {
+                item.style.borderColor = "black";
+            }
+        }
+        Dropped = false;
+    }, 0);
+}
+
+function DragEntered(element)
+{
+    element.style.borderColor = "green";
+}
+
+function DragLeave(element, event)
+{
+    let rect = element.getBoundingClientRect();
+    if (rect.top > event.clientY || rect.bottom < event.clientY || rect.right < event.clientX || rect.left > event.clientX)
+    {
+        element.style.borderColor = "var(--color-prio-urgent)";
     }
 }
