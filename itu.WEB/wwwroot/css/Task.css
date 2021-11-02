@@ -2,7 +2,7 @@
 .container {
     width: 80%;
     max-width: 1500px;
-    min-width: 1000px;
+    min-width: 1150px;
 }
 
 .ov-btn-width {
@@ -11,11 +11,11 @@
 
 
 .priority {
-    width: 140px;
+    width: 100px;
     margin-top: -4px;
     position: absolute;
     left: 50%;
-    transform: translate(-70px, 0);
+    transform: translate(-50px, 0);
     border-radius: 15px;
     color: var(--color-text-inverted);
     padding: 4px 12px;
@@ -27,11 +27,11 @@ h4 {
 }
 
 .priority-detail {
-    width: 190;
+    width: 140;
     margin-top: -7px;
     position: absolute;
     left: 50%;
-    transform: translate(-85px, 0);
+    transform: translate(-75px, 0);
     border-radius: 15px;
     color: var(--color-text-inverted);
     padding: 4px 12px;
@@ -62,10 +62,11 @@ h4 {
     border-style: dashed;
     border-radius: 0.25rem;
     height: 100%;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     margin-left: -30px;
     margin-right: 0.5rem;
     background: var(--color-bg-light);
+    margin-bottom: 2px;
 }
 
 .header {
@@ -161,6 +162,7 @@ h4 {
 }
 
 .task-prep-wdth {
+    width: 176px;
     min-width: 125px !important;
     max-width: 300px !important;
 }
@@ -206,7 +208,7 @@ h4 {
 .file {
     border-radius: 4px;
     border: 1px solid var(--color-bg-dark);
-    background-color: #fff;
+    background-color: var(--color-bg);
     margin-right: 6px;
     margin-bottom: 6px;
     z-index: 5;
@@ -225,6 +227,7 @@ h4 {
     border-bottom-left-radius: 4px;
     border-top-left-radius: 4px;
     margin-left: 1px;
+    border: 2px solid var(--color-bg-dark);
 }
 
 .text-vertical {
@@ -238,13 +241,14 @@ h4 {
 
 .input-grp-border {
     border-radius: 4px;
-    border: 1px solod var(--color-bg-dark);
+    border: 1px solid var(--color-bg-dark);
 }
 
 .new-file-div {
     margin-bottom: 0.5rem;
     width: calc(50% - 7px);
     border: 1px solid var(--color-bg-dark);
+    background-color: var(--color-bg);
     border-radius: 4px;
     margin-left: 6px;
 }
@@ -303,4 +307,12 @@ h4 {
     border: 2px solid var(--color-bg-dark);
     color: var(--color-bg-dark);
     font-weight: bold;
+}
+
+.description-wf {
+    padding: 0.25rem 0.5rem;
+    background-color: var(--color-bg);
+    margin: 0px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }

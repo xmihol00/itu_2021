@@ -15,10 +15,10 @@
   --color-required: #750000;
   --color-bg-success: #28a745;
   --color-border-success: #018f5b;
-  --color-prio-low: #007bff;
-  --color-prio-medium: #fc6a00;
-  --color-prio-high: #cf0000;
-  --color-prio-urgent: #9900ff;
+  --color-prio-low: #018f5b;
+  --color-prio-medium: #007bff;
+  --color-prio-high: #fc6a00;
+  --color-prio-urgent: #cf0000;
 }
 
 a.navbar-brand {
@@ -134,6 +134,10 @@ body {
   background: var(--color-bg-light);
 }
 
+.card:last-child {
+  margin-bottom: 0px;
+}
+
 .card-focus {
   border-color: var(--color-border-focus);
   border-width: 2px;
@@ -159,17 +163,17 @@ body {
 }
 
 .date-green {
-  color: green;
+  color: var(--color-prio-low);
   min-width: 116px;
 }
 
 .date-orange {
-  color: var(--color-prio-medium);
+  color: var(--color-prio-high);
   min-width: 116px;
 }
 
 .date-red {
-  color: var(--color-prio-high);
+  color: var(--color-prio-urgent);
   min-width: 116px;
 }
 

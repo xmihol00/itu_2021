@@ -31,8 +31,6 @@ namespace itu.DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<TaskEntity>().HasKey(x => x.Id);
-            modelBuilder.Entity<TaskEntity>().HasOne(x => x.Previous).WithOne(x => x.Next).HasForeignKey<TaskEntity>(x => x.PreviousId).OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<TaskEntity>().HasOne(x => x.Next).WithOne(x => x.Previous).HasForeignKey<TaskEntity>(x => x.NextId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<TaskEntity>().HasOne(x => x.User).WithMany(x => x.Tasks).HasForeignKey(x => x.UserId);
             modelBuilder.Entity<TaskEntity>().HasOne(x => x.Workflow).WithMany(x => x.Tasks).HasForeignKey(x => x.WorkflowId).OnDelete(DeleteBehavior.NoAction);
 

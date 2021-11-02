@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using itu.Common.Enums;
-using itu.DAL.Entities.Tasks.Interfaces;
 
-namespace itu.DAL.Entities.Tasks
+namespace itu.DAL.Entities.Tasks.Interfaces
 {
-    public class ContractEntity : TaskEntity, IContractEntity
+    public interface IContractEntity : ITaskEntity
     {
         public double FinalPrice { get; set; }
         public string PriceChangeReason { get; set; }

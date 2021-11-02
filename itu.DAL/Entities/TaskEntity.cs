@@ -11,16 +11,13 @@ namespace itu.DAL.Entities
     public class TaskEntity
     {
         public int Id { get; set; }
+        public int Order { get; set; }
         public string Note { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public PriorityEnum Priority { get; set; }
         public string DelayReason { get; set; }
         public bool Active { get; set; }
-        public int? PreviousId { get; set; }
-        public TaskEntity Previous { get; set; }
-        public int? NextId { get; set; }
-        public TaskEntity Next { get; set; }
         public int UserId { get; set; }
         public UserEntity User { get; set; }
         public int WorkflowId { get; set; }
@@ -53,6 +50,44 @@ namespace itu.DAL.Entities
                 
                 default:
                     return new TaskEntity();
+            }
+        }
+
+        public FileTypeEnum ToType()
+        {
+            Type type = this.GetType();
+
+            if (type == typeof(AcceptationEntity))
+            {
+                return FileTypeEnum.Acceptation;
+            }
+            else if (type == typeof(AssignmentEntity))
+            {
+                return FileTypeEnum.Assignment;
+            }
+            else if (type == typeof(AssessmentEntity))
+            {
+                return FileTypeEnum.Assessment;
+            }
+            else if (type == typeof(ArchivationEntity))
+            {
+                return FileTypeEnum.Archivation;
+            }
+            else if (type == typeof(PublishEntity))
+            {
+                return FileTypeEnum.Publication;
+            }
+            else if (type == typeof(ContractEntity))
+            {
+                return FileTypeEnum.Contract;
+            }
+            else if (type == typeof(EstimateEntity))
+            {
+                return FileTypeEnum.Estimate;
+            }
+            else
+            {
+                return FileTypeEnum.Assignment;
             }
         }
 

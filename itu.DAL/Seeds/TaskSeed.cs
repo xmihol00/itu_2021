@@ -17,19 +17,18 @@ namespace itu.DAL.Seeds
             new AssignmentEntity()
             {
                 Id = 1,
+                Order = 1,
                 UserId = 1,
                 WorkflowId = 1,
                 Active = true,
                 End = DateTime.Now.AddDays(3),
                 Currency = CurrencyEnum.EUR,
-                NextId = 2,
-                PreviousId = null,
                 Priority = PriorityEnum.Low,
                 DelayReason = "Testovací důvod vrácení",
                 Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
                 PriceGues = 4368.2,
                 Start = DateTime.Now.AddDays(-3),
-                Reason = "Testovací důvod vypsání tohoto úkolu."
+                Benefit = "Testovací předvyplněný úkol obsahující i přínos organizaci."
             },
 
             new AcceptationEntity()
@@ -39,13 +38,12 @@ namespace itu.DAL.Seeds
                 WorkflowId = 2,
                 Active = true,
                 End = DateTime.Now.AddDays(25),
-                PreviousId = 1,
-                NextId = 3,
                 Priority = PriorityEnum.Medium,
                 Accepted = true,
                 Note = "Přijato bez výhrad",
                 Reason = "Pěkně vypracováno",
                 DelayReason = "dovolená",
+                Start = DateTime.Now.AddDays(-7),
             },
 
             new AssessmentEntity()
@@ -54,9 +52,9 @@ namespace itu.DAL.Seeds
                 UserId = 1,
                 WorkflowId = 3,
                 Active = true,
-                PreviousId = 2,
-                NextId = 4,
+                End = DateTime.Now.AddDays(12),
                 Priority = PriorityEnum.High,
+                Start = DateTime.Now.AddDays(-2),
             },
 
             new EstimateEntity()
@@ -65,9 +63,9 @@ namespace itu.DAL.Seeds
                 UserId = 1,
                 WorkflowId = 4,
                 Active = true,
-                PreviousId = 3,
-                NextId = 5,
+                End = DateTime.Now.AddDays(4),
                 Priority = PriorityEnum.Urgent,
+                Start = DateTime.Now.AddDays(-9),
             },
 
             new ContractEntity()
@@ -76,8 +74,9 @@ namespace itu.DAL.Seeds
                 UserId = 1,
                 WorkflowId = 5,
                 Active = true,
-                PreviousId = 4,
-                NextId = 6,
+                End = DateTime.Now.AddDays(4),
+                Priority = PriorityEnum.Medium,
+                Start = DateTime.Now.AddDays(-4),
             },
 
             new PublishEntity()
@@ -86,8 +85,9 @@ namespace itu.DAL.Seeds
                 UserId = 1,
                 WorkflowId = 6,
                 Active = true,
-                PreviousId = 5,
-                NextId = 7,
+                End = DateTime.Now.AddDays(9),
+                Priority = PriorityEnum.Low,
+                Start = DateTime.Now.AddDays(-1),
             },
 
             new ArchivationEntity()
@@ -96,8 +96,9 @@ namespace itu.DAL.Seeds
                 UserId = 1,
                 WorkflowId = 7,
                 Active = true,
-                PreviousId = 6,
-                NextId = null,
+                End = DateTime.Now.AddDays(4),
+                Priority = PriorityEnum.High,
+                Start = DateTime.Now.AddDays(-6),
             },
         };
 

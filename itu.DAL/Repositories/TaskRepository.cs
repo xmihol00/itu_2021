@@ -15,7 +15,10 @@ namespace itu.DAL.Repositories
         public Task<List<TaskEntity>> AllOfUser(int userId)
         {
             return _dbSet.Include(x => x.Workflow)
-                         .Where(x => x.UserId == userId).ToListAsync();
+                         .OrderBy(x => x.End.Date)
+                            .ThenBy(x => x.Priority)
+                         .Where(x => x.UserId == userId && x.Active == true)
+                         .ToListAsync();
         }
 
         public Task<TaskEntity> Detail(int userId, int taskId)
@@ -30,6 +33,19 @@ namespace itu.DAL.Repositories
         public Task<TaskEntity> GetTask(int id)
         {
             return _dbSet.FirstAsync(x => x.Id == id);
+        }
+
+        public Task<ModelTaskEntity> NextModel(int id, int order)
+        {
+            return _dbSet.Include(x => x.Workflow)
+                            .ThenInclude(x => x.ModelWorkflow)
+                            .ThenInclude(x => x.WorkflowTasks)
+                            .ThenInclude(x => x.ModelTask)
+                         .Where(x => x.Id == id)
+                         .SelectMany(x => x.Workflow.ModelWorkflow.WorkflowTasks)
+                         .Where(x => x.Order == order)
+                         .Select(x => x.ModelTask)
+                         .FirstAsync();
         }
     }
 }

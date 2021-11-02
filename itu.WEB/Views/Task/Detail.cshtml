@@ -1,11 +1,5 @@
 @model DetailTaskDTO
 
-<script>
-    var EndDate = new Date('@Model.End.ToString("yyyy-MM-ddTHH:mm:ss")');
-    var CountDownInterval = null;
-    var TaskId = @Model.Id;
-</script>
-
 <span id="EndDate" class="dis-none">@Model.End.ToString("yyyy-MM-ddTHH:mm:ss")</span>
 <div id="TaskId" class="task-detail">
     <div class="header mb-2">
@@ -14,12 +8,12 @@
                 <button class="btn btn-danger">Zahodit změny</button>
             </div>
             <div>
-                <button onclick="Save(false)" class="btn btn-success save-btn mr-1">Uložit</button>
-                <button onclick="Save(true)" class="btn btn-success save-btn">Vyřešit</button>
+                <button onclick="Save('@Model.ToAction()Save')" class="btn btn-success save-btn mr-1">Uložit</button>
+                <button onclick="Solve('@Model.ToAction()')" class="btn btn-success save-btn">Vyřešit</button>
             </div>
         </div>
         <div class="d-flex justify-content-between mb-3">
-            <span class="priority-detail @Model.Priority">@Model.Priority.ToLabel() priorita</span>
+            <span class="priority-detail @Model.Priority">@Model.Priority.ToLabel()</span>
             <h5 class="fit ml-1">Zadáno: @Model.Start.ToString("dd. MM. yyyy")</h5>
             @if (Model.End.Date > DateTime.Now.Date.AddDays(3))
             {
@@ -71,25 +65,24 @@
     </div>
     <div class="mb-2 border-dark">
         <div class="task-description">
-            Zadání
+            Popis cíle workflow
         </div>
-        <p class="ml-2 mr-2 mt-1 mb-1">@Model.Description</p>
+        <p class="description-wf">@Model.Description</p>
     </div>
-    <form id="FormId"
-          action="/Task/@Model.ToAction()/@Model.Id"
-          method="POST">
+    <form id="@Model.Id" action="/Task/@Model.ToAction()Solve" method="POST">
+          <input id="TaskId" name="Id" type="hidden" value="@Model.Id"/>
         @switch (Model)
         {
             case IAssignmentDTO assignment:
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth">Odhad ceny</label>
+                        <label class="input-group-text task-prep-wdth">Prvotní odhad ceny</label>
                     </div>
-                    <input class="form-control" value="@assignment.PriceGues.ToPrice()" 
+                    <input id="PriceId" class="form-control" value="@assignment.PriceGues.ToPrice()" name="PriceGues"
                            onkeydown="FormatPriceDown(arguments[0], this)"
                            oninput="FormatPriceInput(this)" />
                     <div class="input-group-append">
-                        <select class="input-group-text" >
+                        <select class="input-group-text" name="Currency" id="CurrencyId" >
                             @foreach (CurrencyEnum value in Enum.GetValues(typeof(CurrencyEnum)))
                             {
                                 @if (value == assignment.Currency)
@@ -103,6 +96,12 @@
                             }
                         </select>
                     </div>
+                </div>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text task-prep-wdth">Přínos pro organizaci</label>
+                    </div>
+                    <textarea id="BenefitId" name="Benefit" class="form-control">@assignment.Benefit</textarea>
                 </div>  
                 break;
 
@@ -112,6 +111,12 @@
              default:
                 break;
         }
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Poznámka</label>
+            </div>
+            <textarea id="NoteId" name="Note" class="form-control">@Model.Note</textarea>
+        </div>
         <div class="files-div mb-2">
             <div class="input-group mb-2" style="margin-left: 1px;">
                 <div class="input-group-prepend w-50">
@@ -120,7 +125,7 @@
                 <input id="Upload" type="file" onchange="FileChosen(this)" multiple/>
                 <div class="input-group-append w-50">
                     <label for="Upload" class="input-group-text d-flex justify-content-end w-100" style="cursor: pointer;">
-                        <i class="fas fa-folder-open mr-2"></i> Vybrat nový
+                        <i class="fas fa-folder-open mr-2"></i> Nahrát nový
                     </label>
                 </div>
             </div>
@@ -129,18 +134,6 @@
             <div id="FilesId">
                 @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
             </div>
-        </div>
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <label class="input-group-text task-prep-wdth">Požadavky</label>
-            </div>
-            <textarea class="form-control">@Model.Requirements</textarea>
-        </div>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <label class="input-group-text task-prep-wdth">Poznámka</label>
-            </div>
-            <textarea class="form-control">@Model.Note</textarea>
         </div>
     </form>
 </div>

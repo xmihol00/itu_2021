@@ -8,10 +8,10 @@ namespace itu.Common.Enums
 {
     public enum PriorityEnum
     {
-        Low,
-        Medium,
-        High,
         Urgent,
+        High,
+        Medium,
+        Low,
     }
 
     public static class Priority
@@ -21,16 +21,16 @@ namespace itu.Common.Enums
             switch (value)
             {
                 case PriorityEnum.Low:
-                    return "nízká";
+                    return "odložitelný";
                 
                 case PriorityEnum.Medium:
-                    return "střední";
+                    return "běžný";
                 
                 case PriorityEnum.High:
-                    return "vysoká";
+                    return "nalehavý";
 
                 case PriorityEnum.Urgent:
-                    return "nejvyšší";
+                    return "urgentní";
                 
                 default:
                     return "";

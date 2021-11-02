@@ -10,6 +10,9 @@ namespace itu.BL.DTOs.Task
 {
     public class AcceptationDTO : DetailTaskDTO, IAcceptationDTO
     {
+        public string Benefit { get; set; }
+        public double PriceGues { get; set; }
+        public CurrencyEnum Currency { get; set; }
         public string Reason { get; set; }
         public bool Accepted { get; set; }
     }

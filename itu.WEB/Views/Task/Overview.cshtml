@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div id=@($"Unselect{first.Id}") class="dis-none">
-                    <span class="priority @first.Priority">@first.Priority.ToLabel() priorita</span>
+                    <span class="priority @first.Priority">@first.Priority.ToLabel()</span>
                     <div class="d-flex justify-content-between mb-2">
                         <h5 class="fit ml-1">@first.Type</h5>
                         @if (first.End.Date > DateTime.Now.Date.AddDays(3))
@@ -75,7 +75,7 @@
                     <h4 class="text-center">Vyřešit do</h4>
                 </div>
                 <div id=@($"Unselect{task.Id}")>
-                    <span class="priority @task.Priority">@task.Priority.ToLabel() priorita</span>
+                    <span class="priority @task.Priority">@task.Priority.ToLabel()</span>
                     <div class="d-flex justify-content-between mb-2">
                         <h5 class="fit ml-1">@task.Type</h5>
                         @if (task.End.Date > DateTime.Now.Date.AddDays(3))

@@ -35,6 +35,7 @@ namespace itu.BL.Facades
                 Name = file.FileName,
                 Number = file.Name,
                 MIME = file.ContentType,
+                Type = task.ToType(),
                 Version = (await _repository.HighestVersion(taskId, file.Name)) + 1,
                 FileData = new FileDataEntity()
             };

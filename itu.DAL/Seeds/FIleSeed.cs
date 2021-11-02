@@ -43,7 +43,7 @@ namespace itu.DAL.Seeds
                 WorkflowId = 2,
                 Version = 1,
                 FileDataId = 3,
-                Type = FileTypeEnum.Assessment,
+                Type = FileTypeEnum.Acceptation,
             },
         };
 

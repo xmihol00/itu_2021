@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using itu.DAL.Entities.Tasks.Interfaces;
 
-namespace itu.DAL.Entities.Tasks
+namespace itu.DAL.Entities.Tasks.Interfaces
 {
-    public class EstimateEntity : TaskEntity, IEstimateEntity
+    public interface IEstimateEntity : ITaskEntity 
     {
         public double EstimatePrice { get; set; }
         public double MaxPrice { get; set; }

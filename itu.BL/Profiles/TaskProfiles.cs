@@ -15,6 +15,14 @@ namespace itu.BL.Profiles
     {
         public TaskProfiles()
         {
+            CreateMap<TaskEntity, AcceptationEntity>();
+            CreateMap<TaskEntity, AssignmentEntity>();
+            CreateMap<TaskEntity, AssessmentEntity>();
+            CreateMap<TaskEntity, ArchivationEntity>();
+            CreateMap<TaskEntity, PublishEntity>();
+            CreateMap<TaskEntity, ContractEntity>();
+            CreateMap<TaskEntity, EstimateEntity>();
+
             CreateMap<TaskEntity, AllTaskDTO>()
                 .ForMember(dst => dst.Type, opt => opt.MapFrom(src => src.ToLabel()))
                 .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))

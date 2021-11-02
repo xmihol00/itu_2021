@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using itu.BL.DTOs.File;
+using itu.BL.DTOs.Task;
 using itu.BL.Facades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -34,9 +35,30 @@ namespace itu.WEB.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Assignment()
+        public async Task<IActionResult> AssignmentSolve(AssignmentPostDTO assignment)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _facade.AssignmentSolve(ViewBag.Id, assignment);
+                return Redirect($"/Task/Overview/");
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AssignmentSave(AssignmentPostDTO assignment)
+        {
+            try
+            {
+                return PartialView("Detail", await _facade.AssignmentSave(ViewBag.Id, assignment));
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
     }
 }

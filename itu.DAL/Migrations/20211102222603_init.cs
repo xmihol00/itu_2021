@@ -227,25 +227,19 @@ namespace itu.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Order = table.Column<int>(type: "int", nullable: false),
                     Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Start = table.Column<DateTime>(type: "datetime2", nullable: false),
                     End = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Priority = table.Column<int>(type: "int", nullable: false),
                     DelayReason = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Active = table.Column<bool>(type: "bit", nullable: false),
-                    PreviousId = table.Column<int>(type: "int", nullable: true),
-                    NextId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     WorkflowId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tasks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Tasks_Tasks_NextId",
-                        column: x => x.NextId,
-                        principalTable: "Tasks",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Tasks_Users_UserId",
                         column: x => x.UserId,
@@ -264,6 +258,9 @@ namespace itu.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
+                    Benefit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PriceGues = table.Column<double>(type: "float", nullable: false),
+                    Currency = table.Column<int>(type: "int", nullable: false),
                     Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Accepted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -321,7 +318,7 @@ namespace itu.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Benefit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PriceGues = table.Column<double>(type: "float", nullable: false),
                     Currency = table.Column<int>(type: "int", nullable: false)
                 },
@@ -468,9 +465,9 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "AdministratorId", "Creation", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 2, 2, new DateTime(2021, 10, 28, 15, 31, 14, 918, DateTimeKind.Local).AddTicks(5865), "Agenda spravující menší a střední zakázky", "Malé a střední zakázky" },
-                    { 1, 1, new DateTime(2021, 10, 3, 15, 31, 14, 917, DateTimeKind.Local).AddTicks(7280), "Agenda správující jednoduchuché nákupy bez vúběrových řízení", "Nákupy" },
-                    { 3, 1, new DateTime(2021, 9, 3, 15, 31, 14, 918, DateTimeKind.Local).AddTicks(5882), "Agenda spravující důležité velké zakázky", "Velké zakázky" }
+                    { 2, 2, new DateTime(2021, 10, 28, 23, 26, 3, 111, DateTimeKind.Local).AddTicks(3078), "Agenda spravující menší a střední zakázky", "Malé a střední zakázky" },
+                    { 1, 1, new DateTime(2021, 10, 3, 23, 26, 3, 110, DateTimeKind.Local).AddTicks(1712), "Agenda správující jednoduchuché nákupy bez vúběrových řízení", "Nákupy" },
+                    { 3, 1, new DateTime(2021, 9, 3, 23, 26, 3, 111, DateTimeKind.Local).AddTicks(3099), "Agenda spravující důležité velké zakázky", "Velké zakázky" }
                 });
 
             migrationBuilder.InsertData(
@@ -525,13 +522,27 @@ namespace itu.DAL.Migrations
                 {
                     { 1, 1, "text/plain", "test soubor.c", "ID_852", 0, 1, 1 },
                     { 2, 2, "text/plain", "soubor1.txt", "ID_7823", 0, 1, 1 },
-                    { 3, 3, "text/plain", "soubor2.txt", "ID_11", 1, 1, 2 }
+                    { 3, 3, "text/plain", "soubor2.txt", "ID_11", 2, 1, 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Tasks",
-                columns: new[] { "Id", "Active", "DelayReason", "End", "NextId", "Note", "PreviousId", "Priority", "Start", "UserId", "WorkflowId" },
-                values: new object[] { 7, true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 6, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 7 });
+                columns: new[] { "Id", "Active", "DelayReason", "End", "Note", "Order", "Priority", "Start", "UserId", "WorkflowId" },
+                values: new object[,]
+                {
+                    { 1, true, "Testovací důvod vrácení", new DateTime(2021, 11, 5, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(5515), "Testovaci předvyplněný úkol obsahující i poznámku.", 1, 3, new DateTime(2021, 10, 30, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(7442), 1, 1 },
+                    { 4, true, null, new DateTime(2021, 11, 6, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(9403), null, 0, 0, new DateTime(2021, 10, 24, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(9409), 1, 4 },
+                    { 7, true, null, new DateTime(2021, 11, 6, 23, 26, 3, 113, DateTimeKind.Local).AddTicks(148), null, 0, 1, new DateTime(2021, 10, 27, 23, 26, 3, 113, DateTimeKind.Local).AddTicks(154), 1, 7 },
+                    { 3, true, null, new DateTime(2021, 11, 14, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(9147), null, 0, 1, new DateTime(2021, 10, 31, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(9154), 1, 3 },
+                    { 6, true, null, new DateTime(2021, 11, 11, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(9903), null, 0, 3, new DateTime(2021, 11, 1, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(9909), 1, 6 },
+                    { 2, true, "dovolená", new DateTime(2021, 11, 27, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(8338), "Přijato bez výhrad", 0, 2, new DateTime(2021, 10, 26, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(8881), 1, 2 },
+                    { 5, true, null, new DateTime(2021, 11, 6, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(9649), null, 0, 2, new DateTime(2021, 10, 29, 23, 26, 3, 112, DateTimeKind.Local).AddTicks(9656), 1, 5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Acceptations",
+                columns: new[] { "Id", "Accepted", "Benefit", "Currency", "PriceGues", "Reason" },
+                values: new object[] { 2, true, null, 0, 0.0, "Pěkně vypracováno" });
 
             migrationBuilder.InsertData(
                 table: "Archivations",
@@ -539,19 +550,14 @@ namespace itu.DAL.Migrations
                 values: new object[] { 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0 });
 
             migrationBuilder.InsertData(
-                table: "Tasks",
-                columns: new[] { "Id", "Active", "DelayReason", "End", "NextId", "Note", "PreviousId", "Priority", "Start", "UserId", "WorkflowId" },
-                values: new object[] { 6, true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 5, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 6 });
+                table: "Assessments",
+                columns: new[] { "Id", "Conclusion" },
+                values: new object[] { 3, null });
 
             migrationBuilder.InsertData(
-                table: "Publishes",
-                columns: new[] { "Id", "PublishEnd", "PublishStart" },
-                values: new object[] { 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
-
-            migrationBuilder.InsertData(
-                table: "Tasks",
-                columns: new[] { "Id", "Active", "DelayReason", "End", "NextId", "Note", "PreviousId", "Priority", "Start", "UserId", "WorkflowId" },
-                values: new object[] { 5, true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, null, 4, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 5 });
+                table: "Assignments",
+                columns: new[] { "Id", "Benefit", "Currency", "PriceGues" },
+                values: new object[] { 1, "Testovací předvyplněný úkol obsahující i přínos organizaci.", 1, 4368.1999999999998 });
 
             migrationBuilder.InsertData(
                 table: "Contracts",
@@ -559,44 +565,14 @@ namespace itu.DAL.Migrations
                 values: new object[] { 5, 0, 0.0, null });
 
             migrationBuilder.InsertData(
-                table: "Tasks",
-                columns: new[] { "Id", "Active", "DelayReason", "End", "NextId", "Note", "PreviousId", "Priority", "Start", "UserId", "WorkflowId" },
-                values: new object[] { 4, true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, null, 3, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 4 });
-
-            migrationBuilder.InsertData(
                 table: "Estimates",
                 columns: new[] { "Id", "EstimatePrice", "MaxPrice" },
                 values: new object[] { 4, 0.0, 0.0 });
 
             migrationBuilder.InsertData(
-                table: "Tasks",
-                columns: new[] { "Id", "Active", "DelayReason", "End", "NextId", "Note", "PreviousId", "Priority", "Start", "UserId", "WorkflowId" },
-                values: new object[] { 3, true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, null, 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 3 });
-
-            migrationBuilder.InsertData(
-                table: "Assessments",
-                columns: new[] { "Id", "Conclusion" },
-                values: new object[] { 3, null });
-
-            migrationBuilder.InsertData(
-                table: "Tasks",
-                columns: new[] { "Id", "Active", "DelayReason", "End", "NextId", "Note", "PreviousId", "Priority", "Start", "UserId", "WorkflowId" },
-                values: new object[] { 2, true, "dovolená", new DateTime(2021, 11, 27, 15, 31, 14, 919, DateTimeKind.Local).AddTicks(5831), 3, "Přijato bez výhrad", 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2 });
-
-            migrationBuilder.InsertData(
-                table: "Acceptations",
-                columns: new[] { "Id", "Accepted", "Reason" },
-                values: new object[] { 2, true, "Pěkně vypracováno" });
-
-            migrationBuilder.InsertData(
-                table: "Tasks",
-                columns: new[] { "Id", "Active", "DelayReason", "End", "NextId", "Note", "PreviousId", "Priority", "Start", "UserId", "WorkflowId" },
-                values: new object[] { 1, true, "Testovací důvod vrácení", new DateTime(2021, 11, 5, 15, 31, 14, 919, DateTimeKind.Local).AddTicks(4056), 2, "Testovaci předvyplněný úkol obsahující i poznámku.", null, 0, new DateTime(2021, 10, 30, 15, 31, 14, 919, DateTimeKind.Local).AddTicks(5363), 1, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Assignments",
-                columns: new[] { "Id", "Currency", "PriceGues", "Reason" },
-                values: new object[] { 1, 1, 4368.1999999999998, "Testovací důvod vypsání tohoto úkolu." });
+                table: "Publishes",
+                columns: new[] { "Id", "PublishEnd", "PublishStart" },
+                values: new object[] { 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AgendaRoles_AgendaId",
@@ -633,13 +609,6 @@ namespace itu.DAL.Migrations
                 name: "IX_Notes_WorkflowId",
                 table: "Notes",
                 column: "WorkflowId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tasks_NextId",
-                table: "Tasks",
-                column: "NextId",
-                unique: true,
-                filter: "[NextId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_UserId",

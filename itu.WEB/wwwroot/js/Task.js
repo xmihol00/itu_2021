@@ -1,46 +1,56 @@
 
 var Files = [];
 var Dropped = false;
+var EndDate = null;
+var CountDownInterval = null;
+var TaskId = null;
+var LastEntered = null;
 
 document.addEventListener("DOMContentLoaded", function()
 {
+    let ed = document.getElementById("EndDate");
+    EndDate = new Date(ed.innerHTML);
+    ed.remove();
     CountDown();
     CountDownInterval = setInterval(CountDown, 1000);
+    
+    TaskId = document.getElementsByTagName("form")[0].id;
 });
 
 function SolveTask(element)
 {    
     $.ajax(
-        {
-            async: true,
-            type: 'GET',
-            url: "/Task/Detail/" + element.id,
-        })
-        .done(function (result) 
-        {
-            document.getElementById("DetailDiv").innerHTML = result;
-            
-            let ed = document.getElementById("EndDate");
-            EndDate = new Date(ed.innerHTML);
-            ed.remove();
-            let clk = document.getElementById("CLK");
-            CountDown();
+    {
+        async: true,
+        type: 'GET',
+        url: "/Task/Detail/" + element.id,
+    })
+    .done(function (result) 
+    {
+        document.getElementById("DetailDiv").innerHTML = result;
+        
+        let ed = document.getElementById("EndDate");
+        EndDate = new Date(ed.innerHTML);
+        ed.remove();
+        let clk = document.getElementById("CLK");
+        CountDown();
 
-            document.getElementById("Card" + SelectedId).classList.remove("card-selected");
-            document.getElementById("Select" + SelectedId).style.display = "none";
-            document.getElementById("Unselect" + SelectedId).style.display = "block";
+        document.getElementById("Card" + SelectedId).classList.remove("card-selected");
+        document.getElementById("Select" + SelectedId).style.display = "none";
+        document.getElementById("Unselect" + SelectedId).style.display = "block";
+        SelectedId = element.id;
+        document.getElementById("Card" + SelectedId).classList.add("card-selected");
+        let select = document.getElementById("Select" + SelectedId);
+        select.style.display = "block";
+        select.appendChild(clk);
 
-            SelectedId = element.id;
-            document.getElementById("Card" + SelectedId).classList.add("card-selected");
-            let select = document.getElementById("Select" + SelectedId);
-            select.style.display = "block";
-            select.appendChild(clk);
-            document.getElementById("Unselect" + SelectedId).style.display = "none";
-        })
-        .fail(function (result)
-        {
-            //AlertAndReload(result);
-        });
+        document.getElementById("Unselect" + SelectedId).style.display = "none";
+        TaskId = document.getElementsByTagName("form")[0].id;
+    })
+    .fail(function (result)
+    {
+        //AlertAndReload(result);
+    });
 }
 
 function CountDown()
@@ -224,6 +234,7 @@ function CreateFileNumberDiv(fileName)
     upBtn.disabled = true;
     upBtn.classList.add("btn");
     upBtn.classList.add("btn-success");
+    upBtn.classList.add("btn-sm");
     upBtn.innerText = "Nahrát";
     upBtn.type = "button";
     
@@ -235,6 +246,7 @@ function CreateFileNumberDiv(fileName)
     const delBtn = document.createElement("button");
     delBtn.classList.add("btn");
     delBtn.classList.add("btn-danger");
+    delBtn.classList.add("btn-sm");
     delBtn.innerText = "Zrušit";
     
     const crossIcon = document.createElement("i")
@@ -361,6 +373,11 @@ function DragEnded()
 
 function DragEntered(element)
 {
+    if (LastEntered != null)
+    {
+        LastEntered.style.borderColor = "var(--color-prio-urgent)";
+    }
+    LastEntered = element;
     element.style.borderColor = "green";
 }
 
@@ -373,15 +390,44 @@ function DragLeave(element, event)
     }
 }
 
-function Save(type)
+function Save(address)
 {
-    let form = document.getElementById("FormId");
-    const input = document.createElement("input");
-    input.type = "hidden";
-    intput.value = type;
-    input.name = "Type";
+    let dto = {}
+    let price = document.getElementById("PriceId");
+    dto.PriceGues = price.value.replace(/\s/g,'');
+    dto.Note = document.getElementById("NoteId").value;
+    dto.Currency = document.getElementById("CurrencyId").value;
+    dto.Benefit = document.getElementById("BenefitId").value;
+    dto.Id = document.getElementsByTagName("form")[0].id;
+
+    $.ajax(
+    {
+        async: true,
+        type: 'POST',
+        url: "/Task/" + address,
+        data: dto
+    })
+    .done(function (result) 
+    {
+        console.log("recieved");
+        document.getElementById("DetailDiv").innerHTML = result;
+    })
+    .fail(function (result)
+    {
+        //AlertAndReload(result);
+    });
+}
+
+function Solve(type)
+{
+    let form = document.getElementsByTagName("form")[0];
+
+    if (type == "Assignment")
+    {
+        let price = document.getElementById("PriceId");
+        price.value = price.value.replace(/\s/g,'');
+    }
     
-    form.appendChild(input);
     form.submit();
 }
 
