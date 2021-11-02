@@ -21,6 +21,11 @@ namespace itu.DAL.Seeds
                 Id = 2,
                 Data = new byte[] {5, 7, 8, 9, 10}   
             },
+            new FileDataEntity()
+            {
+                Id = 3,
+                Data = new byte[] {6, 6, 8, 9, 10}   
+            },
         };
 
         public static void SeedFileData(this ModelBuilder modelBuilder)

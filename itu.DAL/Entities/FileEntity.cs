@@ -17,7 +17,7 @@ namespace itu.DAL.Entities
         public FileTypeEnum Type { get; set; }
         public int FileDataId { get; set; }
         public FileDataEntity FileData { get; set; }
-        public int TaskId { get; set; }
-        public TaskEntity Task { get; set; }
+        public int WorkflowId { get; set; }
+        public WorkflowEntity Workflow { get; set; }
     }
 }

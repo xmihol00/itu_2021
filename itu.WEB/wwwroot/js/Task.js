@@ -176,6 +176,8 @@ function UploadFile(element)
         document.getElementById("FilesId").innerHTML = result;
         element.parentNode.remove();
     });
+
+    return false;
 }
 
 function CreateFileNumberDiv(fileName)
@@ -223,6 +225,7 @@ function CreateFileNumberDiv(fileName)
     upBtn.classList.add("btn");
     upBtn.classList.add("btn-success");
     upBtn.innerText = "Nahrát";
+    upBtn.type = "button";
     
     const upIcon = document.createElement("i");
     upIcon.classList.add("fas");
@@ -282,7 +285,9 @@ function DeleteFile(id)
     .done(function(result)
     {
         document.getElementById("FilesId").innerHTML = result;
-    });    
+    });
+
+    return false;
 }
 
 function FileDragged(event)

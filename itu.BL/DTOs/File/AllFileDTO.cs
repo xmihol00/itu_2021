@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using itu.Common.Enums;
 using Microsoft.AspNetCore.Http;
 
 namespace itu.BL.DTOs.File
@@ -13,5 +14,6 @@ namespace itu.BL.DTOs.File
         public string Name { get; set; }
         public string Number { get; set; }
         public int Version { get; set; }
+        public FileTypeEnum Type { get; set; }
     }
 }

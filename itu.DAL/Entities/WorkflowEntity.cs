@@ -21,5 +21,6 @@ namespace itu.DAL.Entities
         public ModelWorkflowEntity ModelWorkflow { get; set; }
         public List<NoteEntity> Notes { get; set; }
         public List<TaskEntity> Tasks { get; set; }
+        public List<FileEntity> Files { get; set; }
     }
 }

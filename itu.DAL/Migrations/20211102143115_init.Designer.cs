@@ -10,7 +10,7 @@ using itu.DAL;
 namespace itu.DAL.Migrations
 {
     [DbContext(typeof(ItuDbContext))]
-    [Migration("20211101182650_init")]
+    [Migration("20211102143115_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 10, 2, 19, 26, 50, 213, DateTimeKind.Local).AddTicks(8625),
+                            Creation = new DateTime(2021, 10, 3, 15, 31, 14, 917, DateTimeKind.Local).AddTicks(7280),
                             Description = "Agenda správující jednoduchuché nákupy bez vúběrových řízení",
                             Name = "Nákupy"
                         },
@@ -59,7 +59,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             AdministratorId = 2,
-                            Creation = new DateTime(2021, 10, 27, 19, 26, 50, 215, DateTimeKind.Local).AddTicks(67),
+                            Creation = new DateTime(2021, 10, 28, 15, 31, 14, 918, DateTimeKind.Local).AddTicks(5865),
                             Description = "Agenda spravující menší a střední zakázky",
                             Name = "Malé a střední zakázky"
                         },
@@ -67,7 +67,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 9, 2, 19, 26, 50, 215, DateTimeKind.Local).AddTicks(87),
+                            Creation = new DateTime(2021, 9, 3, 15, 31, 14, 918, DateTimeKind.Local).AddTicks(5882),
                             Description = "Agenda spravující důležité velké zakázky",
                             Name = "Velké zakázky"
                         });
@@ -122,6 +122,11 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             Data = new byte[] { 5, 7, 8, 9, 10 }
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Data = new byte[] { 6, 6, 8, 9, 10 }
                         });
                 });
 
@@ -144,13 +149,13 @@ namespace itu.DAL.Migrations
                     b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.Property<int>("Version")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkflowId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -158,7 +163,7 @@ namespace itu.DAL.Migrations
                     b.HasIndex("FileDataId")
                         .IsUnique();
 
-                    b.HasIndex("TaskId");
+                    b.HasIndex("WorkflowId");
 
                     b.ToTable("Files");
 
@@ -170,9 +175,9 @@ namespace itu.DAL.Migrations
                             MIME = "text/plain",
                             Name = "test soubor.c",
                             Number = "ID_852",
-                            TaskId = 1,
                             Type = 0,
-                            Version = 1
+                            Version = 1,
+                            WorkflowId = 1
                         },
                         new
                         {
@@ -181,9 +186,20 @@ namespace itu.DAL.Migrations
                             MIME = "text/plain",
                             Name = "soubor1.txt",
                             Number = "ID_7823",
-                            TaskId = 1,
                             Type = 0,
-                            Version = 1
+                            Version = 1,
+                            WorkflowId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FileDataId = 3,
+                            MIME = "text/plain",
+                            Name = "soubor2.txt",
+                            Number = "ID_11",
+                            Type = 1,
+                            Version = 1,
+                            WorkflowId = 2
                         });
                 });
 
@@ -782,12 +798,78 @@ namespace itu.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            AgendaId = 2,
+                            AgendaId = 1,
                             Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam rhoncus aliquam metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
                             ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModelWorkflowId = 1,
-                            Name = "Testovací úkol",
+                            Name = "1. testovací úkol",
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AgendaId = 2,
+                            Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam rhoncus aliquam metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui.",
+                            ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelWorkflowId = 2,
+                            Name = "2. testovací úkol",
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AgendaId = 3,
+                            Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
+                            ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelWorkflowId = 3,
+                            Name = "3. testovací úkol",
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AgendaId = 1,
+                            Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
+                            ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelWorkflowId = 4,
+                            Name = "4. testovací úkol",
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AgendaId = 2,
+                            Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
+                            ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelWorkflowId = 3,
+                            Name = "5. testovací úkol",
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AgendaId = 3,
+                            Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut.",
+                            ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelWorkflowId = 5,
+                            Name = "6. testovací úkol",
+                            State = 0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AgendaId = 1,
+                            Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Donec odio tempus molestie, porttitor ut, iaculis quis. Per inceptos hymenaeos. Sed vel lectus. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
+                            ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelWorkflowId = 5,
+                            Name = "7. testovací úkol",
                             State = 0
                         });
                 });
@@ -808,16 +890,16 @@ namespace itu.DAL.Migrations
                         new
                         {
                             Id = 2,
-                            Active = false,
+                            Active = true,
                             DelayReason = "dovolená",
-                            End = new DateTime(2021, 11, 26, 19, 26, 50, 216, DateTimeKind.Local).AddTicks(4520),
+                            End = new DateTime(2021, 11, 27, 15, 31, 14, 919, DateTimeKind.Local).AddTicks(5831),
                             NextId = 3,
                             Note = "Přijato bez výhrad",
                             PreviousId = 1,
                             Priority = 1,
                             Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1,
-                            WorkflowId = 1,
+                            WorkflowId = 2,
                             Accepted = true,
                             Reason = "Pěkně vypracováno"
                         });
@@ -837,6 +919,22 @@ namespace itu.DAL.Migrations
                         .HasColumnType("int");
 
                     b.ToTable("Archivations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 7,
+                            Active = true,
+                            End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PreviousId = 6,
+                            Priority = 0,
+                            Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 1,
+                            WorkflowId = 7,
+                            Cancallation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = 0,
+                            Number = 0
+                        });
                 });
 
             modelBuilder.Entity("itu.DAL.Entities.Tasks.AssessmentEntity", b =>
@@ -852,14 +950,14 @@ namespace itu.DAL.Migrations
                         new
                         {
                             Id = 3,
-                            Active = false,
+                            Active = true,
                             End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NextId = 4,
                             PreviousId = 2,
                             Priority = 2,
                             Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1,
-                            WorkflowId = 1
+                            WorkflowId = 3
                         });
                 });
 
@@ -884,11 +982,11 @@ namespace itu.DAL.Migrations
                             Id = 1,
                             Active = true,
                             DelayReason = "Testovací důvod vrácení",
-                            End = new DateTime(2021, 11, 4, 19, 26, 50, 216, DateTimeKind.Local).AddTicks(1312),
+                            End = new DateTime(2021, 11, 5, 15, 31, 14, 919, DateTimeKind.Local).AddTicks(4056),
                             NextId = 2,
                             Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
                             Priority = 0,
-                            Start = new DateTime(2021, 10, 29, 19, 26, 50, 216, DateTimeKind.Local).AddTicks(3555),
+                            Start = new DateTime(2021, 10, 30, 15, 31, 14, 919, DateTimeKind.Local).AddTicks(5363),
                             UserId = 1,
                             WorkflowId = 1,
                             Currency = 1,
@@ -916,14 +1014,14 @@ namespace itu.DAL.Migrations
                         new
                         {
                             Id = 5,
-                            Active = false,
+                            Active = true,
                             End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NextId = 6,
                             PreviousId = 4,
                             Priority = 0,
                             Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1,
-                            WorkflowId = 1,
+                            WorkflowId = 5,
                             ContractType = 0,
                             FinalPrice = 0.0
                         });
@@ -945,14 +1043,14 @@ namespace itu.DAL.Migrations
                         new
                         {
                             Id = 4,
-                            Active = false,
+                            Active = true,
                             End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NextId = 5,
                             PreviousId = 3,
                             Priority = 3,
                             Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1,
-                            WorkflowId = 1,
+                            WorkflowId = 4,
                             EstimatePrice = 0.0,
                             MaxPrice = 0.0
                         });
@@ -974,27 +1072,14 @@ namespace itu.DAL.Migrations
                         new
                         {
                             Id = 6,
-                            Active = false,
+                            Active = true,
                             End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NextId = 7,
                             PreviousId = 5,
                             Priority = 0,
                             Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1,
-                            WorkflowId = 1,
-                            PublishEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PublishStart = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Active = false,
-                            End = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PreviousId = 6,
-                            Priority = 0,
-                            Start = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1,
-                            WorkflowId = 1,
+                            WorkflowId = 6,
                             PublishEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishStart = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -1036,15 +1121,15 @@ namespace itu.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("itu.DAL.Entities.TaskEntity", "Task")
+                    b.HasOne("itu.DAL.Entities.WorkflowEntity", "Workflow")
                         .WithMany("Files")
-                        .HasForeignKey("TaskId")
+                        .HasForeignKey("WorkflowId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("FileData");
 
-                    b.Navigation("Task");
+                    b.Navigation("Workflow");
                 });
 
             modelBuilder.Entity("itu.DAL.Entities.ModelWorkflowTaskEntity", b =>
@@ -1211,8 +1296,6 @@ namespace itu.DAL.Migrations
 
             modelBuilder.Entity("itu.DAL.Entities.TaskEntity", b =>
                 {
-                    b.Navigation("Files");
-
                     b.Navigation("Previous");
                 });
 
@@ -1227,6 +1310,8 @@ namespace itu.DAL.Migrations
 
             modelBuilder.Entity("itu.DAL.Entities.WorkflowEntity", b =>
                 {
+                    b.Navigation("Files");
+
                     b.Navigation("Notes");
 
                     b.Navigation("Tasks");

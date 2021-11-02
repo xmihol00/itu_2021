@@ -36,8 +36,8 @@ namespace itu.DAL.Seeds
             {
                 Id = 2,
                 UserId = 1,
-                WorkflowId = 1,
-                Active = false,
+                WorkflowId = 2,
+                Active = true,
                 End = DateTime.Now.AddDays(25),
                 PreviousId = 1,
                 NextId = 3,
@@ -52,8 +52,8 @@ namespace itu.DAL.Seeds
             {
                 Id = 3,
                 UserId = 1,
-                WorkflowId = 1,
-                Active = false,
+                WorkflowId = 3,
+                Active = true,
                 PreviousId = 2,
                 NextId = 4,
                 Priority = PriorityEnum.High,
@@ -63,8 +63,8 @@ namespace itu.DAL.Seeds
             {
                 Id = 4,
                 UserId = 1,
-                WorkflowId = 1,
-                Active = false,
+                WorkflowId = 4,
+                Active = true,
                 PreviousId = 3,
                 NextId = 5,
                 Priority = PriorityEnum.Urgent,
@@ -74,8 +74,8 @@ namespace itu.DAL.Seeds
             {
                 Id = 5,
                 UserId = 1,
-                WorkflowId = 1,
-                Active = false,
+                WorkflowId = 5,
+                Active = true,
                 PreviousId = 4,
                 NextId = 6,
             },
@@ -84,18 +84,18 @@ namespace itu.DAL.Seeds
             {
                 Id = 6,
                 UserId = 1,
-                WorkflowId = 1,
-                Active = false,
+                WorkflowId = 6,
+                Active = true,
                 PreviousId = 5,
                 NextId = 7,
             },
 
-            new PublishEntity()
+            new ArchivationEntity()
             {
                 Id = 7,
                 UserId = 1,
-                WorkflowId = 1,
-                Active = false,
+                WorkflowId = 7,
+                Active = true,
                 PreviousId = 6,
                 NextId = null,
             },

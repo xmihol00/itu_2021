@@ -25,7 +25,6 @@ namespace itu.DAL.Entities
         public UserEntity User { get; set; }
         public int WorkflowId { get; set; }
         public WorkflowEntity Workflow { get; set; }
-        public List<FileEntity> Files { get; set; }
 
         public static TaskEntity Factory(TaskTypeEnum type)
         {

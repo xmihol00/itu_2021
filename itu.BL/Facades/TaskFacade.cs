@@ -49,7 +49,7 @@ namespace itu.BL.Facades
         {
             FileEntity newFile = new FileEntity()
             {
-                TaskId = upload.TaskId,
+                WorkflowId = upload.TaskId,
                 Name = upload.Name,
                 Number = upload.Number,
                 FileData = new FileDataEntity()

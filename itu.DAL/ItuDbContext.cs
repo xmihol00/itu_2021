@@ -62,7 +62,7 @@ namespace itu.DAL
             modelBuilder.Entity<UserEntity>().HasKey(x => x.Id);
             modelBuilder.Entity<UserEntity>().HasMany(x => x.AgendaRoles).WithOne(x => x.User).HasForeignKey(x => x.UserId);
 
-            modelBuilder.Entity<FileEntity>().HasOne(x => x.Task).WithMany(x => x.Files).HasForeignKey(x => x.TaskId);
+            modelBuilder.Entity<FileEntity>().HasOne(x => x.Workflow).WithMany(x => x.Files).HasForeignKey(x => x.WorkflowId);
             modelBuilder.Entity<FileEntity>().HasOne(x => x.FileData).WithOne(x => x.File).HasForeignKey<FileEntity>(x => x.FileDataId);
 
             modelBuilder.Entity<AgendaEntity>().HasKey(x => x.Id);

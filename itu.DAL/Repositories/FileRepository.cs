@@ -12,17 +12,17 @@ namespace itu.DAL.Repositories
     {
         public FileRepository(ItuDbContext context) : base(context) { }
 
-        public Task<int> HighestVersion(int taskId, string number)
+        public Task<int> HighestVersion(int workflowId, string number)
         {
-            return _dbSet.Where(x => x.TaskId == taskId && x.Number == number)
+            return _dbSet.Where(x => x.WorkflowId == workflowId && x.Number == number)
                          .OrderByDescending(x => x.Version)
                          .Select(x => x.Version)
                          .FirstOrDefaultAsync();
         }
 
-        public Task<List<FileEntity>> AllFiles(int taskId)
+        public Task<List<FileEntity>> AllFiles(int workflowId)
         {
-            return _dbSet.Where(x => x.TaskId == taskId).ToListAsync();
+            return _dbSet.Where(x => x.WorkflowId == workflowId).ToListAsync();
         }
 
         public Task<FileEntity> Download(int id)

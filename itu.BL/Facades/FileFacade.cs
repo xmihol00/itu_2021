@@ -16,19 +16,22 @@ namespace itu.BL.Facades
     public class FileFacade
     {
         private readonly FileRepository _repository;
+        private readonly TaskRepository _taskRepository;
         private readonly IMapper _mapper;
 
-        public FileFacade(FileRepository repository, IMapper mapper)
+        public FileFacade(FileRepository repository, TaskRepository taskRepository, IMapper mapper)
         {
             _repository = repository;
+            _taskRepository = taskRepository;
             _mapper = mapper;
         }
 
         public async Task<List<AllFileDTO>> Upload(int taskId, IFormFile file)
         {
+            TaskEntity task = await _taskRepository.GetTask(taskId);
             FileEntity newFile = new FileEntity()
             {
-                TaskId = taskId,
+                WorkflowId = task.WorkflowId,
                 Name = file.FileName,
                 Number = file.Name,
                 MIME = file.ContentType,
@@ -52,7 +55,7 @@ namespace itu.BL.Facades
             _repository.Delete(file);
             await _repository.Save();
 
-            return _mapper.Map<List<AllFileDTO>>(await _repository.AllFiles(file.TaskId));
+            return _mapper.Map<List<AllFileDTO>>(await _repository.AllFiles(file.WorkflowId));
         }
 
         public async Task<DownloadFileDTO> Download(int id)
@@ -67,7 +70,7 @@ namespace itu.BL.Facades
             _repository.Update(file);
             await _repository.Save();
 
-            return _mapper.Map<List<AllFileDTO>>(await _repository.AllFiles(file.TaskId));
+            return _mapper.Map<List<AllFileDTO>>(await _repository.AllFiles(file.WorkflowId));
         }
     }
 }

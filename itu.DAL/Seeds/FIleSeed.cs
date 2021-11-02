@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using itu.Common.Enums;
 using itu.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,9 +18,10 @@ namespace itu.DAL.Seeds
                 Name = "test soubor.c",
                 Number = "ID_852",
                 MIME = "text/plain",
-                TaskId = 1,
+                WorkflowId = 1,
                 Version = 1,
                 FileDataId = 1,
+                Type = FileTypeEnum.Assignment,
             },
             new FileEntity()
             {
@@ -27,9 +29,21 @@ namespace itu.DAL.Seeds
                 Name = "soubor1.txt",
                 Number = "ID_7823",
                 MIME = "text/plain",
-                TaskId = 1,
+                WorkflowId = 1,
                 Version = 1,
                 FileDataId = 2,
+                Type = FileTypeEnum.Assignment,
+            },
+            new FileEntity()
+            {
+                Id = 3,
+                Name = "soubor2.txt",
+                Number = "ID_11",
+                MIME = "text/plain",
+                WorkflowId = 2,
+                Version = 1,
+                FileDataId = 3,
+                Type = FileTypeEnum.Assessment,
             },
         };
 

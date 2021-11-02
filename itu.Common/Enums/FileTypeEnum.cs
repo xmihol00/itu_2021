@@ -10,8 +10,43 @@ namespace itu.Common.Enums
     {
         Assignment,
         Assessment,
+        Acceptation,
         Estimate,
-        Publishment,
+        Publication,
         Contract,
+        Archivation,
+    }
+
+    public static class FileType
+    {
+        public static string ToLabel(this FileTypeEnum value)
+        {
+            switch (value)
+            {
+                case FileTypeEnum.Assignment:
+                    return "zadání";
+                
+                case FileTypeEnum.Acceptation:
+                    return "schválení";
+
+                case FileTypeEnum.Assessment:
+                    return "posouzení";
+                
+                case FileTypeEnum.Estimate:
+                    return "odhad";
+                
+                case FileTypeEnum.Publication:
+                    return "zveřejnění";
+                
+                case FileTypeEnum.Contract:
+                    return "smouva";
+                
+                case FileTypeEnum.Archivation:
+                    return "archivace";
+                
+                default:
+                    return "";
+            }
+        }
     }
 }
