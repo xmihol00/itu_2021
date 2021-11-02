@@ -290,3 +290,17 @@ h4 {
 .hidden-version {
     display: none;
 }
+
+.file-button {
+    width: 45px;
+}
+
+.file-type {
+    border-radius: 15px;
+    padding: 4px 12px;
+    text-align: center;
+    font-size: 14px;
+    border: 2px solid var(--color-bg-dark);
+    color: var(--color-bg-dark);
+    font-weight: bold;
+}

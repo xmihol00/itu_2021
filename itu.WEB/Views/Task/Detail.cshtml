@@ -14,8 +14,8 @@
                 <button class="btn btn-danger">Zahodit změny</button>
             </div>
             <div>
-                <button class="btn btn-success save-btn mr-1">Uložit</button>
-                <button class="btn btn-success save-btn">Vyřešit</button>
+                <button onclick="Save(false)" class="btn btn-success save-btn mr-1">Uložit</button>
+                <button onclick="Save(true)" class="btn btn-success save-btn">Vyřešit</button>
             </div>
         </div>
         <div class="d-flex justify-content-between mb-3">
@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-3 d-flex justify-content-center">
                 <div class="task-headline" style="font-size: 25px">
-                    <span class="center">@Model.Type</span>
+                    <span class="center">@Model.ToLabel()</span>
                 </div>
             </div>
         </div>
@@ -75,69 +75,74 @@
         </div>
         <p class="ml-2 mr-2 mt-1 mb-1">@Model.Description</p>
     </div>
-    @switch (Model)
-    {
-        case IAssignmentDTO assignment:
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <label class="input-group-text task-prep-wdth">Odhad ceny</label>
-                </div>
-                <input class="form-control" value="@assignment.PriceGues.ToPrice()" 
-                       onkeydown="FormatPriceDown(arguments[0], this)"
-                       oninput="FormatPriceInput(this)" />
-                <div class="input-group-append">
-                    <select class="input-group-text" >
-                        @foreach (CurrencyEnum value in Enum.GetValues(typeof(CurrencyEnum)))
-                        {
-                            @if (value == assignment.Currency)
+    <form id="FormId"
+          action="/Task/@Model.ToAction()/@Model.Id"
+          method="POST">
+        @switch (Model)
+        {
+            case IAssignmentDTO assignment:
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text task-prep-wdth">Odhad ceny</label>
+                    </div>
+                    <input class="form-control" value="@assignment.PriceGues.ToPrice()" 
+                           onkeydown="FormatPriceDown(arguments[0], this)"
+                           oninput="FormatPriceInput(this)" />
+                    <div class="input-group-append">
+                        <select class="input-group-text" >
+                            @foreach (CurrencyEnum value in Enum.GetValues(typeof(CurrencyEnum)))
                             {
-                                <option selected>@value</option>
+                                @if (value == assignment.Currency)
+                                {
+                                    <option selected>@value</option>
+                                }
+                                else
+                                {
+                                    <option>@value</option>
+                                }
                             }
-                            else
-                            {
-                                <option>@value</option>
-                            }
-                        }
-                    </select>
-                </div>
-            </div>  
-            break;
-        
-        case IAcceptationDTO acceptation:
-            break;
+                        </select>
+                    </div>
+                </div>  
+                break;
 
-         default:
-            break;
-    }
-    <div class="files-div mb-2">
-        <div class="input-group mb-2" style="margin-left: 1px;">
-            <div class="input-group-prepend w-50">
-                <label class="input-group-text w-100">Soubory</label>
+            case IAcceptationDTO acceptation:
+                break;
+
+             default:
+                break;
+        }
+        <div class="files-div mb-2">
+            <div class="input-group mb-2" style="margin-left: 1px;">
+                <div class="input-group-prepend w-50">
+                    <label class="input-group-text w-100">Soubory</label>
+                </div>
+                <input id="Upload" type="file" onchange="FileChosen(this)" multiple/>
+                <div class="input-group-append w-50">
+                    <label for="Upload" class="input-group-text d-flex justify-content-end w-100" style="cursor: pointer;">
+                        <i class="fas fa-folder-open mr-2"></i> Vybrat nový
+                    </label>
+                </div>
             </div>
-            <input id="Upload" type="file" onchange="FileChosen(this)" multiple/>
-            <div class="input-group-append w-50">
-                <label for="Upload" class="input-group-text d-flex justify-content-end w-100" style="cursor: pointer;">
-                    <i class="fas fa-folder-open mr-2"></i> Vybrat nový
-                </label>
+            <div id="NewFilesId" class="new-files" >
+            </div>
+            <div id="FilesId">
+                @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
             </div>
         </div>
-        <div id="NewFilesId" class="new-files" >
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Požadavky</label>
+            </div>
+            <textarea class="form-control">@Model.Requirements</textarea>
         </div>
-        <div id="FilesId">
-            @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Poznámka</label>
+            </div>
+            <textarea class="form-control">@Model.Note</textarea>
         </div>
-    </div>
-    <div class="input-group mb-2">
-        <div class="input-group-prepend">
-            <label class="input-group-text task-prep-wdth">Požadavky</label>
-        </div>
-        <textarea class="form-control">@Model.Requirements</textarea>
-    </div>
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <label class="input-group-text task-prep-wdth">Poznámka</label>
-        </div>
-        <textarea class="form-control">@Model.Note</textarea>
-    </div>
+    </form>
 </div>
+
 

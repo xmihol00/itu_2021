@@ -34,8 +34,9 @@
                         </div>
                         <span class="mr-2 ml-2"><strong>Identifikátor: </strong>@file.Number</span>
                         <div class="d-flex justify-content-around mb-1">
-                            <a type="button" href="~/File/Download/@file.Id" class="btn btn-sm btn-primary mr-1 ml-2">Stáhnout <i class="fas fa-download ml-1"></i></a>
-                            <button type="button" onclick="DeleteFile(@(file.Id.ToString()))" class="btn btn-sm btn-danger ml-1 mr-2">Smazat <i class="fas fa-times ml-1"></i></button>
+                            <a type="button" href="~/File/Download/@file.Id" class="btn btn-sm btn-primary mr-1 ml-2 file-button"><i class="fas fa-download"></i></a>
+                            <span class="file-type">zadání</span>
+                            <button type="button" onclick="DeleteFile(@(file.Id.ToString()))" class="btn btn-sm btn-danger ml-1 mr-2 file-button"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 }

@@ -57,8 +57,10 @@ namespace itu.DAL.Entities
             }
         }
 
-        public static string ToLabel(Type type)
+        public string ToLabel()
         {
+            Type type = this.GetType();
+
             if (type == typeof(AcceptationEntity))
             {
                 return "Schválení";

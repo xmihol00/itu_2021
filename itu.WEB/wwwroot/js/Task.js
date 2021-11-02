@@ -367,3 +367,16 @@ function DragLeave(element, event)
         element.style.borderColor = "var(--color-prio-urgent)";
     }
 }
+
+function Save(type)
+{
+    let form = document.getElementById("FormId");
+    const input = document.createElement("input");
+    input.type = "hidden";
+    intput.value = type;
+    input.name = "Type";
+    
+    form.appendChild(input);
+    form.submit();
+}
+

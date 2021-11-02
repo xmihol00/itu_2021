@@ -32,5 +32,11 @@ namespace itu.WEB.Controllers
         {
             return PartialView(await _facade.Detail(ViewBag.Id, id));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Assignment()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
