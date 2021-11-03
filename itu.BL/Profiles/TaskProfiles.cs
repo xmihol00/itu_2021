@@ -98,7 +98,7 @@ namespace itu.BL.Profiles
                 .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Workflow.Description))
                 .ForMember(dst => dst.Files, opt => opt.MapFrom(src => src.Workflow.Files));
             
-            CreateMap<AssessmentEntity, AssesmentDTO>()
+            CreateMap<AssessmentEntity, AssessmentDTO>()
                 .ForMember(dst => dst.WorkflowName, opt => opt.MapFrom(src => src.Workflow.Name))
                 .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
                 .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))
@@ -136,7 +136,7 @@ namespace itu.BL.Profiles
             CreateMap<TaskEntity, DetailTaskDTO>()
                 .Include<AssignmentEntity, AssignmentDTO>()
                 .Include<AcceptationEntity, AcceptationDTO>()
-                .Include<AssessmentEntity, AssesmentDTO>()
+                .Include<AssessmentEntity, AssessmentDTO>()
                 .Include<ArchivationEntity, ArchivationDTO>()
                 .Include<ContractEntity, ContractDTO>()
                 .Include<EstimateEntity, EstimateDTO>()

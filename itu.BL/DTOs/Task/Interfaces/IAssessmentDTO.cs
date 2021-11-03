@@ -7,7 +7,7 @@ using itu.Common.Enums;
 
 namespace itu.BL.DTOs.Task.Interfaces
 {
-    public interface IAssesmentDTO : IDetailTaskDTO
+    public interface IAssessmentDTO : IDetailTaskDTO
     {
         public string Conclusion { get; set; }
     }

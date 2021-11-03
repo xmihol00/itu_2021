@@ -74,6 +74,188 @@ namespace itu.BL.Facades
             await _repository.Save();
         }
 
+        public async Task<DetailTaskDTO> AcceptationSave(int userId, AcceptationPostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IAcceptationEntity acceptation = task as IAcceptationEntity;
+
+            acceptation.Accepted = dto.Accepted;
+            acceptation.DelayReason = dto.DelayReason;
+            acceptation.Reason = dto.Reason;
+            acceptation.Note = dto.Note;
+
+            await _repository.Save();
+
+            return _mapper.Map<DetailTaskDTO>(task);
+        }
+
+        public async Task AcceptationSolve(int userId, AcceptationPostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IAcceptationEntity acceptation = task as IAcceptationEntity;
+
+            acceptation.Accepted = dto.Accepted;
+            acceptation.DelayReason = dto.DelayReason;
+            acceptation.Reason = dto.Reason;
+            acceptation.Note = dto.Note;
+            acceptation.Active = false;
+
+            await CreateNextTask(task);            
+            await _repository.Save();
+        }
+
+        public async Task<DetailTaskDTO> AssessmentSave(int userId, AssessmentPostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IAssessmentEntity assessment = task as IAssessmentEntity;
+
+            assessment.Conclusion = dto.Conclusion;
+            assessment.Note = dto.Note;
+            assessment.DelayReason = assessment.DelayReason;
+
+            await _repository.Save();
+
+            return _mapper.Map<DetailTaskDTO>(task);
+        }
+
+        public async Task AssessmentSolve(int userId, AssessmentPostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IAssessmentEntity assessment = task as IAssessmentEntity;
+
+            assessment.Conclusion = dto.Conclusion;
+            assessment.Note = dto.Note;
+            assessment.DelayReason = assessment.DelayReason;
+            assessment.Active = false;
+
+            await CreateNextTask(task);            
+            await _repository.Save();
+        }
+
+        public async Task<DetailTaskDTO> EstimateSave(int userId, EstimatePostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IEstimateEntity estimate = task as IEstimateEntity;
+
+            estimate.EstimatePrice = dto.EstimatePrice;
+            estimate.MaxPrice = dto.MaxPrice;
+            estimate.Note = dto.Note;
+            estimate.DelayReason = estimate.DelayReason;
+
+            await _repository.Save();
+
+            return _mapper.Map<DetailTaskDTO>(task);
+        }
+
+        public async Task EstimateSolve(int userId, EstimatePostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IEstimateEntity estimate = task as IEstimateEntity;
+
+            estimate.EstimatePrice = dto.EstimatePrice;
+            estimate.MaxPrice = dto.MaxPrice;
+            estimate.Note = dto.Note;
+            estimate.DelayReason = estimate.DelayReason;
+            estimate.Active = false;
+
+            await CreateNextTask(task);            
+            await _repository.Save();
+        }
+
+        public async Task<DetailTaskDTO> PublicationSave(int userId, PublishPostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IPublishEntity publish = task as IPublishEntity;
+
+            publish.PublishStart = dto.PublishStart;
+            publish.PublishEnd = dto.PublishEnd;
+            publish.Note = dto.Note;
+            publish.DelayReason = publish.DelayReason;
+
+            await _repository.Save();
+
+            return _mapper.Map<DetailTaskDTO>(task);
+        }
+
+        public async Task PublicationSolve(int userId, PublishPostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IPublishEntity publish = task as IPublishEntity;
+
+            publish.PublishStart = dto.PublishStart;
+            publish.PublishEnd = dto.PublishEnd;
+            publish.Note = dto.Note;
+            publish.DelayReason = publish.DelayReason;
+            publish.Active = false;
+
+            await CreateNextTask(task);            
+            await _repository.Save();
+        }
+
+        public async Task<DetailTaskDTO> ContractSave(int userId, ContractPostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IContractEntity contract = task as IContractEntity;
+
+            contract.ContractType = dto.ContractType;
+            contract.FinalPrice = dto.FinalPrice;
+            contract.PriceChangeReason = dto.PriceChangeReason;
+            contract.Note = dto.Note;
+            contract.DelayReason = contract.DelayReason;
+
+            await _repository.Save();
+
+            return _mapper.Map<DetailTaskDTO>(task);
+        }
+
+        public async Task ContractSolve(int userId, ContractPostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IContractEntity contract = task as IContractEntity;
+
+            contract.ContractType = dto.ContractType;
+            contract.FinalPrice = dto.FinalPrice;
+            contract.PriceChangeReason = dto.PriceChangeReason;
+            contract.Note = dto.Note;
+            contract.DelayReason = contract.DelayReason;
+            contract.Active = false;
+
+            await CreateNextTask(task);            
+            await _repository.Save();
+        }
+
+        public async Task<DetailTaskDTO> ArchivationSave(int userId, ArchivationPostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IArchivationEntity archivation = task as IArchivationEntity;
+
+            archivation.Cancallation = dto.Cancallation;
+            archivation.Number = dto.Number;
+            archivation.Location = dto.Location;
+            archivation.Note = dto.Note;
+            archivation.DelayReason = archivation.DelayReason;
+
+            await _repository.Save();
+
+            return _mapper.Map<DetailTaskDTO>(task);
+        }
+
+        public async Task ArchivationSolve(int userId, ArchivationPostDTO dto)
+        {
+            TaskEntity task = await _repository.Detail(userId, dto.Id);
+            IArchivationEntity archivation = task as IArchivationEntity;
+
+            archivation.Cancallation = dto.Cancallation;
+            archivation.Number = dto.Number;
+            archivation.Location = dto.Location;
+            archivation.Note = dto.Note;
+            archivation.DelayReason = archivation.DelayReason;
+            archivation.Active = false;
+
+            await CreateNextTask(task);            
+            await _repository.Save();
+        }
+
         private async Task CreateNextTask(TaskEntity current)
         {
             ModelTaskEntity model = await _repository.NextModel(current.Id, current.Order + 1);
