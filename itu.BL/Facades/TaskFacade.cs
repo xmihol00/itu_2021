@@ -62,7 +62,6 @@ namespace itu.BL.Facades
         public async Task AssignmentSolve(int userId, AssignmentPostDTO dto)
         {
             TaskEntity task = await _repository.Detail(userId, dto.Id);
-            ModelTaskEntity model = await _repository.NextModel(task.Id, task.Order + 1);
 
             IAssignmentEntity assignment = task as IAssignmentEntity;
             assignment.Benefit = dto.Benefit;
@@ -71,41 +70,88 @@ namespace itu.BL.Facades
             assignment.PriceGues = dto.PriceGues;
             assignment.Active = false;
 
-            switch (model.Type)
-            {
-                case TaskTypeEnum.Acceptation:
-                    AcceptationEntity acceptation = _mapper.Map<AcceptationEntity>(task);
-                    acceptation.Id = 0;
-                    acceptation.Order = assignment.Order++;
-                    acceptation.Benefit = dto.Benefit;
-                    acceptation.Currency = dto.Currency;
-                    acceptation.PriceGues = dto.PriceGues;
-                    acceptation.Active = true;
-                    acceptation.Start = DateTime.Now;
-                    acceptation.End = DateTime.Now.AddDays(model.Difficulty);
-
-                    await _repository.Create(acceptation);
-                    break;
-                
-                case TaskTypeEnum.Archivation:
-                    ArchivationEntity archivation = _mapper.Map<ArchivationEntity>(task);
-                    await _repository.Create(archivation);
-                    break;
-                
-                case TaskTypeEnum.Assessment:
-                    AssessmentEntity assessment = _mapper.Map<AssessmentEntity>(task);
-                    await _repository.Create(assessment);
-                    break;
-                
-                case TaskTypeEnum.Contract:
-                    ContractEntity contract = _mapper.Map<ContractEntity>(task);
-                    await _repository.Create(contract);
-                    break;
-
-                // TODO
-            }
-
+            await CreateNextTask(task);            
             await _repository.Save();
+        }
+
+        private async Task CreateNextTask(TaskEntity current)
+        {
+            ModelTaskEntity model = await _repository.NextModel(current.Id, current.Order + 1);
+            int nextUserId = (await _repository.NextUserId(current.Id, model.Type)).Value;
+            
+            if (model == null)
+            {
+                _repository.CompleteWorkflow(current.WorkflowId);
+            }
+            else
+            {
+                switch (model.Type)
+                {
+                    case TaskTypeEnum.Acceptation:
+                        AcceptationEntity acceptation = _mapper.Map<AcceptationEntity>(current);
+                        if (current is IAssignmentEntity)
+                        {
+                            IAssignmentEntity iAssignment = current as IAssignmentEntity;
+                            acceptation.Order = iAssignment.Order++;
+                            acceptation.Benefit = iAssignment.Benefit;
+                            acceptation.Currency = iAssignment.Currency;
+                            acceptation.PriceGues = iAssignment.PriceGues;
+                        }
+                        acceptation.End = DateTime.Now.AddDays(model.Difficulty);
+                        acceptation.UserId = nextUserId;
+
+                        await _repository.Create(acceptation);
+                        break;
+
+                    case TaskTypeEnum.Archivation:
+                        ArchivationEntity archivation = _mapper.Map<ArchivationEntity>(current);
+                        archivation.End = DateTime.Now.AddDays(model.Difficulty);
+                        archivation.UserId = nextUserId;
+
+                        await _repository.Create(archivation);
+                        break;
+
+                    case TaskTypeEnum.Assessment:
+                        AssessmentEntity assessment = _mapper.Map<AssessmentEntity>(current);
+                        assessment.End = DateTime.Now.AddDays(model.Difficulty);
+                        assessment.UserId = nextUserId;
+
+                        await _repository.Create(assessment);
+                        break;
+
+                    case TaskTypeEnum.Contract:
+                        ContractEntity contract = _mapper.Map<ContractEntity>(current);
+                        contract.End = DateTime.Now.AddDays(model.Difficulty);
+                        contract.UserId = nextUserId;
+
+                        await _repository.Create(contract);
+                        break;
+                    
+                    case TaskTypeEnum.Publish:
+                        PublishEntity publication = _mapper.Map<PublishEntity>(current);
+                        publication.End = DateTime.Now.AddDays(model.Difficulty);
+                        publication.UserId = nextUserId;
+
+                        await _repository.Create(publication);
+                        break;
+
+                    case TaskTypeEnum.Estimate:
+                        EstimateEntity estimate = _mapper.Map<EstimateEntity>(current);
+                        estimate.End = DateTime.Now.AddDays(model.Difficulty);
+                        estimate.UserId = nextUserId;
+
+                        await _repository.Create(estimate);
+                        break;
+
+                    case TaskTypeEnum.Assignment:
+                        AssignmentEntity assignment = _mapper.Map<AssignmentEntity>(current);
+                        assignment.End = DateTime.Now.AddDays(model.Difficulty);
+                        assignment.UserId = nextUserId;
+
+                        await _repository.Create(assignment);
+                        break;
+                }
+            }
         }
     }
 }

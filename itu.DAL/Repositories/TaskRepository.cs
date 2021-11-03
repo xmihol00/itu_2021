@@ -1,4 +1,5 @@
-﻿using itu.DAL.Entities;
+﻿using itu.Common.Enums;
+using itu.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,25 @@ namespace itu.DAL.Repositories
                          .SelectMany(x => x.Workflow.ModelWorkflow.WorkflowTasks)
                          .Where(x => x.Order == order)
                          .Select(x => x.ModelTask)
-                         .FirstAsync();
+                         .FirstOrDefaultAsync();
+        }
+
+        public Task<int?> NextUserId(int id, TaskTypeEnum type)
+        {
+            return _dbSet.Include(x => x.Workflow)
+                            .ThenInclude(x => x.Agenda)
+                            .ThenInclude(x => x.AgendaRoles)
+                         .Where(x => x.Id == id)
+                         .SelectMany(x => x.Workflow.Agenda.AgendaRoles)
+                         .Where(x => x.Type == type)
+                         .Select(x => x.UserId)
+                         .FirstOrDefaultAsync();
+        }
+
+        public void CompleteWorkflow(int workflowId)
+        {
+            _context.Workflows.Attach(new WorkflowEntity(){ Id = workflowId, State = WorkflowStateEnum.Finished })
+                              .Property(x => x.State).IsModified = true;
         }
     }
 }

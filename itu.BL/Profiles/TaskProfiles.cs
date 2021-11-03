@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using itu.BL.DTOs.Task;
 using itu.BL.DTOs.Task.Interfaces;
+using itu.Common.Enums;
 using itu.DAL.Entities;
 using itu.DAL.Entities.Tasks;
 
@@ -15,13 +16,68 @@ namespace itu.BL.Profiles
     {
         public TaskProfiles()
         {
-            CreateMap<TaskEntity, AcceptationEntity>();
-            CreateMap<TaskEntity, AssignmentEntity>();
-            CreateMap<TaskEntity, AssessmentEntity>();
-            CreateMap<TaskEntity, ArchivationEntity>();
-            CreateMap<TaskEntity, PublishEntity>();
-            CreateMap<TaskEntity, ContractEntity>();
-            CreateMap<TaskEntity, EstimateEntity>();
+            CreateMap<TaskEntity, AcceptationEntity>()
+                .ForMember(dst => dst.WorkflowId, opt => opt.MapFrom(src => src.WorkflowId))
+                .ForMember(dst => dst.Note, opt => opt.Ignore())
+                .ForMember(dst => dst.Order, opt => opt.MapFrom(src => src.Order + 1))
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => 0))
+                .ForMember(dst => dst.Start, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dst => dst.Priority, opt => opt.MapFrom(src => PriorityEnum.Medium))
+                .ForMember(dst => dst.Active, opt => opt.MapFrom(src => true));
+
+            CreateMap<TaskEntity, AssignmentEntity>()
+                .ForMember(dst => dst.WorkflowId, opt => opt.MapFrom(src => src.WorkflowId))
+                .ForMember(dst => dst.Note, opt => opt.Ignore())
+                .ForMember(dst => dst.Order, opt => opt.MapFrom(src => src.Order + 1))
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => 0))
+                .ForMember(dst => dst.Start, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dst => dst.Priority, opt => opt.MapFrom(src => PriorityEnum.Medium))
+                .ForMember(dst => dst.Active, opt => opt.MapFrom(src => true));
+
+            CreateMap<TaskEntity, AssessmentEntity>()
+                .ForMember(dst => dst.WorkflowId, opt => opt.MapFrom(src => src.WorkflowId))
+                .ForMember(dst => dst.Note, opt => opt.Ignore())
+                .ForMember(dst => dst.Order, opt => opt.MapFrom(src => src.Order + 1))
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => 0))
+                .ForMember(dst => dst.Start, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dst => dst.Priority, opt => opt.MapFrom(src => PriorityEnum.Medium))
+                .ForMember(dst => dst.Active, opt => opt.MapFrom(src => true));
+
+            CreateMap<TaskEntity, ArchivationEntity>()
+                .ForMember(dst => dst.WorkflowId, opt => opt.MapFrom(src => src.WorkflowId))
+                .ForMember(dst => dst.Note, opt => opt.Ignore())
+                .ForMember(dst => dst.Order, opt => opt.MapFrom(src => src.Order + 1))
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => 0))
+                .ForMember(dst => dst.Start, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dst => dst.Priority, opt => opt.MapFrom(src => PriorityEnum.Medium))
+                .ForMember(dst => dst.Active, opt => opt.MapFrom(src => true));
+
+            CreateMap<TaskEntity, PublishEntity>()
+                .ForMember(dst => dst.WorkflowId, opt => opt.MapFrom(src => src.WorkflowId))
+                .ForMember(dst => dst.Note, opt => opt.Ignore())
+                .ForMember(dst => dst.Order, opt => opt.MapFrom(src => src.Order + 1))
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => 0))
+                .ForMember(dst => dst.Start, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dst => dst.Priority, opt => opt.MapFrom(src => PriorityEnum.Medium))
+                .ForMember(dst => dst.Active, opt => opt.MapFrom(src => true));
+
+            CreateMap<TaskEntity, ContractEntity>()
+                .ForMember(dst => dst.WorkflowId, opt => opt.MapFrom(src => src.WorkflowId))
+                .ForMember(dst => dst.Note, opt => opt.Ignore())
+                .ForMember(dst => dst.Order, opt => opt.MapFrom(src => src.Order + 1))
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => 0))
+                .ForMember(dst => dst.Start, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dst => dst.Priority, opt => opt.MapFrom(src => PriorityEnum.Medium))
+                .ForMember(dst => dst.Active, opt => opt.MapFrom(src => true));
+
+            CreateMap<TaskEntity, EstimateEntity>()
+                .ForMember(dst => dst.WorkflowId, opt => opt.MapFrom(src => src.WorkflowId))
+                .ForMember(dst => dst.Note, opt => opt.Ignore())
+                .ForMember(dst => dst.Order, opt => opt.MapFrom(src => src.Order + 1))
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => 0))
+                .ForMember(dst => dst.Start, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dst => dst.Priority, opt => opt.MapFrom(src => PriorityEnum.Medium))
+                .ForMember(dst => dst.Active, opt => opt.MapFrom(src => true));
 
             CreateMap<TaskEntity, AllTaskDTO>()
                 .ForMember(dst => dst.Type, opt => opt.MapFrom(src => src.ToLabel()))

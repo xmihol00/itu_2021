@@ -105,11 +105,39 @@ namespace itu.DAL.Seeds
                 Id = 13,
                 AgendaId = 2,
                 UserId = 2,
-                Type = TaskTypeEnum.Contract,
+                Type = TaskTypeEnum.Estimate,
             },
             new AgendaRoleEntity()
             {
                 Id = 14,
+                AgendaId = 2,
+                UserId = 1,
+                Type = TaskTypeEnum.Estimate,
+            },
+            new AgendaRoleEntity()
+            {
+                Id = 15,
+                AgendaId = 2,
+                UserId = 1,
+                Type = TaskTypeEnum.Contract,
+            },
+            new AgendaRoleEntity()
+            {
+                Id = 16,
+                AgendaId = 2,
+                UserId = 2,
+                Type = TaskTypeEnum.Contract,
+            },
+            new AgendaRoleEntity()
+            {
+                Id = 17,
+                AgendaId = 2,
+                UserId = 2,
+                Type = TaskTypeEnum.Publish,
+            },
+            new AgendaRoleEntity()
+            {
+                Id = 18,
                 AgendaId = 2,
                 UserId = 1,
                 Type = TaskTypeEnum.Archivation,

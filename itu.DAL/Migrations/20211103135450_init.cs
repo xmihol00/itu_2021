@@ -465,9 +465,9 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "AdministratorId", "Creation", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 2, 2, new DateTime(2021, 10, 29, 10, 25, 14, 889, DateTimeKind.Local).AddTicks(7407), "Agenda spravující menší a střední zakázky", "Malé a střední zakázky" },
-                    { 1, 1, new DateTime(2021, 10, 4, 10, 25, 14, 888, DateTimeKind.Local).AddTicks(5884), "Agenda správující jednoduchuché nákupy bez vúběrových řízení", "Nákupy" },
-                    { 3, 1, new DateTime(2021, 9, 4, 10, 25, 14, 889, DateTimeKind.Local).AddTicks(7427), "Agenda spravující důležité velké zakázky", "Velké zakázky" }
+                    { 2, 2, new DateTime(2021, 10, 29, 14, 54, 49, 865, DateTimeKind.Local).AddTicks(8389), "Agenda spravující menší a střední zakázky", "Malé a střední zakázky" },
+                    { 1, 1, new DateTime(2021, 10, 4, 14, 54, 49, 864, DateTimeKind.Local).AddTicks(7002), "Agenda správující jednoduchuché nákupy bez vúběrových řízení", "Nákupy" },
+                    { 3, 1, new DateTime(2021, 9, 4, 14, 54, 49, 865, DateTimeKind.Local).AddTicks(8410), "Agenda spravující důležité velké zakázky", "Velké zakázky" }
                 });
 
             migrationBuilder.InsertData(
@@ -507,19 +507,23 @@ namespace itu.DAL.Migrations
                 values: new object[,]
                 {
                     { 9, 1, 3, 1 },
-                    { 14, 2, 1, 1 },
-                    { 13, 2, 4, 2 },
+                    { 13, 2, 5, 2 },
                     { 12, 2, 0, 2 },
                     { 11, 2, 3, 1 },
+                    { 16, 2, 4, 2 },
+                    { 17, 2, 6, 2 },
                     { 8, 3, 1, 3 },
-                    { 6, 3, 4, 4 },
-                    { 5, 3, 5, 3 },
                     { 7, 3, 6, 1 },
+                    { 14, 2, 5, 1 },
+                    { 6, 3, 4, 4 },
+                    { 4, 3, 5, 1 },
                     { 3, 3, 2, 4 },
                     { 2, 3, 0, 1 },
                     { 1, 3, 3, 1 },
+                    { 18, 2, 1, 1 },
                     { 10, 1, 0, 1 },
-                    { 4, 3, 5, 1 }
+                    { 5, 3, 5, 3 },
+                    { 15, 2, 4, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -527,13 +531,13 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "AgendaId", "Creation", "Description", "ExpectedEnd", "ModelWorkflowId", "Name", "State" },
                 values: new object[,]
                 {
-                    { 5, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "5. testovací úkol", 0 },
-                    { 1, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam rhoncus aliquam metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "1. testovací úkol", 0 },
-                    { 6, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "6. testovací úkol", 0 },
-                    { 4, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "4. testovací úkol", 0 },
-                    { 3, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "3. testovací úkol", 0 },
                     { 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam rhoncus aliquam metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "2. testovací úkol", 0 },
-                    { 7, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Donec odio tempus molestie, porttitor ut, iaculis quis. Per inceptos hymenaeos. Sed vel lectus. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "7. testovací úkol", 0 }
+                    { 1, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam rhoncus aliquam metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "1. testovací úkol", 0 },
+                    { 5, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "5. testovací úkol", 0 },
+                    { 4, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "4. testovací úkol", 0 },
+                    { 3, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "3. testovací úkol", 0 },
+                    { 6, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "6. testovací úkol", 0 },
+                    { 7, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Donec odio tempus molestie, porttitor ut, iaculis quis. Per inceptos hymenaeos. Sed vel lectus. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "7. testovací úkol", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -551,13 +555,13 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "Active", "DelayReason", "End", "Note", "Order", "Priority", "Start", "UserId", "WorkflowId" },
                 values: new object[,]
                 {
-                    { 3, true, null, new DateTime(2021, 11, 15, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(3451), null, 0, 1, new DateTime(2021, 11, 1, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(3458), 1, 3 },
-                    { 4, true, null, new DateTime(2021, 11, 7, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(3699), null, 0, 0, new DateTime(2021, 10, 25, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(3706), 1, 4 },
-                    { 1, true, "Testovací důvod vrácení", new DateTime(2021, 11, 6, 10, 25, 14, 890, DateTimeKind.Local).AddTicks(9892), "Testovaci předvyplněný úkol obsahující i poznámku.", 1, 3, new DateTime(2021, 10, 31, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(1794), 1, 1 },
-                    { 6, true, null, new DateTime(2021, 11, 12, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(4187), null, 0, 3, new DateTime(2021, 11, 2, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(4194), 1, 6 },
-                    { 2, true, "dovolená", new DateTime(2021, 11, 28, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(2668), "Přijato bez výhrad", 0, 2, new DateTime(2021, 10, 27, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(3193), 1, 2 },
-                    { 5, true, null, new DateTime(2021, 11, 7, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(3938), null, 0, 2, new DateTime(2021, 10, 30, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(3945), 1, 5 },
-                    { 7, true, null, new DateTime(2021, 11, 7, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(4423), null, 0, 1, new DateTime(2021, 10, 28, 10, 25, 14, 891, DateTimeKind.Local).AddTicks(4429), 1, 7 }
+                    { 3, true, null, new DateTime(2021, 11, 15, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3842), null, 0, 1, new DateTime(2021, 11, 1, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3848), 1, 3 },
+                    { 4, true, null, new DateTime(2021, 11, 7, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4072), null, 0, 0, new DateTime(2021, 10, 25, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4079), 1, 4 },
+                    { 1, true, "Testovací důvod vrácení", new DateTime(2021, 11, 6, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(618), "Testovaci předvyplněný úkol obsahující i poznámku.", 1, 3, new DateTime(2021, 10, 31, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(2278), 1, 1 },
+                    { 6, true, null, new DateTime(2021, 11, 12, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4534), null, 0, 3, new DateTime(2021, 11, 2, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4541), 1, 6 },
+                    { 2, true, "dovolená", new DateTime(2021, 11, 28, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3101), "Přijato bez výhrad", 0, 2, new DateTime(2021, 10, 27, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3598), 1, 2 },
+                    { 5, true, null, new DateTime(2021, 11, 7, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4298), null, 0, 2, new DateTime(2021, 10, 30, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4304), 1, 5 },
+                    { 7, true, null, new DateTime(2021, 11, 7, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4756), null, 0, 1, new DateTime(2021, 10, 28, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4762), 1, 7 }
                 });
 
             migrationBuilder.InsertData(
