@@ -16,7 +16,7 @@ namespace itu.DAL.Seeds
             new WorkflowEntity()
             {
                 Id = 1,
-                AgendaId = 1,
+                AgendaId = 3,
                 Name = "1. testovací úkol",
                 Description = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam rhoncus aliquam metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
                 State = WorkflowStateEnum.Active,
@@ -34,7 +34,7 @@ namespace itu.DAL.Seeds
             new WorkflowEntity()
             {
                 Id = 3,
-                AgendaId = 3,
+                AgendaId = 1,
                 Name = "3. testovací úkol",
                 Description = "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
                 State = WorkflowStateEnum.Active,
@@ -70,7 +70,7 @@ namespace itu.DAL.Seeds
             new WorkflowEntity()
             {
                 Id = 7,
-                AgendaId = 1,
+                AgendaId = 2,
                 Name = "7. testovací úkol",
                 Description = "Donec odio tempus molestie, porttitor ut, iaculis quis. Per inceptos hymenaeos. Sed vel lectus. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
                 State = WorkflowStateEnum.Active,
