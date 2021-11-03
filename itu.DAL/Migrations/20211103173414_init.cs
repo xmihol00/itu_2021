@@ -465,9 +465,9 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "AdministratorId", "Creation", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 2, 2, new DateTime(2021, 10, 29, 14, 54, 49, 865, DateTimeKind.Local).AddTicks(8389), "Agenda spravující menší a střední zakázky", "Malé a střední zakázky" },
-                    { 1, 1, new DateTime(2021, 10, 4, 14, 54, 49, 864, DateTimeKind.Local).AddTicks(7002), "Agenda správující jednoduchuché nákupy bez vúběrových řízení", "Nákupy" },
-                    { 3, 1, new DateTime(2021, 9, 4, 14, 54, 49, 865, DateTimeKind.Local).AddTicks(8410), "Agenda spravující důležité velké zakázky", "Velké zakázky" }
+                    { 2, 2, new DateTime(2021, 10, 29, 18, 34, 13, 971, DateTimeKind.Local).AddTicks(8399), "Agenda spravující menší a střední zakázky", "Malé a střední zakázky" },
+                    { 1, 1, new DateTime(2021, 10, 4, 18, 34, 13, 971, DateTimeKind.Local).AddTicks(712), "Agenda správující jednoduchuché nákupy bez vúběrových řízení", "Nákupy" },
+                    { 3, 1, new DateTime(2021, 9, 4, 18, 34, 13, 971, DateTimeKind.Local).AddTicks(8412), "Agenda spravující důležité velké zakázky", "Velké zakázky" }
                 });
 
             migrationBuilder.InsertData(
@@ -555,13 +555,13 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "Active", "DelayReason", "End", "Note", "Order", "Priority", "Start", "UserId", "WorkflowId" },
                 values: new object[,]
                 {
-                    { 3, true, null, new DateTime(2021, 11, 15, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3842), null, 0, 1, new DateTime(2021, 11, 1, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3848), 1, 3 },
-                    { 4, true, null, new DateTime(2021, 11, 7, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4072), null, 0, 0, new DateTime(2021, 10, 25, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4079), 1, 4 },
-                    { 1, true, "Testovací důvod vrácení", new DateTime(2021, 11, 6, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(618), "Testovaci předvyplněný úkol obsahující i poznámku.", 1, 3, new DateTime(2021, 10, 31, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(2278), 1, 1 },
-                    { 6, true, null, new DateTime(2021, 11, 12, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4534), null, 0, 3, new DateTime(2021, 11, 2, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4541), 1, 6 },
-                    { 2, true, "dovolená", new DateTime(2021, 11, 28, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3101), "Přijato bez výhrad", 0, 2, new DateTime(2021, 10, 27, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3598), 1, 2 },
-                    { 5, true, null, new DateTime(2021, 11, 7, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4298), null, 0, 2, new DateTime(2021, 10, 30, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4304), 1, 5 },
-                    { 7, true, null, new DateTime(2021, 11, 7, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4756), null, 0, 1, new DateTime(2021, 10, 28, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4762), 1, 7 }
+                    { 3, true, null, new DateTime(2021, 11, 15, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8150), null, 0, 1, new DateTime(2021, 11, 1, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8153), 1, 3 },
+                    { 4, true, null, new DateTime(2021, 11, 7, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8260), null, 0, 0, new DateTime(2021, 10, 25, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8262), 1, 4 },
+                    { 1, true, "Testovací důvod vrácení", new DateTime(2021, 11, 6, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(6603), "Testovaci předvyplněný úkol obsahující i poznámku.", 1, 3, new DateTime(2021, 10, 31, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(7390), 1, 1 },
+                    { 6, true, null, new DateTime(2021, 11, 12, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8479), null, 0, 3, new DateTime(2021, 11, 2, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8481), 1, 6 },
+                    { 2, true, "dovolená", new DateTime(2021, 11, 28, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(7794), "Přijato bez výhrad", 0, 2, new DateTime(2021, 10, 27, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8036), 1, 2 },
+                    { 5, true, null, new DateTime(2021, 11, 7, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8368), null, 0, 2, new DateTime(2021, 10, 30, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8370), 1, 5 },
+                    { 7, true, null, new DateTime(2021, 11, 7, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8585), null, 0, 1, new DateTime(2021, 10, 28, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8587), 1, 7 }
                 });
 
             migrationBuilder.InsertData(

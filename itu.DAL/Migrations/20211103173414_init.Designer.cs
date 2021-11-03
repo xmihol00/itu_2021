@@ -10,7 +10,7 @@ using itu.DAL;
 namespace itu.DAL.Migrations
 {
     [DbContext(typeof(ItuDbContext))]
-    [Migration("20211103135450_init")]
+    [Migration("20211103173414_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 10, 4, 14, 54, 49, 864, DateTimeKind.Local).AddTicks(7002),
+                            Creation = new DateTime(2021, 10, 4, 18, 34, 13, 971, DateTimeKind.Local).AddTicks(712),
                             Description = "Agenda správující jednoduchuché nákupy bez vúběrových řízení",
                             Name = "Nákupy"
                         },
@@ -59,7 +59,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             AdministratorId = 2,
-                            Creation = new DateTime(2021, 10, 29, 14, 54, 49, 865, DateTimeKind.Local).AddTicks(8389),
+                            Creation = new DateTime(2021, 10, 29, 18, 34, 13, 971, DateTimeKind.Local).AddTicks(8399),
                             Description = "Agenda spravující menší a střední zakázky",
                             Name = "Malé a střední zakázky"
                         },
@@ -67,7 +67,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 9, 4, 14, 54, 49, 865, DateTimeKind.Local).AddTicks(8410),
+                            Creation = new DateTime(2021, 9, 4, 18, 34, 13, 971, DateTimeKind.Local).AddTicks(8412),
                             Description = "Agenda spravující důležité velké zakázky",
                             Name = "Velké zakázky"
                         });
@@ -1022,11 +1022,11 @@ namespace itu.DAL.Migrations
                             Id = 2,
                             Active = true,
                             DelayReason = "dovolená",
-                            End = new DateTime(2021, 11, 28, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3101),
+                            End = new DateTime(2021, 11, 28, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(7794),
                             Note = "Přijato bez výhrad",
                             Order = 0,
                             Priority = 2,
-                            Start = new DateTime(2021, 10, 27, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3598),
+                            Start = new DateTime(2021, 10, 27, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8036),
                             UserId = 1,
                             WorkflowId = 2,
                             Accepted = true,
@@ -1056,10 +1056,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 7,
                             Active = true,
-                            End = new DateTime(2021, 11, 7, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4756),
+                            End = new DateTime(2021, 11, 7, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8585),
                             Order = 0,
                             Priority = 1,
-                            Start = new DateTime(2021, 10, 28, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4762),
+                            Start = new DateTime(2021, 10, 28, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8587),
                             UserId = 1,
                             WorkflowId = 7,
                             Cancallation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1082,10 +1082,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             Active = true,
-                            End = new DateTime(2021, 11, 15, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3842),
+                            End = new DateTime(2021, 11, 15, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8150),
                             Order = 0,
                             Priority = 1,
-                            Start = new DateTime(2021, 11, 1, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(3848),
+                            Start = new DateTime(2021, 11, 1, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8153),
                             UserId = 1,
                             WorkflowId = 3
                         });
@@ -1112,11 +1112,11 @@ namespace itu.DAL.Migrations
                             Id = 1,
                             Active = true,
                             DelayReason = "Testovací důvod vrácení",
-                            End = new DateTime(2021, 11, 6, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(618),
+                            End = new DateTime(2021, 11, 6, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(6603),
                             Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
                             Order = 1,
                             Priority = 3,
-                            Start = new DateTime(2021, 10, 31, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(2278),
+                            Start = new DateTime(2021, 10, 31, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(7390),
                             UserId = 1,
                             WorkflowId = 1,
                             Benefit = "Testovací předvyplněný úkol obsahující i přínos organizaci.",
@@ -1145,10 +1145,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 5,
                             Active = true,
-                            End = new DateTime(2021, 11, 7, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4298),
+                            End = new DateTime(2021, 11, 7, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8368),
                             Order = 0,
                             Priority = 2,
-                            Start = new DateTime(2021, 10, 30, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4304),
+                            Start = new DateTime(2021, 10, 30, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8370),
                             UserId = 1,
                             WorkflowId = 5,
                             ContractType = 0,
@@ -1173,10 +1173,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 4,
                             Active = true,
-                            End = new DateTime(2021, 11, 7, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4072),
+                            End = new DateTime(2021, 11, 7, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8260),
                             Order = 0,
                             Priority = 0,
-                            Start = new DateTime(2021, 10, 25, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4079),
+                            Start = new DateTime(2021, 10, 25, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8262),
                             UserId = 1,
                             WorkflowId = 4,
                             EstimatePrice = 0.0,
@@ -1201,10 +1201,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 6,
                             Active = true,
-                            End = new DateTime(2021, 11, 12, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4534),
+                            End = new DateTime(2021, 11, 12, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8479),
                             Order = 0,
                             Priority = 3,
-                            Start = new DateTime(2021, 11, 2, 14, 54, 49, 867, DateTimeKind.Local).AddTicks(4541),
+                            Start = new DateTime(2021, 11, 2, 18, 34, 13, 972, DateTimeKind.Local).AddTicks(8481),
                             UserId = 1,
                             WorkflowId = 6,
                             PublishEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
