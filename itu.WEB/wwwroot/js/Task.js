@@ -393,12 +393,21 @@ function DragLeave(element, event)
 function Save(address)
 {
     let dto = {}
-    let price = document.getElementById("PriceId");
-    dto.PriceGues = price.value.replace(/\s/g,'');
     dto.Note = document.getElementById("NoteId").value;
-    dto.Currency = document.getElementById("CurrencyId").value;
-    dto.Benefit = document.getElementById("BenefitId").value;
     dto.Id = document.getElementsByTagName("form")[0].id;
+    
+    if (address == "AssignmentSave")
+    {
+        let price = document.getElementById("PriceId");
+        dto.PriceGues = price.value.replace(/\s/g,'');
+        dto.Currency = document.getElementById("CurrencyId").value;
+        dto.Benefit = document.getElementById("BenefitId").value;
+    }
+    else if (address == "AcceptationSave")
+    {
+        dto.Reason = document.getElementById("ReasonId").value;
+        dto.Accepted = document.getElementById("AcceptId").checked;
+    }
 
     $.ajax(
     {
@@ -431,3 +440,12 @@ function Solve(type)
     form.submit();
 }
 
+function Accept()
+{
+    document.getElementById("ReasonLabelId").innerText = "Důvod přijetí";
+}
+
+function Deny()
+{
+    document.getElementById("ReasonLabelId").innerText = "Důvod odmítnutí";
+}

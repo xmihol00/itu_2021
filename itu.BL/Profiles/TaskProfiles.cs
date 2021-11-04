@@ -23,7 +23,8 @@ namespace itu.BL.Profiles
                 .ForMember(dst => dst.Id, opt => opt.MapFrom(src => 0))
                 .ForMember(dst => dst.Start, opt => opt.MapFrom(src => DateTime.Now))
                 .ForMember(dst => dst.Priority, opt => opt.MapFrom(src => PriorityEnum.Medium))
-                .ForMember(dst => dst.Active, opt => opt.MapFrom(src => true));
+                .ForMember(dst => dst.Active, opt => opt.MapFrom(src => true))
+                .ForMember(dst => dst.Accepted, opt => opt.MapFrom(src => true));
 
             CreateMap<TaskEntity, AssignmentEntity>()
                 .ForMember(dst => dst.WorkflowId, opt => opt.MapFrom(src => src.WorkflowId))

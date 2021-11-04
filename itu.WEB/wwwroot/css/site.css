@@ -19,6 +19,7 @@
   --color-prio-medium: #007bff;
   --color-prio-high: #fc6a00;
   --color-prio-urgent: #cf0000;
+  --value-bradius: 0.25rem;
 }
 
 a.navbar-brand {
@@ -100,7 +101,7 @@ body {
   width: 450px;
   padding: 10px;
   border: var(--color-border) solid 1px;
-  border-radius: 4px;
+  border-radius: var(--value-bradius);
   background-color: var(--color-bg-light);
 }
 
@@ -192,7 +193,7 @@ body {
 }
 
 .b-radius-r, .b-radius-r:hover, .b-radius-r::selection, .b-radius-r:active {
-  border-radius: 0px 4px 4px 0px !important;
+  border-radius: 0px var(--value-bradius) var(--value-bradius) 0px !important;
 }
 
 .b-radius-none {
@@ -211,5 +212,5 @@ input[type="file"] {
 
 .border-dark {
   border: 1px solid var(--color-bg-dark);
-  border-radius: 4px;
+  border-radius: var(--value-bradius);
 }

@@ -133,17 +133,43 @@
                         </div>
                     </div>
                 </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="w-50">
+                        <div class="pr-1">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text task-prep-wdth">Přijmout</label>
+                                </div>
+                                <div class="input-group-text input-group-append">
+                                    <input type="radio" id="AcceptId" name="Reason" @(acceptation.Accepted ? "checked" : "") onclick="Accept()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-50">
+                        <div class="pl-1">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text task-prep-wdth">Odmítnout</label>
+                                </div>
+                                <div class="input-group-text input-group-append">
+                                    <input type="radio" name="Reason" onclick="Deny()" @(acceptation.Accepted ? "" : "checked") />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label id="ReasonLabelId" class="input-group-text task-prep-wdth">Důvod přijetí</label>
+                    </div>
+                    <textarea id="ReasonId" name="Reason" class="form-control" >@acceptation.Reason</textarea>
+                </div>            
                 break;
 
              default:
                 break;
         }
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <label class="input-group-text task-prep-wdth">Poznámka</label>
-            </div>
-            <textarea id="NoteId" name="Note" class="form-control">@Model.Note</textarea>
-        </div>
         <div class="files-div mb-2">
             <div class="input-group mb-2" style="margin-left: 1px;">
                 <div class="input-group-prepend w-50">
@@ -161,6 +187,12 @@
             <div id="FilesId">
                 @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
             </div>
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Poznámka</label>
+            </div>
+            <textarea id="NoteId" name="Note" class="form-control">@Model.Note</textarea>
         </div>
     </form>
 </div>
