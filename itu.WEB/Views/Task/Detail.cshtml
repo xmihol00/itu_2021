@@ -206,7 +206,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text task-prep-wdth">Finální cena</label>
                     </div>
-                    <input id="MaxPriceId" class="form-control" value="@contract.FinalPrice.ToPrice()" name="MaxPrice"
+                    <input id="FinalPriceId" class="form-control" value="@contract.FinalPrice.ToPrice()" name="FinalPrice"
                            onkeydown="FormatPriceDown(arguments[0], this)"
                            oninput="FormatPriceInput(this)" />
                     <div class="input-group-append">
@@ -282,7 +282,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text task-prep-wdth">Číslo archivace</label>
                                 </div>
-                                <input type="number" class="form-control" name="Number" id="NumberId" />
+                                <input type="number" class="form-control" name="Number" id="NumberId" value="@archivation.Number" />
                             </div>
                         </div>
                     </div>

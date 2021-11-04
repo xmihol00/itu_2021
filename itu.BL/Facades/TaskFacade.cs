@@ -202,6 +202,7 @@ namespace itu.BL.Facades
             contract.PriceChangeReason = dto.PriceChangeReason;
             contract.Note = dto.Note;
             contract.DelayReason = contract.DelayReason;
+            contract.Currency = dto.Currency;
 
             await _repository.Save();
 
@@ -219,6 +220,7 @@ namespace itu.BL.Facades
             contract.Note = dto.Note;
             contract.DelayReason = contract.DelayReason;
             contract.Active = false;
+            contract.Currency = dto.Currency;
 
             await CreateNextTask(task);            
             await _repository.Save();
@@ -259,9 +261,9 @@ namespace itu.BL.Facades
         private async Task CreateNextTask(TaskEntity current)
         {
             ModelTaskEntity model = await _repository.NextModel(current.Id, current.Order + 1);
-            int nextUserId = (await _repository.NextUserId(current.Id, model.Type)).Value;
+            int? nextUserId = await _repository.NextUserId(current.Id, model.Type); // TODO
             
-            if (model == null)
+            if (model == null || !nextUserId.HasValue)
             {
                 _repository.CompleteWorkflow(current.WorkflowId);
             }
@@ -279,7 +281,7 @@ namespace itu.BL.Facades
                             acceptation.PriceGues = iAssignment.PriceGues;
                         }
                         acceptation.End = DateTime.Now.AddDays(model.Difficulty);
-                        acceptation.UserId = nextUserId;
+                        acceptation.UserId = nextUserId.Value;
 
                         await _repository.Create(acceptation);
                         break;
@@ -287,7 +289,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Archivation:
                         ArchivationEntity archivation = _mapper.Map<ArchivationEntity>(current);
                         archivation.End = DateTime.Now.AddDays(model.Difficulty);
-                        archivation.UserId = nextUserId;
+                        archivation.UserId = nextUserId.Value;
 
                         await _repository.Create(archivation);
                         break;
@@ -295,7 +297,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Assessment:
                         AssessmentEntity assessment = _mapper.Map<AssessmentEntity>(current);
                         assessment.End = DateTime.Now.AddDays(model.Difficulty);
-                        assessment.UserId = nextUserId;
+                        assessment.UserId = nextUserId.Value;
 
                         await _repository.Create(assessment);
                         break;
@@ -303,7 +305,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Contract:
                         ContractEntity contract = _mapper.Map<ContractEntity>(current);
                         contract.End = DateTime.Now.AddDays(model.Difficulty);
-                        contract.UserId = nextUserId;
+                        contract.UserId = nextUserId.Value;
 
                         await _repository.Create(contract);
                         break;
@@ -311,7 +313,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Publish:
                         PublishEntity publication = _mapper.Map<PublishEntity>(current);
                         publication.End = DateTime.Now.AddDays(model.Difficulty);
-                        publication.UserId = nextUserId;
+                        publication.UserId = nextUserId.Value;
 
                         await _repository.Create(publication);
                         break;
@@ -319,7 +321,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Estimate:
                         EstimateEntity estimate = _mapper.Map<EstimateEntity>(current);
                         estimate.End = DateTime.Now.AddDays(model.Difficulty);
-                        estimate.UserId = nextUserId;
+                        estimate.UserId = nextUserId.Value;
 
                         if (current is IAssignmentEntity)
                         {
@@ -336,7 +338,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Assignment:
                         AssignmentEntity assignment = _mapper.Map<AssignmentEntity>(current);
                         assignment.End = DateTime.Now.AddDays(model.Difficulty);
-                        assignment.UserId = nextUserId;
+                        assignment.UserId = nextUserId.Value;
 
                         await _repository.Create(assignment);
                         break;

@@ -12,5 +12,6 @@ namespace itu.DAL.Entities.Tasks.Interfaces
         public double FinalPrice { get; set; }
         public string PriceChangeReason { get; set; }
         public ContractTypeEnum ContractType { get; set; }
+        public CurrencyEnum Currency { get; set; }
     }
 }

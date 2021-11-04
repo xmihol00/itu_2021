@@ -39,7 +39,7 @@ namespace itu.BL.DTOs.Task
                     return "Archivation";
                 
                 case IAssessmentDTO:
-                    return "Assesment";
+                    return "Assessment";
                 
                 case IAssignmentDTO:
                     return "Assignment";

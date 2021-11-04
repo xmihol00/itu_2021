@@ -16,7 +16,7 @@ namespace itu.Common.Helpers
 
             for (int i = split[0].Length - 1; i >= 0; i--)
             {
-                if (i % 3 == 0 && result != "")
+                if (i % 3 == 0 && result != "") // TODO
                 {
                     result = split[0][i] + " " + result;
                 }
