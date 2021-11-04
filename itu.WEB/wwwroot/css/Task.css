@@ -162,7 +162,7 @@ h4 {
 }
 
 .task-prep-wdth {
-    width: 176px;
+    width: 163px;
     min-width: 125px !important;
     max-width: 300px !important;
 }
@@ -184,7 +184,7 @@ h4 {
 .files-div {
     border: 2px solid var(--color-border);
     border-radius: var(--value-bradius);
-    padding: 5px;
+    padding: 0.5rem;
     margin-left: -1px;
     margin-right: -1px;
     padding-bottom: 0px;
@@ -328,4 +328,10 @@ h4 {
     border-bottom-right-radius: var(--value-bradius);
     background-color: var(--color-bg-dark);
     color: var(--color-text-inverted);
+}
+
+.border-right-radius {
+    border-radius: 0px !important;
+    border-bottom-right-radius: var(--value-bradius) !important;
+    border-top-right-radius: var(--value-bradius) !important;
 }

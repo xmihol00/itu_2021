@@ -410,12 +410,33 @@ function Save(address)
     }
     else if (address == "EstimateSave")
     {
-        dto.EstimatePrice = document.getElementById("EstimatePriceId").value;
-        dto.MaxPrice = document.getElementById("MacPriceId").value;
+        let price = document.getElementById("EstimatePriceId").value;
+        dto.EstimatePrice = price.value.replace(/\s/g,'');
+        price = document.getElementById("MaxPriceId").value;
+        dto.MaxPrice = price.value.replace(/\s/g,'');
     }
     else if (address == "AssessmentSave")
     {
         dto.Conclusion = document.getElementById("ConclusionId").value;
+    }
+    else if (address == "ContractSave")
+    {
+        let price = document.getElementById("FinalPriceId").value;
+        dto.FinalPrice = price.value.replace(/\s/g,'');
+        dto.ContractType = document.getElementById("ContractTypeId").value;
+        dto.Currency = document.getElementById("CurrencyId").value;
+    }
+    else if (address == "PublicationSave")
+    {
+        dto.PublishStart = document.getElementById("PublishStartId").value;
+        dto.PublishEnd = document.getElementById("PublishEndId").value;
+    }
+    else if (address == "ArchivationSave")
+    {
+        console.log("save");
+        dto.Number = document.getElementById("NumberId").value;
+        dto.Cancallation = document.getElementById("CancallationId").value;
+        dto.Location = document.getElementById("LocationId").value;
     }
 
     $.ajax(
@@ -445,16 +466,31 @@ function Solve(type)
         let price = document.getElementById("PriceId");
         price.value = price.value.replace(/\s/g,'');
     }
+    else if (address == "Estimate")
+    {
+        let estimatePrice = document.getElementById("EstimatePriceId");
+        estimatePrice.value = estimatePrice.value.replace(/\s/g,'');
+
+        let maxPrice = document.getElementById("MaxPriceId");
+        maxPrice.value = maxPrice.value.replace(/\s/g,'');
+    }
+    else if (address == "Contract")
+    {
+        let finalPrice = document.getElementById("FinalPriceId");
+        finalPrice.value = finalPrice.value.replace(/\s/g,'');
+    }
     
     form.submit();
 }
 
 function Accept()
 {
+    document.getElementById("DenyId").checked = false;
     document.getElementById("ReasonLabelId").innerText = "Důvod přijetí";
 }
 
 function Deny()
 {
+    document.getElementById("AcceptId").checked = false;
     document.getElementById("ReasonLabelId").innerText = "Důvod odmítnutí";
 }
