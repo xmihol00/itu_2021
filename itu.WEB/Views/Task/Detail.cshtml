@@ -141,7 +141,7 @@
                                     <label class="input-group-text task-prep-wdth">Přijmout</label>
                                 </div>
                                 <div class="input-group-text input-group-append">
-                                    <input type="radio" id="AcceptId" name="Reason" @(acceptation.Accepted ? "checked" : "") onclick="Accept()" />
+                                    <input type="radio" id="AcceptId" name="Accepted" @(acceptation.Accepted ? "checked" : "") onclick="Accept()" />
                                 </div>
                             </div>
                         </div>
@@ -153,7 +153,7 @@
                                     <label class="input-group-text task-prep-wdth">Odmítnout</label>
                                 </div>
                                 <div class="input-group-text input-group-append">
-                                    <input type="radio" name="Reason" onclick="Deny()" @(acceptation.Accepted ? "" : "checked") />
+                                    <input type="radio" onclick="Deny()" @(acceptation.Accepted ? "" : "checked") />
                                 </div>
                             </div>
                         </div>
@@ -164,7 +164,67 @@
                         <label id="ReasonLabelId" class="input-group-text task-prep-wdth">Důvod přijetí</label>
                     </div>
                     <textarea id="ReasonId" name="Reason" class="form-control" >@acceptation.Reason</textarea>
-                </div>            
+                </div>
+                break;
+
+            case IAssessmentDTO assessment:
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text task-prep-wdth">Závěr posudku</label>
+                    </div>
+                    <textarea id="ConclusionId" name="Conclusion" class="form-control" >@assessment.Conclusion</textarea>
+                </div>
+                break;
+            
+            case IEstimateDTO estimate:
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text task-prep-wdth">Odhad ceny</label>
+                    </div>
+                    <input id="EstimatePriceId" class="form-control" value="@estimate.EstimatePrice.ToPrice()" name="EstimatePrice"
+                           onkeydown="FormatPriceDown(arguments[0], this)"
+                           oninput="FormatPriceInput(this)" />
+                    <div class="input-group-append">
+                        <label class="input-group-text">@estimate.Currency</label>
+                    </div>
+                </div>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text task-prep-wdth">Maximální cena</label>
+                    </div>
+                    <input id="MaxPriceId" class="form-control" value="@estimate.MaxPrice.ToPrice()" name="MaxPrice"
+                           onkeydown="FormatPriceDown(arguments[0], this)"
+                           oninput="FormatPriceInput(this)" />
+                    <div class="input-group-append">
+                        <label class="input-group-text">@estimate.Currency</label>
+                    </div>
+                </div>
+                break;
+            
+            case IContractDTO contract:
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text task-prep-wdth">Finální cena</label>
+                    </div>
+                    <input id="MaxPriceId" class="form-control" value="@contract.FinalPrice.ToPrice()" name="MaxPrice"
+                           onkeydown="FormatPriceDown(arguments[0], this)"
+                           oninput="FormatPriceInput(this)" />
+                    <div class="input-group-append">
+                        <select class="input-group-text" name="Currency" id="CurrencyId" >
+                            @foreach (CurrencyEnum value in Enum.GetValues(typeof(CurrencyEnum)))
+                            {
+                                @if (value == contract.Currency)
+                                {
+                                    <option selected>@value</option>
+                                }
+                                else
+                                {
+                                    <option>@value</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
                 break;
 
              default:

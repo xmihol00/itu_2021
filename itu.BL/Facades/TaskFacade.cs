@@ -274,7 +274,6 @@ namespace itu.BL.Facades
                         if (current is IAssignmentEntity)
                         {
                             IAssignmentEntity iAssignment = current as IAssignmentEntity;
-                            acceptation.Order = iAssignment.Order++;
                             acceptation.Benefit = iAssignment.Benefit;
                             acceptation.Currency = iAssignment.Currency;
                             acceptation.PriceGues = iAssignment.PriceGues;
@@ -321,6 +320,15 @@ namespace itu.BL.Facades
                         EstimateEntity estimate = _mapper.Map<EstimateEntity>(current);
                         estimate.End = DateTime.Now.AddDays(model.Difficulty);
                         estimate.UserId = nextUserId;
+
+                        if (current is IAssignmentEntity)
+                        {
+                            estimate.Currency = (current as IAssignmentEntity).Currency;
+                        }
+                        else if (current is IAcceptationEntity)
+                        {
+                            estimate.Currency = (current as IAcceptationEntity).Currency;
+                        }
 
                         await _repository.Create(estimate);
                         break;

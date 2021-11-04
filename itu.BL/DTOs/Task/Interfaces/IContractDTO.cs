@@ -10,6 +10,7 @@ namespace itu.BL.DTOs.Task.Interfaces
     public interface IContractDTO : IDetailTaskDTO
     {
         public double FinalPrice { get; set; }
+        public CurrencyEnum Currency { get; set; }
         public string PriceChangeReason { get; set; }
         public ContractTypeEnum ContractType { get; set; }
     }

@@ -408,6 +408,15 @@ function Save(address)
         dto.Reason = document.getElementById("ReasonId").value;
         dto.Accepted = document.getElementById("AcceptId").checked;
     }
+    else if (address == "EstimateSave")
+    {
+        dto.EstimatePrice = document.getElementById("EstimatePriceId").value;
+        dto.MaxPrice = document.getElementById("MacPriceId").value;
+    }
+    else if (address == "AssessmentSave")
+    {
+        dto.Conclusion = document.getElementById("ConclusionId").value;
+    }
 
     $.ajax(
     {

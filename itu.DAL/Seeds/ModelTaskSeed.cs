@@ -54,38 +54,38 @@ namespace itu.DAL.Seeds
             new ModelTaskEntity()
             {
                 Id = 201,
-                Type = TaskTypeEnum.Assessment,
+                Type = TaskTypeEnum.Estimate,
                 Difficulty = 5
             },
             new ModelTaskEntity()
             {
                 Id = 202,
-                Type = TaskTypeEnum.Assessment,
+                Type = TaskTypeEnum.Estimate,
                 Difficulty = 10
             },
             new ModelTaskEntity()
             {
                 Id = 203,
-                Type = TaskTypeEnum.Assessment,
+                Type = TaskTypeEnum.Estimate,
                 Difficulty = 15
             },
 
             new ModelTaskEntity()
             {
                 Id = 301,
-                Type = TaskTypeEnum.Estimate,
+                Type = TaskTypeEnum.Assessment,
                 Difficulty = 5
             },
             new ModelTaskEntity()
             {
                 Id = 302,
-                Type = TaskTypeEnum.Estimate,
+                Type = TaskTypeEnum.Assessment,
                 Difficulty = 10
             },
             new ModelTaskEntity()
             {
                 Id = 303,
-                Type = TaskTypeEnum.Estimate,
+                Type = TaskTypeEnum.Assessment,
                 Difficulty = 15
             },
 

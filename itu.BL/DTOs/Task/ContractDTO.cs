@@ -13,5 +13,6 @@ namespace itu.BL.DTOs.Task
         public double FinalPrice { get; set; }
         public string PriceChangeReason { get; set; }
         public ContractTypeEnum ContractType { get; set; }
+        public CurrencyEnum Currency { get; set; }
     }
 }

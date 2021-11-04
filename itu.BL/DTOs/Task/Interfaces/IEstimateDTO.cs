@@ -11,5 +11,6 @@ namespace itu.BL.DTOs.Task.Interfaces
     {
         public double EstimatePrice { get; set; }
         public double MaxPrice { get; set; }
+        public CurrencyEnum Currency { get; set; }
     }
 }
