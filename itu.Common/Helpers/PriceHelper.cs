@@ -11,6 +11,11 @@ namespace itu.Common.Helpers
     {
         public static string ToPrice(this double price)
         {
+            if (price == 0.0)
+            {
+                return "";
+            }
+            
             string[] split = price.ToString().Split('.');
             string result = "";
 

@@ -8,6 +8,8 @@ var LastEntered = null;
 
 document.addEventListener("input", function() 
 {
+    let btn = document.getElementById("SolveBtnId");
+    btn.disabled = false;
     for (let elem of document.getElementsByClassName("comp"))
     {
         let parent = elem.parentNode.parentNode;
@@ -20,19 +22,20 @@ document.addEventListener("input", function()
             else
             {
                 elem.classList.add("comp-bckg");
+                btn.disabled = true;
             }
         }
 
         for (let area of parent.getElementsByTagName("textarea"))
         {
-            console.log(area, area.innerText.trim());
-            if (area.innerText.trim() !== "")
+            if (area.value.trim())
             {
                 elem.classList.remove("comp-bckg");
             }
             else
             {
                 elem.classList.add("comp-bckg");
+                btn.disabled = true;
             }
         }
     }
@@ -114,7 +117,12 @@ function CountDown()
     if (days < 0)
     {
         clk.style.color = "#cf0000"
-        document.getElementById("DelayReasonId").style.display = "block";
+        let dReason = document.getElementById("DelayDivId");
+        dReason.classList.remove("d-none");
+        let dLabel = document.getElementById("DelayLabelId");
+        dLabel.classList.add("comp");
+        dLabel.classList.add("comp-bckg");
+        document.getElementById("SolveBtnId").disabled = true;
     }
     else if (days < 3)
     {

@@ -217,4 +217,5 @@ input[type="file"] {
 
 .comp-bckg {
   background-color: var(--color-required);
+  border-color: var(--color-required);
 }

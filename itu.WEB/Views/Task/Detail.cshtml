@@ -9,7 +9,7 @@
             </div>
             <div>
                 <button onclick="Save('@Model.ToAction()Save')" class="btn btn-success save-btn mr-1">Uložit</button>
-                <button onclick="Solve('@Model.ToAction()')" class="btn btn-success save-btn">Vyřešit</button>
+                <button id="SolveBtnId" onclick="Solve('@Model.ToAction()')" class="btn btn-success save-btn">Vyřešit</button>
             </div>
         </div>
         <div class="d-flex justify-content-between mb-3">
@@ -71,12 +71,12 @@
     </div>
     <form id="@Model.Id" action="/Task/@Model.ToAction()Solve" method="POST">
         <input id="TaskId" name="Id" type="hidden" value="@Model.Id"/>
-        <div class="input-group mb-2 @(@Model.End.Date < DateTime.Now.Date ? "dis-none" : "")" >
-            <div class="input-group-prepend">
-                <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(Model.DelayReason) ? "comp-bckg" : "")">Důvod zpoždění</label>
-            </div>
-            <textarea id="DelayReasonId" name="DelayReason" class="form-control">@Model.DelayReason</textarea>
-        </div>  
+            <div id="DelayDivId" class="input-group mb-2 @(Model.End.Date < DateTime.Now.Date ? "" : "d-none")" >
+                <div class="input-group-prepend">
+                    <label id="DelayLabelId" class="input-group-text task-prep-wdth @(String.IsNullOrWhiteSpace(Model.DelayReason) ? "comp comp-bckg" : "")">Důvod zpoždění</label>
+                </div>
+                <textarea id="DelayReasonId" name="DelayReason" class="form-control">@Model.DelayReason</textarea>
+            </div>  
         @switch (Model)
         {
             case IAssignmentDTO assignment:
@@ -289,7 +289,7 @@
                                     <label class="input-group-text task-prep-wdth comp @(archivation.Number == 0 ? "comp-bckg" : "")">Číslo archivace</label>
                                 </div>
                                 <input type="number" class="form-control" name="Number" 
-                                       id="NumberId" value="@archivation.Number" />
+                                       id="NumberId" value="@(archivation.Number != 0 ? archivation.Number.ToString() : "")" />
                             </div>
                         </div>
                     </div>
