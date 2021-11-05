@@ -261,14 +261,14 @@ namespace itu.BL.Facades
         private async Task CreateNextTask(TaskEntity current)
         {
             ModelTaskEntity model = await _repository.NextModel(current.Id, current.Order + 1);
-            int? nextUserId = await _repository.NextUserId(current.Id, model.Type); // TODO
             
-            if (model == null || !nextUserId.HasValue)
+            if (model == null)
             {
                 _repository.CompleteWorkflow(current.WorkflowId);
             }
             else
             {
+                int nextUserId = (await _repository.NextUserId(current.Id, model.Type)).Value; // TODO
                 switch (model.Type)
                 {
                     case TaskTypeEnum.Acceptation:
@@ -281,7 +281,7 @@ namespace itu.BL.Facades
                             acceptation.PriceGues = iAssignment.PriceGues;
                         }
                         acceptation.End = DateTime.Now.AddDays(model.Difficulty);
-                        acceptation.UserId = nextUserId.Value;
+                        acceptation.UserId = nextUserId;
 
                         await _repository.Create(acceptation);
                         break;
@@ -289,7 +289,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Archivation:
                         ArchivationEntity archivation = _mapper.Map<ArchivationEntity>(current);
                         archivation.End = DateTime.Now.AddDays(model.Difficulty);
-                        archivation.UserId = nextUserId.Value;
+                        archivation.UserId = nextUserId;
 
                         await _repository.Create(archivation);
                         break;
@@ -297,7 +297,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Assessment:
                         AssessmentEntity assessment = _mapper.Map<AssessmentEntity>(current);
                         assessment.End = DateTime.Now.AddDays(model.Difficulty);
-                        assessment.UserId = nextUserId.Value;
+                        assessment.UserId = nextUserId;
 
                         await _repository.Create(assessment);
                         break;
@@ -305,7 +305,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Contract:
                         ContractEntity contract = _mapper.Map<ContractEntity>(current);
                         contract.End = DateTime.Now.AddDays(model.Difficulty);
-                        contract.UserId = nextUserId.Value;
+                        contract.UserId = nextUserId;
 
                         await _repository.Create(contract);
                         break;
@@ -313,7 +313,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Publish:
                         PublishEntity publication = _mapper.Map<PublishEntity>(current);
                         publication.End = DateTime.Now.AddDays(model.Difficulty);
-                        publication.UserId = nextUserId.Value;
+                        publication.UserId = nextUserId;
 
                         await _repository.Create(publication);
                         break;
@@ -321,7 +321,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Estimate:
                         EstimateEntity estimate = _mapper.Map<EstimateEntity>(current);
                         estimate.End = DateTime.Now.AddDays(model.Difficulty);
-                        estimate.UserId = nextUserId.Value;
+                        estimate.UserId = nextUserId;
 
                         if (current is IAssignmentEntity)
                         {
@@ -338,7 +338,7 @@ namespace itu.BL.Facades
                     case TaskTypeEnum.Assignment:
                         AssignmentEntity assignment = _mapper.Map<AssignmentEntity>(current);
                         assignment.End = DateTime.Now.AddDays(model.Difficulty);
-                        assignment.UserId = nextUserId.Value;
+                        assignment.UserId = nextUserId;
 
                         await _repository.Create(assignment);
                         break;

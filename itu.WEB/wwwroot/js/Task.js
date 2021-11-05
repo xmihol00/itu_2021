@@ -82,6 +82,7 @@ function CountDown()
     if (days < 0)
     {
         clk.style.color = "#cf0000"
+        document.getElementById("DelayReasonId").style.display = "block";
     }
     else if (days < 3)
     {
@@ -109,7 +110,22 @@ function FormatPriceDown(event, element)
             event.preventDefault();
         }
     }
-    else if (value != "Backspace" && (value < '0' || value > '9') && value != "ArrowRight" && value != "ArrowLeft")
+    else if (value == "e" || value == "E")
+    {
+        document.getElementById("CurrencyId").value = "EUR";
+        event.preventDefault();
+    }
+    else if (value == "u" || value == "U")
+    {
+        document.getElementById("CurrencyId").value = "USD";
+        event.preventDefault();
+    }
+    else if (value == "c" || value == "C")
+    {
+        document.getElementById("CurrencyId").value = "CZK";
+        event.preventDefault();
+    }
+    else if (value != "Backspace" && (value < '0' || value > '9') && value != "ArrowRight" && value != "ArrowLeft" && value != "Tab")
     {
         event.preventDefault();
     }
@@ -395,6 +411,7 @@ function Save(address)
     let dto = {}
     dto.Note = document.getElementById("NoteId").value;
     dto.Id = document.getElementsByTagName("form")[0].id;
+    dto.DelayReason = document.getElementById("DelayReasonId").value;
     
     if (address == "AssignmentSave")
     {
