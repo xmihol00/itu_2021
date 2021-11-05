@@ -6,6 +6,38 @@ var CountDownInterval = null;
 var TaskId = null;
 var LastEntered = null;
 
+document.addEventListener("input", function() 
+{
+    for (let elem of document.getElementsByClassName("comp"))
+    {
+        let parent = elem.parentNode.parentNode;
+        for (let input of parent.getElementsByTagName("input"))
+        {
+            if (input.value.trim())
+            {
+                elem.classList.remove("comp-bckg");
+            }
+            else
+            {
+                elem.classList.add("comp-bckg");
+            }
+        }
+
+        for (let area of parent.getElementsByTagName("textarea"))
+        {
+            console.log(area, area.innerText.trim());
+            if (area.innerText.trim() !== "")
+            {
+                elem.classList.remove("comp-bckg");
+            }
+            else
+            {
+                elem.classList.add("comp-bckg");
+            }
+        }
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function()
 {
     let ed = document.getElementById("EndDate");
@@ -293,7 +325,7 @@ function newFileRemoved(element)
 
 function BtnChangeState(input, button)
 {
-    if (input.value && input.value.trim())
+    if (input.value.trim())
     {
         button.disabled = false;
     }

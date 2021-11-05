@@ -73,7 +73,7 @@
         <input id="TaskId" name="Id" type="hidden" value="@Model.Id"/>
         <div class="input-group mb-2 @(@Model.End.Date < DateTime.Now.Date ? "dis-none" : "")" >
             <div class="input-group-prepend">
-                <label class="input-group-text task-prep-wdth">Důvod zpoždění</label>
+                <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(Model.DelayReason) ? "comp-bckg" : "")">Důvod zpoždění</label>
             </div>
             <textarea id="DelayReasonId" name="DelayReason" class="form-control">@Model.DelayReason</textarea>
         </div>  
@@ -82,9 +82,9 @@
             case IAssignmentDTO assignment:
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth">Prvotní odhad ceny</label>
+                        <label class="input-group-text task-prep-wdth comp @(assignment.PriceGues == 0.0 ? "comp-bckg" : "")">Prvotní odhad ceny</label>
                     </div>
-                    <input id="PriceId" class="form-control comp" value="@assignment.PriceGues.ToPrice()" name="PriceGues"
+                    <input id="PriceId" class="form-control" value="@assignment.PriceGues.ToPrice()" name="PriceGues"
                            onkeydown="FormatPriceDown(arguments[0], this)"
                            oninput="FormatPriceInput(this)" />
                     <div class="input-group-append">
@@ -105,9 +105,9 @@
                 </div>
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth">Přínos organizaci</label>
+                        <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(assignment.Benefit) ? "comp-bckg" : "")">Přínos organizaci</label>
                     </div>
-                    <textarea id="BenefitId" name="Benefit" class="form-control comp">@assignment.Benefit</textarea>
+                    <textarea id="BenefitId" name="Benefit" class="form-control">@assignment.Benefit</textarea>
                 </div>  
                 break;
 
@@ -167,27 +167,27 @@
                 </div>
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <label id="ReasonLabelId" class="input-group-text task-prep-wdth">Důvod přijetí</label>
+                        <label id="ReasonLabelId" class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(acceptation.Reason) ? "comp-bckg" : "")">Důvod přijetí</label>
                     </div>
-                    <textarea id="ReasonId" name="Reason" class="form-control comp" >@acceptation.Reason</textarea>
+                    <textarea id="ReasonId" name="Reason" class="form-control" >@acceptation.Reason</textarea>
                 </div>
                 break;
 
             case IAssessmentDTO assessment:
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth">Závěr posudku</label>
+                        <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(assessment.Conclusion) ? "comp-bckg" : "")">Závěr posudku</label>
                     </div>
-                    <textarea id="ConclusionId" name="Conclusion" class="form-control comp" >@assessment.Conclusion</textarea>
+                    <textarea id="ConclusionId" name="Conclusion" class="form-control" >@assessment.Conclusion</textarea>
                 </div>
                 break;
             
             case IEstimateDTO estimate:
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth">Odhad ceny</label>
+                        <label class="input-group-text task-prep-wdth comp @(estimate.EstimatePrice == 0.0 ? "comp-bckg" : "")">Odhad ceny</label>
                     </div>
-                    <input id="EstimatePriceId" class="form-control comp" value="@estimate.EstimatePrice.ToPrice()" name="EstimatePrice"
+                    <input id="EstimatePriceId" class="form-control" value="@estimate.EstimatePrice.ToPrice()" name="EstimatePrice"
                            onkeydown="FormatPriceDown(arguments[0], this)"
                            oninput="FormatPriceInput(this)" />
                     <div class="input-group-append">
@@ -196,9 +196,9 @@
                 </div>
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth">Maximální cena</label>
+                        <label class="input-group-text task-prep-wdth comp @(estimate.MaxPrice == 0.0 ? "comp-bckg" : "")">Maximální cena</label>
                     </div>
-                    <input id="MaxPriceId" class="form-control comp" value="@estimate.MaxPrice.ToPrice()" name="MaxPrice"
+                    <input id="MaxPriceId" class="form-control" value="@estimate.MaxPrice.ToPrice()" name="MaxPrice"
                            onkeydown="FormatPriceDown(arguments[0], this)"
                            oninput="FormatPriceInput(this)" />
                     <div class="input-group-append">
@@ -210,9 +210,9 @@
             case IContractDTO contract:
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth">Finální cena</label>
+                        <label class="input-group-text task-prep-wdth comp @(contract.FinalPrice == 0.0 ? "comp-bckg" : "")">Finální cena</label>
                     </div>
-                    <input id="FinalPriceId" class="form-control comp" value="@contract.FinalPrice.ToPrice()" name="FinalPrice"
+                    <input id="FinalPriceId" class="form-control" value="@contract.FinalPrice.ToPrice()" name="FinalPrice"
                            onkeydown="FormatPriceDown(arguments[0], this)"
                            oninput="FormatPriceInput(this)" />
                     <div class="input-group-append">
@@ -286,9 +286,10 @@
                         <div class="pr-1">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text task-prep-wdth">Číslo archivace</label>
+                                    <label class="input-group-text task-prep-wdth comp @(archivation.Number == 0 ? "comp-bckg" : "")">Číslo archivace</label>
                                 </div>
-                                <input type="number" class="form-control" name="Number" id="NumberId" value="@archivation.Number" />
+                                <input type="number" class="form-control" name="Number" 
+                                       id="NumberId" value="@archivation.Number" />
                             </div>
                         </div>
                     </div>
