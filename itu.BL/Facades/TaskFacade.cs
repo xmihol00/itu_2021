@@ -27,14 +27,20 @@ namespace itu.BL.Facades
             _mapper = mapper;
         }
 
-        public async Task<OverviewDTO> AllOfUser(int userId)
+        public async Task<OverviewDTO> AllOfUser(int userId, int selected = 0)
         {
             OverviewDTO overview = new OverviewDTO();
             overview.Tasks = _mapper.Map<List<AllTaskDTO>>(await _repository.AllOfUser(userId));
             if (overview.Tasks.Count > 0)
             {
-                overview.Detail = _mapper.Map<DetailTaskDTO>(await _repository.Detail(userId, overview.Tasks[0].Id));
+                if (selected <= 0)
+                {
+                    selected = overview.Tasks[0].Id;
+                }
+
+                overview.Detail = _mapper.Map<DetailTaskDTO>(await _repository.Detail(userId, selected));
             }
+            overview.Selected = selected;
 
             return overview;
         }
@@ -75,7 +81,7 @@ namespace itu.BL.Facades
             { 
                 NextUserId = nextUserId,
                 Overview = await AllOfUser(userId),
-                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+                CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
 
@@ -110,7 +116,7 @@ namespace itu.BL.Facades
             { 
                 NextUserId = nextUserId,
                 Overview = await AllOfUser(userId),
-                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+                CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
 
@@ -143,7 +149,7 @@ namespace itu.BL.Facades
             { 
                 NextUserId = nextUserId,
                 Overview = await AllOfUser(userId),
-                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+                CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
 
@@ -178,7 +184,7 @@ namespace itu.BL.Facades
             { 
                 NextUserId = nextUserId,
                 Overview = await AllOfUser(userId),
-                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+                CreatedTask = created != null ? created != null ? _mapper.Map<AllTaskDTO>(created) : null : null
             };
         }
 
@@ -213,7 +219,7 @@ namespace itu.BL.Facades
             { 
                 NextUserId = nextUserId,
                 Overview = await AllOfUser(userId),
-                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+                CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
 
@@ -252,7 +258,7 @@ namespace itu.BL.Facades
             { 
                 NextUserId = nextUserId,
                 Overview = await AllOfUser(userId),
-                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+                CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
 
@@ -289,7 +295,7 @@ namespace itu.BL.Facades
             { 
                 NextUserId = nextUserId,
                 Overview = await AllOfUser(userId),
-                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+                CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
 

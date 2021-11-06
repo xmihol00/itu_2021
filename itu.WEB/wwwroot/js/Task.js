@@ -6,11 +6,11 @@ var CountDownInterval = null;
 var TaskId = null;
 var LastEntered = null;
 
-document.addEventListener("input", CheckCompulsary);
+document.addEventListener("input", CheckCompulsory);
 
 document.addEventListener("DOMContentLoaded", function()
 {
-    CheckCompulsary();
+    CheckCompulsory();
     SetCountDown();
     
     TaskId = document.getElementById("IdOfTaskId").value;
@@ -29,7 +29,7 @@ function SetCountDown()
     CountDownInterval = setInterval(CountDown, 1000);
 }
 
-function CheckCompulsary()
+function CheckCompulsory()
 {
     let btn = document.getElementById("SolveBtnId");
     if (btn == null)
@@ -97,7 +97,7 @@ function SolveTask(element)
         select.appendChild(clk);
 
         document.getElementById("Unselect" + TaskId).style.display = "none";
-        CheckCompulsary();
+        CheckCompulsory();
     })
     .fail(function() 
     {
@@ -544,6 +544,7 @@ function Save(type)
     .done(function (result) 
     {
         document.getElementById("DetailDiv").innerHTML = result;
+        CheckCompulsory();
         ShowAlert("Úkol byl úspěšně uložen.");
     })
     .fail(function() 
@@ -568,6 +569,8 @@ function Solve(type)
         document.getElementById("BodyId").innerHTML = result;
         TaskId = document.getElementById("IdOfTaskId").value;
         SetCountDown();
+        CheckCompulsory();
+        document.getElementById("TaskCountId").innerText = document.getElementsByClassName("card").length;
         ShowAlert("Úkol byl úspěšně vyřešen.");
     })
     .fail(function() 
@@ -587,3 +590,4 @@ function Deny()
     document.getElementById("AcceptId").checked = false;
     document.getElementById("ReasonLabelId").innerText = "Důvod odmítnutí";
 }
+

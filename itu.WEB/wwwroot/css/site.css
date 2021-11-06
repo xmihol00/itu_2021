@@ -245,3 +245,79 @@ input[type="file"] {
   top: -3px;
   margin-left: 5px;
 }
+
+.custom-task-alert {
+  display: none; 
+  position: fixed;
+  z-index: 99;
+  left: 30%;
+  top: 73px;
+  width: 40%;
+}
+
+.alert-div {
+  position: relative;
+  padding: 10px 10px 0px 10px;
+  min-width: 450px;
+  max-width: 600px;
+  color: black;
+  border-radius: var(--value-bradius);
+  border-style: solid;
+  border-color: var(--color-border-dark);
+  border-width: 2px;
+  background: var(--color-bg-light);
+}
+
+.bd-bottom {
+  border-bottom: 2px solid var(--color-border-dark);
+}
+
+
+.priority {
+  width: 100px;
+  margin-top: -4px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50px, 0);
+  border-radius: 15px;
+  color: var(--color-text-inverted);
+  padding: 4px 12px;
+  text-align: center;
+}
+
+h4 {
+  color: black;
+}
+
+.priority-detail {
+  width: 140;
+  margin-top: -7px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-75px, 0);
+  border-radius: 15px;
+  color: var(--color-text-inverted);
+  padding: 4px 12px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.Low {
+  background-color: var(--color-prio-low);
+}
+
+.Medium {
+  background-color: var(--color-prio-medium);
+}
+
+.High {
+  background-color: var(--color-prio-high);
+}
+
+.Urgent {
+  background-color: var(--color-prio-urgent);
+}
+
+.ov-btn-width {
+  width: 80px;
+}

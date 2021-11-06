@@ -11,5 +11,6 @@ namespace itu.BL.DTOs.Task
     {
         public List<AllTaskDTO> Tasks { get; set; }
         public DetailTaskDTO Detail { get; set; }
+        public int Selected { get; set; }
     }
 }

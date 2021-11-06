@@ -27,9 +27,9 @@ namespace itu.WEB.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Overview()
+        public async Task<IActionResult> Overview(int id)
         {
-            return View(await _facade.AllOfUser(ViewBag.Id));
+            return View(await _facade.AllOfUser(ViewBag.Id, id));
         }
 
         [HttpGet]
@@ -44,7 +44,12 @@ namespace itu.WEB.Controllers
             try
             {
                 SolvedDTO solved = await _facade.AssignmentSolve(ViewBag.Id, assignment);
-                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                if (solved.NextUserId != 0)
+                {
+                    await _hubContext.Clients
+                                    .Group(solved.NextUserId.ToString())
+                                    .SendAsync("NewTask", await this.RenderViewAsync("Partial/_TaskAlert", solved.CreatedTask));
+                }
                 return PartialView("Overview", solved.Overview);
             }
             catch
@@ -72,7 +77,12 @@ namespace itu.WEB.Controllers
             try
             {
                 SolvedDTO solved = await _facade.AcceptationSolve(ViewBag.Id, acceptation);
-                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                if (solved.NextUserId != 0)
+                {
+                    await _hubContext.Clients
+                                    .Group(solved.NextUserId.ToString())
+                                    .SendAsync("NewTask", await this.RenderViewAsync("Partial/_TaskAlert", solved.CreatedTask));
+                }
                 return PartialView("Overview", solved.Overview);
             }
             catch
@@ -100,7 +110,12 @@ namespace itu.WEB.Controllers
             try
             {
                 SolvedDTO solved = await _facade.AssessmentSolve(ViewBag.Id, assessment);
-                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                if (solved.NextUserId != 0)
+                {
+                    await _hubContext.Clients
+                                    .Group(solved.NextUserId.ToString())
+                                    .SendAsync("NewTask", await this.RenderViewAsync("Partial/_TaskAlert", solved.CreatedTask));
+                }
                 return PartialView("Overview", solved.Overview);
             }
             catch
@@ -128,7 +143,12 @@ namespace itu.WEB.Controllers
             try
             {
                 SolvedDTO solved = await _facade.EstimateSolve(ViewBag.Id, estimate);
-                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                if (solved.NextUserId != 0)
+                {
+                    await _hubContext.Clients
+                                    .Group(solved.NextUserId.ToString())
+                                    .SendAsync("NewTask", await this.RenderViewAsync("Partial/_TaskAlert", solved.CreatedTask));
+                }
                 return PartialView("Overview", solved.Overview);
             }
             catch
@@ -156,7 +176,12 @@ namespace itu.WEB.Controllers
             try
             {
                 SolvedDTO solved = await _facade.ContractSolve(ViewBag.Id, contract);
-                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                if (solved.NextUserId != 0)
+                {
+                    await _hubContext.Clients
+                                    .Group(solved.NextUserId.ToString())
+                                    .SendAsync("NewTask", await this.RenderViewAsync("Partial/_TaskAlert", solved.CreatedTask));
+                }
                 return PartialView("Overview", solved.Overview);
             }
             catch
@@ -184,7 +209,12 @@ namespace itu.WEB.Controllers
             try
             {
                 SolvedDTO solved = await _facade.PublicationSolve(ViewBag.Id, publish);
-                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                if (solved.NextUserId != 0)
+                {
+                    await _hubContext.Clients
+                                    .Group(solved.NextUserId.ToString())
+                                    .SendAsync("NewTask", await this.RenderViewAsync("Partial/_TaskAlert", solved.CreatedTask));
+                }
                 return PartialView("Overview", solved.Overview);
             }
             catch
@@ -212,7 +242,12 @@ namespace itu.WEB.Controllers
             try
             {
                 SolvedDTO solved = await _facade.ArchivationSolve(ViewBag.Id, archivation);
-                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                if (solved.NextUserId != 0)
+                {
+                    await _hubContext.Clients
+                                    .Group(solved.NextUserId.ToString())
+                                    .SendAsync("NewTask", await this.RenderViewAsync("Partial/_TaskAlert", solved.CreatedTask));
+                }
                 return PartialView("Overview", solved.Overview);
             }
             catch

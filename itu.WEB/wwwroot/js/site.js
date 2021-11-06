@@ -3,9 +3,13 @@ var Timeout = null;
 var Interval = null;
 var SignalConnection = new signalR.HubConnectionBuilder().configureLogging(signalR.LogLevel.None).withUrl("/hub").build();
 
-SignalConnection.on("NewTask", function()
+SignalConnection.on("NewTask", function(result)
 {
-    console.log("new task");
+    let count = document.getElementById("TaskCountId");
+    count.innerText = parseInt(count.innerText) + 1;
+    let alertDiv = document.getElementById("TaskAlertId");
+    alertDiv.innerHTML = result;
+    alertDiv.style.display = "block";
 });
 
 SignalConnection.start();
@@ -55,3 +59,11 @@ function HideAlert()
     clearInterval(Interval);
     Timeout = null;
 }
+
+function TaskAlertClose()
+{
+    let alertDiv = document.getElementById("TaskAlertId");
+    alertDiv.innerHTML = "";
+    alertDiv.style.display = "none";
+}
+
