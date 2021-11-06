@@ -59,6 +59,11 @@
         "themes/explorer/theme.min.css",
         "themes/explorer/theme.min.js"
       ]
+    },
+    {
+      "provider": "unpkg",
+      "library": "@microsoft/signalr@latest",
+      "destination": "wwwroot/lib/microsoft/signalr/"
     }
   ]
 }

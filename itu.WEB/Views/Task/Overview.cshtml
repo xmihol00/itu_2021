@@ -1,13 +1,7 @@
 @model OverviewDTO
 
-<script>
-    var SelectedId = @Model.Tasks[0].Id;
-</script>
 <script src="/js/Task.js"></script>
-
 <link rel="stylesheet" href="~/css/Task.css" />
-
-@{ AllTaskDTO first = Model.Tasks?[0]; }
 
 <div class="d-flex justify-content-between mr-2 ml-2">
     <h1 class="page-name">Aktivní úkoly</h1>
@@ -24,6 +18,10 @@
     </div>
 </div>
 <hr class="page-title-line">
+
+@if (Model.Tasks.Count > 0)
+{
+AllTaskDTO first = Model.Tasks[0];
 <div class="row">
     <div class="col-md-5">
         @if (first != null)
@@ -109,4 +107,9 @@
         @await Html.PartialAsync("Detail", Model.Detail)
     </div>
 </div>
+}
+else
+{
+
+}
 

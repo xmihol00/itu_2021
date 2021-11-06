@@ -59,7 +59,7 @@ namespace itu.BL.Facades
             return _mapper.Map<DetailTaskDTO>(task);
         }
 
-        public async Task AssignmentSolve(int userId, AssignmentPostDTO dto)
+        public async Task<SolvedDTO> AssignmentSolve(int userId, AssignmentPostDTO dto)
         {
             TaskEntity task = await _repository.Detail(userId, dto.Id);
 
@@ -70,8 +70,13 @@ namespace itu.BL.Facades
             assignment.PriceGues = dto.PriceGues;
             assignment.Active = false;
 
-            await CreateNextTask(task);            
-            await _repository.Save();
+            (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
+            return new SolvedDTO() 
+            { 
+                NextUserId = nextUserId,
+                Overview = await AllOfUser(userId),
+                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+            };
         }
 
         public async Task<DetailTaskDTO> AcceptationSave(int userId, AcceptationPostDTO dto)
@@ -89,7 +94,7 @@ namespace itu.BL.Facades
             return _mapper.Map<DetailTaskDTO>(task);
         }
 
-        public async Task AcceptationSolve(int userId, AcceptationPostDTO dto)
+        public async Task<SolvedDTO> AcceptationSolve(int userId, AcceptationPostDTO dto)
         {
             TaskEntity task = await _repository.Detail(userId, dto.Id);
             IAcceptationEntity acceptation = task as IAcceptationEntity;
@@ -100,8 +105,13 @@ namespace itu.BL.Facades
             acceptation.Note = dto.Note;
             acceptation.Active = false;
 
-            await CreateNextTask(task);            
-            await _repository.Save();
+            (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
+            return new SolvedDTO() 
+            { 
+                NextUserId = nextUserId,
+                Overview = await AllOfUser(userId),
+                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+            };
         }
 
         public async Task<DetailTaskDTO> AssessmentSave(int userId, AssessmentPostDTO dto)
@@ -118,7 +128,7 @@ namespace itu.BL.Facades
             return _mapper.Map<DetailTaskDTO>(task);
         }
 
-        public async Task AssessmentSolve(int userId, AssessmentPostDTO dto)
+        public async Task<SolvedDTO> AssessmentSolve(int userId, AssessmentPostDTO dto)
         {
             TaskEntity task = await _repository.Detail(userId, dto.Id);
             IAssessmentEntity assessment = task as IAssessmentEntity;
@@ -128,8 +138,13 @@ namespace itu.BL.Facades
             assessment.DelayReason = assessment.DelayReason;
             assessment.Active = false;
 
-            await CreateNextTask(task);            
-            await _repository.Save();
+            (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
+            return new SolvedDTO() 
+            { 
+                NextUserId = nextUserId,
+                Overview = await AllOfUser(userId),
+                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+            };
         }
 
         public async Task<DetailTaskDTO> EstimateSave(int userId, EstimatePostDTO dto)
@@ -147,7 +162,7 @@ namespace itu.BL.Facades
             return _mapper.Map<DetailTaskDTO>(task);
         }
 
-        public async Task EstimateSolve(int userId, EstimatePostDTO dto)
+        public async Task<SolvedDTO> EstimateSolve(int userId, EstimatePostDTO dto)
         {
             TaskEntity task = await _repository.Detail(userId, dto.Id);
             IEstimateEntity estimate = task as IEstimateEntity;
@@ -158,8 +173,13 @@ namespace itu.BL.Facades
             estimate.DelayReason = estimate.DelayReason;
             estimate.Active = false;
 
-            await CreateNextTask(task);            
-            await _repository.Save();
+            (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
+            return new SolvedDTO() 
+            { 
+                NextUserId = nextUserId,
+                Overview = await AllOfUser(userId),
+                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+            };
         }
 
         public async Task<DetailTaskDTO> PublicationSave(int userId, PublishPostDTO dto)
@@ -177,7 +197,7 @@ namespace itu.BL.Facades
             return _mapper.Map<DetailTaskDTO>(task);
         }
 
-        public async Task PublicationSolve(int userId, PublishPostDTO dto)
+        public async Task<SolvedDTO> PublicationSolve(int userId, PublishPostDTO dto)
         {
             TaskEntity task = await _repository.Detail(userId, dto.Id);
             IPublishEntity publish = task as IPublishEntity;
@@ -188,8 +208,13 @@ namespace itu.BL.Facades
             publish.DelayReason = publish.DelayReason;
             publish.Active = false;
 
-            await CreateNextTask(task);            
-            await _repository.Save();
+            (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
+            return new SolvedDTO() 
+            { 
+                NextUserId = nextUserId,
+                Overview = await AllOfUser(userId),
+                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+            };
         }
 
         public async Task<DetailTaskDTO> ContractSave(int userId, ContractPostDTO dto)
@@ -209,7 +234,7 @@ namespace itu.BL.Facades
             return _mapper.Map<DetailTaskDTO>(task);
         }
 
-        public async Task ContractSolve(int userId, ContractPostDTO dto)
+        public async Task<SolvedDTO> ContractSolve(int userId, ContractPostDTO dto)
         {
             TaskEntity task = await _repository.Detail(userId, dto.Id);
             IContractEntity contract = task as IContractEntity;
@@ -222,8 +247,13 @@ namespace itu.BL.Facades
             contract.Active = false;
             contract.Currency = dto.Currency;
 
-            await CreateNextTask(task);            
-            await _repository.Save();
+            (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
+            return new SolvedDTO() 
+            { 
+                NextUserId = nextUserId,
+                Overview = await AllOfUser(userId),
+                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+            };
         }
 
         public async Task<DetailTaskDTO> ArchivationSave(int userId, ArchivationPostDTO dto)
@@ -242,7 +272,7 @@ namespace itu.BL.Facades
             return _mapper.Map<DetailTaskDTO>(task);
         }
 
-        public async Task ArchivationSolve(int userId, ArchivationPostDTO dto)
+        public async Task<SolvedDTO> ArchivationSolve(int userId, ArchivationPostDTO dto)
         {
             TaskEntity task = await _repository.Detail(userId, dto.Id);
             IArchivationEntity archivation = task as IArchivationEntity;
@@ -254,13 +284,20 @@ namespace itu.BL.Facades
             archivation.DelayReason = archivation.DelayReason;
             archivation.Active = false;
 
-            await CreateNextTask(task);            
-            await _repository.Save();
+            (int nextUserId, TaskEntity created) = await CreateNextTask(task);
+            return new SolvedDTO() 
+            { 
+                NextUserId = nextUserId,
+                Overview = await AllOfUser(userId),
+                CreatedTask = _mapper.Map<AllTaskDTO>(created)
+            };
         }
 
-        private async Task CreateNextTask(TaskEntity current)
+        private async Task<(int, TaskEntity)> CreateNextTask(TaskEntity current)
         {
             ModelTaskEntity model = await _repository.NextModel(current.Id, current.Order + 1);
+            int nextUserId = 0;
+            TaskEntity created = null;
             
             if (model == null)
             {
@@ -268,7 +305,7 @@ namespace itu.BL.Facades
             }
             else
             {
-                int nextUserId = (await _repository.NextUserId(current.Id, model.Type)).Value; // TODO
+                nextUserId = (await _repository.NextUserId(current.Id, model.Type)).Value; // TODO
                 switch (model.Type)
                 {
                     case TaskTypeEnum.Acceptation:
@@ -284,6 +321,7 @@ namespace itu.BL.Facades
                         acceptation.UserId = nextUserId;
 
                         await _repository.Create(acceptation);
+                        created = acceptation;
                         break;
 
                     case TaskTypeEnum.Archivation:
@@ -300,6 +338,7 @@ namespace itu.BL.Facades
                         assessment.UserId = nextUserId;
 
                         await _repository.Create(assessment);
+                        created = assessment;
                         break;
 
                     case TaskTypeEnum.Contract:
@@ -308,6 +347,7 @@ namespace itu.BL.Facades
                         contract.UserId = nextUserId;
 
                         await _repository.Create(contract);
+                        created = contract;
                         break;
                     
                     case TaskTypeEnum.Publish:
@@ -316,6 +356,7 @@ namespace itu.BL.Facades
                         publication.UserId = nextUserId;
 
                         await _repository.Create(publication);
+                        created = publication;
                         break;
 
                     case TaskTypeEnum.Estimate:
@@ -333,6 +374,7 @@ namespace itu.BL.Facades
                         }
 
                         await _repository.Create(estimate);
+                        created = estimate;
                         break;
 
                     case TaskTypeEnum.Assignment:
@@ -341,9 +383,13 @@ namespace itu.BL.Facades
                         assignment.UserId = nextUserId;
 
                         await _repository.Create(assignment);
+                        created = assignment;
                         break;
                 }
             }
+
+            await _repository.Save();
+            return (nextUserId, created);
         }
     }
 }

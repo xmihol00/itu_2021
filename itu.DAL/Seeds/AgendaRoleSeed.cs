@@ -74,7 +74,7 @@ namespace itu.DAL.Seeds
             {
                 Id = 10,
                 AgendaId = 1,
-                UserId = 1,
+                UserId = 2,
                 Type = TaskTypeEnum.Acceptation,
             },
 
@@ -104,14 +104,14 @@ namespace itu.DAL.Seeds
             {
                 Id = 14,
                 AgendaId = 2,
-                UserId = 1,
+                UserId = 2,
                 Type = TaskTypeEnum.Estimate,
             },
             new AgendaRoleEntity()
             {
                 Id = 15,
                 AgendaId = 2,
-                UserId = 1,
+                UserId = 2,
                 Type = TaskTypeEnum.Contract,
             },
             new AgendaRoleEntity()
@@ -132,7 +132,7 @@ namespace itu.DAL.Seeds
             {
                 Id = 18,
                 AgendaId = 2,
-                UserId = 1,
+                UserId = 2,
                 Type = TaskTypeEnum.Archivation,
             },
         };

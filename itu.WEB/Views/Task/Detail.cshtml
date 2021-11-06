@@ -8,7 +8,7 @@
                 <button class="btn btn-danger">Zahodit změny</button>
             </div>
             <div>
-                <button onclick="Save('@Model.ToAction()Save')" class="btn btn-success save-btn mr-1">Uložit</button>
+                <button onclick="Save('@Model.ToAction()')" class="btn btn-success save-btn mr-1">Uložit</button>
                 <button id="SolveBtnId" onclick="Solve('@Model.ToAction()')" class="btn btn-success save-btn">Vyřešit</button>
             </div>
         </div>
@@ -69,291 +69,286 @@
         </div>
         <p class="description-wf">@Model.Description</p>
     </div>
-    <form id="@Model.Id" action="/Task/@Model.ToAction()Solve" method="POST">
-        <input id="TaskId" name="Id" type="hidden" value="@Model.Id"/>
-            <div id="DelayDivId" class="input-group mb-2 @(Model.End.Date < DateTime.Now.Date ? "" : "d-none")" >
-                <div class="input-group-prepend">
-                    <label id="DelayLabelId" class="input-group-text task-prep-wdth @(String.IsNullOrWhiteSpace(Model.DelayReason) ? "comp comp-bckg" : "")">Důvod zpoždění</label>
-                </div>
-                <textarea id="DelayReasonId" name="DelayReason" class="form-control">@Model.DelayReason</textarea>
-            </div>  
-        @switch (Model)
-        {
-            case IAssignmentDTO assignment:
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth comp @(assignment.PriceGues == 0.0 ? "comp-bckg" : "")">Prvotní odhad ceny</label>
-                    </div>
-                    <input id="PriceId" class="form-control" value="@assignment.PriceGues.ToPrice()" name="PriceGues"
-                           onkeydown="FormatPriceDown(arguments[0], this)"
-                           oninput="FormatPriceInput(this)" />
-                    <div class="input-group-append">
-                        <select class="input-group-text" name="Currency" id="CurrencyId" >
-                            @foreach (CurrencyEnum value in Enum.GetValues(typeof(CurrencyEnum)))
-                            {
-                                @if (value == assignment.Currency)
-                                {
-                                    <option selected>@value</option>
-                                }
-                                else
-                                {
-                                    <option>@value</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(assignment.Benefit) ? "comp-bckg" : "")">Přínos organizaci</label>
-                    </div>
-                    <textarea id="BenefitId" name="Benefit" class="form-control">@assignment.Benefit</textarea>
-                </div>  
-                break;
-
-            case IAcceptationDTO acceptation:
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="w-50">
-                        <div class="pr-1">
-                            <div class="border-dark bg-light">
-                               <div class="task-description">
-                                   Prvotní odhad ceny
-                               </div>
-                               <div class="d-flex justify-content-between">
-                                   <div class="price-value">@acceptation.PriceGues</div>
-                                   <div class="price-currency">@acceptation.Currency</div>
-                               </div>
-                            </div>                        
-                        </div>
-                    </div>
-                    <div class="w-50">
-                        <div class="pl-1">
-                            <div class="border-dark">
-                                <div class="task-description">
-                                    Přínos pro organizaci
-                                </div>
-                                <div class="description-wf">
-                                    @acceptation.Benefit
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="w-50">
-                        <div class="pr-1">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text task-prep-wdth">Přijmout</label>
-                                </div>
-                                <div class="input-group-text input-group-append border-right-radius">
-                                    <input type="radio" id="AcceptId" name="Accepted" @(acceptation.Accepted ? "checked" : "") onclick="Accept()" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-50">
-                        <div class="pl-1">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text task-prep-wdth">Odmítnout</label>
-                                </div>
-                                <div class="input-group-text input-group-append border-right-radius">
-                                    <input type="radio" id="DenyId" onclick="Deny()" @(acceptation.Accepted ? "" : "checked") />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <label id="ReasonLabelId" class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(acceptation.Reason) ? "comp-bckg" : "")">Důvod přijetí</label>
-                    </div>
-                    <textarea id="ReasonId" name="Reason" class="form-control" >@acceptation.Reason</textarea>
-                </div>
-                break;
-
-            case IAssessmentDTO assessment:
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(assessment.Conclusion) ? "comp-bckg" : "")">Závěr posudku</label>
-                    </div>
-                    <textarea id="ConclusionId" name="Conclusion" class="form-control" >@assessment.Conclusion</textarea>
-                </div>
-                break;
-            
-            case IEstimateDTO estimate:
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth comp @(estimate.EstimatePrice == 0.0 ? "comp-bckg" : "")">Odhad ceny</label>
-                    </div>
-                    <input id="EstimatePriceId" class="form-control" value="@estimate.EstimatePrice.ToPrice()" name="EstimatePrice"
-                           onkeydown="FormatPriceDown(arguments[0], this)"
-                           oninput="FormatPriceInput(this)" />
-                    <div class="input-group-append">
-                        <label class="input-group-text">@estimate.Currency</label>
-                    </div>
-                </div>
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth comp @(estimate.MaxPrice == 0.0 ? "comp-bckg" : "")">Maximální cena</label>
-                    </div>
-                    <input id="MaxPriceId" class="form-control" value="@estimate.MaxPrice.ToPrice()" name="MaxPrice"
-                           onkeydown="FormatPriceDown(arguments[0], this)"
-                           oninput="FormatPriceInput(this)" />
-                    <div class="input-group-append">
-                        <label class="input-group-text">@estimate.Currency</label>
-                    </div>
-                </div>
-                break;
-            
-            case IContractDTO contract:
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth comp @(contract.FinalPrice == 0.0 ? "comp-bckg" : "")">Finální cena</label>
-                    </div>
-                    <input id="FinalPriceId" class="form-control" value="@contract.FinalPrice.ToPrice()" name="FinalPrice"
-                           onkeydown="FormatPriceDown(arguments[0], this)"
-                           oninput="FormatPriceInput(this)" />
-                    <div class="input-group-append">
-                        <select class="input-group-text" name="Currency" id="CurrencyId" >
-                            @foreach (CurrencyEnum value in Enum.GetValues(typeof(CurrencyEnum)))
-                            {
-                                @if (value == contract.Currency)
-                                {
-                                    <option selected>@value</option>
-                                }
-                                else
-                                {
-                                    <option>@value</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth">Typ smlouvy</label>
-                    </div>
-                    <select id="ContractTypeId" name="ContractType" class="form-control" name="Type">
-                        @foreach (ContractTypeEnum value in Enum.GetValues(typeof(ContractTypeEnum)))
-                        {
-                            if (value == contract.ContractType)
-                            {
-                                <option value="@value" selected>@value.ToLabel()</option>
-                            }
-                            else
-                            {
-                                <option value="@value">@value.ToLabel()</option>
-                            }
-                        }
-                    </select>
-                </div>
-                break;
-            
-            case IPublishDTO publish:
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="w-50">
-                        <div class="pr-1">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text task-prep-wdth">Datum zveřejnění</label>
-                                </div>
-                                <input type="date" class="form-control" name="PublishStart" id="PublishStartId"
-                                       value="@(publish.PublishStart > DateTime.Now ? publish.PublishStart.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))" 
-                                       min="@DateTime.Now.ToString("yyyy-MM-dd")" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-50">
-                        <div class="pl-1">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text task-prep-wdth">Datum ukončení</label>
-                                </div>
-                                <input type="date" class="form-control" name="PublishEnd" id="PublishEndId"
-                                       value="@(publish.PublishEnd > DateTime.Now ? publish.PublishEnd.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))" 
-                                       min="@DateTime.Now.ToString("yyyy-MM-dd")" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                break;
-
-            case IArchivationDTO archivation:
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="w-50">
-                        <div class="pr-1">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text task-prep-wdth comp @(archivation.Number == 0 ? "comp-bckg" : "")">Číslo archivace</label>
-                                </div>
-                                <input type="number" class="form-control" name="Number" 
-                                       id="NumberId" value="@(archivation.Number != 0 ? archivation.Number.ToString() : "")" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-50">
-                        <div class="pl-1">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text task-prep-wdth">Datum zrušení</label>
-                                </div>
-                                <input type="date" class="form-control" name="Cancallation" id="CancallationId"
-                                       value="@(archivation.Cancallation > DateTime.Now ? archivation.Cancallation.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))" 
-                                       min="@DateTime.Now.ToString("yyyy-MM-dd")" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text task-prep-wdth">Umístění archivace</label>
-                    </div>
-                    <select id="LocationId" name="Location" class="form-control" name="Type">
-                        @foreach (LocationEnum value in Enum.GetValues(typeof(LocationEnum)))
-                        {
-                            if (value == archivation.Location)
-                            {
-                                <option value="@value" selected>@value.ToLabel()</option>
-                            }
-                            else
-                            {
-                                <option value="@value">@value.ToLabel()</option>
-                            }
-                        }
-                    </select>
-                </div>
-                break;
-
-             default:
-                break;
-        }
-        <div class="files-div mb-2">
-            <div class="input-group mb-2" style="margin-left: 1px;">
-                <div class="input-group-prepend w-50">
-                    <label class="input-group-text w-100">Soubory</label>
-                </div>
-                <input id="Upload" type="file" onchange="FileChosen(this)" multiple/>
-                <div class="input-group-append w-50">
-                    <label for="Upload" class="input-group-text d-flex justify-content-end w-100" style="cursor: pointer;">
-                        <i class="fas fa-folder-open mr-2"></i> Nahrát nový
-                    </label>
-                </div>
-            </div>
-            <div id="NewFilesId" class="new-files" >
-            </div>
-            <div id="FilesId">
-                @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
-            </div>
-        </div>
-        <div class="input-group mb-2">
+    <input id="IdOfTaskId" name="Id" type="hidden" value="@Model.Id"/>
+        <div id="DelayDivId" class="input-group mb-2 @(Model.End.Date < DateTime.Now.Date ? "" : "d-none")" >
             <div class="input-group-prepend">
-                <label class="input-group-text task-prep-wdth">Poznámka</label>
+                <label id="DelayLabelId" class="input-group-text task-prep-wdth @(String.IsNullOrWhiteSpace(Model.DelayReason) ? "" : "comp comp-bckg")">Důvod zpoždění</label>
             </div>
-            <textarea id="NoteId" name="Note" class="form-control">@Model.Note</textarea>
+            <textarea id="DelayReasonId" name="DelayReason" class="form-control">@Model.DelayReason</textarea>
+        </div>  
+    @switch (Model)
+    {
+        case IAssignmentDTO assignment:
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth comp @(assignment.PriceGues == 0.0 ? "comp-bckg" : "")">Prvotní odhad ceny</label>
+                </div>
+                <input id="PriceId" class="form-control" value="@assignment.PriceGues.ToPrice()" name="PriceGues"
+                       onkeydown="FormatPriceDown(arguments[0], this)"
+                       oninput="FormatPriceInput(this)" />
+                <div class="input-group-append">
+                    <select class="input-group-text" name="Currency" id="CurrencyId" >
+                        @foreach (CurrencyEnum value in Enum.GetValues(typeof(CurrencyEnum)))
+                        {
+                            @if (value == assignment.Currency)
+                            {
+                                <option selected>@value</option>
+                            }
+                            else
+                            {
+                                <option>@value</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(assignment.Benefit) ? "comp-bckg" : "")">Přínos organizaci</label>
+                </div>
+                <textarea id="BenefitId" name="Benefit" class="form-control">@assignment.Benefit</textarea>
+            </div>  
+            break;
+
+        case IAcceptationDTO acceptation:
+            <div class="d-flex justify-content-between mb-2">
+                <div class="w-50">
+                    <div class="pr-1">
+                        <div class="border-dark bg-light">
+                           <div class="task-description">
+                               Prvotní odhad ceny
+                           </div>
+                           <div class="d-flex justify-content-between">
+                               <div class="price-value">@acceptation.PriceGues</div>
+                               <div class="price-currency">@acceptation.Currency</div>
+                           </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="pl-1">
+                        <div class="border-dark">
+                            <div class="task-description">
+                                Přínos pro organizaci
+                            </div>
+                            <div class="description-wf">
+                                @acceptation.Benefit
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <div class="w-50">
+                    <div class="pr-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text task-prep-wdth">Přijmout</label>
+                            </div>
+                            <div class="input-group-text input-group-append border-right-radius">
+                                <input type="radio" id="AcceptId" name="Accepted" @(acceptation.Accepted ? "checked" : "") onclick="Accept()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="pl-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text task-prep-wdth">Odmítnout</label>
+                            </div>
+                            <div class="input-group-text input-group-append border-right-radius">
+                                <input type="radio" id="DenyId" onclick="Deny()" @(acceptation.Accepted ? "" : "checked") />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label id="ReasonLabelId" class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(acceptation.Reason) ? "comp-bckg" : "")">Důvod přijetí</label>
+                </div>
+                <textarea id="ReasonId" name="Reason" class="form-control" >@acceptation.Reason</textarea>
+            </div>
+            break;
+        case IAssessmentDTO assessment:
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(assessment.Conclusion) ? "comp-bckg" : "")">Závěr posudku</label>
+                </div>
+                <textarea id="ConclusionId" name="Conclusion" class="form-control" >@assessment.Conclusion</textarea>
+            </div>
+            break;
+        
+        case IEstimateDTO estimate:
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth comp @(estimate.EstimatePrice == 0.0 ? "comp-bckg" : "")">Odhad ceny</label>
+                </div>
+                <input id="EstimatePriceId" class="form-control" value="@estimate.EstimatePrice.ToPrice()" name="EstimatePrice"
+                       onkeydown="FormatPriceDown(arguments[0], this)"
+                       oninput="FormatPriceInput(this)" />
+                <div class="input-group-append">
+                    <label class="input-group-text">@estimate.Currency</label>
+                </div>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth comp @(estimate.MaxPrice == 0.0 ? "comp-bckg" : "")">Maximální cena</label>
+                </div>
+                <input id="MaxPriceId" class="form-control" value="@estimate.MaxPrice.ToPrice()" name="MaxPrice"
+                       onkeydown="FormatPriceDown(arguments[0], this)"
+                       oninput="FormatPriceInput(this)" />
+                <div class="input-group-append">
+                    <label class="input-group-text">@estimate.Currency</label>
+                </div>
+            </div>
+            break;
+        
+        case IContractDTO contract:
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth comp @(contract.FinalPrice == 0.0 ? "comp-bckg" : "")">Finální cena</label>
+                </div>
+                <input id="FinalPriceId" class="form-control" value="@contract.FinalPrice.ToPrice()" name="FinalPrice"
+                       onkeydown="FormatPriceDown(arguments[0], this)"
+                       oninput="FormatPriceInput(this)" />
+                <div class="input-group-append">
+                    <select class="input-group-text" name="Currency" id="CurrencyId" >
+                        @foreach (CurrencyEnum value in Enum.GetValues(typeof(CurrencyEnum)))
+                        {
+                            @if (value == contract.Currency)
+                            {
+                                <option selected>@value</option>
+                            }
+                            else
+                            {
+                                <option>@value</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth">Typ smlouvy</label>
+                </div>
+                <select id="ContractTypeId" name="ContractType" class="form-control" name="Type">
+                    @foreach (ContractTypeEnum value in Enum.GetValues(typeof(ContractTypeEnum)))
+                    {
+                        if (value == contract.ContractType)
+                        {
+                            <option value="@value" selected>@value.ToLabel()</option>
+                        }
+                        else
+                        {
+                            <option value="@value">@value.ToLabel()</option>
+                        }
+                    }
+                </select>
+            </div>
+            break;
+        
+        case IPublishDTO publish:
+            <div class="d-flex justify-content-between mb-2">
+                <div class="w-50">
+                    <div class="pr-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text task-prep-wdth">Datum zveřejnění</label>
+                            </div>
+                            <input type="date" class="form-control" name="PublishStart" id="PublishStartId"
+                                   value="@(publish.PublishStart > DateTime.Now ? publish.PublishStart.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))" 
+                                   min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="pl-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text task-prep-wdth">Datum ukončení</label>
+                            </div>
+                            <input type="date" class="form-control" name="PublishEnd" id="PublishEndId"
+                                   value="@(publish.PublishEnd > DateTime.Now ? publish.PublishEnd.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))" 
+                                   min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            break;
+
+        case IArchivationDTO archivation:
+            <div class="d-flex justify-content-between mb-2">
+                <div class="w-50">
+                    <div class="pr-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text task-prep-wdth comp @(archivation.Number == 0 ? "comp-bckg" : "")">Číslo archivace</label>
+                            </div>
+                            <input type="number" class="form-control" name="Number" 
+                                   id="NumberId" value="@(archivation.Number != 0 ? archivation.Number.ToString() : "")" />
+                        </div>
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="pl-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text task-prep-wdth">Datum zrušení</label>
+                            </div>
+                            <input type="date" class="form-control" name="Cancallation" id="CancallationId"
+                                   value="@(archivation.Cancallation > DateTime.Now ? archivation.Cancallation.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))" 
+                                   min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth">Umístění archivace</label>
+                </div>
+                <select id="LocationId" name="Location" class="form-control" name="Type">
+                    @foreach (LocationEnum value in Enum.GetValues(typeof(LocationEnum)))
+                    {
+                        if (value == archivation.Location)
+                        {
+                            <option value="@value" selected>@value.ToLabel()</option>
+                        }
+                        else
+                        {
+                            <option value="@value">@value.ToLabel()</option>
+                        }
+                    }
+                </select>
+            </div>
+            break;
+
+         default:
+            break;
+    }
+    <div class="files-div mb-2">
+        <div class="input-group mb-2" style="margin-left: 1px;">
+            <div class="input-group-prepend w-50">
+                <label class="input-group-text w-100">Soubory</label>
+            </div>
+            <input id="Upload" type="file" onchange="FileChosen(this)" multiple/>
+            <div class="input-group-append w-50">
+                <label for="Upload" class="input-group-text d-flex justify-content-end w-100" style="cursor: pointer;">
+                    <i class="fas fa-folder-open mr-2"></i> Nahrát nový
+                </label>
+            </div>
         </div>
-    </form>
+        <div id="NewFilesId" class="new-files" >
+        </div>
+        <div id="FilesId">
+            @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
+        </div>
+    </div>
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <label class="input-group-text task-prep-wdth">Poznámka</label>
+        </div>
+        <textarea id="NoteId" name="Note" class="form-control">@Model.Note</textarea>
+    </div>
 </div>
-
-

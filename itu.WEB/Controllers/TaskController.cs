@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using itu.BL.DTOs.File;
 using itu.BL.DTOs.Task;
 using itu.BL.Facades;
+using itu.WEB.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace itu.WEB.Controllers
@@ -16,9 +18,11 @@ namespace itu.WEB.Controllers
     public class TaskController : BaseController
     {
         private readonly TaskFacade _facade;
+        private readonly IHubContext<TaskNotificationHub> _hubContext;
 
-        public TaskController(TaskFacade facade)
+        public TaskController(TaskFacade facade, IHubContext<TaskNotificationHub> hubContext, BaseFacade baseFacade) : base(baseFacade)
         {
+            _hubContext = hubContext;
             _facade = facade;
         }
 
@@ -39,8 +43,9 @@ namespace itu.WEB.Controllers
         {
             try
             {
-                await _facade.AssignmentSolve(ViewBag.Id, assignment);
-                return Redirect($"/Task/Overview/");
+                SolvedDTO solved = await _facade.AssignmentSolve(ViewBag.Id, assignment);
+                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                return PartialView("Overview", solved.Overview);
             }
             catch
             {
@@ -66,8 +71,9 @@ namespace itu.WEB.Controllers
         {
             try
             {
-                await _facade.AcceptationSolve(ViewBag.Id, acceptation);
-                return Redirect($"/Task/Overview/");
+                SolvedDTO solved = await _facade.AcceptationSolve(ViewBag.Id, acceptation);
+                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                return PartialView("Overview", solved.Overview);
             }
             catch
             {
@@ -93,8 +99,9 @@ namespace itu.WEB.Controllers
         {
             try
             {
-                await _facade.AssessmentSolve(ViewBag.Id, assessment);
-                return Redirect($"/Task/Overview/");
+                SolvedDTO solved = await _facade.AssessmentSolve(ViewBag.Id, assessment);
+                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                return PartialView("Overview", solved.Overview);
             }
             catch
             {
@@ -120,8 +127,9 @@ namespace itu.WEB.Controllers
         {
             try
             {
-                await _facade.EstimateSolve(ViewBag.Id, estimate);
-                return Redirect($"/Task/Overview/");
+                SolvedDTO solved = await _facade.EstimateSolve(ViewBag.Id, estimate);
+                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                return PartialView("Overview", solved.Overview);
             }
             catch
             {
@@ -147,8 +155,9 @@ namespace itu.WEB.Controllers
         {
             try
             {
-                await _facade.ContractSolve(ViewBag.Id, contract);
-                return Redirect($"/Task/Overview/");
+                SolvedDTO solved = await _facade.ContractSolve(ViewBag.Id, contract);
+                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                return PartialView("Overview", solved.Overview);
             }
             catch
             {
@@ -174,8 +183,9 @@ namespace itu.WEB.Controllers
         {
             try
             {
-                await _facade.PublicationSolve(ViewBag.Id, publish);
-                return Redirect($"/Task/Overview/");
+                SolvedDTO solved = await _facade.PublicationSolve(ViewBag.Id, publish);
+                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                return PartialView("Overview", solved.Overview);
             }
             catch
             {
@@ -201,8 +211,9 @@ namespace itu.WEB.Controllers
         {
             try
             {
-                await _facade.ArchivationSolve(ViewBag.Id, archivation);
-                return Redirect($"/Task/Overview/");
+                SolvedDTO solved = await _facade.ArchivationSolve(ViewBag.Id, archivation);
+                await _hubContext.Clients.Group(solved.NextUserId.ToString()).SendAsync("NewTask", solved.CreatedTask);
+                return PartialView("Overview", solved.Overview);
             }
             catch
             {

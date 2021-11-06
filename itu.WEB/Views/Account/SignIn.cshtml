@@ -15,14 +15,13 @@
     <div class="signin-box">
         <form asp-action="Signin" method="POST" onsubmit="return ValidateSignIn()">
             <div class="form-group">
-                <label asp-for="UserName"></label>
+                <label>Uživatelské jméno</label>
                 <input id="UserName" asp-for="UserName" class="form-control" style="width: 430px" />
             </div>
             <div class="form-group">
-                <label asp-for="Password"></label>
+                <label>Heslo</label>
                 <input id="Password" type="password" asp-for="Password" class="form-control" style="width: 430px;" />
             </div>
-            <a href="~/Account/Register" class="btn btn-primary" >Registrovat se</a>
             <button type="submit" class="btn btn-primary" style="float: right;">Přihlásit se</button>
             <input type="hidden" asp-for="ReturnURL" />
         </form>

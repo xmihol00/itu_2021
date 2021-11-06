@@ -16,7 +16,7 @@ namespace itu.WEB.Controllers
     {
         private readonly FileFacade _facade;
 
-        public FileController(FileFacade facade)
+        public FileController(FileFacade facade, BaseFacade baseFacade) : base(baseFacade)
         {
             _facade = facade;
         }

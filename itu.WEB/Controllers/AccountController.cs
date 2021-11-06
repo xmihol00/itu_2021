@@ -17,7 +17,7 @@ namespace itu.WEB.Controllers
     {
         private readonly UserFacade _facade;
 
-        public AccountController(UserFacade facade)
+        public AccountController(UserFacade facade, BaseFacade baseFacade) : base(baseFacade)
         {
             _facade = facade;
         }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aministrace zakázek</title>
     
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -24,19 +25,22 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link mr-1" href="~/"><i class="fas fa-tasks"></i> Úkoly</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mr-1" href="~/Workflow/Overview"><i class="fas fa-sync"></i> Workflow</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mr-1" href="~/Agenda/Overview"><i class="fas fa-users"></i> Agendy</a>
-                            </li>
-                        </ul>
-                    </div>
+                    @if (ViewBag.Signed)
+                    {
+                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link mr-1" href="~/"><i class="fas fa-tasks"></i> Úkoly <span class="task-count-rel" ><span class="task-count">@ViewBag.TaskCount</span></span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mr-1" href="~/Workflow/Overview"><i class="fas fa-sync"></i> Workflow</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mr-1" href="~/Agenda/Overview"><i class="fas fa-users"></i> Agendy</a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
                     <div class="my-2 my-0 mr-0 btn-group">
                         @if (ViewBag.Signed)
                         {
@@ -53,7 +57,17 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3" style="padding-top: 70px">
-            @RenderBody()
+            <div id="AlertId" class="custom-alert">@*
+                *@<div class="alert alert-danger alert-dismissible mr-4 ml-4" role="alert">@*
+                    *@<span></span>
+                    <button type="button" class="close" data-hide="alert" aria-label="Close" onclick="HideAlert()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div id="BodyId">
+                @RenderBody()
+            </div>
         </main>
     </div>
 

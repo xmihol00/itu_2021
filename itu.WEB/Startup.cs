@@ -2,6 +2,7 @@ using itu.BL.Facades;
 using itu.BL.Profiles;
 using itu.DAL;
 using itu.DAL.Repositories;
+using itu.WEB.Hubs;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,8 @@ namespace itu.WEB
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
             
+            services.AddSignalR();
+            
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options =>
                     {
@@ -48,6 +51,7 @@ namespace itu.WEB
             services.AddScoped<FileRepository>();
             services.AddScoped<FileDataRepository>();
 
+            services.AddScoped<BaseFacade>();
             services.AddScoped<UserFacade>();
             services.AddScoped<TaskFacade>();
             services.AddScoped<FileFacade>();
@@ -79,6 +83,7 @@ namespace itu.WEB
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Task}/{action=Overview}/{id?}");
+                endpoints.MapHub<TaskNotificationHub>("/hub");
             });
 
             using (var serviceScope = app.ApplicationServices

@@ -6,9 +6,37 @@ var CountDownInterval = null;
 var TaskId = null;
 var LastEntered = null;
 
-document.addEventListener("input", function() 
+document.addEventListener("input", CheckCompulsary);
+
+document.addEventListener("DOMContentLoaded", function()
+{
+    CheckCompulsary();
+    SetCountDown();
+    
+    TaskId = document.getElementById("IdOfTaskId").value;
+});
+
+function SetCountDown()
+{
+    let ed = document.getElementById("EndDate");
+    if (ed == null)
+    {
+        return;
+    }
+    EndDate = new Date(ed.innerHTML);
+    ed.remove();
+    CountDown();
+    CountDownInterval = setInterval(CountDown, 1000);
+}
+
+function CheckCompulsary()
 {
     let btn = document.getElementById("SolveBtnId");
+    if (btn == null)
+    {
+        return;
+    }
+
     btn.disabled = false;
     for (let elem of document.getElementsByClassName("comp"))
     {
@@ -39,18 +67,7 @@ document.addEventListener("input", function()
             }
         }
     }
-});
-
-document.addEventListener("DOMContentLoaded", function()
-{
-    let ed = document.getElementById("EndDate");
-    EndDate = new Date(ed.innerHTML);
-    ed.remove();
-    CountDown();
-    CountDownInterval = setInterval(CountDown, 1000);
-    
-    TaskId = document.getElementsByTagName("form")[0].id;
-});
+}
 
 function SolveTask(element)
 {    
@@ -70,21 +87,21 @@ function SolveTask(element)
         let clk = document.getElementById("CLK");
         CountDown();
 
-        document.getElementById("Card" + SelectedId).classList.remove("card-selected");
-        document.getElementById("Select" + SelectedId).style.display = "none";
-        document.getElementById("Unselect" + SelectedId).style.display = "block";
-        SelectedId = element.id;
-        document.getElementById("Card" + SelectedId).classList.add("card-selected");
-        let select = document.getElementById("Select" + SelectedId);
+        document.getElementById("Card" + TaskId).classList.remove("card-selected");
+        document.getElementById("Select" + TaskId).style.display = "none";
+        document.getElementById("Unselect" + TaskId).style.display = "block";
+        TaskId = element.id;
+        document.getElementById("Card" + TaskId).classList.add("card-selected");
+        let select = document.getElementById("Select" + TaskId);
         select.style.display = "block";
         select.appendChild(clk);
 
-        document.getElementById("Unselect" + SelectedId).style.display = "none";
-        TaskId = document.getElementsByTagName("form")[0].id;
+        document.getElementById("Unselect" + TaskId).style.display = "none";
+        CheckCompulsary();
     })
-    .fail(function (result)
+    .fail(function() 
     {
-        //AlertAndReload(result);
+        ShowAlert("Nepodařilo se otevřít řešení úkolu.", true);
     });
 }
 
@@ -241,6 +258,11 @@ function UploadFile(element)
         Files = Files.filter(x => x.name != element.id);
         document.getElementById("FilesId").innerHTML = result;
         element.parentNode.remove();
+        ShowAlert("Soubor byl úspěšně nahrán.");
+    })
+    .fail(function() 
+    {
+        ShowAlert("Soubor se nepodařilo nahrát.", true);
     });
 
     return false;
@@ -353,6 +375,11 @@ function DeleteFile(id)
     .done(function(result)
     {
         document.getElementById("FilesId").innerHTML = result;
+        ShowAlert("Soubor byl úspěšně smazán");
+    })
+    .fail(function() 
+    {
+        ShowAlert("Soubor se nepodařilo smazat.", true);
     });
 
     return false;
@@ -399,6 +426,11 @@ function FileDropped(event)
     .done(function(result)
     {
         document.getElementById("FilesId").innerHTML = result;
+        ShowAlert("Verze souboru byla úspěšně změněna.");
+    })
+    .fail(function() 
+    {
+        ShowAlert("Nepodařilo se změnit verzi souboru.", true);
     }); 
 }
 
@@ -446,96 +478,102 @@ function DragLeave(element, event)
     }
 }
 
-function Save(address)
+function CreateDTO(type)
 {
-    let dto = {}
+    const dto = {}
     dto.Note = document.getElementById("NoteId").value;
-    dto.Id = document.getElementsByTagName("form")[0].id;
+    dto.Id = TaskId;
     dto.DelayReason = document.getElementById("DelayReasonId").value;
     
-    if (address == "AssignmentSave")
+    if (type == "Assignment")
     {
         let price = document.getElementById("PriceId");
         dto.PriceGues = price.value.replace(/\s/g,'');
         dto.Currency = document.getElementById("CurrencyId").value;
         dto.Benefit = document.getElementById("BenefitId").value;
     }
-    else if (address == "AcceptationSave")
+    else if (type == "Acceptation")
     {
         dto.Reason = document.getElementById("ReasonId").value;
         dto.Accepted = document.getElementById("AcceptId").checked;
     }
-    else if (address == "EstimateSave")
+    else if (type == "Estimate")
     {
         let price = document.getElementById("EstimatePriceId");
         dto.EstimatePrice = price.value.replace(/\s/g,'');
         price = document.getElementById("MaxPriceId");
         dto.MaxPrice = price.value.replace(/\s/g,'');
     }
-    else if (address == "AssessmentSave")
+    else if (type == "Assessment")
     {
         dto.Conclusion = document.getElementById("ConclusionId").value;
     }
-    else if (address == "ContractSave")
+    else if (type == "Contract")
     {
         let price = document.getElementById("FinalPriceId");
         dto.FinalPrice = price.value.replace(/\s/g,'');
         dto.ContractType = document.getElementById("ContractTypeId").value;
         dto.Currency = document.getElementById("CurrencyId").value;
     }
-    else if (address == "PublicationSave")
+    else if (type == "Publication")
     {
         dto.PublishStart = document.getElementById("PublishStartId").value;
         dto.PublishEnd = document.getElementById("PublishEndId").value;
     }
-    else if (address == "ArchivationSave")
+    else if (type == "Archivation")
     {
         dto.Number = document.getElementById("NumberId").value;
         dto.Cancallation = document.getElementById("CancallationId").value;
         dto.Location = document.getElementById("LocationId").value;
     }
 
+    return dto;
+}
+
+function Save(type)
+{
+    const dto = CreateDTO(type)
+
     $.ajax(
     {
         async: true,
         type: 'POST',
-        url: "/Task/" + address,
+        url: "/Task/" + type + "Save",
         data: dto
     })
     .done(function (result) 
     {
         document.getElementById("DetailDiv").innerHTML = result;
+        ShowAlert("Úkol byl úspěšně uložen.");
     })
-    .fail(function (result)
+    .fail(function() 
     {
-        //AlertAndReload(result);
+        ShowAlert("Úkol se nepodařilo uložit.", true);
     });
 }
 
 function Solve(type)
 {
-    let form = document.getElementsByTagName("form")[0];
-
-    if (type == "Assignment")
-    {
-        let price = document.getElementById("PriceId");
-        price.value = price.value.replace(/\s/g,'');
-    }
-    else if (type == "Estimate")
-    {
-        let estimatePrice = document.getElementById("EstimatePriceId");
-        estimatePrice.value = estimatePrice.value.replace(/\s/g,'');
-
-        let maxPrice = document.getElementById("MaxPriceId");
-        maxPrice.value = maxPrice.value.replace(/\s/g,'');
-    }
-    else if (type == "Contract")
-    {
-        let finalPrice = document.getElementById("FinalPriceId");
-        finalPrice.value = finalPrice.value.replace(/\s/g,'');
-    }
+    const dto = CreateDTO(type);
     
-    form.submit();
+    $.ajax(
+    {
+        async: true,
+        type: 'POST',
+        url: "/Task/" + type + "Solve",
+        data: dto
+    })
+    .done(function (result) 
+    {
+        document.getElementById("BodyId").innerHTML = result;
+        TaskId = document.getElementById("IdOfTaskId").value;
+        SetCountDown();
+        ShowAlert("Úkol byl úspěšně vyřešen.");
+    })
+    .fail(function() 
+    {
+        ShowAlert("Úkol se nepodařilo vyřešit.", true);
+    });
 }
 
 function Accept()

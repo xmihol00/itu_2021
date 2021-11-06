@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using itu.BL.Facades;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,13 @@ namespace itu.WEB.Controllers
 {
     public class BaseController : Controller
     {
+        private readonly BaseFacade _baseFacade;
+
+        public BaseController(BaseFacade baseFacade)
+        {
+            _baseFacade = baseFacade;
+        }
+
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
@@ -31,6 +39,8 @@ namespace itu.WEB.Controllers
                     }
                 }
             }
+
+            ViewBag.TaskCount = _baseFacade.TaskOfUserCount(ViewBag.Id);
         }
     }
 }

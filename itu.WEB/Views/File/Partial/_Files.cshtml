@@ -6,13 +6,13 @@
 {
     @foreach (var group in Model.GroupBy(x => x.Version).OrderBy(x => x.Key))
     {
-        if (++version != group.Key)
+        while (++version < group.Key)
         {
-            <div class="mb-2 w-50 hidden-version" style="display: none;">
+            <div class="mb-2 hidden-version" style="display: none;">
                 <div class="text-vertical-div">
                     <div class="text-vertical">verze @version</div>
                 </div>
-                <div class="d-flex file-version w-100" data-version="@(version++)" 
+                <div class="d-flex file-version" data-version="@version" 
                      ondrop="FileDropped(event)" ondragover="DragOver(event)" ondragenter="DragEntered(this)" ondragleave="DragLeave(this, event)">
                 
                 </div>

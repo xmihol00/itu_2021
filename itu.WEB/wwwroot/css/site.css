@@ -111,7 +111,6 @@ body {
   margin-bottom: 1%;
 }
 
-
 .page-name {
   color: var(--color-text-inverted);
   background: var(--color-bg-dark);
@@ -218,4 +217,31 @@ input[type="file"] {
 .comp-bckg {
   background-color: var(--color-required);
   border-color: var(--color-required);
+}
+
+.custom-alert {
+  display: none; 
+  position: fixed;
+  z-index: 100;
+  left: 30%;
+  top: 73px;
+  width: 40%;
+}
+
+.task-count-rel {
+  position: relative;
+  margin-right: 24px;
+}
+
+.task-count {
+  border-radius: 15px;
+  padding: 2px 8px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-bg-dark);
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  top: -3px;
+  margin-left: 5px;
 }
