@@ -27,10 +27,28 @@ namespace itu.BL.Facades
             _mapper = mapper;
         }
 
-        public async Task<OverviewDTO> AllOfUser(int userId, int selected = 0)
+        public async Task<OverviewDTO> ActiveOfUser(int userId, int selected = 0)
         {
             OverviewDTO overview = new OverviewDTO();
-            overview.Tasks = _mapper.Map<List<AllTaskDTO>>(await _repository.AllOfUser(userId));
+            overview.Tasks = _mapper.Map<List<AllTaskDTO>>(await _repository.ActiveOfUser(userId));
+            if (overview.Tasks.Count > 0)
+            {
+                if (selected <= 0)
+                {
+                    selected = overview.Tasks[0].Id;
+                }
+
+                overview.Detail = _mapper.Map<DetailTaskDTO>(await _repository.Detail(userId, selected));
+            }
+            overview.Selected = selected;
+
+            return overview;
+        }
+
+        public async Task<OverviewDTO> SolvedOfUser(int userId, int selected = 0)
+        {
+            OverviewDTO overview = new OverviewDTO();
+            overview.Tasks = _mapper.Map<List<AllTaskDTO>>(await _repository.SolvedOfUser(userId));
             if (overview.Tasks.Count > 0)
             {
                 if (selected <= 0)
@@ -75,12 +93,13 @@ namespace itu.BL.Facades
             assignment.Note = dto.Note;
             assignment.PriceGues = dto.PriceGues;
             assignment.Active = false;
+            assignment.End = DateTime.Now;
 
             (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
             return new SolvedDTO() 
             { 
                 NextUserId = nextUserId,
-                Overview = await AllOfUser(userId),
+                Overview = await ActiveOfUser(userId),
                 CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
@@ -110,12 +129,13 @@ namespace itu.BL.Facades
             acceptation.Reason = dto.Reason;
             acceptation.Note = dto.Note;
             acceptation.Active = false;
+            acceptation.End = DateTime.Now;
 
             (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
             return new SolvedDTO() 
             { 
                 NextUserId = nextUserId,
-                Overview = await AllOfUser(userId),
+                Overview = await ActiveOfUser(userId),
                 CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
@@ -143,12 +163,13 @@ namespace itu.BL.Facades
             assessment.Note = dto.Note;
             assessment.DelayReason = assessment.DelayReason;
             assessment.Active = false;
+            assessment.End = DateTime.Now;
 
             (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
             return new SolvedDTO() 
             { 
                 NextUserId = nextUserId,
-                Overview = await AllOfUser(userId),
+                Overview = await ActiveOfUser(userId),
                 CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
@@ -178,12 +199,13 @@ namespace itu.BL.Facades
             estimate.Note = dto.Note;
             estimate.DelayReason = estimate.DelayReason;
             estimate.Active = false;
+            estimate.End = DateTime.Now;
 
             (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
             return new SolvedDTO() 
             { 
                 NextUserId = nextUserId,
-                Overview = await AllOfUser(userId),
+                Overview = await ActiveOfUser(userId),
                 CreatedTask = created != null ? created != null ? _mapper.Map<AllTaskDTO>(created) : null : null
             };
         }
@@ -213,12 +235,13 @@ namespace itu.BL.Facades
             publish.Note = dto.Note;
             publish.DelayReason = publish.DelayReason;
             publish.Active = false;
+            publish.End = DateTime.Now;
 
             (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
             return new SolvedDTO() 
             { 
                 NextUserId = nextUserId,
-                Overview = await AllOfUser(userId),
+                Overview = await ActiveOfUser(userId),
                 CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
@@ -252,12 +275,13 @@ namespace itu.BL.Facades
             contract.DelayReason = contract.DelayReason;
             contract.Active = false;
             contract.Currency = dto.Currency;
+            contract.End = DateTime.Now;
 
             (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
             return new SolvedDTO() 
             { 
                 NextUserId = nextUserId,
-                Overview = await AllOfUser(userId),
+                Overview = await ActiveOfUser(userId),
                 CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }
@@ -289,12 +313,13 @@ namespace itu.BL.Facades
             archivation.Note = dto.Note;
             archivation.DelayReason = archivation.DelayReason;
             archivation.Active = false;
+            archivation.End = DateTime.Now;
 
             (int nextUserId, TaskEntity created) = await CreateNextTask(task);
             return new SolvedDTO() 
             { 
                 NextUserId = nextUserId,
-                Overview = await AllOfUser(userId),
+                Overview = await ActiveOfUser(userId),
                 CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
             };
         }

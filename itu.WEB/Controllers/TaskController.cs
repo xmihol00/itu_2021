@@ -29,7 +29,19 @@ namespace itu.WEB.Controllers
         [HttpGet]
         public async Task<IActionResult> Overview(int id)
         {
-            return View(await _facade.AllOfUser(ViewBag.Id, id));
+            return View(await _facade.ActiveOfUser(ViewBag.Id, id));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Solved(int id)
+        {
+            return View(await _facade.SolvedOfUser(ViewBag.Id, id));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delayed()
+        {
+            throw new NotImplementedException();
         }
 
         [HttpGet]

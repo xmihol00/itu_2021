@@ -286,3 +286,10 @@
     border-top-right-radius: var(--value-bradius) !important;
 }
 
+.end-date {
+    font-size: 60px;
+}
+
+.area-min-h {
+    min-height: 4.25rem;
+}

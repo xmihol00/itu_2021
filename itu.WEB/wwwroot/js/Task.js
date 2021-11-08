@@ -105,6 +105,27 @@ function SolveTask(element)
     });
 }
 
+function ResetTask()
+{
+    $.ajax(
+    {
+        async: true,
+        type: 'GET',
+        url: "/Task/Detail/" + TaskId,
+    })
+    .done(function (result) 
+    {
+        document.getElementById("DetailDiv").innerHTML = result;
+        document.getElementById("EndDate").remove();
+        
+        CheckCompulsory();
+    })
+    .fail(function() 
+    {
+        ShowAlert("Nepodařilo se obnovit stav úkolu.", true);
+    });
+}
+
 function CountDown()
 {
     let timeLeft = (Date.parse(EndDate) - Date.parse(new Date)) / 1000 - 3600;

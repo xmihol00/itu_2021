@@ -97,6 +97,10 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+.text-default {
+  color: var(--color-text-default);
+}
+
 .signin-box {
   width: 450px;
   padding: 10px;
@@ -212,6 +216,10 @@ input[type="file"] {
 .border-dark {
   border: 1px solid var(--color-bg-dark);
   border-radius: var(--value-bradius);
+}
+
+.border-dark-flat {
+  border: 1px solid var(--color-bg-dark);
 }
 
 .comp-bckg {
