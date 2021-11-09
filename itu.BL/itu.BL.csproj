@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Agenda\" />
     <Folder Include="DTOs\Workflow\" />
   </ItemGroup>
 

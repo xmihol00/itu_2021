@@ -9,14 +9,15 @@ namespace itu.WEB.Controllers
 {
     public class AgendaController : BaseController
     {
-        public AgendaController(BaseFacade baseFacade) : base(baseFacade)
+        private readonly AgendaFacade _facade;
+        public AgendaController(AgendaFacade facade, BaseFacade baseFacade) : base(baseFacade)
         {
-            
+            _facade = facade;
         }
 
         public async Task<IActionResult> Overview()
         {
-            return View();
+            return View(await _facade.All());
         }
     }
 }

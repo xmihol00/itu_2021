@@ -1,2 +1,6 @@
+@model List<AllAgendaDTO>
 
-<h1>Tady budou agendy!</h1>
+@foreach (AllAgendaDTO agenda in Model)
+{ 
+	<h1>@agenda.Name</h1>
+}
