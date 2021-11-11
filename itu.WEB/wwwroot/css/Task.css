@@ -16,7 +16,6 @@
     margin-left: -30px;
     margin-right: 0.5rem;
     background: var(--color-bg-light);
-    margin-bottom: 2px;
 }
 
 .header {
@@ -254,8 +253,8 @@
     padding: 4px 12px;
     text-align: center;
     font-size: 14px;
-    border: 2px solid var(--color-bg-dark);
-    color: var(--color-bg-dark);
+    border: 2px solid var(--color-input);
+    color: var(--color-input);
     font-weight: bold;
 }
 
@@ -265,6 +264,8 @@
     margin: 0px;
     border-bottom-left-radius: var(--value-bradius);
     border-bottom-right-radius: var(--value-bradius);
+    color: var(--color-text-default);
+    min-height: 36px;
 }
 
 .price-value {
@@ -286,3 +287,15 @@
     border-top-right-radius: var(--value-bradius) !important;
 }
 
+.end-date {
+    font-size: 52px;
+    margin: 5px 0px;
+}
+
+.area-min-h {
+    min-height: 4.25rem;
+}
+
+.mb-detail {
+    margin-bottom: calc(0.5rem + 2px);
+}

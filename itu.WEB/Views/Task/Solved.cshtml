@@ -1,0 +1,85 @@
+@model OverviewDTO
+
+<script src="/js/TaskSolved.js"></script>
+<link rel="stylesheet" href="~/css/Task.css" />
+
+<div class="d-flex justify-content-between mr-2 ml-2">
+    <h1 class="page-name">Vyřešené úkoly</h1>
+    <div id="Buttons" class="mt-auto mb-auto d-flex">
+        <a href="~/Task/Overview" class="btn btn-primary ml-1" style="white-space: nowrap">
+            Aktivní úkoly
+        </a>
+        <a href="~/Task/Delayed" class="btn btn-primary ml-1" style="white-space: nowrap">
+            Zpožděné úkoly
+        </a>
+    </div>
+</div>
+<hr class="page-title-line">
+<div class="row">
+    <div class="col-md-5">
+        @foreach (AllTaskDTO task in Model.Tasks)
+        {
+            @if (task.Id == Model.Selected)
+            {
+                <div id=@($"Card{task.Id}") class="card card-selected ">
+                    <div id=@($"Select{task.Id}")>
+                        <h4 class="text-center">Datum vyřešení</h4>
+                        <h1 class="end-date text-center">
+                            @task.End.ToString("dd. MM. yyyy")</h1>@*
+                    *@</div>
+                    <div id=@($"Unselect{task.Id}") class="dis-none">
+                        <span class="priority @task.Priority">@task.Priority.ToLabel()</span>
+                        <div class="d-flex justify-content-between mb-2">
+                            <h5 class="fit ml-1">@task.Type</h5>
+                            <h5 class="fit">@task.End.ToString("dd. MM. yyyy")</h5>
+                        </div>
+                        <div class="d-flex justify-content-center mb-2">
+                            <h3 class="fit">@task.WorkflowName</h3>
+                        </div>
+                        <div class="mb-2">
+                            <a href="~/Agenda/Detail/@task.AgendaId" class="btn btn-sm btn-primary ov-btn-width">Agenda</a>
+                            <a href="~/Workflow/Detail/@task.WorkflowId" class="btn btn-sm btn-primary ov-btn-width ml-1">Workflow</a>
+                            <button id="@task.Id" onclick="ShowTask(this)" class="btn btn-sm btn-primary ov-btn-width float-right">
+                                Detail <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id=@($"Card{task.Id}") class="card">
+                    <div id=@($"Select{task.Id}") class="dis-none">
+                        <h4 class="text-center">Datum vyřešení</h4>
+                        <h1 class="end-date text-center"></h1>@*
+                    *@</div>
+                    <div id=@($"Unselect{task.Id}")>
+                        <span class="priority @task.Priority">@task.Priority.ToLabel()</span>
+                        <div class="d-flex justify-content-between mb-2">
+                            <h5 class="fit ml-1">@task.Type</h5>
+                            <h5 class="fit">@task.End.ToString("dd. MM. yyyy")</h5>
+                        </div>
+                        <div class="d-flex justify-content-center mb-2">
+                            <h3 class="fit">@task.WorkflowName</h3>
+                        </div>
+                        <div class="mb-2">
+                            <a href="~/Agenda/Detail/@task.AgendaId" class="btn btn-sm btn-primary ov-btn-width">Agenda</a>
+                            <a href="~/Workflow/Detail/@task.WorkflowId" class="btn btn-sm btn-primary ov-btn-width ml-1">Workflow</a>
+                            <button id="@task.Id" onclick="ShowTask(this)" class="btn btn-sm btn-primary ov-btn-width float-right">
+                                Detail <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    @if (Model.Detail != null)
+    {
+        <div id="DetailDiv" class="col-md-7 mb-2">
+            @await Html.PartialAsync("DetailSolved", Model.Detail)
+        </div>
+    }
+</div>
+
+

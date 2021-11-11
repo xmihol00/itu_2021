@@ -8,7 +8,10 @@ SignalConnection.on("NewTask", function(result)
     let count = document.getElementById("TaskCountId");
     count.innerText = parseInt(count.innerText) + 1;
     let alertDiv = document.getElementById("TaskAlertId");
-    alertDiv.innerHTML = result;
+    let tmp = document.createElement("div");
+    tmp.innerHTML = result;
+    console.log(tmp.firstChild);
+    alertDiv.appendChild(tmp.firstChild);
     alertDiv.style.display = "block";
 });
 
@@ -60,10 +63,13 @@ function HideAlert()
     Timeout = null;
 }
 
-function TaskAlertClose()
+function TaskAlertClose(id)
 {
     let alertDiv = document.getElementById("TaskAlertId");
-    alertDiv.innerHTML = "";
-    alertDiv.style.display = "none";
+    document.getElementById("Alert" + id).remove();
+    if (alertDiv.childNodes.length == 0)
+    {
+        alertDiv.style.display = "none";
+    }
 }
 

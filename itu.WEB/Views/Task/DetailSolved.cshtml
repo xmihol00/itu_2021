@@ -1,0 +1,250 @@
+@model DetailTaskDTO
+
+<span id="EndDate" class="dis-none">@Model.End.ToString("dd. MM. yyyy")</span>
+<div id="TaskId" class="task-detail">
+    <div class="header mb-2" style="padding-top: 0.75rem;">
+        <div class="d-flex justify-content-between mb-3">
+            <span class="priority-detail @Model.Priority">@Model.Priority.ToLabel()</span>
+            <h5 class="fit ml-1">Zadáno: @Model.Start.ToString("dd. MM. yyyy")</h5>
+            <h5 class="fit">Ukončeno: @Model.End.ToString("dd. MM. yyyy")</h5>
+        </div>
+        <div class="row">
+            <div class="col-md-3 d-flex justify-content-center mt-1">
+                <div> 
+                    <a href="~/Agenda/Detail/@Model.AgendaId" class="center">Agenda <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center mt-1">
+                <div>
+                    <a href="~/Workflow/Detail/@Model.WorkflowId" class="center">Workflow <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">
+                <div>
+                    Druh úkolu 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 d-flex justify-content-center">
+                <div class="task-headline" style="font-size: 22px">
+                    <span class="center">@Model.AgendaName</span>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <div class="task-headline" style="font-size: 40px; margin-top -2px">
+                    <span class="center">@Model.WorkflowName</span>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">
+                <div class="task-headline" style="font-size: 25px">
+                    <span class="center">@Model.ToLabel()</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-2 border-dark">
+        <div class="task-description">
+            Popis cíle workflow
+        </div>
+        <p class="description-wf">@Model.Description</p>
+    </div>
+    <input id="IdOfTaskId" name="Id" type="hidden" value="@Model.Id"/>
+    @if (Model is IAcceptationDTO)
+    {
+        <div class="d-flex justify-content-between mb-2">
+                <div class="w-50">
+                    <div class="pr-1">
+                        <div class="border-dark bg-default text-color">
+                           <div class="task-description">
+                               Prvotní odhad ceny
+                           </div>
+                           <div class="d-flex justify-content-between">
+                               <div class="price-value">@((Model as IAcceptationDTO).PriceGues)</div>
+                               <div class="price-currency">@((Model as IAcceptationDTO).Currency)</div>
+                           </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="pl-1">
+                        <div class="border-dark">
+                            <div class="task-description">
+                                Přínos pro organizaci
+                            </div>
+                            <div class="description-wf">
+                                @((Model as IAcceptationDTO).Benefit)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    }
+    @if (!String.IsNullOrWhiteSpace(Model.DelayReason))
+    {
+        <div id="DelayDivId" class="input-group mb-2" >
+            <div class="input-group-prepend">
+                <label id="DelayLabelId" class="input-group-text task-prep-wdth">Důvod zpoždění</label>
+            </div>
+            <p class="form-control border-dark-flat text-default area-min-h">@Model.DelayReason</p>
+        </div>  
+    }
+    @switch (Model)
+    {
+        case IAssignmentDTO assignment:
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth">Prvotní odhad ceny</label>
+                </div>
+                <span class="form-control border-dark-flat text-default">@assignment.PriceGues.ToPrice()</span>
+                <div class="input-group-append">
+                    <label class="input-group-text">@assignment.Currency</label>
+                </div>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(assignment.Benefit) ? "comp-bckg" : "")">Přínos organizaci</label>
+                </div>
+                <p class="form-control border-dark-flat text-default area-min-h">@assignment.Benefit</p>
+            </div>  
+            break;
+
+        case IAcceptationDTO acceptation:
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label id="ReasonLabelId" class="input-group-text task-prep-wdth">@(acceptation.Accepted ? "Důvod přijetí" : "Důvod odmítnutí")</label>
+                </div>
+                <p class="form-control border-dark-flat text-default area-min-h">@acceptation.Reason</p>
+            </div>
+            break;
+
+        case IAssessmentDTO assessment:
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth">Závěr posudku</label>
+                </div>
+                <p class="form-control border-dark-flat text-default area-min-h">@assessment.Conclusion</p>
+            </div>
+            break;
+        
+        case IEstimateDTO estimate:
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth">Odhad ceny</label>
+                </div>
+                <span class="form-control border-dark-flat text-default">@estimate.EstimatePrice.ToPrice()</span>
+                <div class="input-group-append">
+                    <label class="input-group-text">@estimate.Currency</label>
+                </div>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth">Maximální cena</label>
+                </div>
+                <span class="form-control border-dark-flat text-default">@estimate.MaxPrice.ToPrice()</span>
+                <div class="input-group-append">
+                    <label class="input-group-text">@estimate.Currency</label>
+                </div>
+            </div>
+            break;
+        
+        case IContractDTO contract:
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth">Finální cena</label>
+                </div>
+                <span class="form-control border-dark-flat text-default">@contract.FinalPrice</span>
+                <div class="input-group-append">
+                    <span class="input-group-text">@contract.Currency</span>
+                </div>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth">Typ smlouvy</label>
+                </div>
+                <span class="form-control border-dark-flat text-default">@contract.ContractType.ToLabel()</span>
+            </div>
+            break;
+        
+        case IPublishDTO publish:
+            <div class="d-flex justify-content-between mb-2">
+                <div class="w-50">
+                    <div class="pr-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text task-prep-wdth">Datum zveřejnění</label>
+                            </div>
+                            <span class="form-control border-dark-flat text-default">@publish.PublishStart.ToString("yyyy-MM-dd")</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="pl-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text task-prep-wdth">Datum ukončení</label>
+                            </div>
+                            <span class="form-control border-dark-flat text-default">@publish.PublishEnd.ToString("yyyy-MM-dd")</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            break;
+
+        case IArchivationDTO archivation:
+            <div class="d-flex justify-content-between mb-2">
+                <div class="w-50">
+                    <div class="pr-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text task-prep-wdth">Číslo archivace</label>
+                            </div>
+                            <span class="form-control border-dark-flat text-default">@archivation.Number</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="pl-1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text task-prep-wdth">Datum zrušení</label>
+                            </div>
+                            <span class="form-control border-dark-flat text-default">@archivation.Cancallation.ToString("dd. MM. yyyy")</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text task-prep-wdth">Umístění archivace</label>
+                </div>
+                <span class="form-control border-dark-flat text-default">@archivation.Location.ToLabel()</span>
+            </div>
+            break;
+
+         default:
+            break;
+    }
+    <div class="files-div mb-2">
+        <div class="input-group mb-2" style="margin-left: 1px;">
+            <div class="input-group-prepend w-50">
+                <label class="input-group-text w-100">Soubory</label>
+            </div>
+            <div class="input-group-append w-50">
+                <label class="input-group-text w-100">
+                </label>
+            </div>
+        </div>
+        <div id="NewFilesId" class="new-files" >
+        </div>
+        <div id="FilesId">
+            @await Html.PartialAsync("../File/Partial/_FilesSolved", Model.Files)
+        </div>
+    </div>
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <label class="input-group-text task-prep-wdth">Poznámka</label>
+        </div>
+        <p class="form-control border-dark-flat text-default area-min-h">@Model.Note</p>
+    </div>
+</div>

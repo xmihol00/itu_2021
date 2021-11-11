@@ -1,11 +1,7 @@
 @model AllTaskDTO
-
-<div id=@($"Card{Model.Id}") class="alert-div">
+<div id="@($"Alert{Model.Id}")" class="alert-div mb-1">
     <h3 class="bd-bottom">Máte nový úkol</h3>
-    <div id=@($"Select{Model.Id}") class="dis-none">
-        <h4 class="text-center">Vyřešit do</h4>
-    </div>
-    <div id=@($"Unselect{Model.Id}")>
+    <div>
         <span class="priority @Model.Priority">@Model.Priority.ToLabel()</span>
         <div class="d-flex justify-content-between mb-2">
             <h5 class="fit ml-1">@Model.Type</h5>
@@ -31,7 +27,7 @@
             <a href="~/Task/Overview/@Model.Id" class="btn btn-sm btn-primary ov-btn-width ml-1">
                 Řešit <i class="fas fa-arrow-right ml-2"></i>
             </a>
-            <button class="btn btn-sm btn-danger ov-btn-width float-right" onclick="TaskAlertClose()">Zavřít</button>
+            <button class="btn btn-sm btn-danger ov-btn-width float-right" onclick="TaskAlertClose(@Model.Id)">Zavřít</button>
         </div>
     </div>
 </div>

@@ -5,7 +5,7 @@
     <div class="header mb-2">
         <div class="d-flex justify-content-between mb-3 btn-div">
             <div>
-                <button class="btn btn-danger">Zahodit změny</button>
+                <button class="btn btn-danger" onclick="ResetTask()">Zahodit změny</button>
             </div>
             <div>
                 <button onclick="Save('@Model.ToAction()')" class="btn btn-success save-btn mr-1">Uložit</button>
@@ -70,12 +70,42 @@
         <p class="description-wf">@Model.Description</p>
     </div>
     <input id="IdOfTaskId" name="Id" type="hidden" value="@Model.Id"/>
-        <div id="DelayDivId" class="input-group mb-2 @(Model.End.Date < DateTime.Now.Date ? "" : "d-none")" >
-            <div class="input-group-prepend">
-                <label id="DelayLabelId" class="input-group-text task-prep-wdth @(String.IsNullOrWhiteSpace(Model.DelayReason) ? "" : "comp comp-bckg")">Důvod zpoždění</label>
+    @if (Model is IAcceptationDTO)
+    {
+        <div class="d-flex justify-content-between mb-2">
+                <div class="w-50">
+                    <div class="pr-1">
+                        <div class="border-dark bg-default text-color">
+                           <div class="task-description">
+                               Prvotní odhad ceny
+                           </div>
+                           <div class="d-flex justify-content-between">
+                               <div class="price-value">@((Model as IAcceptationDTO).PriceGues)</div>
+                               <div class="price-currency">@((Model as IAcceptationDTO).Currency)</div>
+                           </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="pl-1">
+                        <div class="border-dark">
+                            <div class="task-description">
+                                Přínos pro organizaci
+                            </div>
+                            <div class="description-wf">
+                                @((Model as IAcceptationDTO).Benefit)
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <textarea id="DelayReasonId" name="DelayReason" class="form-control">@Model.DelayReason</textarea>
-        </div>  
+    }
+    <div id="DelayDivId" class="input-group mb-2 @(Model.End.Date >= DateTime.Now.Date ? "d-none" : "")" >
+        <div class="input-group-prepend">
+            <label id="DelayLabelId" class="input-group-text task-prep-wdth @(String.IsNullOrWhiteSpace(Model.DelayReason) && Model.End.Date < DateTime.Now.Date  ? "comp comp-bckg" : "")">Důvod zpoždění</label>
+        </div>
+        <textarea id="DelayReasonId" name="DelayReason" class="form-control">@Model.DelayReason</textarea>
+    </div>  
     @switch (Model)
     {
         case IAssignmentDTO assignment:
@@ -111,33 +141,6 @@
             break;
 
         case IAcceptationDTO acceptation:
-            <div class="d-flex justify-content-between mb-2">
-                <div class="w-50">
-                    <div class="pr-1">
-                        <div class="border-dark bg-light">
-                           <div class="task-description">
-                               Prvotní odhad ceny
-                           </div>
-                           <div class="d-flex justify-content-between">
-                               <div class="price-value">@acceptation.PriceGues</div>
-                               <div class="price-currency">@acceptation.Currency</div>
-                           </div>
-                        </div>                        
-                    </div>
-                </div>
-                <div class="w-50">
-                    <div class="pl-1">
-                        <div class="border-dark">
-                            <div class="task-description">
-                                Přínos pro organizaci
-                            </div>
-                            <div class="description-wf">
-                                @acceptation.Benefit
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="d-flex justify-content-between mb-2">
                 <div class="w-50">
                     <div class="pr-1">

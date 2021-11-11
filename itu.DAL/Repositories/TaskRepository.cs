@@ -13,12 +13,30 @@ namespace itu.DAL.Repositories
     {
         public TaskRepository(ItuDbContext context) : base(context) { }
 
-        public Task<List<TaskEntity>> AllOfUser(int userId)
+        public Task<List<TaskEntity>> ActiveOfUser(int userId)
         {
             return _dbSet.Include(x => x.Workflow)
                          .OrderBy(x => x.End.Date)
                             .ThenBy(x => x.Priority)
                          .Where(x => x.UserId == userId && x.Active == true)
+                         .ToListAsync();
+        }
+
+        public Task<List<TaskEntity>> SolvedOfUser(int userId)
+        {
+            return _dbSet.Include(x => x.Workflow)
+                         .OrderBy(x => x.End.Date)
+                            .ThenBy(x => x.Priority)
+                         .Where(x => x.UserId == userId && x.Active == false)
+                         .ToListAsync();
+        }
+
+        public Task<List<TaskEntity>> DelayedOfUser(int userId)
+        {
+            return _dbSet.Include(x => x.Workflow)
+                         .OrderBy(x => x.End.Date)
+                            .ThenBy(x => x.Priority)
+                         .Where(x => x.UserId == userId && x.Active == true && x.End.Date < DateTime.Now.Date)
                          .ToListAsync();
         }
 
@@ -59,12 +77,6 @@ namespace itu.DAL.Repositories
                          .Where(x => x.Type == type)
                          .Select(x => x.UserId)
                          .FirstOrDefaultAsync();
-        }
-
-        public void CompleteWorkflow(int workflowId)
-        {
-            _context.Workflows.Attach(new WorkflowEntity(){ Id = workflowId, State = WorkflowStateEnum.Finished })
-                              .Property(x => x.State).IsModified = true;
         }
 
         public int TaskOfUserCount(int userId)

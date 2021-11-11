@@ -17,7 +17,5 @@ namespace itu.BL.DTOs.Task.Interfaces
         public PriorityEnum Priority { get; set; }
         public string DelayReason { get; set; }
         public bool Active { get; set; }
-        public int? PreviousId { get; set; }
-        public int? NextId { get; set; }
     }
 }

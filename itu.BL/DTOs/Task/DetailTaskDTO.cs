@@ -22,8 +22,6 @@ namespace itu.BL.DTOs.Task
         public PriorityEnum Priority { get; set; }
         public string DelayReason { get; set; }
         public bool Active { get; set; }
-        public int? PreviousId { get; set; }
-        public int? NextId { get; set; }
         public int WorkflowId { get; set; }
         public int AgendaId { get; set; }
         public List<AllFileDTO> Files { get; set; }

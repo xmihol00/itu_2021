@@ -105,6 +105,27 @@ function SolveTask(element)
     });
 }
 
+function ResetTask()
+{
+    $.ajax(
+    {
+        async: true,
+        type: 'GET',
+        url: "/Task/Detail/" + TaskId,
+    })
+    .done(function (result) 
+    {
+        document.getElementById("DetailDiv").innerHTML = result;
+        document.getElementById("EndDate").remove();
+        
+        CheckCompulsory();
+    })
+    .fail(function() 
+    {
+        ShowAlert("Nepodařilo se obnovit stav úkolu.", true);
+    });
+}
+
 function CountDown()
 {
     let timeLeft = (Date.parse(EndDate) - Date.parse(new Date)) / 1000 - 3600;
@@ -133,13 +154,15 @@ function CountDown()
     let clk = document.getElementById("CLK");
     if (days < 0)
     {
-        clk.style.color = "#cf0000"
-        let dReason = document.getElementById("DelayDivId");
-        dReason.classList.remove("d-none");
-        let dLabel = document.getElementById("DelayLabelId");
-        dLabel.classList.add("comp");
-        dLabel.classList.add("comp-bckg");
-        document.getElementById("SolveBtnId").disabled = true;
+        if (clk.style.color != "rgb(207, 0, 0)")
+        {
+            clk.style.color = "rgb(207, 0, 0)";
+            let dReason = document.getElementById("DelayDivId");
+            dReason.classList.remove("d-none");
+            let dLabel = document.getElementById("DelayLabelId");
+            dLabel.classList.add("comp");
+            CheckCompulsory();
+        }
     }
     else if (days < 3)
     {
@@ -556,6 +579,9 @@ function Save(type)
 function Solve(type)
 {
     const dto = CreateDTO(type);
+    let alert = document.getElementById("TaskAlertId");
+    alert.innerHTML = "";
+    alert.style.display = "none";
     
     $.ajax(
     {
