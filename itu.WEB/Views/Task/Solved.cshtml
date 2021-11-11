@@ -24,8 +24,8 @@
                     <div id=@($"Select{task.Id}")>
                         <h4 class="text-center">Datum vyřešení</h4>
                         <h1 class="end-date text-center @(String.IsNullOrWhiteSpace(Model.Detail.DelayReason) ? "date-green" : "date-orange")">
-                            @task.End.ToString("dd. MM. yyyy")</h1>
-                    </div>
+                            @task.End.ToString("dd. MM. yyyy")</h1>@*
+                    *@</div>
                     <div id=@($"Unselect{task.Id}") class="dis-none">
                         <span class="priority @task.Priority">@task.Priority.ToLabel()</span>
                         <div class="d-flex justify-content-between mb-2">
@@ -61,7 +61,8 @@
                 <div id=@($"Card{task.Id}") class="card">
                     <div id=@($"Select{task.Id}") class="dis-none">
                         <h4 class="text-center">Datum vyřešení</h4>
-                    </div>
+                        <h1 class="end-date text-center"></h1>@*
+                    *@</div>
                     <div id=@($"Unselect{task.Id}")>
                         <span class="priority @task.Priority">@task.Priority.ToLabel()</span>
                         <div class="d-flex justify-content-between mb-2">
