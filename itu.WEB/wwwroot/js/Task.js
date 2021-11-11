@@ -154,13 +154,15 @@ function CountDown()
     let clk = document.getElementById("CLK");
     if (days < 0)
     {
-        clk.style.color = "#cf0000"
-        let dReason = document.getElementById("DelayDivId");
-        dReason.classList.remove("d-none");
-        let dLabel = document.getElementById("DelayLabelId");
-        dLabel.classList.add("comp");
-        dLabel.classList.add("comp-bckg");
-        document.getElementById("SolveBtnId").disabled = true;
+        if (clk.style.color != "rgb(207, 0, 0)")
+        {
+            clk.style.color = "rgb(207, 0, 0)";
+            let dReason = document.getElementById("DelayDivId");
+            dReason.classList.remove("d-none");
+            let dLabel = document.getElementById("DelayLabelId");
+            dLabel.classList.add("comp");
+            CheckCompulsory();
+        }
     }
     else if (days < 3)
     {
@@ -577,6 +579,9 @@ function Save(type)
 function Solve(type)
 {
     const dto = CreateDTO(type);
+    let alert = document.getElementById("TaskAlertId");
+    alert.innerHTML = "";
+    alert.style.display = "none";
     
     $.ajax(
     {

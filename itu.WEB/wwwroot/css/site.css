@@ -4,7 +4,7 @@
   --color-bg-light: #f3f3f3;
   --color-bg-dark: #343a40;
   --color-text-default: #000;
-  --color-text-inverted: #fff;
+  --color-text-inverted: #f3f3f3;
   --color-text-accent: #1b75bb;
   --color-text-accent-inverted: #000;
   --color-focus: #1b75bb;
@@ -19,7 +19,59 @@
   --color-prio-medium: #007bff;
   --color-prio-high: #fc6a00;
   --color-prio-urgent: #cf0000;
+  --color-input: #343a40;
+  --color-bg-input: #ced4da;
   --value-bradius: 0.25rem;
+}
+
+@media (prefers-color-scheme:dark) {
+  :root {
+    --color-bg: #141414;
+    --color-bg-transparent: rgba(255, 255, 255, 0.8);
+    --color-bg-light: #bbb;
+    --color-bg-dark: #343a40;
+    --color-text-default: #fff;
+    --color-text-inverted: #c2c2c2;
+    --color-text-accent: #1b75bb;
+    --color-text-accent-inverted: #000;
+    --color-focus: #1b75bb;
+    --color-border: #dcdcdc;
+    --color-border-focus: #1861ac;
+    --color-border-dark: #343a40;
+    --color-warning: #fc6a00;
+    --color-required: #750000;
+    --color-bg-success: #28a745;
+    --color-border-success: #018f5b;
+    --color-prio-low: #018f5b;
+    --color-prio-medium: #007bff;
+    --color-prio-high: #fc6a00;
+    --color-prio-urgent: #cf0000;
+    --color-input: #c2c2c2;
+    --color-bg-input: #343a40;
+    --value-bradius: 0.25rem;
+  }
+}
+
+body {
+  background-color: var(--color-bg);
+}
+
+footer {
+  background-color: var(--color-bg-dark);
+}
+
+.bg-default {
+  background-color: var(--color-bg);
+}
+
+.form-control, .form-control:focus {
+  background-color: var(--color-bg) !important;
+  color: var(--color-input);
+  border-color: var(--color-bg-input);
+}
+
+.text-color {
+  color: var(--color-text-default) !important;
 }
 
 a.navbar-brand {
@@ -113,6 +165,7 @@ body {
   text-align: center;
   margin-top: 8%;
   margin-bottom: 1%;
+  color: var(--color-text-inverted);
 }
 
 .page-name {
@@ -127,6 +180,7 @@ body {
 {
   margin-top: -2px;
   margin-bottom: 0px;
+  color: var(--color-input);
 }
 
 .card {
@@ -282,7 +336,7 @@ input[type="file"] {
 
 
 .priority {
-  width: 100px;
+  width: 105px;
   margin-top: -4px;
   position: absolute;
   left: 50%;
@@ -298,11 +352,11 @@ h4 {
 }
 
 .priority-detail {
-  width: 140;
+  width: 120px;
   margin-top: -7px;
   position: absolute;
   left: 50%;
-  transform: translate(-75px, 0);
+  transform: translate(-80px, 0);
   border-radius: 15px;
   color: var(--color-text-inverted);
   padding: 4px 12px;

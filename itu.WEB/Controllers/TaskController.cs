@@ -39,13 +39,19 @@ namespace itu.WEB.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delayed()
+        public async Task<IActionResult> Delayed(int id)
         {
-            throw new NotImplementedException();
+            return View(await _facade.DelayedOfUser(ViewBag.Id, id));
         }
 
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
+        {
+            return PartialView(await _facade.Detail(ViewBag.Id, id));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DetailSolved(int id)
         {
             return PartialView(await _facade.Detail(ViewBag.Id, id));
         }

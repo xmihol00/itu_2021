@@ -6,14 +6,7 @@
         <div class="d-flex justify-content-between mb-3">
             <span class="priority-detail @Model.Priority">@Model.Priority.ToLabel()</span>
             <h5 class="fit ml-1">Zadáno: @Model.Start.ToString("dd. MM. yyyy")</h5>
-            @if(String.IsNullOrWhiteSpace(Model.DelayReason))
-            {
-                <h5 class="fit date-green"><span style="color: black;">Ukončeno:</span> @Model.End.ToString("dd. MM. yyyy")</h5>
-            }
-            else
-            {
-                <h5 class="fit date-orange"><span style="color: black;">Ukončeno:</span> @Model.End.ToString("dd. MM. yyyy")</h5>
-            }
+            <h5 class="fit">Ukončeno: @Model.End.ToString("dd. MM. yyyy")</h5>
         </div>
         <div class="row">
             <div class="col-md-3 d-flex justify-content-center mt-1">
@@ -57,15 +50,45 @@
         <p class="description-wf">@Model.Description</p>
     </div>
     <input id="IdOfTaskId" name="Id" type="hidden" value="@Model.Id"/>
-        @if (!String.IsNullOrWhiteSpace(Model.DelayReason))
-        {
-            <div id="DelayDivId" class="input-group mb-2" >
-                <div class="input-group-prepend">
-                    <label id="DelayLabelId" class="input-group-text task-prep-wdth">Důvod zpoždění</label>
+    @if (Model is IAcceptationDTO)
+    {
+        <div class="d-flex justify-content-between mb-2">
+                <div class="w-50">
+                    <div class="pr-1">
+                        <div class="border-dark bg-default text-color">
+                           <div class="task-description">
+                               Prvotní odhad ceny
+                           </div>
+                           <div class="d-flex justify-content-between">
+                               <div class="price-value">@((Model as IAcceptationDTO).PriceGues)</div>
+                               <div class="price-currency">@((Model as IAcceptationDTO).Currency)</div>
+                           </div>
+                        </div>                        
+                    </div>
                 </div>
-                <p id="NoteId" name="Note" class="form-control border-dark-flat text-default area-min-h">@Model.DelayReason</p>
-            </div>  
-        }
+                <div class="w-50">
+                    <div class="pl-1">
+                        <div class="border-dark">
+                            <div class="task-description">
+                                Přínos pro organizaci
+                            </div>
+                            <div class="description-wf">
+                                @((Model as IAcceptationDTO).Benefit)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    }
+    @if (!String.IsNullOrWhiteSpace(Model.DelayReason))
+    {
+        <div id="DelayDivId" class="input-group mb-2" >
+            <div class="input-group-prepend">
+                <label id="DelayLabelId" class="input-group-text task-prep-wdth">Důvod zpoždění</label>
+            </div>
+            <p class="form-control border-dark-flat text-default area-min-h">@Model.DelayReason</p>
+        </div>  
+    }
     @switch (Model)
     {
         case IAssignmentDTO assignment:
@@ -82,43 +105,16 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(assignment.Benefit) ? "comp-bckg" : "")">Přínos organizaci</label>
                 </div>
-                <textarea id="BenefitId" name="Benefit" class="form-control">@assignment.Benefit</textarea>
+                <p class="form-control border-dark-flat text-default area-min-h">@assignment.Benefit</p>
             </div>  
             break;
 
         case IAcceptationDTO acceptation:
-            <div class="d-flex justify-content-between mb-2">
-                <div class="w-50">
-                    <div class="pr-1">
-                        <div class="border-dark bg-light">
-                           <div class="task-description">
-                               Prvotní odhad ceny
-                           </div>
-                           <div class="d-flex justify-content-between">
-                               <div class="price-value">@acceptation.PriceGues</div>
-                               <div class="price-currency">@acceptation.Currency</div>
-                           </div>
-                        </div>                        
-                    </div>
-                </div>
-                <div class="w-50">
-                    <div class="pl-1">
-                        <div class="border-dark">
-                            <div class="task-description">
-                                Přínos pro organizaci
-                            </div>
-                            <div class="description-wf">
-                                @acceptation.Benefit
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
                     <label id="ReasonLabelId" class="input-group-text task-prep-wdth">@(acceptation.Accepted ? "Důvod přijetí" : "Důvod odmítnutí")</label>
                 </div>
-                <p id="NoteId" name="Note" class="form-control border-dark-flat text-default area-min-h">@acceptation.Reason</p>
+                <p class="form-control border-dark-flat text-default area-min-h">@acceptation.Reason</p>
             </div>
             break;
 
@@ -127,7 +123,7 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text task-prep-wdth">Závěr posudku</label>
                 </div>
-                <p id="NoteId" name="Note" class="form-control border-dark-flat text-default area-min-h">@assessment.Conclusion</p>
+                <p class="form-control border-dark-flat text-default area-min-h">@assessment.Conclusion</p>
             </div>
             break;
         
@@ -242,13 +238,13 @@
         <div id="NewFilesId" class="new-files" >
         </div>
         <div id="FilesId">
-            @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
+            @await Html.PartialAsync("../File/Partial/_FilesSolved", Model.Files)
         </div>
     </div>
     <div class="input-group mb-2">
         <div class="input-group-prepend">
             <label class="input-group-text task-prep-wdth">Poznámka</label>
         </div>
-        <p id="NoteId" name="Note" class="form-control border-dark-flat text-default area-min-h">@Model.Note</p>
+        <p class="form-control border-dark-flat text-default area-min-h">@Model.Note</p>
     </div>
 </div>

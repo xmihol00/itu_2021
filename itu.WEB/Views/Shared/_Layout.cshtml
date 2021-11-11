@@ -11,8 +11,8 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
@@ -56,7 +56,7 @@
             </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3" style="padding-top: 70px">
+        <main role="main" style="padding: 70px 0px 10px 0px">
             <div id="AlertId" class="custom-alert">@*
                 *@<div class="alert alert-danger alert-dismissible mr-4 ml-4" role="alert">@*
                     *@<span></span>
@@ -65,8 +65,7 @@
                     </button>
                 </div>
             </div>
-            <div id="TaskAlertId" class="custom-task-alert">
-            </div>
+            <div id="TaskAlertId" class="custom-task-alert"></div>
             <div id="BodyId">
                 @RenderBody()
             </div>

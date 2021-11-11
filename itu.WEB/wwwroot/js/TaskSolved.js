@@ -1,11 +1,18 @@
 
+var TaskId = null;
+
+document.addEventListener("DOMContentLoaded", function()
+{
+    TaskId = document.getElementById("IdOfTaskId").value;
+});
+
 function ShowTask(element)
 {    
     $.ajax(
     {
         async: true,
         type: 'GET',
-        url: "/Task/Detail/" + element.id,
+        url: "/Task/DetailSolved/" + element.id,
     })
     .done(function (result) 
     {
@@ -16,6 +23,7 @@ function ShowTask(element)
         document.getElementById("Select" + TaskId).style.display = "none";
         document.getElementById("Unselect" + TaskId).style.display = "block";
         TaskId = element.id;
+
         document.getElementById("Card" + TaskId).classList.add("card-selected");
         let select = document.getElementById("Select" + TaskId);
         select.style.display = "block";
@@ -24,7 +32,6 @@ function ShowTask(element)
         ed.remove();
 
         document.getElementById("Unselect" + TaskId).style.display = "none";
-        CheckCompulsory();
     })
     .fail(function() 
     {
