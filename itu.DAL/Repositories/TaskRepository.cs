@@ -31,6 +31,15 @@ namespace itu.DAL.Repositories
                          .ToListAsync();
         }
 
+        public Task<List<TaskEntity>> DelayedOfUser(int userId)
+        {
+            return _dbSet.Include(x => x.Workflow)
+                         .OrderBy(x => x.End.Date)
+                            .ThenBy(x => x.Priority)
+                         .Where(x => x.UserId == userId && x.Active == true && x.End.Date < DateTime.Now.Date)
+                         .ToListAsync();
+        }
+
         public Task<TaskEntity> Detail(int userId, int taskId)
         {
             return _dbSet.Include(x => x.Workflow)

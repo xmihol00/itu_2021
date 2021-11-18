@@ -45,6 +45,24 @@ namespace itu.BL.Facades
             return overview;
         }
 
+        public async Task<OverviewDTO> DelayedOfUser(int userId, int selected = 0)
+        {
+            OverviewDTO overview = new OverviewDTO();
+            overview.Tasks = _mapper.Map<List<AllTaskDTO>>(await _repository.DelayedOfUser(userId));
+            if (overview.Tasks.Count > 0)
+            {
+                if (selected <= 0)
+                {
+                    selected = overview.Tasks[0].Id;
+                }
+
+                overview.Detail = _mapper.Map<DetailTaskDTO>(await _repository.Detail(userId, selected));
+            }
+            overview.Selected = selected;
+
+            return overview;
+        }
+
         public async Task<OverviewDTO> SolvedOfUser(int userId, int selected = 0)
         {
             OverviewDTO overview = new OverviewDTO();
@@ -377,6 +395,7 @@ namespace itu.BL.Facades
                         archivation.UserId = nextUserId;
 
                         await _repository.Create(archivation);
+                        created = archivation;
                         break;
 
                     case TaskTypeEnum.Assessment:

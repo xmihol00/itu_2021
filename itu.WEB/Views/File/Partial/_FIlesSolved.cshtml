@@ -1,0 +1,28 @@
+@model List<AllFileDTO>
+
+@if (Model != null && Model.Count > 0)
+{
+    @foreach (var group in Model.GroupBy(x => x.Version).OrderBy(x => x.Key))
+    {
+        <div class="d-flex mb-2">
+            <div class="text-vertical-div">
+                <div class="text-vertical">verze @group.Key</div>
+            </div>
+            <div class="d-flex file-version" >
+                @foreach (AllFileDTO file in group)
+                {
+                    <div id="@file.Id" class="file" >
+                        <div class="file-name" style="cursor: default;">
+                            <span class="center">@file.Name</span>
+                        </div>
+                        <span class="mr-2 ml-2 text-color"><strong>Identifikátor: </strong>@file.Number</span>
+                        <div class="d-flex justify-content-around mb-1">
+                            <a type="button" href="~/File/Download/@file.Id" class="btn btn-sm btn-primary mr-1 ml-2 file-button"><i class="fas fa-download"></i></a>
+                            <span class="file-type">zadání</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}
