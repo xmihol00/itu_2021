@@ -159,8 +159,11 @@ function CountDown()
         dReason.classList.remove("d-none");
         let dLabel = document.getElementById("DelayLabelId");
         dLabel.classList.add("comp");
-        dLabel.classList.add("comp-bckg");
-        document.getElementById("SolveBtnId").disabled = true;
+        if (!document.getElementById("DelayReasonId").value)
+        {
+            dLabel.classList.add("comp-bckg");
+            document.getElementById("SolveBtnId").disabled = true;
+        }
     }
     else if (days < 3)
     {

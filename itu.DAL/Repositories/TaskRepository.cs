@@ -70,12 +70,6 @@ namespace itu.DAL.Repositories
                          .FirstOrDefaultAsync();
         }
 
-        public void CompleteWorkflow(int workflowId)
-        {
-            _context.Workflows.Attach(new WorkflowEntity(){ Id = workflowId, State = WorkflowStateEnum.Finished })
-                              .Property(x => x.State).IsModified = true;
-        }
-
         public int TaskOfUserCount(int userId)
         {
             return _dbSet.Where(x => x.UserId == userId && x.Active)

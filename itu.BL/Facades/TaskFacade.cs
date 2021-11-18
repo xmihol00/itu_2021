@@ -131,13 +131,29 @@ namespace itu.BL.Facades
             acceptation.Active = false;
             acceptation.End = DateTime.Now;
 
-            (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
-            return new SolvedDTO() 
-            { 
-                NextUserId = nextUserId,
-                Overview = await ActiveOfUser(userId),
-                CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
-            };
+            if (acceptation.Accepted)
+            {
+                (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
+                return new SolvedDTO() 
+                { 
+                    NextUserId = nextUserId,
+                    Overview = await ActiveOfUser(userId),
+                    CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
+                };
+            }
+            else
+            {
+                task.Workflow.State = WorkflowStateEnum.Canceled;
+                await _repository.Save();
+
+                return new SolvedDTO()
+                {
+                    NextUserId = 0,
+                    Overview = await ActiveOfUser(userId),
+                    CreatedTask = null
+                };
+            }
+
         }
 
         public async Task<DetailTaskDTO> AssessmentSave(int userId, AssessmentPostDTO dto)
@@ -332,11 +348,11 @@ namespace itu.BL.Facades
             
             if (model == null)
             {
-                _repository.CompleteWorkflow(current.WorkflowId);
+                current.Workflow.State = WorkflowStateEnum.Finished;
             }
             else
             {
-                nextUserId = (await _repository.NextUserId(current.Id, model.Type)).Value; // TODO
+                nextUserId = (await _repository.NextUserId(current.Id, model.Type)).Value;
                 switch (model.Type)
                 {
                     case TaskTypeEnum.Acceptation:
