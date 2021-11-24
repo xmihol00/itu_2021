@@ -5,6 +5,7 @@ var EndDate = null;
 var CountDownInterval = null;
 var TaskId = null;
 var LastEntered = null;
+var Changes = false;
 
 document.addEventListener("input", CheckCompulsory);
 
@@ -31,6 +32,8 @@ function SetCountDown()
 
 function CheckCompulsory()
 {
+    Changes = true;
+
     let btn = document.getElementById("SolveBtnId");
     if (btn == null)
     {
@@ -119,6 +122,7 @@ function ResetTask()
         document.getElementById("EndDate").remove();
         
         CheckCompulsory();
+        Changes = false;
     })
     .fail(function() 
     {
@@ -617,3 +621,26 @@ function Deny()
     document.getElementById("ReasonLabelId").innerText = "Důvod odmítnutí";
 }
 
+
+function DiscardPrompt()
+{
+    if (Changes)
+    {
+        document.getElementById("DiscardChnagesId").style.display = "block";
+        setTimeout(() => document.addEventListener("click", HideModal), 0);
+    }
+    else
+    {
+        ResetTask();
+    }
+}
+
+function HideModal(event)
+{
+    let element = document.getElementById("DiscardChnagesId");
+    if (element == event.target)
+    {
+        element.style.display = "none";
+        document.removeEventListener("click", HideModal);
+    }
+}
