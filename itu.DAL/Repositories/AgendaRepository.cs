@@ -1,4 +1,5 @@
 ﻿using itu.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,10 @@ namespace itu.DAL.Repositories
     public class AgendaRepository : BaseRepository<AgendaEntity>
     {
         public AgendaRepository(ItuDbContext context) : base(context) { }
+
+        public Task<List<AgendaEntity>> All()
+        {
+            return _dbSet.ToListAsync();
+        }
     }
 }
