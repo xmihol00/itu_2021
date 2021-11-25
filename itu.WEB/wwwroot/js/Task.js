@@ -6,8 +6,18 @@ var CountDownInterval = null;
 var TaskId = null;
 var LastEntered = null;
 var Changes = false;
+var ToSolve = 0;
+var Callback = null;
+var AgendaId = 0;
+var WorkflowId = 0;
+var ClickedTaskId = 0;
 
-document.addEventListener("input", CheckCompulsory);
+document.addEventListener("input", (event) => 
+{ 
+    Changes = true; 
+    event.target.classList.add("modified"); 
+    CheckCompulsory(); 
+});
 
 document.addEventListener("DOMContentLoaded", function()
 {
@@ -32,8 +42,6 @@ function SetCountDown()
 
 function CheckCompulsory()
 {
-    Changes = true;
-
     let btn = document.getElementById("SolveBtnId");
     if (btn == null)
     {
@@ -72,16 +80,18 @@ function CheckCompulsory()
     }
 }
 
-function SolveTask(element)
+function SolveTask(id)
 {    
     $.ajax(
     {
         async: true,
         type: 'GET',
-        url: "/Task/Detail/" + element.id,
+        url: "/Task/Detail/" + id,
     })
     .done(function (result) 
     {
+        Changes = false;
+        document.getElementById("LeaveModId").style.display = "none";
         document.getElementById("DetailDiv").innerHTML = result;
         
         let ed = document.getElementById("EndDate");
@@ -93,7 +103,7 @@ function SolveTask(element)
         document.getElementById("Card" + TaskId).classList.remove("card-selected");
         document.getElementById("Select" + TaskId).style.display = "none";
         document.getElementById("Unselect" + TaskId).style.display = "block";
-        TaskId = element.id;
+        TaskId = id;
         document.getElementById("Card" + TaskId).classList.add("card-selected");
         let select = document.getElementById("Select" + TaskId);
         select.style.display = "block";
@@ -120,6 +130,9 @@ function ResetTask()
     {
         document.getElementById("DetailDiv").innerHTML = result;
         document.getElementById("EndDate").remove();
+
+        document.getElementById("DiscardChnagesId").style.display = "none";
+        document.removeEventListener("click", HideModal);
         
         CheckCompulsory();
         Changes = false;
@@ -435,6 +448,7 @@ function FileDragged(event)
 
 function FileDropped(event)
 {
+    console.log("dropped");
     Dropped = true;
     let target = event.target;
     while(target.getAttribute("data-version") == undefined)
@@ -570,9 +584,15 @@ function Save(type)
     })
     .done(function (result) 
     {
+        Changes = false;
         document.getElementById("DetailDiv").innerHTML = result;
         CheckCompulsory();
         ShowAlert("Úkol byl úspěšně uložen.");
+        if (Callback)
+        {
+            Callback();
+            Callback = null;
+        }
     })
     .fail(function() 
     {
@@ -627,20 +647,84 @@ function DiscardPrompt()
     if (Changes)
     {
         document.getElementById("DiscardChnagesId").style.display = "block";
-        setTimeout(() => document.addEventListener("click", HideModal), 0);
-    }
-    else
-    {
-        ResetTask();
+        document.addEventListener("click", HideModal);
     }
 }
 
 function HideModal(event)
 {
-    let element = document.getElementById("DiscardChnagesId");
-    if (element == event.target)
+    let modal1 = document.getElementById("DiscardChnagesId");
+    let modal2 = document.getElementById("LeaveModId");
+    if (event == null || modal1 == event.target || modal2 == event.target)
     {
-        element.style.display = "none";
+        modal1.style.display = "none";
+        modal2.style.display = "none";
+        Callback = null;
         document.removeEventListener("click", HideModal);
     }
+}
+
+function AgendaCB()
+{
+    window.location = "/Agenda/Detail/" + AgendaId;
+    document.getElementById("LeaveModId").style.display = "none";
+}
+
+function WorkflowCB()
+{
+    window.location = "/Workflow/Detail/" + WorkflowId;
+    document.getElementById("LeaveModId").style.display = "none";
+}
+
+function AgendaClicked(id)
+{
+    AgendaId = id;
+    if (Changes)
+    {
+        Callback = AgendaCB;
+        document.getElementById("LeaveModId").style.display = "block";
+        document.addEventListener("click", HideModal);
+    }
+    else
+    {
+        Callback = null;
+        AgendaCB();
+    }
+}
+
+function WorkflowClicked(id)
+{
+    WorkflowId = id;
+    if (Changes)
+    {
+        Callback = WorkflowCB;
+        document.getElementById("LeaveModId").style.display = "block";
+        document.addEventListener("click", HideModal);
+    }
+    else
+    {
+        Callback = null;
+        WorkflowCB();
+    }
+}
+
+function SolveClicked(id)
+{
+    if (Changes)
+    {
+        Callback = () => SolveTask(id);
+        document.getElementById("LeaveModId").style.display = "block";
+        document.addEventListener("click", HideModal);
+    }
+    else
+    {
+        Callback = null;
+        SolveTask(id);
+    }
+}
+
+function SaveAndLeave()
+{
+    document.getElementById("TaskSaveId").click();
+    document.getElementById("LeaveModId").style.display = "block";
 }

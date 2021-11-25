@@ -165,7 +165,7 @@ body {
   text-align: center;
   margin-top: 8%;
   margin-bottom: 1%;
-  color: var(--color-text-inverted);
+  color: var(--color-text-default);
 }
 
 .page-name {
@@ -334,7 +334,6 @@ input[type="file"] {
   border-bottom: 2px solid var(--color-border-dark);
 }
 
-
 .priority {
   width: 105px;
   margin-top: -4px;
@@ -384,7 +383,6 @@ h4 {
   width: 80px;
 }
 
-
 .modal {
   display: none; 
   position: fixed;
@@ -408,3 +406,13 @@ h4 {
   z-index: 26;
 }
 
+.modified {
+  border: dashed 2px var(--color-focus);
+}
+
+.form-control:focus {
+  outline: 0px;
+  box-shadow: none;
+  border: solid 2px var(--color-focus);
+  border-left: none;
+}

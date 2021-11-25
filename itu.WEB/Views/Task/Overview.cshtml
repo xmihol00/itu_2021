@@ -19,13 +19,25 @@
 
 
 <div id="DiscardChnagesId" class="modal">
-    <div id="DiscardBodyId" class="modal-content">
-        <div class="mb-3">
+    <div id="DiscardBodyId" class="modal-content" style="width: 37%;">
+        <h3 class="text-center mb-3">
             Opravdu chcete zahodit změny?
-        </div>
+        </h3>
         <div class="d-flex justify-content-between">
-            <button class="btn btn-success">Zrušit</button>
-            <button class="btn btn-danger">Zahodit změy</button>
+            <button class="btn btn-danger cancel-btn-width" onclick="ResetTask()">Zahodit změy</button>
+            <button class="btn btn-success cancel-btn-width" onclick="HideModal()">Zrušit</button>
+        </div>
+    </div>
+</div>
+
+<div id="LeaveModId" class="modal">
+    <div id="LeaveId" class="modal-content" style="width: 37%;">
+        <h3 class="text-center mb-3">
+            Máte neuložené změny, přejete si je uložit?
+        </h3>
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-danger leave-btn-width" onclick="Callback()">Neukládat</button>
+            <button class="btn btn-success leave-btn-width" onclick="SaveAndLeave()">Uložit</button>
         </div>
     </div>
 </div>

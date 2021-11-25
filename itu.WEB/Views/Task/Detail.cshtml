@@ -8,7 +8,7 @@
                 <button class="btn btn-danger" onclick="DiscardPrompt()">Zahodit změny</button>
             </div>
             <div>
-                <button onclick="Save('@Model.ToAction()')" class="btn btn-success save-btn mr-1">Uložit</button>
+                <button id="TaskSaveId" onclick="Save('@Model.ToAction()')" class="btn btn-success save-btn mr-1">Uložit</button>
                 <button id="SolveBtnId" onclick="Solve('@Model.ToAction()')" class="btn btn-success save-btn">Vyřešit</button>
             </div>
         </div>
