@@ -14,7 +14,10 @@ namespace itu.DAL.Repositories
 
         public Task<List<AgendaEntity>> All()
         {
-            return _dbSet.ToListAsync();
+            return _dbSet.Include(x => x.Workflows)
+                            .ThenInclude(x => x.ModelWorkflow)
+                         .Include(x => x.AgendaRoles)
+                         .ToListAsync();
         }
     }
 }
