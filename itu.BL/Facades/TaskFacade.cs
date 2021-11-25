@@ -95,6 +95,7 @@ namespace itu.BL.Facades
             assignment.Currency = model.Currency;
             assignment.Note = model.Note;
             assignment.PriceGues = model.PriceGues;
+            assignment.DelayReason = model.DelayReason;
 
             await _repository.Save();
 
@@ -112,6 +113,7 @@ namespace itu.BL.Facades
             assignment.PriceGues = dto.PriceGues;
             assignment.Active = false;
             assignment.End = DateTime.Now;
+            assignment.DelayReason = dto.DelayReason;
 
             (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
             return new SolvedDTO() 
@@ -149,13 +151,28 @@ namespace itu.BL.Facades
             acceptation.Active = false;
             acceptation.End = DateTime.Now;
 
-            (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
-            return new SolvedDTO() 
-            { 
-                NextUserId = nextUserId,
-                Overview = await ActiveOfUser(userId),
-                CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
-            };
+            if (acceptation.Accepted)
+            {
+                (int nextUserId, TaskEntity created) = await CreateNextTask(task);            
+                return new SolvedDTO() 
+                { 
+                    NextUserId = nextUserId,
+                    Overview = await ActiveOfUser(userId),
+                    CreatedTask = created != null ? _mapper.Map<AllTaskDTO>(created) : null
+                };
+            }
+            else
+            {
+                task.Workflow.State = WorkflowStateEnum.Canceled;
+                await _repository.Save();
+
+                return new SolvedDTO()
+                {
+                    NextUserId = 0,
+                    Overview = await ActiveOfUser(userId),
+                    CreatedTask = null
+                };
+            }
         }
 
         public async Task<DetailTaskDTO> AssessmentSave(int userId, AssessmentPostDTO dto)
@@ -165,7 +182,7 @@ namespace itu.BL.Facades
 
             assessment.Conclusion = dto.Conclusion;
             assessment.Note = dto.Note;
-            assessment.DelayReason = assessment.DelayReason;
+            assessment.DelayReason = dto.DelayReason;
 
             await _repository.Save();
 
@@ -179,7 +196,7 @@ namespace itu.BL.Facades
 
             assessment.Conclusion = dto.Conclusion;
             assessment.Note = dto.Note;
-            assessment.DelayReason = assessment.DelayReason;
+            assessment.DelayReason = dto.DelayReason;
             assessment.Active = false;
             assessment.End = DateTime.Now;
 
@@ -200,7 +217,7 @@ namespace itu.BL.Facades
             estimate.EstimatePrice = dto.EstimatePrice;
             estimate.MaxPrice = dto.MaxPrice;
             estimate.Note = dto.Note;
-            estimate.DelayReason = estimate.DelayReason;
+            estimate.DelayReason = dto.DelayReason;
 
             await _repository.Save();
 
@@ -215,7 +232,7 @@ namespace itu.BL.Facades
             estimate.EstimatePrice = dto.EstimatePrice;
             estimate.MaxPrice = dto.MaxPrice;
             estimate.Note = dto.Note;
-            estimate.DelayReason = estimate.DelayReason;
+            estimate.DelayReason = dto.DelayReason;
             estimate.Active = false;
             estimate.End = DateTime.Now;
 
@@ -236,7 +253,7 @@ namespace itu.BL.Facades
             publish.PublishStart = dto.PublishStart;
             publish.PublishEnd = dto.PublishEnd;
             publish.Note = dto.Note;
-            publish.DelayReason = publish.DelayReason;
+            publish.DelayReason = dto.DelayReason;
 
             await _repository.Save();
 
@@ -251,7 +268,7 @@ namespace itu.BL.Facades
             publish.PublishStart = dto.PublishStart;
             publish.PublishEnd = dto.PublishEnd;
             publish.Note = dto.Note;
-            publish.DelayReason = publish.DelayReason;
+            publish.DelayReason = dto.DelayReason;
             publish.Active = false;
             publish.End = DateTime.Now;
 
@@ -273,7 +290,7 @@ namespace itu.BL.Facades
             contract.FinalPrice = dto.FinalPrice;
             contract.PriceChangeReason = dto.PriceChangeReason;
             contract.Note = dto.Note;
-            contract.DelayReason = contract.DelayReason;
+            contract.DelayReason = dto.DelayReason;
             contract.Currency = dto.Currency;
 
             await _repository.Save();
@@ -290,7 +307,7 @@ namespace itu.BL.Facades
             contract.FinalPrice = dto.FinalPrice;
             contract.PriceChangeReason = dto.PriceChangeReason;
             contract.Note = dto.Note;
-            contract.DelayReason = contract.DelayReason;
+            contract.DelayReason = dto.DelayReason;
             contract.Active = false;
             contract.Currency = dto.Currency;
             contract.End = DateTime.Now;
@@ -313,7 +330,7 @@ namespace itu.BL.Facades
             archivation.Number = dto.Number;
             archivation.Location = dto.Location;
             archivation.Note = dto.Note;
-            archivation.DelayReason = archivation.DelayReason;
+            archivation.DelayReason = dto.DelayReason;
 
             await _repository.Save();
 
@@ -329,7 +346,7 @@ namespace itu.BL.Facades
             archivation.Number = dto.Number;
             archivation.Location = dto.Location;
             archivation.Note = dto.Note;
-            archivation.DelayReason = archivation.DelayReason;
+            archivation.DelayReason = dto.DelayReason;
             archivation.Active = false;
             archivation.End = DateTime.Now;
 
@@ -354,7 +371,7 @@ namespace itu.BL.Facades
             }
             else
             {
-                nextUserId = (await _repository.NextUserId(current.Id, model.Type)).Value; // TODO
+                nextUserId = (await _repository.NextUserId(current.Id, model.Type)).Value;
                 switch (model.Type)
                 {
                     case TaskTypeEnum.Acceptation:

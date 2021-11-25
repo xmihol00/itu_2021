@@ -39,7 +39,7 @@
                         <div class="mb-2">
                             <a href="~/Agenda/Detail/@task.AgendaId" class="btn btn-sm btn-primary ov-btn-width">Agenda</a>
                             <a href="~/Workflow/Detail/@task.WorkflowId" class="btn btn-sm btn-primary ov-btn-width ml-1">Workflow</a>
-                            <button id="@task.Id" onclick="SolveTask(this)" class="btn btn-sm btn-primary ov-btn-width float-right">
+                            <button id="@task.Id" onclick="SolveClicked(this.id)" class="btn btn-sm btn-primary ov-btn-width float-right">
                                 Řešit <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </div>
@@ -73,9 +73,9 @@
                             <h3 class="fit">@task.WorkflowName</h3>
                         </div>
                         <div class="mb-2">
-                            <a href="~/Agenda/Detail/@task.AgendaId" class="btn btn-sm btn-primary ov-btn-width">Agenda</a>
-                            <a href="~/Workflow/Detail/@task.WorkflowId" class="btn btn-sm btn-primary ov-btn-width ml-1">Workflow</a>
-                            <button id="@task.Id" onclick="SolveTask(this)" class="btn btn-sm btn-primary ov-btn-width float-right">
+                            <button id="@task.AgendaId" onclick="AgendaClicked(this.id)" class="btn btn-sm btn-primary ov-btn-width">Agenda</button>
+                            <button id="@task.WorkflowId" onclick="WorkflowClicked(this.id)" class="btn btn-sm btn-primary ov-btn-width ml-1">Workflow</button>
+                            <button id="@task.Id" onclick="SolveClicked(this.id)" class="btn btn-sm btn-primary ov-btn-width float-right">
                                 Řešit <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </div>

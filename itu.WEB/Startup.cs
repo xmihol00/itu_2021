@@ -51,6 +51,7 @@ namespace itu.WEB
             services.AddScoped<TaskRepository>();
             services.AddScoped<FileRepository>();
             services.AddScoped<FileDataRepository>();
+            services.AddScoped<WorkflowRepository>();
 
             services.AddScoped<BaseFacade>();
             services.AddScoped<UserFacade>();

@@ -1,4 +1,5 @@
-﻿using itu.DAL.Entities;
+﻿using itu.Common.Enums;
+using itu.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

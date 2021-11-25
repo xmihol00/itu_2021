@@ -18,16 +18,18 @@ namespace itu.Common.Helpers
             
             string[] split = price.ToString().Split('.');
             string result = "";
+            int mod = 3 - split[0].Length % 3;
 
-            for (int i = split[0].Length - 1; i >= 0; i--)
+            
+            for (int i = 0; i < split[0].Length; i++)
             {
-                if (i % 3 == 0 && result != "") // TODO
+                if ((i + mod) % 3 == 0 && result != "")
                 {
-                    result = split[0][i] + " " + result;
+                    result = result + " " + split[0][i];
                 }
                 else
                 {
-                    result = split[0][i] + result;
+                    result = result + split[0][i];
                 }
             }
 

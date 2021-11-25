@@ -299,3 +299,11 @@
 .mb-detail {
     margin-bottom: calc(0.5rem + 2px);
 }
+
+.cancel-btn-width {
+    width: 125px;
+}
+
+.leave-btn-width {
+    width: 100px;
+}
