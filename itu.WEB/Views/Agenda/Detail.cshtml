@@ -1,0 +1,38 @@
+@model AgendaDetailDTO
+
+<script src="/js/Agenda.js"></script>
+<link rel="stylesheet" href="~/css/Agenda.css" />
+
+<div class="d-flex justify-content-between mr-2 ml-2">
+    <h1 class="page-name">Detail agendy</h1>
+    <div id="Buttons" class="mt-auto mb-auto d-flex">
+        <button class="btn btn-primary" style="white-space: nowrap">
+            Editovat
+        </button>
+    </div>
+</div>
+<hr class="page-title-line">
+
+<div class="row m-0 mt-2">
+    <div class="col-4">
+        <h1>@Model.Name</h1>
+        <p>@Model.Description</p>
+        <h2>Správce agendy</h2>
+        <h3>@Model.AdministratorName</h3>
+    </div>
+    <div class="col-8">
+        <div class="row">
+            @foreach (var group in Model.Roles.GroupBy(x => x.Role))
+            {
+                <div class="card card-role">
+                    <h3 class="text-center">@group.Key.ToLabel()</h3>
+                    @foreach (var role in group)
+                    {
+                        <p>@role.UserName</p>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

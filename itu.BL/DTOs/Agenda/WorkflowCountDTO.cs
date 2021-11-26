@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace itu.BL.DTOs.Agenda
 {
-    public class AllWorkflowAgendaDTO
+    public class WorkflowCountDTO
     {
         public string Name { get; set; }
         public int Count { get; set; }

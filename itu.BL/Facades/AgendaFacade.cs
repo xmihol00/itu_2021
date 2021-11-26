@@ -24,5 +24,10 @@ namespace itu.BL.Facades
         {
             return _mapper.Map<List<AllAgendaDTO>>(await _repository.All());
         }
+
+        public async Task<AgendaDetailDTO> Detail(int id)
+        {
+            return _mapper.Map<AgendaDetailDTO>(await _repository.Detail(id));
+        }
     }
 }

@@ -28,7 +28,7 @@
   :root {
     --color-bg: #141414;
     --color-bg-transparent: rgba(255, 255, 255, 0.8);
-    --color-bg-light: #bbb;
+    --color-bg-light: #aaa;
     --color-bg-dark: #343a40;
     --color-text-default: #fff;
     --color-text-inverted: #c2c2c2;
@@ -46,7 +46,7 @@
     --color-prio-medium: #007bff;
     --color-prio-high: #fc6a00;
     --color-prio-urgent: #cf0000;
-    --color-input: #c2c2c2;
+    --color-input: #d2d2d2;
     --color-bg-input: #343a40;
     --value-bradius: 0.25rem;
   }
@@ -414,4 +414,13 @@ h4 {
   outline: 0px;
   box-shadow: none;
   border: solid 2px var(--color-focus);
+}
+
+.text-def {
+  color: var(--color-text-default);
+}
+
+
+hr {
+  border-top: solid 1px var(--color-input);
 }

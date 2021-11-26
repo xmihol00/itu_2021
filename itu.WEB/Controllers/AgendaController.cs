@@ -19,5 +19,10 @@ namespace itu.WEB.Controllers
         {
             return View(await _facade.All());
         }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            return View(await _facade.Detail(id));
+        }
     }
 }

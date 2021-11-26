@@ -10,7 +10,7 @@ namespace itu.BL.DTOs.Agenda
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<AllWorkflowAgendaDTO> Workflows { get; set; }
+        public List<WorkflowCountDTO> Workflows { get; set; }
         public int UserCount { get; set; }
         public int NotFilledRoleCount { get; set; }
     }
