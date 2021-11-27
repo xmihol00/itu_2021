@@ -31,5 +31,10 @@ namespace itu.DAL.Repositories
                             .ThenInclude(x => x.ModelWorkflow) 
                          .FirstAsync(x => x.Id == id);
         }
+
+        public Task<AgendaEntity> DetailForEdit(int id)
+        {
+            return _dbSet.FirstAsync(x => x.Id == id);
+        }
     }
 }

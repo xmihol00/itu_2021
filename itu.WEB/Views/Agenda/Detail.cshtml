@@ -1,38 +1,87 @@
 @model AgendaDetailDTO
 
+<script>
+    const AgendaId = @Model.Id;
+    const Users = @(Html.Raw(JsonConvert.SerializeObject(Model.Users)));
+</script>
 <script src="/js/Agenda.js"></script>
 <link rel="stylesheet" href="~/css/Agenda.css" />
-
 <div class="d-flex justify-content-between mr-2 ml-2">
     <h1 class="page-name">Detail agendy</h1>
     <div id="Buttons" class="mt-auto mb-auto d-flex">
-        <button class="btn btn-primary" style="white-space: nowrap">
-            Editovat
-        </button>
+        <button class="btn btn-primary mr-2" style="white-space: nowrap">Přidat model</button>
+        <button class="btn btn-primary" style="white-space: nowrap">Spustit workflow</button>
     </div>
 </div>
 <hr class="page-title-line">
-
 <div class="row m-0 mt-2">
-    <div class="col-4">
-        <h1>@Model.Name</h1>
-        <p>@Model.Description</p>
-        <h2>Správce agendy</h2>
-        <h3>@Model.AdministratorName</h3>
-    </div>
-    <div class="col-8">
-        <div class="row">
-            @foreach (var group in Model.Roles.GroupBy(x => x.Role))
-            {
-                <div class="card card-role">
-                    <h3 class="text-center">@group.Key.ToLabel()</h3>
-                    @foreach (var role in group)
-                    {
-                        <p>@role.UserName</p>
-                    }
+    <div class="col-6 border-right">
+        <div class="vertical-justify-between">
+            <div id="DataId">
+                <div class="d-flex justify-content-between">
+                    <h1 id="NameId">@Model.Name</h1>
+                    <div class="mt-auto mb-auto">
+                        <button onclick="DataEdit()" class="btn btn-secondary"><i class="fas fa-edit cursor"></i></button>
+                    </div>
                 </div>
-            }
+                <p id="DescriptionId">@Model.Description</p>
+            </div>
+            <div id="DataEditId" style="display: none;">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text agenda-edit-wdth">Název agendy</label>
+                    </div>
+                    <input class="form-control" value="@Model.Name" id="NameEditId"/>
+                </div>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text agenda-edit-wdth">Popis agendy</label>
+                    </div>
+                    <textarea class="form-control" id="DescriptionEditId">@Model.Description</textarea>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button onclick="CancelData()" id="CancelAdmin" class="btn btn-danger m-0 mr-2">Zrušit <i class="fas fa-times ml-2"></i></button>
+                    <button onclick="SaveData()" id="SaveAdmin" class="btn btn-success m-0 ml-2">Uložit <i class="fas fa-save ml-2"></i></button>
+                </div>
+            </div>
+            <div id="AdminId" class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text agenda-edit-wdth">Správce agendy</label>
+                </div>
+                <span id="AdminName" class="form-control">@Model.AdministratorName</span>
+                <div class="input-group-append">
+                    <button onclick="EditAdmin()" id="AdminEdit" class="btn btn-secondary m-0 edit-btn-w"><i class="fas fa-edit cursor"></i></button>
+                </div>
+            </div>
+            <div id="AdminEditId" class="input-group mb-2" style="display: none;">
+                <div class="input-group-prepend">
+                    <label class="input-group-text agenda-edit-wdth">Správce agendy</label>
+                </div>
+                <select id="AdminSelect" class="form-control">
+                    @foreach (var user in Model.Users)
+                    {
+                        @if (user.Id == Model.AdministratorId)
+                        {
+                            <option value="@user.Id" selected>@user.FullName</option>
+                        }
+                        else
+                        {
+                            <option value="@user.Id">@user.FullName</option>
+                        }
+                    }
+                </select>
+                <div class="input-group-append">
+                    <button onclick="CancelAdmin()" id="CancelAdmin" class="btn btn-danger m-0 edit-btn-w"><i class="fas fa-times"></i></button>
+                    <button onclick="SaveAdmin()" id="SaveAdmin" class="btn btn-success m-0 edit-btn-w"><i class="fas fa-save"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div id="RolesId" class="row pl-3">
+            @await Html.PartialAsync("Partial/_Roles", (Model.Roles, Model.Users))
         </div>
     </div>
 </div>
+<hr style="margin-top: 6px;">
 

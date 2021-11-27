@@ -1,0 +1,61 @@
+@model (List<AgendaRoleDTO> Roles, List<AllUserDTO> Users)
+
+@{ bool filled = true; }
+
+@foreach (var group in Model.Roles.GroupBy(x => x.Role).OrderBy(x => x.Key))
+{
+    filled = true;
+    <div class="card card-role" onmouseenter="MouseInRoleCB(arguments[0])" onmouseleave="MouseOutRoleCB(arguments[0])">
+        <div class="vertical-justify-between">
+            <div>
+                <h4 class="text-center">@group.Key.ToLabel()</h4>
+                @if (group.Count() > 1)
+                {
+                    @foreach (var role in group)
+                    {
+                        <div class="d-flex justify-content-between mb-1">
+                            <div name="@role.UserId" class="mt-auto mb-auto user">@role.UserName</div>
+                            <div class="mt-auto mb-auto">
+                                <button onclick="RemoveRole(this)" id="@role.Id" class="btn btn-sm btn-danger vis-hidden" style="height: 30px;"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    @foreach (var role in group)
+                    {
+                        @if (String.IsNullOrEmpty(role.UserName))
+                        {
+                            filled = false;
+                            <select id="@($"Sel{group.Key}Id")" class="form-control mb-2" name="@role.Id">
+                                @foreach (var user in Model.Users)
+                                {
+                                    <option value="@user.Id">@user.FullName</option>
+                                }           
+                            </select>
+                        }
+                        else
+                        {
+                            <div name="@role.UserId" class="mb-2 user">@role.UserName</div>
+                        }
+                    }
+                }
+            </div>
+            <div class="d-flex justify-content-center mb-2 @(filled ? "vis-hidden" : "")">
+                @if (filled)
+                {
+                    <button onclick="AddNewRole(this)" class="btn btn-sm btn-primary">Přidat <i class="fas fa-plus ml-2"></i>
+                    </button><button onclick="RolesCancel(this)" class="btn btn-sm btn-danger mr-2" style="display: none;">Zrušit <i class="fas fa-times ml-2"></i>
+                    </button><button onclick="AddRole(this)" id="@group.Key" class="btn btn-sm btn-success ml-2" style="display: none;">Uložit <i class="fas fa-save ml-2"></i>
+                    </button>
+                }
+                else
+                {
+                    <button onclick="EditRole(this)" id="@group.Key" name="@($"Sel{group.Key}Id")" class="btn btn-sm btn-success">Uložit <i class="fas fa-save ml-2"></i>
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+}

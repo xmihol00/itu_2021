@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using itu.BL.DTOs.User;
 using itu.Common.Enums;
 
 namespace itu.BL.DTOs.Agenda
@@ -15,6 +16,7 @@ namespace itu.BL.DTOs.Agenda
         public List<AgendaRoleDTO> Roles { get; set; }
         public int AdministratorId { get; set; }
         public string AdministratorName { get; set; }
-        public List<WorkflowCountDTO> Workflows { get; set; }
+        public List<AllWorkflowAgendaDTO> Workflows { get; set; }
+        public List<AllUserDTO> Users { get; set; }
     }
 }

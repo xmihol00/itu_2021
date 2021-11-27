@@ -8,11 +8,15 @@
   transition: transform .5s;
 }
 
+.card:last-child {
+  margin: 10px;
+}
+
 .card-role {
   margin: 10px;
   padding: 10px 10px 0px 10px;
-  width: 225px;
-  min-height: 200px;
+  width: 45%;
+  min-height: 125px;
   cursor: default;
 }
 
@@ -50,3 +54,22 @@ h1, h2, h3, p {
   color: var(--color-text-default);
 }
 
+.btn-secondary {
+  background-color: var(--color-bg-dark);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-bg-dark);
+}
+
+.edit-btn-w {
+  width: 45px;
+}
+
+.agenda-edit-wdth {
+  width: 140px;
+}
+
+.vis-hidden {
+  visibility: hidden;
+}
