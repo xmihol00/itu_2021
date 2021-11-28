@@ -1,4 +1,11 @@
-﻿using itu.Common.Enums;
+﻿//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Marek Fiala
+// Kontakt:     xfiala60@stud.fit.vutbr.cz
+//=================================================================================================================
+
+using itu.Common.Enums;
 using itu.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -53,6 +60,13 @@ namespace itu.DAL.Repositories
                          .SelectMany(x => x.AgendaRoles)
                          .Where(x => x.Type == type)
                          .Select(x => x.UserId)
+                         .FirstAsync();
+        }
+
+        public Task<int> AdminId(int agendaId)
+        {
+            return _dbSet.Where(x => x.Id == agendaId)
+                         .Select(x => x.AdministratorId)
                          .FirstAsync();
         }
     }

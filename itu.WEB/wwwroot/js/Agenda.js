@@ -1,3 +1,9 @@
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Marek Fiala
+// Kontakt:     xfiala60@stud.fit.vutbr.cz
+//=================================================================================================================
 
 function EditationStart() {
     let normals = document.getElementsByClassName("normal");
@@ -200,10 +206,20 @@ function EditRole(element) {
     })
     .done(function (result) 
     {
-        document.getElementById("RolesId").innerHTML = result;
+        let roles = document.getElementById("RolesId");
+        roles.innerHTML = result;
         MouseInRoleCB = MouseInRole;
         MouseOutRoleCB = MouseOutRole;
         ShowAlert("Role úspěšně přidána.");
+        
+        if (roles.getElementsByTagName("select").length == 0)
+        {
+            for (let ele of document.getElementById("WFModelsId").getElementsByTagName("button"))
+            {
+                ele.disabled = false;
+                ele.title = null;
+            }
+        }
     })
     .fail(function() 
     {
@@ -309,4 +325,98 @@ function HideAddWF(event) {
         modal.style.display = "none";
         document.removeEventListener("click", HideAddWF);
     }
+}
+
+function ShowModelDetail(element) {
+    $.ajax(
+    {
+        async: true,
+        type: "GET",
+        url: "/Agenda/ModelDetail/" + element.id,
+    })
+    .done(function (result) 
+    {
+        document.getElementById("SvgDataId").innerHTML = result;
+        document.getElementById("SvgDetailId").style.display = "block";
+        document.addEventListener("click", HideModelDetail);        
+    })
+    .fail(function() 
+    {
+        ShowAlert("Detail modelu se nepodařilo zobrazit.", true);
+    });
+}
+
+function HideModelDetail(event) {
+    let modal = document.getElementById("SvgDetailId");
+    if (event == null || modal == event.target)
+    {
+        modal.style.display = "none";
+        document.removeEventListener("click", HideModelDetail);
+    }
+}
+
+function RemoveModel(element) {
+    $.ajax(
+    {
+        async: true,
+        type: "GET",
+        url: "/Agenda/RemoveModel/" + element.id + "/" + AgendaId,
+    })
+    .done(function() 
+    {
+        element.parentNode.parentNode.parentNode.parentNode.remove();
+        ShowAlert("Model workflow úspěšně odebrán.");
+    })
+    .fail(function() 
+    {
+        ShowAlert("Model workflow se nepodařilo odebrat.", true);
+    });    
+}
+
+function RunWorkflowCheck() {
+    let name = document.getElementById("RunNameId");
+    let desc = document.getElementById("RunDescId");
+    let dis = false;
+    
+    if (!name.value || !name.value.trim()) {
+        name.parentNode.firstChild.firstChild.classList.add("comp-bckg");
+        dis = true;
+    }
+    else {
+        name.parentNode.firstChild.firstChild.classList.remove("comp-bckg");
+    }
+
+    if (!desc.value || !desc.value.trim()) {
+        desc.parentNode.firstChild.firstChild.classList.add("comp-bckg");
+        dis = true;
+    }
+    else {
+        desc.parentNode.firstChild.firstChild.classList.remove("comp-bckg");
+    }
+
+    document.getElementById("RunWFBtnId").disabled = dis;
+}
+
+function CreateAgendaCheck() {
+    let name = document.getElementById("AgendaNameId");
+    let desc = document.getElementById("AgendaDescId");
+    let dis = false;
+    
+    if (!name.value || !name.value.trim()) {
+        name.parentNode.firstChild.firstChild.classList.add("comp-bckg");
+        dis = true;
+    }
+    else {
+        name.parentNode.firstChild.firstChild.classList.remove("comp-bckg");
+    }
+
+    if (!desc.value || !desc.value.trim()) {
+        desc.parentNode.firstChild.firstChild.classList.add("comp-bckg");
+        dis = true;
+    }
+    else {
+        desc.parentNode.firstChild.firstChild.classList.remove("comp-bckg");
+    }
+
+    document.getElementById("CreateBtnId").disabled = dis;
 }

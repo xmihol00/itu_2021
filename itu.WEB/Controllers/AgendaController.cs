@@ -1,4 +1,11 @@
-﻿using System;
+﻿//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Marek Fiala
+// Kontakt:     xfiala60@stud.fit.vutbr.cz
+//=================================================================================================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,19 +45,19 @@ namespace itu.WEB.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRole(NewRoleDTO role)
         {
-            return PartialView("Partial/_Roles", await _facade.AddRole(role));
+            return PartialView("Partial/_Roles", await _facade.AddRole(role, ViewBag.Id));
         }
 
         [HttpPost]
         public async Task<IActionResult> EditRole(EditedRoleDTO role)
         {
-            return PartialView("Partial/_Roles", await _facade.EditRole(role));
+            return PartialView("Partial/_Roles", await _facade.EditRole(role, ViewBag.Id));
         }
 
         [HttpGet]
         public async Task<IActionResult> RemoveRole(int id)
         {
-            return PartialView("Partial/_Roles", await _facade.RemoveRole(id));
+            return PartialView("Partial/_Roles", await _facade.RemoveRole(id, ViewBag.Id));
         }
 
         [HttpPost]
@@ -85,6 +92,20 @@ namespace itu.WEB.Controllers
         {
             await _facade.RunWorkflow(dto);
             return Redirect($"/Agenda/Detail/{dto.AgendaId}");
+        }
+
+        [HttpGet]
+        public IActionResult ModelDetail(int id)
+        {
+            return PartialView("../Model/svg", _facade.ModelDetail(id));
+        }
+
+        [HttpGet]
+        [Route("Agenda/RemoveModel/{modelId}/{agendaId}")]
+        public async Task<IActionResult> RemoveModel(int modelId, int agendaId)
+        {
+            await _facade.RemoveModel(modelId, agendaId);
+            return Ok();
         }
     }
 }

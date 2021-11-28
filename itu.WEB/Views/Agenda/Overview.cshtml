@@ -1,3 +1,12 @@
+@*
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Marek Fiala
+// Kontakt:     xfiala60@stud.fit.vutbr.cz
+//=================================================================================================================
+*@
+
 @model List<AllAgendaDTO>
 
 <script src="/js/Agenda.js"></script>
@@ -62,21 +71,21 @@
         <form method="post" action="/Agenda/Create" >
 			<h2>Tvorba Agendy</h2>
 			<hr class="mt-0 mb-3">
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <label class="input-group-text agenda-edit-wdth">Název agendy</label>
+            <div class="input-group mb-2">@*
+                *@<div class="input-group-prepend">@*
+                    *@<label class="input-group-text agenda-edit-wdth comp-bckg">Název agendy</label>
                 </div>
-                <input class="form-control" name="Name" />
+                <input autocomplete="off" id="AgendaNameId" class="form-control" name="Name" oninput="CreateAgendaCheck()"/>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text agenda-edit-wdth">Popis agendy</label>
+            <div class="input-group mb-3">@*
+                *@<div class="input-group-prepend">@*
+                    *@<label class="input-group-text agenda-edit-wdth comp-bckg">Popis agendy</label>
                 </div>
-                <textarea class="form-control" name="Description"></textarea>
+                <textarea id="AgendaDescId" class="form-control" name="Description" oninput="CreateAgendaCheck()"></textarea>
             </div>
             <div class="d-flex justify-content-between">
-                <button type="button" onclick="HideCreateModal()" class="btn btn-danger">Zrušit <i class="fas fa-times ml-2"></i></button>
-                <button type="submit" class="btn btn-success">Vytvořit <i class="fas fa-save ml-2"></i></button>
+                <button type="button" onclick="HideCreateModal()" class="btn btn-danger">Zrušit</button>
+                <button id="CreateBtnId" type="submit" class="btn btn-success" disabled>Vytvořit</button>
             </div>
         </form>
     </div>

@@ -4,6 +4,7 @@
 // Autor:       Vítek Hnatovskyj
 // Kontakt:     xhnato00@stud.fit.vutbr.cz
 //=================================================================================================================
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

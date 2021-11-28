@@ -1,4 +1,11 @@
-﻿using AutoMapper;
+﻿//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Marek Fiala
+// Kontakt:     xfiala60@stud.fit.vutbr.cz
+//=================================================================================================================
+
+using AutoMapper;
 using itu.BL.DTOs.Agenda;
 using itu.BL.DTOs.User;
 using itu.Common.Enums;
