@@ -56,7 +56,7 @@ namespace itu.BL.Facades
 
         public async Task<AgendaDetailDTO> Detail(int id)
         {
-            var agenda = _mapper.Map<AgendaDetailDTO>(await _repository.Detail(id));
+            var agenda = _mapper.Map<AgendaDetailDTO>(await _repository.Detail(id));    
             agenda.Users = _mapper.Map<List<AllUserDTO>>(await _userRepository.All());
             agenda.Runable = agenda.Roles.All(x => x.UserId != 0);
             return agenda;
