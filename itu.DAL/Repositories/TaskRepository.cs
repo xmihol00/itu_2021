@@ -1,4 +1,11 @@
-﻿using itu.Common.Enums;
+﻿//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       David Mihola
+// Kontakt:     xmihol00@stud.fit.vutbr.cz
+//=================================================================================================================
+
+using itu.Common.Enums;
 using itu.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -1,4 +1,10 @@
-﻿
+﻿//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       David Mihola
+// Kontakt:     xmihol00@stud.fit.vutbr.cz
+//=================================================================================================================
+
 var Timeout = null;
 var Interval = null;
 var SignalConnection = new signalR.HubConnectionBuilder().configureLogging(signalR.LogLevel.None).withUrl("/hub").build();
