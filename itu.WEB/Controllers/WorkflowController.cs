@@ -39,14 +39,14 @@ namespace itu.WEB.Controllers
         {
             SearchResultDTO result = new SearchResultDTO();
             OverviewWorkflowDTO overview = new OverviewWorkflowDTO();
-            overview.AllWorkflow =  await _workflow.GetOverviewFiltered(filters);
+            overview.AllWorkflow = _workflow.GetOverviewFiltered(filters);
             overview.SearchOptions = await _workflow.GetFiltersFiltered(overview.AllWorkflow);
 
             Task<string> filtersTask = this.RenderViewAsync("Partial/_FilterLists", overview.SearchOptions);
             Task<string> workflowTask = this.RenderViewAsync("Partial/_Workflows", overview.AllWorkflow);
 
-            result.WorkflowsHTML = await workflowTask;
             result.FiltersHTML = await filtersTask;
+            result.WorkflowsHTML = await workflowTask;
             return Ok(result);
 
         }

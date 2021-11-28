@@ -34,7 +34,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    @if (ViewBag.Signed)
+                    @if (ViewBag.Signed is bool && ViewBag.Signed)
                     {
                         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                             <ul class="navbar-nav flex-grow-1">
@@ -51,7 +51,7 @@
                         </div>
                     }
                     <div class="my-2 my-0 mr-0 btn-group">
-                        @if (ViewBag.Signed)
+                        @if (ViewBag.Signed is bool && ViewBag.Signed)
                         {
                             <span class="btn btn-sm btn-light" title="User"><i class="fa fa-user ml-1 mr-1"></i> @ViewBag.Name</span>
                             <a href="~/Account/SignOut" class="btn btn-sm btn-light" role="button" title="Odhlásit se"><i class="fa fa-sign-out-alt"></i></a>    
