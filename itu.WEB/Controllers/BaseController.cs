@@ -6,6 +6,7 @@
 //=================================================================================================================
 
 using itu.BL.Facades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace itu.WEB.Controllers
 {
+    [Authorize]
     public class BaseController : Controller
     {
         private readonly BaseFacade _baseFacade;

@@ -38,19 +38,19 @@
             }
         </div>
         <div class="row">
-            <div class="col-md-3 d-flex justify-content-center mt-1">
+            <div class="col-md-3 d-flex justify-content-center">
                 <div> 
-                    <a href="~/Agenda/Detail/@Model.AgendaId" class="center">Agenda <i class="fas fa-arrow-right"></i></a>
+                    <button id="@Model.AgendaId" onclick="AgendaClicked(this.id)" class="center mb-2 btn-hvr">Agenda <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
-            <div class="col-md-6 d-flex justify-content-center mt-1">
+            <div class="col-md-6 d-flex justify-content-center">
                 <div>
-                    <a href="~/Workflow/Detail/@Model.WorkflowId" class="center">Workflow <i class="fas fa-arrow-right"></i></a>
+                    <button id="@Model.WorkflowId" onclick="WorkflowClicked(this.id)" class="center mb-1 btn-hvr">Workflow <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
             <div class="col-md-3 d-flex justify-content-center">
                 <div>
-                    Druh úkolu 
+                    <button class="center mb-2" style="cursor: default;">Druh úkolu</button>
                 </div>
             </div>
         </div>

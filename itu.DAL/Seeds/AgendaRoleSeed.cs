@@ -123,7 +123,7 @@ namespace itu.DAL.Seeds
             {
                 Id = 14,
                 AgendaId = 2,
-                UserId = 2,
+                UserId = 1,
                 Type = TaskTypeEnum.Estimate,
             },
             new AgendaRoleEntity()
@@ -137,7 +137,7 @@ namespace itu.DAL.Seeds
             {
                 Id = 16,
                 AgendaId = 2,
-                UserId = 2,
+                UserId = 1,
                 Type = TaskTypeEnum.Contract,
             },
             new AgendaRoleEntity()

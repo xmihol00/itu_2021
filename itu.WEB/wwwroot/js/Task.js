@@ -30,7 +30,11 @@ document.addEventListener("DOMContentLoaded", function()
     CheckCompulsory();
     SetCountDown();
     
-    TaskId = document.getElementById("IdOfTaskId").value;
+    let task = document.getElementById("IdOfTaskId");
+    if (task != null)
+    {
+        TaskId = task.value;
+    }
 });
 
 function SetCountDown()
@@ -454,7 +458,6 @@ function FileDragged(event)
 
 function FileDropped(event)
 {
-    console.log("dropped");
     Dropped = true;
     let target = event.target;
     while(target.getAttribute("data-version") == undefined)
@@ -627,6 +630,7 @@ function Solve(type)
         SetCountDown();
         CheckCompulsory();
         document.getElementById("TaskCountId").innerText = document.getElementsByClassName("card").length;
+        Changes = false;
         ShowAlert("Úkol byl úspěšně vyřešen.");
     })
     .fail(function() 
@@ -685,6 +689,7 @@ function WorkflowCB()
 function AgendaClicked(id)
 {
     AgendaId = id;
+    console.log(Changes);
     if (Changes)
     {
         Callback = AgendaCB;
@@ -729,8 +734,69 @@ function SolveClicked(id)
     }
 }
 
+function SolvedClicked()
+{
+    if (Changes)
+    {
+        Callback = () => window.location = "/Task/Solved";
+        document.getElementById("LeaveModId").style.display = "block";
+        document.addEventListener("click", HideModal);
+    }
+    else
+    {
+        Callback = null;
+        window.location = "/Task/Solved"
+    }
+}
+
+function DelayedClicked()
+{
+    if (Changes)
+    {
+        Callback = () => window.location = "/Task/Delayed";
+        document.getElementById("LeaveModId").style.display = "block";
+        document.addEventListener("click", HideModal);
+    }
+    else
+    {
+        Callback = null;
+        window.location = "/Task/Delayed"
+    }
+}
+
+function ActiveClicked()
+{
+    if (Changes)
+    {
+        Callback = () => window.location = "/";
+        document.getElementById("LeaveModId").style.display = "block";
+        document.addEventListener("click", HideModal);
+    }
+    else
+    {
+        Callback = null;
+        window.location = "/"
+    }
+}
+
+function NavClicked(event, string)
+{
+    if (Changes)
+    {
+        Callback = () => window.location = string;
+        document.getElementById("LeaveModId").style.display = "block";
+        document.addEventListener("click", HideModal);
+        event.preventDefault();
+        return false;
+    }
+    else
+    {
+        Callback = null;
+        return true;
+    }
+}
+
 function SaveAndLeave()
 {
     document.getElementById("TaskSaveId").click();
-    document.getElementById("LeaveModId").style.display = "block";
 }

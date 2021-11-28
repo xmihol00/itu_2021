@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@*
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       David Mihola
+// Kontakt:     xmihol00@stud.fit.vutbr.cz
+//=================================================================================================================
+*@
+
+<!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="utf-8" />
@@ -30,13 +39,13 @@
                         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                             <ul class="navbar-nav flex-grow-1">
                                 <li class="nav-item">
-                                    <a class="nav-link mr-1" href="~/"><i class="fas fa-tasks"></i> Úkoly <span class="task-count-rel" ><span id="TaskCountId" class="task-count">@ViewBag.TaskCount</span></span></a>
+                                    <a class="nav-link mr-1" href="~/" onclick="NavClicked(arguments[0], '/')"><i class="fas fa-tasks"></i> Úkoly <span class="task-count-rel" ><span id="TaskCountId" class="task-count">@ViewBag.TaskCount</span></span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link mr-1" href="~/Workflow/Overview"><i class="fas fa-sync"></i> Workflow</a>
+                                    <a class="nav-link mr-1" href="~/Workflow/Overview" onclick="NavClicked(arguments[0], '/Workflow/Overview')"><i class="fas fa-sync"></i> Workflow</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link mr-1" href="~/Agenda/Overview"><i class="fas fa-users"></i> Agendy</a>
+                                    <a class="nav-link mr-1" href="~/Agenda/Overview" onclick="NavClicked(arguments[0], '/Agenda/Overview')"><i class="fas fa-users"></i> Agendy</a>
                                 </li>
                             </ul>
                         </div>

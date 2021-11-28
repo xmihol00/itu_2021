@@ -30,9 +30,9 @@ namespace itu.WEB.Controllers
         }
 
         [HttpGet]
-        public IActionResult SignIn()
+        public IActionResult SignIn(string ReturnURL, string UserName)
         {
-            return View(new SignInDTO());
+            return View(new SignInDTO(){ UserName = UserName, ReturnURL = ReturnURL });
         }
 
         [HttpPost]
@@ -48,7 +48,7 @@ namespace itu.WEB.Controllers
             }
             catch
             {
-                return RedirectToAction(nameof(SignIn), new { model.ReturnURL });
+                return RedirectToAction(nameof(SignIn), new { model.ReturnURL, model?.UserName });
             }
         }
 
