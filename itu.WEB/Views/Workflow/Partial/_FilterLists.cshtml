@@ -6,20 +6,14 @@
 //=================================================================================================================*@
 
 @model SearchDTO
-@{
-    int initiallyDisplayed = 5;
-    List<SearchDTO> searchOptions;
-}
 
-<h5 style="padding-left: 2%;">
-    Agendy<h5>
         <ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
-
+            <li class="list-group-item list-item-search">Agendy</li>
             @foreach (var agenda in Model.Agendas)
 
             {
                 <li id=@("Agenda" + agenda.Id)
-                    class="filter-button list-group-item-action list-group-item"
+                    class="filter-button list-group-item-action list-group-item list-item-search"
                     onclick="Filter(null, this)"
                     value="@(agenda.Name)">
                     @(agenda.Name)
@@ -29,15 +23,13 @@
 
 
         </ul>
-        <h5 style="padding-left: 2%;">
-            Modely workflow<h5>
                 <ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
-
+                    <li class="list-group-item list-item-search">Modely workflow</li>
                     @foreach (var model in Model.WorkflowModels)
 
                     {
                         <li id=@("Model" + model.Id)
-                            class="filter-button list-group-item-action list-group-item"
+                            class="list-group-item list-item-search"
                             onclick="Filter(null, this)"
                             value="@(model.Name)">
                             @(model.Name)
@@ -47,10 +39,8 @@
 
 
                 </ul>
-                <h5 style="padding-left: 2%;">
-                    Úkoly<h5>
                         <ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
-
+                            <li class="list-group-item list-item-search">Typ úkolu</li>
                             @if (Model.ActiveTasks != null)
                             {
 
@@ -58,7 +48,7 @@
 
                                 {
                                     <li id=@("Task" + task.Id)
-                                        class="filter-button list-group-item-action list-group-item"
+                                        class="filter-button list-group-item-action list-group-item list-item-search"
                                         onclick="Filter(null, this)"
                                         value="@(task.FileType)">
                                         @(task.FileType)

@@ -15,9 +15,9 @@ namespace itu.DAL.Repositories
         public WorkflowRepository(ItuDbContext context) : base(context) { }
 
 
-        public async Task<List<WorkflowEntity>> GetAllWorkflows()
+        public Task<List<WorkflowEntity>> GetAllWorkflows()
         {
-            return _context.Workflows.Include(y => y.Agenda).Include(z => z.Tasks).Where(x => x.Id != 0).ToList();
+            return _context.Workflows.Include(y => y.Agenda).Include(z => z.Tasks).Where(x => x.Id != 0).ToListAsync();
         }
 
         public Task<WorkflowEntity> GetDetail(int id)
@@ -30,12 +30,12 @@ namespace itu.DAL.Repositories
                 .FirstAsync(x => x.Id == id);
         }
 
-        public async Task<List<ModelWorkflowEntity>> GetAllModels()
+        public Task<List<ModelWorkflowEntity>> GetAllModels()
         {
-            return _context.ModelWorkflows.ToList();
+            return _context.ModelWorkflows.ToListAsync();
         }
 
-        public async Task<List<WorkflowEntity>> GetWorkflowsByAgenda(List<string> names)
+        public List<WorkflowEntity> GetWorkflowsByAgenda(List<string> names)
         {
             List<WorkflowEntity> workflows = new List<WorkflowEntity>();
             foreach (var name in names)
@@ -48,7 +48,7 @@ namespace itu.DAL.Repositories
             }
             return workflows;
         }
-        public async Task<List<WorkflowEntity>> GetWorkflowsByModel(List<string> names)
+        public List<WorkflowEntity> GetWorkflowsByModel(List<string> names)
         {
             List<WorkflowEntity> workflows = new List<WorkflowEntity>();
             foreach (var name in names)
@@ -56,6 +56,7 @@ namespace itu.DAL.Repositories
                 workflows.Add(_context.Workflows.Include(a => a.ModelWorkflow).Include(b => b.Files)
                 .Include(c => c.ModelWorkflow)
                 .Include(d => d.Tasks)
+                .Include(e => e.Agenda)
                 .FirstOrDefault(x => x.ModelWorkflow.Name == name));
             }
             return workflows;

@@ -11,10 +11,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using itu.BL.DTOs.Agenda;
 using itu.BL.Facades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace itu.WEB.Controllers
 {
+    [Authorize]
     public class AgendaController : BaseController
     {
         private readonly AgendaFacade _facade;

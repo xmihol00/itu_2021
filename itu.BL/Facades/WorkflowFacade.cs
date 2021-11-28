@@ -61,17 +61,17 @@ namespace itu.BL.Facades
             return detail;
         }
 
-        public async Task<List<AllWorkflowDTO>> GetOverviewFiltered(WorkflowSearchDTO search)
+        public List<AllWorkflowDTO> GetOverviewFiltered(WorkflowSearchDTO search)
         {
             List<AllWorkflowDTO> allWorkflows = new List<AllWorkflowDTO>();
             if (search.AgendaNames != null && search.AgendaNames.Count > 0)
             {
-                allWorkflows.AddRange(_mapper.Map<List<AllWorkflowDTO>>(await _workflow.GetWorkflowsByAgenda(search.AgendaNames)));
+                allWorkflows.AddRange(_mapper.Map<List<AllWorkflowDTO>>(_workflow.GetWorkflowsByAgenda(search.AgendaNames)));
             }
 
             if (search.WorkflowModelsNames != null && search.WorkflowModelsNames.Count > 0)
             {
-                allWorkflows.AddRange(_mapper.Map<List<AllWorkflowDTO>>(await _workflow.GetWorkflowsByModel(search.WorkflowModelsNames)));
+                allWorkflows.AddRange(_mapper.Map<List<AllWorkflowDTO>>(_workflow.GetWorkflowsByModel(search.WorkflowModelsNames)));
             }
 
             foreach(var workflow in allWorkflows)

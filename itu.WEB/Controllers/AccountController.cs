@@ -20,11 +20,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace itu.WEB.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : Controller
     {
         private readonly UserFacade _facade;
 
-        public AccountController(UserFacade facade, BaseFacade baseFacade) : base(baseFacade)
+        public AccountController(UserFacade facade)
         {
             _facade = facade;
         }

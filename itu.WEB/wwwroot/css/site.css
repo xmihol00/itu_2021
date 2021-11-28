@@ -568,3 +568,48 @@ hr {
 .active-task-detail-workflow{
     background-color: var(--color-bg-success);
 }
+
+
+.list-group {
+  margin-bottom: 1rem;
+}
+
+.list-item-search {
+  color: var(--color-text-default);
+  overflow-wrap: break-word;
+  border-color: var(--color-border);
+  cursor: pointer;
+  padding: 0.5rem 1rem !important;
+}
+
+.list-item-search:hover {
+  color: var(--color-text-inverted);
+  background-color: var(--color-focus);
+  border-color: var(--color-border-focus);
+}
+
+.list-item:first-child, .list-item-search:first-child {
+  background-color: var(--color-border);
+  font-weight: bold;
+  cursor: default;
+}
+
+.list-item:first-child:hover, .list-item-search:first-child:hover {
+  background-color: var(--color-border);
+  border-color: var(--color-border);
+  color: var(--color-text-default) !important;
+  font-weight: bold;
+  cursor: default;
+}
+
+.list-item-search-selected {
+  color: var(--color-text-inverted) !important;
+  background-color: var(--color-focus) !important;
+  border-color: var(--color-border-focus);
+}
+
+.list-item-search-selected:hover {
+  color: var(--color-text-default) !important;
+  background-color: var(--color-bg) !important;
+  border-color: var(--color-border);
+}
