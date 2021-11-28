@@ -1,3 +1,10 @@
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Marek Fiala
+// Kontakt:     xfiala60@stud.fit.vutbr.cz
+//=================================================================================================================
+
 using itu.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;

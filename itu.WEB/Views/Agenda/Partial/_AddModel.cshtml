@@ -1,3 +1,12 @@
+@*
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Marek Fiala
+// Kontakt:     xfiala60@stud.fit.vutbr.cz
+//=================================================================================================================
+*@
+
 @model List<AgendaModelDTO>
 
 <ul class="list-group mt-1">
@@ -5,7 +14,7 @@
     {
         <li class="list-group-item d-flex justify-content-start model-li">
             <div>
-                <div style="width: 235px; height: 191px" >
+                <div class="model-svg" id="@mod.Id" onclick="ShowModelDetail(this)">
                     @await Html.PartialAsync("../Model/svg", (mod.Id, 0, 235, 190))
                 </div>
             </div>

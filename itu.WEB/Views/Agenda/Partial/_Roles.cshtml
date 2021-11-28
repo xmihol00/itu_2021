@@ -1,4 +1,13 @@
-@model (List<AgendaRoleDTO> Roles, List<AllUserDTO> Users)
+@*
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Marek Fiala
+// Kontakt:     xfiala60@stud.fit.vutbr.cz
+//=================================================================================================================
+*@
+
+@model (List<AgendaRoleDTO> Roles, List<AllUserDTO> Users, bool admin)
 
 @{ bool filled = true; }
 
@@ -16,7 +25,10 @@
                         <div class="d-flex justify-content-between mb-1">
                             <div name="@role.UserId" class="mt-auto mb-auto user">@role.UserName</div>
                             <div class="mt-auto mb-auto">
-                                <button onclick="RemoveRole(this)" id="@role.Id" class="btn btn-sm btn-danger vis-hidden" style="height: 30px;"><i class="fas fa-minus"></i></button>
+                                @if (Model.admin)
+                                {
+                                    <button onclick="RemoveRole(this)" id="@role.Id" class="btn btn-sm btn-danger vis-hidden" style="height: 30px;"><i class="fas fa-minus"></i></button>
+                                }
                             </div>
                         </div>
                     }
@@ -43,17 +55,20 @@
                 }
             </div>
             <div class="d-flex justify-content-center mb-2 @(filled ? "vis-hidden" : "")">
-                @if (filled)
+                @if (Model.admin)
                 {
-                    <button onclick="AddNewRole(this)" class="btn btn-sm btn-primary">Přidat <i class="fas fa-plus ml-2"></i>
-                    </button><button onclick="RolesCancel(this)" class="btn btn-sm btn-danger mr-2" style="display: none;">Zrušit <i class="fas fa-times ml-2"></i>
-                    </button><button onclick="AddRole(this)" id="@group.Key" class="btn btn-sm btn-success ml-2" style="display: none;">Uložit <i class="fas fa-save ml-2"></i>
-                    </button>
-                }
-                else
-                {
-                    <button onclick="EditRole(this)" id="@group.Key" name="@($"Sel{group.Key}Id")" class="btn btn-sm btn-success">Uložit <i class="fas fa-save ml-2"></i>
-                    </button>
+                    @if (filled)
+                    {
+                        <button onclick="AddNewRole(this)" class="btn btn-sm btn-primary">Přidat <i class="fas fa-plus ml-2"></i>
+                        </button><button onclick="RolesCancel(this)" class="btn btn-sm btn-danger mr-2" style="display: none;">Zrušit <i class="fas fa-times ml-2"></i>
+                        </button><button onclick="AddRole(this)" id="@group.Key" class="btn btn-sm btn-success ml-2" style="display: none;">Uložit <i class="fas fa-save ml-2"></i>
+                        </button>
+                    }
+                    else
+                    {
+                        <button onclick="EditRole(this)" id="@group.Key" name="@($"Sel{group.Key}Id")" class="btn btn-sm btn-success">Uložit <i class="fas fa-save ml-2"></i>
+                        </button>
+                    }
                 }
             </div>
         </div>

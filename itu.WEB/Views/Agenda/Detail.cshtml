@@ -1,5 +1,16 @@
-@model AgendaDetailDTO
+@*
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Marek Fiala
+// Kontakt:     xfiala60@stud.fit.vutbr.cz
+//=================================================================================================================
+*@
 
+@model AgendaDetailDTO
+@{
+    bool admin = Model.AdministratorId == ViewBag.Id;
+}
 <script>
     const AgendaId = @Model.Id;
     const Users = @(Html.Raw(JsonConvert.SerializeObject(Model.Users)));
@@ -13,26 +24,30 @@
     </div>
 </div>
 <hr class="page-title-line">
-<div class="row m-0 mt-2">
-    <div class="col-6 border-right">
-        <div id="DataId">
-            <div class="d-flex justify-content-between">
-                <h1 id="NameId">@Model.Name</h1>
+<div class="w-100 mt-2 pl-2 pr-2">
+    <div id="DataId">
+        <div class="d-flex justify-content-between">
+            <h1 id="NameId">@Model.Name</h1>
+            @if (admin)
+            {
                 <div class="mt-auto mb-auto">
                     <button onclick="DataEdit()" class="btn btn-secondary"><i class="fas fa-edit cursor"></i></button>
                 </div>
-            </div>
-            <table class="table table-borderless table-sm mb-0">
-                <tr class="mb-0">
-                    <td style="min-width:130px">Popis Agendy:</td>
-                    <td id="DescriptionId" style="font-weight: 500;">@Model.Description</td>
-                </tr>
-                <tr class="mb-0">
-                    <td>Správce agendy:</td>
-                    <td id="AdminId" style="font-weight: 500;">@Model.AdministratorName</td>
-                </tr>
-            </table>
+            }
         </div>
+        <table class="table table-borderless table-sm mb-0">
+            <tr class="mb-0">
+                <td style="min-width:130px">Popis Agendy:</td>
+                <td id="DescriptionId" style="font-weight: 500;">@Model.Description</td>
+            </tr>
+            <tr class="mb-0">
+                <td>Správce agendy:</td>
+                <td id="AdminId" style="font-weight: 500;">@Model.AdministratorName</td>
+            </tr>
+        </table>
+    </div>
+    @if (admin)
+    {
         <div id="DataEditId" style="display: none;">
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -69,22 +84,26 @@
                 <button onclick="SaveData()" id="SaveAdmin" class="btn btn-success m-0 ml-2">Uložit <i class="fas fa-save ml-2"></i></button>
             </div>
         </div>
-        <hr class="mt-2 mb-2">
+    }
+    <hr class="mt-2 mb-2">
+</div>
+<div class="row m-0 mt-2">
+    <div class="col-6 border-right">
         <div>
             <h2 class="text-center">Role agendy</h2>
             <div id="RolesId" class="row pl-1">
-                @await Html.PartialAsync("Partial/_Roles", (Model.Roles, Model.Users))
+                @await Html.PartialAsync("Partial/_Roles", (Model.Roles, Model.Users, admin))
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-6" id="WFModelsId">
         <h2 class="text-center">Modely workflow</h2>
         <ul class="list-group mt-1">
             @foreach (var mod in Model.Models)
             {
                 <li class="list-group-item d-flex justify-content-start model-li" onmouseenter="MouseInRoleCB(arguments[0])" onmouseleave="MouseOutRoleCB(arguments[0])">
                     <div>
-                        <div style="width: 235px; height: 191px" >
+                        <div class="model-svg" id="@mod.Id" onclick="ShowModelDetail(this)">
                             @await Html.PartialAsync("../Model/svg", (mod.Id, 0, 235, 190))
                         </div>
                     </div>
@@ -94,17 +113,20 @@
                                 <h4>@mod.Name</h4>
                                 <p class="mb-0" style="color: black;">@mod.Description</p>
                             </div>
-                            <div class="d-flex justify-content-between pl-3">
-                                @if (Model.Runable)
-                                {
-                                    <button class="btn btn-sm btn-primary" id="@mod.Id" onclick="ShowRunWF(this)">Spustit</button>
-                                }
-                                else
-                                {
-                                    <button class="btn btn-sm btn-primary" disabled title="Nejsou vyplněny některé role.">Spustit</button>
-                                }
-                                <button class="btn btn-sm btn-danger vis-hidden">Odebrat</button>
-                            </div>
+                            @if (admin)
+                            {
+                                <div class="d-flex justify-content-between pl-3 vis-hidden">
+                                    @if (Model.Runable)
+                                    {
+                                        <button class="btn btn-sm btn-primary" id="@mod.Id" onclick="ShowRunWF(this)">Spustit</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-sm btn-primary" disabled onclick="ShowRunWF(this)" title="Nejsou vyplněny některé role.">Spustit</button>
+                                    }
+                                        <button id="@mod.Id" onclick="RemoveModel(this)" class="btn btn-sm btn-danger">Odebrat</button>
+                                </div>
+                            }
                         </div>
                     </div>
                 </li>
@@ -116,12 +138,12 @@
 
 <div id="AddModelId" class="modal">
     <div id="AddModelBodyId" class="modal-content mb-3">
-        <h2 class="text-center">Přiřazení modelu agendě</h2>
+        <h2 class="text-center">Přidání modelu agendě</h2>
         <div id="AddModalDataId">
 
         </div>
-        <div>
-            <button class="btn btn-danger" onclick="HideAddModel()">Zrušit</button>
+        <div class="d-flex justify-content-center mt-2">
+            <button class="btn btn-primary mb-0" onclick="HideAddModel()">Zavřít</button>
         </div>
     </div>
 </div>
@@ -132,23 +154,35 @@
         <form action="/Agenda/RunWorkflow" method="POST">
             <input type="hidden" name="AgendaId" value="@Model.Id" />
             <input type="hidden" name="ModelId" value="" id="ModelInputId"/>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" style="width: 165px;">Název workflow</label>
+            <div class="input-group mb-2">@*
+                *@<div class="input-group-prepend">@*
+                    *@<label class="input-group-text comp-bckg" style="width: 165px;">Název workflow</label>
                 </div>
-                <input class="form-control" name="Name"/>
+                <input autocomplete="off" class="form-control" name="Name" id="RunNameId" oninput="RunWorkflowCheck()"/>
             </div>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" style="width: 165px;">Popis cíle workflow</label>
+            <div class="input-group mb-2">@*
+                *@<div class="input-group-prepend">@*
+                    *@<label class="input-group-text comp-bckg" style="width: 165px;">Popis cíle workflow</label>
                 </div>
-                <textarea class="form-control" name="Description"></textarea>
+                <textarea class="form-control" name="Description" id="RunDescId" oninput="RunWorkflowCheck()"></textarea>
             </div>
             <div class="d-flex justify-content-between">
-                <button type="button" class="btn btn-danger" onclick="HideAddWF()">Zrušit</button>
-                <button type="submit" class="btn btn-success">Spustit</button>
+                <button type="button" class="btn btn-danger mb-0" onclick="HideAddWF()">Zrušit</button>
+                <button type="submit" class="btn btn-success mb-0" id="RunWFBtnId" disabled>Spustit</button>
             </div>
         </form>
+    </div>
+</div>
+
+<div id="SvgDetailId" class="modal">
+    <div class="modal-content mb-3">
+        <h2 class="text-center">Náhled modelu workflow</h2>
+        <div class="d-flex justify-content-center">
+            <div class="model-svg-detail" id="SvgDataId"></div>
+        </div>
+        <div class="d-flex justify-content-center m-3">
+            <button class="btn btn-primary mb-0" onclick="HideModelDetail()">Zavřít</button>
+        </div>
     </div>
 </div>
 
