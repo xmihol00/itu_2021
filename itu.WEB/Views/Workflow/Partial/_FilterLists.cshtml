@@ -13,7 +13,7 @@
 
             {
                 <li id=@("Agenda" + agenda.Id)
-                    class="filter-button list-group-item-action list-group-item list-item-search"
+                    class="list-group-item list-item-search"
                     onclick="Filter(null, this)"
                     value="@(agenda.Name)">
                     @(agenda.Name)
@@ -48,7 +48,7 @@
 
                                 {
                                     <li id=@("Task" + task.Id)
-                                        class="filter-button list-group-item-action list-group-item list-item-search"
+                                        class="list-group-item list-item-search"
                                         onclick="Filter(null, this)"
                                         value="@(task.FileType)">
                                         @(task.FileType)
