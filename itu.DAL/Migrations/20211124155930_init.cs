@@ -112,30 +112,6 @@ namespace itu.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AgendaModelEntity",
-                columns: table => new
-                {
-                    AgendaId = table.Column<int>(type: "int", nullable: false),
-                    ModelId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AgendaModelEntity", x => new { x.ModelId, x.AgendaId });
-                    table.ForeignKey(
-                        name: "FK_AgendaModelEntity_Agendas_AgendaId",
-                        column: x => x.AgendaId,
-                        principalTable: "Agendas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AgendaModelEntity_ModelWorkflows_ModelId",
-                        column: x => x.ModelId,
-                        principalTable: "ModelWorkflows",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AgendaRoles",
                 columns: table => new
                 {
@@ -432,26 +408,26 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "Difficulty", "Type" },
                 values: new object[,]
                 {
-                    { 603, 15, 6 },
-                    { 602, 10, 6 },
-                    { 601, 5, 6 },
-                    { 502, 10, 5 },
-                    { 501, 5, 5 },
+                    { 603, 15, 1 },
+                    { 602, 10, 1 },
+                    { 601, 5, 1 },
+                    { 502, 10, 6 },
+                    { 501, 5, 6 },
                     { 403, 15, 4 },
                     { 402, 10, 4 },
                     { 401, 5, 4 },
                     { 303, 15, 2 },
                     { 302, 10, 2 },
-                    { 503, 15, 5 },
-                    { 203, 15, 3 },
-                    { 202, 10, 3 },
-                    { 201, 5, 3 },
-                    { 103, 15, 1 },
-                    { 102, 10, 1 },
-                    { 101, 5, 1 },
-                    { 3, 15, 0 },
-                    { 2, 10, 0 },
-                    { 1, 5, 0 },
+                    { 503, 15, 6 },
+                    { 203, 15, 5 },
+                    { 202, 10, 5 },
+                    { 201, 5, 5 },
+                    { 103, 15, 0 },
+                    { 102, 10, 0 },
+                    { 101, 5, 0 },
+                    { 3, 15, 3 },
+                    { 2, 10, 3 },
+                    { 1, 5, 3 },
                     { 301, 5, 2 }
                 });
 
@@ -460,12 +436,11 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 6, "Slouží pro velký nákup více položek, u kterých je vyžadováno posouzení a odhad ceny. S dodavatelem je sepsána exkluzivní smlouva.", "Model pro velké nákupy" },
-                    { 5, "Slouží pro velké zakázky nad 1 000 000 Kč. Jedná se o nejdůležitější zakázky.", "Výběrové řízení velké zakázky" },
-                    { 4, "Slouží pro střední zakázky do 1 000 000 Kč.", "Výběrové řízení střední zakázky" },
-                    { 2, "Slouží pro nákup více položek, s dodavatelem je sepsána exkluzivní smlouva.", "Model pro nákup se smlouvou" },
+                    { 5, "Slouží pro zakázky nad 1 000 000 Kč.", "Výběrové řízení velké zakázky" },
+                    { 3, "Slouží pro zakázky do 100 000 Kč.", "Výběrové řízení malé zakázky" },
+                    { 4, "Slouží pro zakázky do 1 000 000 Kč.", "Výběrové řízení střední zakázky" },
                     { 1, "Slouží pro nákup maximálně několika běžně dostupných položek.", "Rychlý model malého nákupu" },
-                    { 3, "Slouží pro malé zakázky do 100 000 Kč.", "Výběrové řízení malé zakázky" }
+                    { 2, "Slouží pro nákup více položek, s dodavatelem je sepsána exkluzivní smlouva.", "Model pro nákup se smlouvou" }
                 });
 
             migrationBuilder.InsertData(
@@ -492,9 +467,9 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "AdministratorId", "Creation", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 2, 2, new DateTime(2021, 11, 23, 17, 17, 42, 928, DateTimeKind.Local).AddTicks(7212), "Agenda spravující menší a střední zakázky", "Malé a střední zakázky" },
-                    { 1, 1, new DateTime(2021, 10, 29, 17, 17, 42, 927, DateTimeKind.Local).AddTicks(5296), "Agenda správující jednoduchuché nákupy bez vúběrových řízení", "Nákupy" },
-                    { 3, 1, new DateTime(2021, 9, 29, 17, 17, 42, 928, DateTimeKind.Local).AddTicks(7234), "Agenda spravující důležité velké zakázky", "Velké zakázky" }
+                    { 2, 2, new DateTime(2021, 11, 19, 16, 59, 29, 770, DateTimeKind.Local).AddTicks(7441), "Agenda spravující menší a střední zakázky", "Malé a střední zakázky" },
+                    { 1, 1, new DateTime(2021, 10, 25, 16, 59, 29, 768, DateTimeKind.Local).AddTicks(4520), "Agenda správující jednoduchuché nákupy bez vúběrových řízení", "Nákupy" },
+                    { 3, 1, new DateTime(2021, 9, 25, 16, 59, 29, 770, DateTimeKind.Local).AddTicks(7471), "Agenda spravující důležité velké zakázky", "Velké zakázky" }
                 });
 
             migrationBuilder.InsertData(
@@ -502,11 +477,6 @@ namespace itu.DAL.Migrations
                 columns: new[] { "ModelTaskId", "ModelWorkflowId", "Order" },
                 values: new object[,]
                 {
-                    { 403, 6, 5 },
-                    { 302, 6, 4 },
-                    { 201, 6, 3 },
-                    { 102, 6, 2 },
-                    { 2, 6, 1 },
                     { 603, 5, 7 },
                     { 503, 5, 6 },
                     { 403, 5, 5 },
@@ -516,8 +486,8 @@ namespace itu.DAL.Migrations
                     { 3, 5, 1 },
                     { 601, 4, 6 },
                     { 502, 4, 5 },
+                    { 402, 4, 4 },
                     { 303, 4, 3 },
-                    { 102, 4, 2 },
                     { 2, 4, 1 },
                     { 602, 3, 5 },
                     { 501, 3, 4 },
@@ -529,20 +499,8 @@ namespace itu.DAL.Migrations
                     { 102, 2, 2 },
                     { 1, 2, 1 },
                     { 101, 1, 2 },
-                    { 402, 4, 4 },
+                    { 102, 4, 2 },
                     { 1, 1, 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AgendaModelEntity",
-                columns: new[] { "AgendaId", "ModelId" },
-                values: new object[,]
-                {
-                    { 1, 1 },
-                    { 3, 5 },
-                    { 2, 4 },
-                    { 2, 3 },
-                    { 2, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -550,25 +508,23 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "AgendaId", "Type", "UserId" },
                 values: new object[,]
                 {
+                    { 9, 1, 3, 1 },
                     { 15, 2, 4, 2 },
-                    { 14, 2, 3, 1 },
-                    { 13, 2, 3, 2 },
-                    { 12, 2, 1, 2 },
-                    { 11, 2, 0, 1 },
-                    { 18, 2, 6, 2 },
-                    { 8, 3, 6, 1 },
-                    { 7, 3, 5, 1 },
+                    { 14, 2, 5, 2 },
+                    { 13, 2, 5, 2 },
+                    { 12, 2, 0, 2 },
+                    { 11, 2, 3, 1 },
+                    { 18, 2, 1, 2 },
+                    { 16, 2, 4, 2 },
+                    { 8, 3, 1, 1 },
                     { 6, 3, 4, 1 },
-                    { 4, 3, 3, 1 },
+                    { 4, 3, 5, 1 },
                     { 3, 3, 2, 1 },
-                    { 2, 3, 1, 1 },
-                    { 1, 3, 0, 1 },
-                    { 20, 1, 3, null },
-                    { 19, 1, 4, null },
-                    { 10, 1, 1, 2 },
-                    { 9, 1, 0, 1 },
-                    { 16, 2, 4, 1 },
-                    { 17, 2, 5, 2 }
+                    { 2, 3, 0, 1 },
+                    { 1, 3, 3, 1 },
+                    { 10, 1, 0, 2 },
+                    { 7, 3, 6, 1 },
+                    { 17, 2, 6, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -600,13 +556,13 @@ namespace itu.DAL.Migrations
                 columns: new[] { "Id", "Active", "DelayReason", "End", "Note", "Order", "Priority", "Start", "UserId", "WorkflowId" },
                 values: new object[,]
                 {
-                    { 3, true, null, new DateTime(2021, 12, 10, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(2959), null, 0, 1, new DateTime(2021, 11, 26, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(2966), 1, 3 },
-                    { 1, true, "Testovací důvod vrácení", new DateTime(2021, 12, 1, 17, 17, 42, 929, DateTimeKind.Local).AddTicks(9462), "Testovaci předvyplněný úkol obsahující i poznámku.", 1, 3, new DateTime(2021, 11, 25, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(1223), 1, 1 },
-                    { 6, true, null, new DateTime(2021, 11, 26, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(3714), null, 0, 3, new DateTime(2021, 11, 27, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(3721), 1, 6 },
-                    { 2, true, "dovolená", new DateTime(2021, 11, 21, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(2143), "Přijato bez výhrad", 0, 2, new DateTime(2021, 11, 21, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(2692), 1, 2 },
-                    { 4, true, null, new DateTime(2021, 12, 2, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(3212), null, 0, 0, new DateTime(2021, 11, 19, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(3218), 1, 4 },
-                    { 5, true, null, new DateTime(2021, 12, 2, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(3458), null, 0, 2, new DateTime(2021, 11, 24, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(3464), 1, 5 },
-                    { 7, true, null, new DateTime(2021, 12, 2, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(3958), null, 0, 1, new DateTime(2021, 11, 22, 17, 17, 42, 930, DateTimeKind.Local).AddTicks(3964), 1, 7 }
+                    { 3, true, null, new DateTime(2021, 12, 6, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(2675), null, 0, 1, new DateTime(2021, 11, 22, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(2683), 1, 3 },
+                    { 1, true, "Testovací důvod vrácení", new DateTime(2021, 11, 27, 16, 59, 29, 771, DateTimeKind.Local).AddTicks(8885), "Testovaci předvyplněný úkol obsahující i poznámku.", 1, 3, new DateTime(2021, 11, 21, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(974), 1, 1 },
+                    { 6, true, null, new DateTime(2021, 11, 22, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(3641), null, 0, 3, new DateTime(2021, 11, 23, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(3650), 1, 6 },
+                    { 2, true, "dovolená", new DateTime(2021, 11, 17, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(1962), "Přijato bez výhrad", 0, 2, new DateTime(2021, 11, 17, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(2448), 1, 2 },
+                    { 4, true, null, new DateTime(2021, 11, 28, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(3019), null, 0, 0, new DateTime(2021, 11, 15, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(3032), 1, 4 },
+                    { 5, true, null, new DateTime(2021, 11, 28, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(3291), null, 0, 2, new DateTime(2021, 11, 20, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(3300), 1, 5 },
+                    { 7, true, null, new DateTime(2021, 11, 28, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(3872), null, 0, 1, new DateTime(2021, 11, 18, 16, 59, 29, 772, DateTimeKind.Local).AddTicks(3880), 1, 7 }
                 });
 
             migrationBuilder.InsertData(
@@ -643,11 +599,6 @@ namespace itu.DAL.Migrations
                 table: "Publishes",
                 columns: new[] { "Id", "PublishEnd", "PublishStart" },
                 values: new object[] { 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AgendaModelEntity_AgendaId",
-                table: "AgendaModelEntity",
-                column: "AgendaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AgendaRoles_AgendaId",
@@ -710,9 +661,6 @@ namespace itu.DAL.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Acceptations");
-
-            migrationBuilder.DropTable(
-                name: "AgendaModelEntity");
 
             migrationBuilder.DropTable(
                 name: "AgendaRoles");
