@@ -79,3 +79,7 @@ function TaskAlertClose(id)
     }
 }
 
+function NavClicked()
+{
+    return true;
+}

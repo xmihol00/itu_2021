@@ -15,38 +15,16 @@
 <div class="d-flex justify-content-between mr-2 ml-2">
     <h1 class="page-name">Aktivní úkoly</h1>
     <div id="Buttons" class="mt-auto mb-auto d-flex">
-        <a href="~/Task/Solved" class="btn btn-primary ml-1" style="white-space: nowrap">
-            Vyřešené úkoly
-        </a>
-        <a href="~/Task/Delayed" class="btn btn-primary ml-1" style="white-space: nowrap">
+        <button onclick="ActiveClicked()" class="btn btn-secondary ml-1" style="white-space: nowrap">
+            Aktivní úkoly
+        </button>
+        <button onclick="DelayedClicked()" class="btn btn-primary ml-1" style="white-space: nowrap">
             Zpožděné úkoly
-        </a>
+        </button>
+        <button onclick="SolvedClicked()" class="btn btn-primary ml-1" style="white-space: nowrap">
+            Vyřešené úkoly
+        </button>
     </div>
 </div>
 <hr class="page-title-line">
 @await Html.PartialAsync("Partial/_Overview", Model)
-
-
-<div id="DiscardChnagesId" class="modal">
-    <div id="DiscardBodyId" class="modal-content" style="width: 37%;">
-        <h3 class="text-center mb-3">
-            Opravdu chcete zahodit změny?
-        </h3>
-        <div class="d-flex justify-content-between">
-            <button class="btn btn-danger cancel-btn-width" onclick="ResetTask()">Zahodit změy</button>
-            <button class="btn btn-success cancel-btn-width" onclick="HideModal()">Zrušit</button>
-        </div>
-    </div>
-</div>
-
-<div id="LeaveModId" class="modal">
-    <div id="LeaveId" class="modal-content" style="width: 37%;">
-        <h3 class="text-center mb-3">
-            Máte neuložené změny, přejete si je uložit?
-        </h3>
-        <div class="d-flex justify-content-between">
-            <button class="btn btn-danger leave-btn-width" onclick="Callback()">Neukládat</button>
-            <button class="btn btn-success leave-btn-width" onclick="SaveAndLeave()">Uložit</button>
-        </div>
-    </div>
-</div>

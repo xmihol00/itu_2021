@@ -31,6 +31,10 @@
                 <label>Heslo</label>
                 <input id="Password" type="password" asp-for="Password" class="form-control" style="width: 430px;" />
             </div>
+            @if (!String.IsNullOrWhiteSpace(Model.UserName))
+            {
+                <div class="signin-fail">Nezámé přihlašovací údaje</div>
+            }
             <button type="submit" class="btn btn-primary" style="float: right;">Přihlásit se</button>
             <input type="hidden" asp-for="ReturnURL" />
         </form>

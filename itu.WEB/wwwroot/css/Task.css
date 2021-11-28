@@ -315,3 +315,7 @@
 .leave-btn-width {
     width: 100px;
 }
+
+.btn-hvr:hover {
+    color: var(--color-focus);
+}
