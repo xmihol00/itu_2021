@@ -38,7 +38,7 @@ namespace itu.BL.Facades
 
             overview.SearchOptions = new SearchDTO();
             overview.SearchOptions.ActiveTasks = _mapper.Map<List<IdTypeTaskDTO>>(await _tasks.GetActive());
-            overview.SearchOptions.Agendas = _mapper.Map<List<IdNameAgendaDTO>>(await _agendas.GetAll());
+            overview.SearchOptions.Agendas = _mapper.Map<List<IdNameAgendaDTO>>(await _agendas.All());
             overview.SearchOptions.WorkflowModels = _mapper.Map<List<IdNameModelDTO>>(await _workflow.GetAllModels());
 
             return overview;
