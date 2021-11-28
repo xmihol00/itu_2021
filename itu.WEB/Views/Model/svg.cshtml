@@ -1,0 +1,1173 @@
+@model (int modelId, int active, int width, int height)
+@if(Model.modelId == 1)
+{
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="@Model.width" height="@Model.height" viewBox="150 51 288 293" version="1.1">
+   <defs>
+      <marker id="arrow" viewBox="0 0 20 20" refX="11" refY="10" markerWidth="10" markerHeight="10" orient="auto">
+         <path d="M 1 5 L 11 10 L 1 15 Z" style="fill: black; stroke-width: 1px; stroke-linecap: round; stroke-dasharray: 10000, 1; stroke: black;" />
+      </marker>
+   </defs>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  174,117L174,139 L230,139 L230,160 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="174,117 174,139 230,139 230,160 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="168" y="111" width="68" height="55" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  280,200L310,200 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="280,200 310,200 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="274" y="194" width="42" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  360,240L360,261 L414,261 L414,281 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="360,240 360,261 414,261 414,281 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="354" y="234" width="66" height="53" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 156 81)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 396 281)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 4px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 409 324)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">cíl</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="11" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="23" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 163 57)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">start</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="22" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="34" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 180 160)">
+         <g class="djs-visual">
+            @if (Model.active == 1)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+               <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="30.984375" y="43.599999999999994">Zadání</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 310 160)">
+         <g class="djs-visual">
+            @if (Model.active == 2)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+               <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="23.3125" y="43.599999999999994">Schválení</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+</svg>
+}
+else if(Model.modelId == 2)
+{
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="@Model.width" height="@Model.height" viewBox="118 53 352 293" version="1.1">
+   <defs>
+      <marker id="arrow" viewBox="0 0 20 20" refX="11" refY="10" markerWidth="10" markerHeight="10" orient="auto">
+         <path d="M 1 5 L 11 10 L 1 15 Z" style="fill: black; stroke-width: 1px; stroke-linecap: round; stroke-dasharray: 10000, 1; stroke: black;" />
+      </marker>
+   </defs>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  192,99L244,99 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="192,99 244,99 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="186" y="93" width="64" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  344,99L414,99 L414,160 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="344,99 414,99 414,160 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="93" width="82" height="73" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  364,200L224,200 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="364,200 224,200 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="218" y="194" width="152" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  174,240L174,300 L244,300 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="174,240 174,300 244,300 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="168" y="234" width="82" height="72" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  344,300L396,300 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="344,300 396,300 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="294" width="64" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 156 81)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 163 124)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">start</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="22" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="34" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 59)">
+         <g class="djs-visual">
+            @if (Model.active == 1)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="30.984375" y="43.599999999999994">Zadání</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 260)">
+         <g class="djs-visual">
+            @if (Model.active == 4)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="23.4921875" y="43.599999999999994">Archivace</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 396 282)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 4px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 409 325)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">cíl</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="11" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="23" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 124 160)">
+         <g class="djs-visual">
+            @if (Model.active == 3)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="7.6484375" y="43.599999999999994">Tvorba smlouvy</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 364 160)">
+         <g class="djs-visual">
+            @if (Model.active == 2)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="23.3125" y="43.599999999999994">Schválení</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+</svg>
+}
+else if(Model.modelId == 3)
+{
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="@Model.width" height="@Model.height" viewBox="118 53 352 292" version="1.1">
+   <defs>
+      <marker id="arrow" viewBox="0 0 20 20" refX="11" refY="10" markerWidth="10" markerHeight="10" orient="auto">
+         <path d="M 1 5 L 11 10 L 1 15 Z" style="fill: black; stroke-width: 1px; stroke-linecap: round; stroke-dasharray: 10000, 1; stroke: black;" />
+      </marker>
+   </defs>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  192,99L244,99 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="192,99 244,99 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="186" y="93" width="64" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  344,99L414,99 L414,159 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="344,99 414,99 414,159 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="93" width="82" height="72" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  364,199L344,199 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="364,199 344,199 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="193" width="32" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  244,199L174,199 L174,259 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="244,199 174,199 174,259 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="168" y="193" width="82" height="72" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  224,299L244,299 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="224,299 244,299 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="218" y="293" width="32" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  344,299L396,299 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="344,299 396,299 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="293" width="64" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 156 81)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 163 124)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">start</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="22" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="34" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 59)">
+         <g class="djs-visual">
+            @if (Model.active == 1)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="30.984375" y="43.599999999999994">Zadání</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 124 259)">
+         <g class="djs-visual">
+            @if (Model.active == 4)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="21.3125" y="43.599999999999994">Zveřejnění</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 259)">
+         <g class="djs-visual">
+            @if (Model.active == 5)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="23.4921875" y="43.599999999999994">Archivace</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 396 281)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 4px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 409 324)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">cíl</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="11" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="23" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 159)">
+         <g class="djs-visual">
+            @if (Model.active == 3)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="7.6484375" y="43.599999999999994">Tvorba smlouvy</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 364 159)">
+         <g class="djs-visual">
+            @if (Model.active == 2)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="23.3125" y="43.599999999999994">Schválení</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+</svg>
+}
+else if(Model.modelId == 4)
+{
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="@Model.width" height="@Model.height" viewBox="118 53 352 293" version="1.1">
+   <defs>
+      <marker id="arrow" viewBox="0 0 20 20" refX="11" refY="10" markerWidth="10" markerHeight="10" orient="auto">
+         <path d="M 1 5 L 11 10 L 1 15 Z" style="fill: black; stroke-width: 1px; stroke-linecap: round; stroke-dasharray: 10000, 1; stroke: black;" />
+      </marker>
+   </defs>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  192,99L244,99 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="192,99 244,99 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="186" y="93" width="64" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  344,99L364,99 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="344,99 364,99 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="93" width="32" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  414,139L414,199 L344,199 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="414,139 414,199 344,199 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="133" width="82" height="72" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  244,199L224,199 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="244,199 224,199 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="218" y="193" width="32" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  174,239L174,259 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="174,239 174,259 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="168" y="233" width="12" height="32" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  224,299L234,299 L234,300 L244,300 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="224,299 234,299 234,300 244,300 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="218" y="293" width="32" height="13" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  344,300L396,300 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="344,300 396,300 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="294" width="64" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 156 81)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 163 124)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">start</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="22" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="34" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 59)">
+         <g class="djs-visual">
+            @if (Model.active == 1)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="30.984375" y="43.599999999999994">Zadání</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 364 59)">
+         <g class="djs-visual">
+            @if (Model.active == 2)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="23.3125" y="43.599999999999994">Schválení</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 159)">
+         <g class="djs-visual">
+            @if (Model.active == 3)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="17.640625" y="43.599999999999994">Odhad ceny</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 124 159)">
+         <g class="djs-visual">
+            @if (Model.active == 4)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="7.6484375" y="43.599999999999994">Tvorba smlouvy</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 124 259)">
+         <g class="djs-visual">
+            @if (Model.active == 5)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="21.3125" y="43.599999999999994">Zveřejnění</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 260)">
+         <g class="djs-visual">
+            @if (Model.active == 6)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="23.4921875" y="43.599999999999994">Archivace</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 396 282)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 4px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 409 325)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">cíl</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="11" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="23" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+</svg>
+}
+else if(Model.modelId == 5)
+{
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="@Model.width" height="@Model.height" viewBox="118 53 352 293" version="1.1">
+   <defs>
+      <marker id="arrow" viewBox="0 0 20 20" refX="11" refY="10" markerWidth="10" markerHeight="10" orient="auto">
+         <path d="M 1 5 L 11 10 L 1 15 Z" style="fill: black; stroke-width: 1px; stroke-linecap: round; stroke-dasharray: 10000, 1; stroke: black;" />
+      </marker>
+   </defs>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  192,99L244,99 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="192,99 244,99 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="186" y="93" width="64" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  344,99L364,99 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="344,99 364,99 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="93" width="32" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  414,139L414,159 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="414,139 414,159 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="408" y="133" width="12" height="32" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  364,199L344,199 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="364,199 344,199 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="193" width="32" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  244,199L224,199 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="244,199 224,199 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="218" y="193" width="32" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  174,239L174,259 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="174,239 174,259 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="168" y="233" width="12" height="32" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  224,299L234,299 L234,300 L244,300 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="224,299 234,299 234,300 244,300 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="218" y="293" width="32" height="13" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  344,300L396,300 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="344,300 396,300 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="294" width="64" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 156 81)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 163 124)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">start</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="22" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="34" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 59)">
+         <g class="djs-visual">
+            @if (Model.active == 1)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="30.984375" y="43.599999999999994">Zadání</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 364 59)">
+         <g class="djs-visual">
+            @if (Model.active == 2)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="23.3125" y="43.599999999999994">Schválení</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 364 159)">
+         <g class="djs-visual">
+            @if (Model.active == 3)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="17.640625" y="43.599999999999994">Odhad ceny</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 159)">
+         <g class="djs-visual">
+            @if (Model.active == 4)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="21.3125" y="43.599999999999994">Posouzení</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 124 159)">
+         <g class="djs-visual">
+            @if (Model.active == 5)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="7.6484375" y="43.599999999999994">Tvorba smlouvy</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 124 259)">
+         <g class="djs-visual">
+            @if (Model.active == 6)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="21.3125" y="43.599999999999994">Zveřejnění</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 260)">
+         <g class="djs-visual">
+            @if (Model.active == 7)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="23.4921875" y="43.599999999999994">Archivace</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 396 282)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 4px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 409 325)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">cíl</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="11" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="23" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+</svg>
+}
+else if(Model.modelId == 6)
+{
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="@Model.width" height="@Model.height" viewBox="118 53 352 293" version="1.1">
+   <defs>
+      <marker id="arrow" viewBox="0 0 20 20" refX="11" refY="10" markerWidth="10" markerHeight="10" orient="auto">
+         <path d="M 1 5 L 11 10 L 1 15 Z" style="fill: black; stroke-width: 1px; stroke-linecap: round; stroke-dasharray: 10000, 1; stroke: black;" />
+      </marker>
+   </defs>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  192,99L244,99 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="192,99 244,99 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="186" y="93" width="64" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  344,99L364,99 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="344,99 364,99 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="93" width="32" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  414,139L414,199 L344,199 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="414,139 414,199 344,199 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="133" width="82" height="72" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  244,199L224,199 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="244,199 224,199 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="218" y="193" width="32" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  174,239L174,300 L244,300 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="174,239 174,300 244,300 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="168" y="233" width="82" height="73" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-connection" style="display: block;">
+         <g class="djs-visual">
+            <path d="m  344,300L396,300 " style="fill: none; stroke-width: 2px; stroke: black; stroke-linejoin: round; marker-end: url('#arrow');" />
+         </g>
+         <polyline points="344,300 396,300 " class="djs-hit djs-hit-stroke" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="338" y="294" width="64" height="12" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 156 81)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 163 124)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">start</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="22" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="34" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 59)">
+         <g class="djs-visual">
+            @if (Model.active == 1)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="30.984375" y="43.599999999999994">Zadání</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 364 59)">
+         <g class="djs-visual">
+            @if (Model.active == 2)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="23.3125" y="43.599999999999994">Schválení</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 396 282)">
+         <g class="djs-visual">
+            <circle cx="18" cy="18" r="18" style="stroke: black; stroke-width: 4px; fill: white; fill-opacity: 0.95;" />
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="36" height="36" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="48" height="48" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 409 325)">
+         <g class="djs-visual">
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 11px; font-weight: normal; fill: black;">
+               <tspan x="0" y="9.899999999999999">cíl</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="11" height="14" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="23" height="26" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 260)">
+         <g class="djs-visual">
+            @if (Model.active == 5)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="7.6484375" y="43.599999999999994">Tvorba smlouvy</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 124 159)">
+         <g class="djs-visual">
+            @if (Model.active == 4)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="21.3125" y="43.599999999999994">Posouzení</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+   <g class="djs-group">
+      <g class="djs-element djs-shape" style="display: block;" transform="matrix(1 0 0 1 244 159)">
+         <g class="djs-visual">
+            @if (Model.active == 3)
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: green; stroke-width: 2px; fill: #abfffd; fill-opacity: 0.95;" />
+            }
+            else
+            {
+                <rect x="0" y="0" width="100" height="80" rx="10" ry="10" style="stroke: black; stroke-width: 2px; fill: white; fill-opacity: 0.95;" />
+            }
+            <text lineHeight="1.2" class="djs-label" style="font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; fill: black;">
+               <tspan x="17.640625" y="43.599999999999994">Odhad ceny</tspan>
+            </text>
+         </g>
+         <rect class="djs-hit djs-hit-all" x="0" y="0" width="100" height="80" style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 15px;" />
+         <rect x="-6" y="-6" width="112" height="92" class="djs-outline" style="fill: none;" />
+      </g>
+   </g>
+</svg>
+}

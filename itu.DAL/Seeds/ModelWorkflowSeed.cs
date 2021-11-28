@@ -30,21 +30,28 @@ namespace itu.DAL.Seeds
             {
                 Id = 3,
                 Name = "Výběrové řízení malé zakázky",
-                Description = "Slouží pro zakázky do 100 000 Kč."
+                Description = "Slouží pro malé zakázky do 100 000 Kč."
             },
 
             new ModelWorkflowEntity()
             {
                 Id = 4,
                 Name = "Výběrové řízení střední zakázky",
-                Description = "Slouží pro zakázky do 1 000 000 Kč."
+                Description = "Slouží pro střední zakázky do 1 000 000 Kč."
             },
 
             new ModelWorkflowEntity()
             {
                 Id = 5,
                 Name = "Výběrové řízení velké zakázky",
-                Description = "Slouží pro zakázky nad 1 000 000 Kč."
+                Description = "Slouží pro velké zakázky nad 1 000 000 Kč. Jedná se o nejdůležitější zakázky."
+            },
+
+            new ModelWorkflowEntity()
+            {
+                Id = 6,
+                Name = "Model pro velké nákupy",
+                Description = "Slouží pro velký nákup více položek, u kterých je vyžadováno posouzení a odhad ceny. S dodavatelem je sepsána exkluzivní smlouva."
             },
         };
 

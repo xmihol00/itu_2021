@@ -164,6 +164,37 @@ namespace itu.DAL.Seeds
                 ModelWorkflowId = 5,
                 Order = 7
             },
+
+            new ModelWorkflowTaskEntity()
+            {
+                ModelTaskId = 2,
+                ModelWorkflowId = 6,
+                Order = 1
+            },
+            new ModelWorkflowTaskEntity()
+            {
+                ModelTaskId = 102,
+                ModelWorkflowId = 6,
+                Order = 2
+            },
+            new ModelWorkflowTaskEntity()
+            {
+                ModelTaskId = 201,
+                ModelWorkflowId = 6,
+                Order = 3
+            },
+            new ModelWorkflowTaskEntity()
+            {
+                ModelTaskId = 302,
+                ModelWorkflowId = 6,
+                Order = 4
+            },
+            new ModelWorkflowTaskEntity()
+            {
+                ModelTaskId = 403,
+                ModelWorkflowId = 6,
+                Order = 5
+            },
         };
 
         public static void SeedModelWorkflowTasks(this ModelBuilder modelBuilder)
