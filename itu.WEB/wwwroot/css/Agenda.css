@@ -1,0 +1,86 @@
+
+.card {
+  margin: 10px;
+  padding: 10px 10px 0px 10px;
+  width: 345px;
+  min-height: 200px;
+  cursor: pointer;
+  transition: transform .5s;
+}
+
+.card:last-child {
+  margin: 10px;
+}
+
+.card-role {
+  margin: 9px;
+  padding: 10px 10px 0px 10px;
+  width: 46%;
+  min-height: 125px;
+  cursor: default;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(37, 33, 82, 0.12), 0 4px 8px rgba(37, 33, 82, 0.06);
+  transition: transform .2s;
+}
+
+.card-role:hover {
+  transform: none;
+  box-shadow: none;
+  transition: none;
+}
+ 
+.agenda-count {
+  border-radius: 15px;
+  background-color: var(--color-focus);
+  color: var(--color-text-inverted);
+  padding: 4px 10px;
+  word-break: break-word;
+  font-weight: 500;
+}
+
+.user-count {
+  border-radius: 15px;
+  background-color: purple;
+  color: var(--color-text-inverted);
+  padding: 4px 10px;
+  word-break: break-word;
+  font-weight: 500;
+}
+
+h1, h2, h3, p, td {
+  color: var(--color-text-default);
+}
+
+.btn-secondary {
+  background-color: var(--color-bg-dark);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-bg-dark);
+}
+
+.edit-btn-w {
+  width: 45px;
+}
+
+.agenda-edit-wdth {
+  width: 140px;
+}
+
+.vis-hidden {
+  visibility: hidden;
+}
+
+.model-li {
+  border-color: var(--color-border);
+  border-width: 2px;
+  border-top: 2px solid var(--color-border) !important;
+  background: var(--color-bg-light);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--value-bradius);
+}

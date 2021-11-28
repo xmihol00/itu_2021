@@ -16,5 +16,10 @@ namespace itu.DAL.Repositories
         {
             return _dbSet.FirstAsync(x => x.UserName == userName && x.Password == password);
         }
+
+        public Task<List<UserEntity>> All()
+        {
+            return _dbSet.ToListAsync();
+        }
     }
 }

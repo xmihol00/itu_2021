@@ -29,6 +29,11 @@ namespace itu.DAL.Repositories
             await _dbSet.AddAsync(entity);
         }
 
+        public async Task Create(IEnumerable<T> entities)
+        {
+            await _dbSet.AddRangeAsync(entities);
+        }
+
         public void Update(T entity)
         {
             _dbSet.Update(entity);

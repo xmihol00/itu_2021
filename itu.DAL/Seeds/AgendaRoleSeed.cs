@@ -77,6 +77,18 @@ namespace itu.DAL.Seeds
                 UserId = 2,
                 Type = TaskTypeEnum.Acceptation,
             },
+            new AgendaRoleEntity()
+            {
+                Id = 19,
+                AgendaId = 1,
+                Type = TaskTypeEnum.Contract,
+            },
+            new AgendaRoleEntity()
+            {
+                Id = 20,
+                AgendaId = 1,
+                Type = TaskTypeEnum.Estimate,
+            },
 
 
             new AgendaRoleEntity()

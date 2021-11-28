@@ -8,13 +8,13 @@ namespace itu.Common.Enums
 {
     public enum TaskTypeEnum
     {
-        Acceptation,
-        Archivation,
-        Assessment,
         Assignment,
-        Contract,
+        Acceptation,
+        Assessment,
         Estimate,
-        Publish
+        Contract,
+        Publish,
+        Archivation,
     }
 
     public static class TaskType

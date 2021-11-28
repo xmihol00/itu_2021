@@ -1,0 +1,24 @@
+@model List<AgendaModelDTO>
+
+<ul class="list-group mt-1">
+    @foreach (var mod in Model)
+    {
+        <li class="list-group-item d-flex justify-content-start model-li">
+            <div>
+                <div style="width: 200px; height: 170px" class="border" >
+                </div>
+            </div>
+            <div class="w-100">
+                <div class="vertical-justify-between">
+                    <div class="pl-3">
+                        <h4>@mod.Name</h4>
+                        <p class="mb-0" style="color: black;">@mod.Description</p>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button id="@mod.Id" onclick="AddModel(this)" class="btn btn-sm btn-success">Přidat</button>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+</ul>

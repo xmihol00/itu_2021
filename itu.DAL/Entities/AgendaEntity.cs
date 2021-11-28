@@ -16,5 +16,6 @@ namespace itu.DAL.Entities
         public List<AgendaRoleEntity> AgendaRoles { get; set; }
         public int AdministratorId { get; set; }
         public UserEntity Administrator { get; set; }
+        public List<AgendaModelEntity> AgendaModels { get; set; }
     }
 }
