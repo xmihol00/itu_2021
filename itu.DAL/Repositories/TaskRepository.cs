@@ -49,6 +49,15 @@ namespace itu.DAL.Repositories
                          .FirstAsync(x => x.Id == taskId && x.UserId == userId);
         }
 
+        public Task<TaskEntity> Detail(int taskId)
+        {
+            return _dbSet.Include(x => x.Workflow)
+                            .ThenInclude(x => x.Agenda)
+                         .Include(x => x.Workflow)
+                            .ThenInclude(x => x.Files)
+                         .FirstOrDefaultAsync(x => x.Id == taskId);
+        }
+
         public Task<TaskEntity> GetTask(int id)
         {
             return _dbSet.FirstAsync(x => x.Id == id);
@@ -83,6 +92,11 @@ namespace itu.DAL.Repositories
         {
             return _dbSet.Where(x => x.UserId == userId && x.Active)
                          .Count();
+        }
+
+        public Task<List<TaskEntity>> GetActive()
+        {
+            return _dbSet.Where(x => x.Active == true).ToListAsync();
         }
     }
 }

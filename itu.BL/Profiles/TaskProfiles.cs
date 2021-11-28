@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using itu.BL.DTOs.Task;
 using itu.BL.DTOs.Task.Interfaces;
+using itu.BL.DTOs.Workflow;
 using itu.Common.Enums;
 using itu.DAL.Entities;
 using itu.DAL.Entities.Tasks;
@@ -153,6 +154,9 @@ namespace itu.BL.Profiles
                 .ForMember(dst => dst.AgendaName, opt => opt.MapFrom(src => src.Workflow.Agenda.Name))
                 .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))
                 .ForMember(dst => dst.Files, opt => opt.MapFrom(src => src.Workflow.Files));
+
+            CreateMap<TaskEntity, WorkflowTaskOverviewDTO>();
+            CreateMap<TaskEntity, IdTypeTaskDTO>();
         }
     }
 }
