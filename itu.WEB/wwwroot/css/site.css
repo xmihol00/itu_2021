@@ -404,10 +404,11 @@ h4 {
 }
 
 .modal-content {
-  background-color: #fefefe;
+  border-color: var(--color-border);
+  border-width: 2px;
+  background: var(--color-bg-light);
   margin: auto;
   padding: 20px;
-  border: 1px solid #888;
   width: 45%;
   z-index: 26;
 }
@@ -425,7 +426,6 @@ h4 {
 .text-def {
   color: var(--color-text-default);
 }
-
 
 hr {
   border-top: solid 1px var(--color-hr);

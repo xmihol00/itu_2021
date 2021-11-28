@@ -13,9 +13,9 @@
 }
 
 .card-role {
-  margin: 10px;
+  margin: 9px;
   padding: 10px 10px 0px 10px;
-  width: 45%;
+  width: 46%;
   min-height: 125px;
   cursor: default;
 }
@@ -50,7 +50,7 @@
   font-weight: 500;
 }
 
-h1, h2, h3, p {
+h1, h2, h3, p, td {
   color: var(--color-text-default);
 }
 
@@ -72,4 +72,15 @@ h1, h2, h3, p {
 
 .vis-hidden {
   visibility: hidden;
+}
+
+.model-li {
+  border-color: var(--color-border);
+  border-width: 2px;
+  border-top: 2px solid var(--color-border) !important;
+  background: var(--color-bg-light);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--value-bradius);
 }

@@ -29,6 +29,13 @@ namespace itu.WEB.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> Create(AgendaCreateDTO model)
+        {
+            await _facade.Create(model, ViewBag.Id);
+            return Redirect("/Agenda/Overview");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> AddRole(NewRoleDTO role)
         {
             return PartialView("Partial/_Roles", await _facade.AddRole(role));
@@ -58,6 +65,26 @@ namespace itu.WEB.Controllers
         {
             await _facade.EditAdmin(admin);
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> NewModels(int id)
+        {
+            return PartialView("Partial/_AddModel", await _facade.NewModels(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddModel(AddModelDTO dto)
+        {
+            await _facade.AddModel(dto);
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RunWorkflow(RunWorkflowDTO dto)
+        {
+            await _facade.RunWorkflow(dto);
+            return Redirect($"/Agenda/Detail/{dto.AgendaId}");
         }
     }
 }

@@ -27,6 +27,7 @@ namespace itu.BL.Profiles
 
             CreateMap<AgendaEntity, AgendaDetailDTO>()
                 .ForMember(dst => dst.AdministratorName, opt => opt.MapFrom(src => src.Administrator.FirstName + " " + src.Administrator.LastName))
+                .ForMember(dst => dst.Models, opt => opt.MapFrom(src => src.AgendaModels.Select(x => x.Model)))
                 .ForMember(dst => dst.Roles, opt => opt.MapFrom(src => src.AgendaRoles));
             
             CreateMap<AgendaRoleEntity, AgendaRoleDTO>()
@@ -41,6 +42,8 @@ namespace itu.BL.Profiles
                 .ForMember(dst => dst.FullName, opt => opt.MapFrom(src => src.FirstName + " " + src.LastName));
             
             CreateMap<NewRoleDTO, AgendaRoleEntity>();
+
+            CreateMap<ModelWorkflowEntity, AgendaModelDTO>();
         }
     }
 }

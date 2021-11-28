@@ -54,7 +54,10 @@ namespace itu.DAL
 
             modelBuilder.Entity<ModelWorkflowTaskEntity>().HasKey(x => new { x.ModelTaskId, x.ModelWorkflowId });
 
+            modelBuilder.Entity<AgendaModelEntity>().HasKey(x => new { x.ModelId, x.AgendaId });
+
             modelBuilder.Entity<ModelWorkflowEntity>().HasKey(x => x.Id);
+            modelBuilder.Entity<ModelWorkflowEntity>().HasMany(x => x.AgendaModels).WithOne(x => x.Model).HasForeignKey(x => x.ModelId);
             modelBuilder.Entity<ModelWorkflowEntity>().HasMany(x => x.WorkflowTasks).WithOne(x => x.ModelWorkflow).HasForeignKey(x => x.ModelWorkflowId);
 
             modelBuilder.Entity<UserEntity>().HasKey(x => x.Id);
@@ -64,6 +67,7 @@ namespace itu.DAL
             modelBuilder.Entity<FileEntity>().HasOne(x => x.FileData).WithOne(x => x.File).HasForeignKey<FileEntity>(x => x.FileDataId);
 
             modelBuilder.Entity<AgendaEntity>().HasKey(x => x.Id);
+            modelBuilder.Entity<AgendaEntity>().HasMany(x => x.AgendaModels).WithOne(x => x.Agenda).HasForeignKey(x => x.AgendaId);
             modelBuilder.Entity<AgendaEntity>().HasOne(x => x.Administrator).WithMany(x => x.Agendas).HasForeignKey(x => x.AdministratorId);
 
             modelBuilder.Entity<AgendaRoleEntity>().HasKey(x => x.Id);
@@ -82,6 +86,7 @@ namespace itu.DAL
             modelBuilder.SeedFiles();
             modelBuilder.SeedFileData();
             modelBuilder.SeedAgendaRoles();
+            modelBuilder.SeedAgendaModels();
         }
     }
 }

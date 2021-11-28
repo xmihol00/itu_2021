@@ -53,6 +53,8 @@ function SaveAdmin() {
 function DataEdit() {
     document.getElementById("DataId").style.display = "none";
     document.getElementById("DataEditId").style.display = "block";
+    let des = document.getElementById("DescriptionEditId");
+    des.style.minHeight = des.scrollHeight + "px";
 }
 
 function SaveData() {
@@ -61,6 +63,11 @@ function SaveData() {
     dto.Name = document.getElementById("NameEditId").value;
     dto.Description = document.getElementById("DescriptionEditId").value;
     dto.Id = AgendaId;
+
+    let sel = document.getElementById("AdminSelect");
+    let opt = sel.options[sel.selectedIndex];
+    opt.selected = true;
+    dto.AdminId = sel.value;
     
     $.ajax(
     {
@@ -73,6 +80,7 @@ function SaveData() {
     {
         document.getElementById("NameId").innerText = dto.Name;
         document.getElementById("DescriptionId").innerText = dto.Description;
+        document.getElementById("AdminId").innerText = opt.text;
         document.getElementById("DataId").style.display = "block";
         document.getElementById("DataEditId").style.display = "none";
         ShowAlert("Data úspěšně změněna.");
@@ -207,7 +215,7 @@ function RemoveRole(element) {
     $.ajax(
     {
         async: true,
-        type: 'GET',
+        type: "GET",
         url: "/Agenda/RemoveRole/" + element.id,
     })
     .done(function (result) 
@@ -221,4 +229,84 @@ function RemoveRole(element) {
     {
         ShowAlert("Roli se nepodařilo odebrat.", true);
     });
+}
+
+function ShowCrateModal() {
+    document.getElementById("CreateAgendaId").style.display = "block";
+    document.addEventListener("click", HideCreateModal);
+}
+
+function HideCreateModal(event) {
+    let modal = document.getElementById("CreateAgendaId");
+    if (event == null || modal == event.target)
+    {
+        modal.style.display = "none";
+        document.removeEventListener("click", HideCreateModal);
+    }
+}
+
+function ShowAddModel() {
+    $.ajax(
+    {
+        async: true,
+        type: "GET",
+        url: "/Agenda/NewModels/" + AgendaId,
+    })
+    .done(function (result) 
+    {
+        document.getElementById("AddModalDataId").innerHTML = result;
+        document.getElementById("AddModelId").style.display = "block";
+        document.addEventListener("click", HideAddModel);
+    })
+    .fail(function() 
+    {
+        ShowAlert("Nepodařilo se získat modely pro přidání.", true);
+    });
+}
+
+function HideAddModel(event) {
+    let modal = document.getElementById("AddModelId");
+    if (event == null || modal == event.target)
+    {
+        modal.style.display = "none";
+        document.removeEventListener("click", HideAddModel);
+    }
+}
+
+function AddModel(element) {
+    let dto = {};
+    dto.AgendaId = AgendaId;
+    dto.ModelId = element.id;
+    
+    $.ajax(
+    {
+        async: true,
+        type: "POST",
+        url: "/Agenda/AddModel/" + AgendaId,
+        data: dto
+    })
+    .done(function () 
+    {
+        window.location = "/Agenda/Detail/" + AgendaId;
+    })
+    .fail(function() 
+    {
+        ShowAlert("Model workflow se nepodařilo přidat.", true);
+    });
+}
+
+
+function ShowRunWF(element) {
+    document.getElementById("AddWorkflowId").style.display = "block";
+    document.addEventListener("click", HideAddWF);
+    document.getElementById("ModelInputId").value = element.id;
+}
+
+function HideAddWF(event) {
+    let modal = document.getElementById("AddWorkflowId");
+    if (event == null || modal == event.target)
+    {
+        modal.style.display = "none";
+        document.removeEventListener("click", HideAddWF);
+    }
 }

@@ -6,7 +6,7 @@
 <div class="d-flex justify-content-between mr-2 ml-2">
     <h1 class="page-name">Agendy</h1>
     <div id="Buttons" class="mt-auto mb-auto d-flex">
-		<button class="btn btn-primary">Vytvořit agendu</button>
+		<button class="btn btn-primary" onclick="ShowCrateModal()">Vytvořit agendu</button>
 	</div>
 </div>
 <hr class="page-title-line">
@@ -29,6 +29,12 @@
 							</div>
 						</div>
 					}
+					@if (agenda.Workflows.Count == 0)
+					{
+						<div class="mt-1 mb-2 text-center">
+							<i>Agenda nemá žádná aktivní workflow</i>
+						</div>
+					} 
 				</div>
 				<div class="d-flex justify-content-between mb-1">
 					<div class="mt-auto mb-auto">
@@ -49,4 +55,29 @@
 			</div>
 		</a>
 	}
+</div>
+
+<div id="CreateAgendaId" class="modal">
+    <div id="CreateBodyId" class="modal-content">
+        <form method="post" action="/Agenda/Create" >
+			<h2>Tvorba Agendy</h2>
+			<hr class="mt-0 mb-3">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text agenda-edit-wdth">Název agendy</label>
+                </div>
+                <input class="form-control" name="Name" />
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text agenda-edit-wdth">Popis agendy</label>
+                </div>
+                <textarea class="form-control" name="Description"></textarea>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="button" onclick="HideCreateModal()" class="btn btn-danger">Zrušit <i class="fas fa-times ml-2"></i></button>
+                <button type="submit" class="btn btn-success">Vytvořit <i class="fas fa-save ml-2"></i></button>
+            </div>
+        </form>
+    </div>
 </div>

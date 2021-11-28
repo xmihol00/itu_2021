@@ -18,5 +18,7 @@ namespace itu.BL.DTOs.Agenda
         public string AdministratorName { get; set; }
         public List<AllWorkflowAgendaDTO> Workflows { get; set; }
         public List<AllUserDTO> Users { get; set; }
+        public List<AgendaModelDTO> Models { get; set; }
+        public bool Runable { get; set; }
     }
 }
