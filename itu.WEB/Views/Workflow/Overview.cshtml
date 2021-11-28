@@ -1,2 +1,71 @@
+﻿@*//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Vítek Hnatovskyj
+// Kontakt:     xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================*@
 
-<h1>Tady budou workflow!</h1>
+@model OverviewWorkflowDTO
+<script>
+    const filterURL = "@Url.Action(nameof(WorkflowController.FilterSelected), "Workflow")";
+</script>
+<div class="container">
+    <div class="page-headline d-flex justify-content-between">
+
+        <h1 class="headline-color">Přehled workflow</h1>
+
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <div id="FilterLists" class="mt-2">
+
+                @await Html.PartialAsync("Partial/_FilterLists", Model.SearchOptions)
+
+            </div>
+        </div>
+        <div class="col-12 col-md-9 border-left border-right">
+            <div class="m-md-1">
+
+                <div class="search-div">
+                    <div class="search-bar">
+                        <div class="search-bar-div">
+                            <input id="SearchBar"
+                                   autocomplete="off"
+                                   class="search-bar-input"
+                                   placeholder="Vyhledávání dle názvu workflow" />
+                            <div id="SuggestionList" class="list-suggestion">
+
+                            </div>
+                        </div>
+                        <button id="Search" type="button" class="btn btn-primary"
+                                style="margin-left: -1%;" onclick="Filter()">
+                            Vyhledat
+                        </button>
+                    </div>
+                    <div id="DataSetStates" class="state-filters">
+
+                        @foreach (var value in FilterType.SearchTypes)
+                        {
+
+
+                            <span class="workflow-set-states states-enum"
+                                  data-value="@value"
+                                  onclick="EnumStateClicked(this)">@value</span>
+                            }
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="m-md-1">
+                <div style="margin-bottom: 7px;">
+                    <div id="Workflows">
+                        @await Html.PartialAsync("Partial/_Workflows", Model.AllWorkflow)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/Workflow.js"></script>

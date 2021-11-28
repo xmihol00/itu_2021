@@ -1,0 +1,71 @@
+@*//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Vítek Hnatovskyj
+// Kontakt:     xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================*@
+
+@model SearchDTO
+@{
+    int initiallyDisplayed = 5;
+    List<SearchDTO> searchOptions;
+}
+
+<h5 style="padding-left: 2%;">
+    Agendy<h5>
+        <ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
+
+            @foreach (var agenda in Model.Agendas)
+
+            {
+                <li id=@("Agenda" + agenda.Id)
+                    class="filter-button list-group-item-action list-group-item"
+                    onclick="Filter(null, this)"
+                    value="@(agenda.Name)">
+                    @(agenda.Name)
+
+                </li>
+            }
+
+
+        </ul>
+        <h5 style="padding-left: 2%;">
+            Modely workflow<h5>
+                <ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
+
+                    @foreach (var model in Model.WorkflowModels)
+
+                    {
+                        <li id=@("Model" + model.Id)
+                            class="filter-button list-group-item-action list-group-item"
+                            onclick="Filter(null, this)"
+                            value="@(model.Name)">
+                            @(model.Name)
+
+                        </li>
+                    }
+
+
+                </ul>
+                <h5 style="padding-left: 2%;">
+                    Úkoly<h5>
+                        <ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
+
+                            @if (Model.ActiveTasks != null)
+                            {
+
+                                foreach (var task in Model.ActiveTasks)
+
+                                {
+                                    <li id=@("Task" + task.Id)
+                                        class="filter-button list-group-item-action list-group-item"
+                                        onclick="Filter(null, this)"
+                                        value="@(task.FileType)">
+                                        @(task.FileType)
+
+                                    </li>
+                                }
+
+                            }
+
+                        </ul>

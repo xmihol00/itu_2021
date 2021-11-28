@@ -1,0 +1,82 @@
+@*//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Vítek Hnatovskyj
+// Kontakt:     xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================*@
+
+@model List<AllWorkflowDTO>
+
+<div>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+
+        <div id=@Model[i].Id class="workflow-div-overview border-bottom">
+            <div class="row">
+                <div class="col-md-4 border-right">
+                    <div class="workflow-tasks-overview">
+
+                        @{ for (int j = 0; j < 4; j++)
+                            {
+                                if (Model[i].Tasks.Count > j && Model[i].Tasks[j] != null)
+                                {
+                                    <div class="row">
+                                        <span id="test(@j)" class="" style="margin-top: -2px;">@Model[i].Tasks[j].Id - @Model[i].Tasks[j].End</span>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+
+                        <div class="col-6">
+                            @* odkaz na akci vracejici detail datove sady *@
+                            <p style="word-break:break-word">@Model[i].ExpectedEnd</p>
+                        </div>
+                        <div class="col-6">
+                            <span class="" style="margin-top: -2px;">@Model[i].CurrentTask.End</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            @if (Model[i].Name == null)
+                            {
+                                <h3 style="color:grey">
+                                    @("Nepojmenovaná workflow")
+                                </h3>
+                            }
+                            else
+                            {
+                                <h5>
+                                    <a href="~/Workflow/Detail/@(Model[i].Id)">
+                                        @(Model[i].Name)
+                                    </a>
+                                </h5>
+                            }
+
+                        </div>
+
+                        <div class="col-6">
+                            <span class="" style="margin-top: -2px;">Stav: @Model[i].State</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <p style="word-break:break-word">Agenda: <a>@Model[i].Agenda.Id</a></p>
+                        </div>
+
+                        <div class="col-6">
+                            <span class="" style="margin-top: -2px;"> <a>@Model[i].CurrentTask.Id</a></span>
+                        </div>
+                    </div>
+
+                    <hr style="margin-bottom: -3px;">
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+

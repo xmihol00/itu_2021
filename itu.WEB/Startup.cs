@@ -67,6 +67,7 @@ namespace itu.WEB
             services.AddScoped<TaskFacade>();
             services.AddScoped<FileFacade>();
             services.AddScoped<AgendaFacade>();
+            services.AddScoped<WorkflowFacade>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
