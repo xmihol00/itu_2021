@@ -17,7 +17,12 @@ namespace itu.DAL.Repositories
 
         public Task<List<WorkflowEntity>> GetAllWorkflows()
         {
-            return _context.Workflows.Include(y => y.Agenda).Include(z => z.Tasks).Where(x => x.Id != 0).ToListAsync();
+            return _context.Workflows.Include(a => a.Agenda)
+                .Include(b => b.Files)
+                .Include(c => c.ModelWorkflow)
+                .ThenInclude(e => e.WorkflowTasks)
+                .ThenInclude(g => g.ModelTask)
+                .Include(d => d.Tasks).Where(x => x.Id != 0).ToListAsync();
         }
 
         public Task<WorkflowEntity> GetDetail(int id)
@@ -26,6 +31,8 @@ namespace itu.DAL.Repositories
                 .Include(a => a.Agenda)
                 .Include(b => b.Files)
                 .Include(c => c.ModelWorkflow)
+                .ThenInclude(e => e.WorkflowTasks)
+                .ThenInclude(g => g.ModelTask)
                 .Include(d => d.Tasks)
                 .FirstAsync(x => x.Id == id);
         }
@@ -35,31 +42,37 @@ namespace itu.DAL.Repositories
             return _context.ModelWorkflows.ToListAsync();
         }
 
-        public List<WorkflowEntity> GetWorkflowsByAgenda(List<string> names)
+        public List<WorkflowEntity> GetWorkflowsByAgenda(List<int> Ids)
         {
             List<WorkflowEntity> workflows = new List<WorkflowEntity>();
-            foreach (var name in names)
+            foreach (var id in Ids)
             {
-                workflows.Add(_context.Workflows.Include(a => a.Agenda)
+                workflows.AddRange(_context.Workflows.Include(a => a.Agenda)
                 .Include(b => b.Files)
                 .Include(c => c.ModelWorkflow)
+                .ThenInclude(e => e.WorkflowTasks)
+                .ThenInclude(g => g.ModelTask)
                 .Include(d => d.Tasks)
-                .FirstOrDefault(x => x.Agenda.Name == name));
+                .Where(x => x.Agenda.Id == id));
             }
             return workflows;
+            //return _dbSet.Where(x => Ids.All(y => x.Agenda.Id == y)).ToList();
         }
-        public List<WorkflowEntity> GetWorkflowsByModel(List<string> names)
+        public List<WorkflowEntity> GetWorkflowsByModel(List<int> Ids)
         {
             List<WorkflowEntity> workflows = new List<WorkflowEntity>();
-            foreach (var name in names)
+            foreach (var id in Ids)
             {
-                workflows.Add(_context.Workflows.Include(a => a.ModelWorkflow).Include(b => b.Files)
+                workflows.AddRange(_context.Workflows.Include(a => a.ModelWorkflow).Include(b => b.Files)
                 .Include(c => c.ModelWorkflow)
+                .ThenInclude(e => e.WorkflowTasks)
+                .ThenInclude(g => g.ModelTask)
                 .Include(d => d.Tasks)
                 .Include(e => e.Agenda)
-                .FirstOrDefault(x => x.ModelWorkflow.Name == name));
+                .Where(x => x.ModelWorkflow.Id == id));
             }
             return workflows;
+            //return _dbSet.Where(x => Ids.All(y => x.ModelWorkflow.Id == y)).ToList();
         }
 
         public Task<ModelWorkflowEntity> GetWorkflowModel(int id)

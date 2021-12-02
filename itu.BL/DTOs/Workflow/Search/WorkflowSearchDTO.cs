@@ -14,8 +14,10 @@ namespace itu.BL.DTOs.Workflow.Search
 {
     public class WorkflowSearchDTO
     {
-        public List<string> TaskNames { get; set; }
-        public List<string> AgendaNames { get; set; }
-        public List<string> WorkflowModelsNames { get; set; }
+        public List<int> TaskIds { get; set; }
+        public List<int> AgendaIds { get; set; }
+        public List<int> WorkflowModelsIds { get; set; }
+      
+        public string SearchString { get; set; }
     }
 }

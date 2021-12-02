@@ -41,6 +41,14 @@ namespace itu.BL.Facades
             overview.SearchOptions.Agendas = _mapper.Map<List<IdNameAgendaDTO>>(await _agendas.All());
             overview.SearchOptions.WorkflowModels = _mapper.Map<List<IdNameModelDTO>>(await _workflow.GetAllModels());
 
+            foreach (var workflow in overview.AllWorkflow)
+            {
+                workflow.ExpectedEnd = workflow.CurrentTask.End;
+                foreach (var task in workflow.ModelWorkflow.WorkflowTasks)
+                {
+                    workflow.ExpectedEnd.AddDays(task.ModelTask.Difficulty);
+                }
+            }
             return overview;
         }
 
@@ -63,24 +71,53 @@ namespace itu.BL.Facades
 
         public List<AllWorkflowDTO> GetOverviewFiltered(WorkflowSearchDTO search)
         {
+            bool filterSet = false;
             List<AllWorkflowDTO> allWorkflows = new List<AllWorkflowDTO>();
-            if (search.AgendaNames != null && search.AgendaNames.Count > 0)
+            if (search.AgendaIds != null && search.AgendaIds.Count > 0)
             {
-                allWorkflows.AddRange(_mapper.Map<List<AllWorkflowDTO>>(_workflow.GetWorkflowsByAgenda(search.AgendaNames)));
+                allWorkflows.AddRange(_mapper.Map<List<AllWorkflowDTO>>(_workflow.GetWorkflowsByAgenda(search.AgendaIds)));
+                filterSet = true;
             }
 
-            if (search.WorkflowModelsNames != null && search.WorkflowModelsNames.Count > 0)
+            if (search.WorkflowModelsIds != null && search.WorkflowModelsIds.Count > 0)
             {
-                allWorkflows.AddRange(_mapper.Map<List<AllWorkflowDTO>>(_workflow.GetWorkflowsByModel(search.WorkflowModelsNames)));
+                allWorkflows.AddRange(_mapper.Map<List<AllWorkflowDTO>>(_workflow.GetWorkflowsByModel(search.WorkflowModelsIds)));
+                filterSet = true;
             }
 
-            foreach(var workflow in allWorkflows)
+
+            //allWorkflows.AddRange(_workflow.GetWorkflowsByTask(search.TaskNames));
+            if(search.SearchString != null && search.SearchString.Length != 0)
+            {
+                if(filterSet == false)
+                {
+                    allWorkflows.AddRange(_mapper.Map<List<AllWorkflowDTO>>(_workflow.GetAllWorkflows().Result));
+                }   
+                allWorkflows = allWorkflows.Where(x => x.Name.Contains(search.SearchString)).ToList();
+            }
+            else
+            {
+                if (filterSet == false)
+                {
+                    allWorkflows.AddRange(_mapper.Map<List<AllWorkflowDTO>>(_workflow.GetAllWorkflows().Result));
+                }
+            }
+
+
+            foreach (var workflow in allWorkflows)
             {
                 workflow.CurrentTask = workflow.Tasks.FirstOrDefault(x => x.Active == true);
             }
-
-            //allWorkflows.AddRange(_workflow.GetWorkflowsByTask(search.TaskNames));
-
+            allWorkflows = allWorkflows.Distinct(new ItemEqualityComparer()).ToList();
+            
+            foreach(var workflow in allWorkflows)
+            {
+                workflow.ExpectedEnd = workflow.CurrentTask.End;
+                foreach(var task in workflow.ModelWorkflow.WorkflowTasks)
+                {
+                    workflow.ExpectedEnd.AddDays(task.ModelTask.Difficulty);
+                }
+            }
             return allWorkflows;
         }
 
@@ -92,16 +129,23 @@ namespace itu.BL.Facades
             search.WorkflowModels = new List<IdNameModelDTO>();
             foreach (var workflow in workflows)
             {
-                if (workflow.CurrentTask != null)
+                if (workflow.CurrentTask != null && !search.ActiveTasks.Contains(new IdTypeTaskDTO() { Id = workflow.CurrentTask.Id }))
                 {
                     search.ActiveTasks.Add(_mapper.Map<IdTypeTaskDTO>(workflow.CurrentTask));
                 }
-                if (workflow.Agenda != null)
+                if (workflow.Agenda != null && !search.Agendas.Contains(new IdNameAgendaDTO() { Id = workflow.Agenda.Id }))
                 {
                     search.Agendas.Add(_mapper.Map<IdNameAgendaDTO>(workflow.Agenda));
                 }
-                search.WorkflowModels.Add(_mapper.Map<IdNameModelDTO>(await _workflow.GetWorkflowModel(workflow.Id)));
+                if(!search.WorkflowModels.Contains(new IdNameModelDTO { Id = workflow.ModelWorkflow.Id }))
+                {
+                    search.WorkflowModels.Add(_mapper.Map<IdNameModelDTO>(workflow.ModelWorkflow));
+                }
             }
+
+            search.ActiveTasks = search.ActiveTasks.Distinct(new IdTypeTaskDTOEqualityComparer()).ToList();
+            search.Agendas = search.Agendas.Distinct(new IdNameAgendaDTOEqualityComparer()).ToList();
+            search.WorkflowModels= search.WorkflowModels.Distinct(new IdNameModelDTOEqualityComparer()).ToList();
 
             return search;
 

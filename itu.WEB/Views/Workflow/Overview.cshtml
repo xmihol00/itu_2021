@@ -1,14 +1,16 @@
 ﻿@*//=================================================================================================================
-// Projekt:     VUT, FIT, ITU, celosemestralni projekt
-// Datum:       28. 11. 2021
-// Autor:       Vítek Hnatovskyj
-// Kontakt:     xhnato00@stud.fit.vutbr.cz
-//=================================================================================================================*@
+    // Projekt:     VUT, FIT, ITU, celosemestralni projekt
+    // Datum:       28. 11. 2021
+    // Autor:       Vítek Hnatovskyj
+    // Kontakt:     xhnato00@stud.fit.vutbr.cz
+    //=================================================================================================================*@
 
 @model OverviewWorkflowDTO
 <script>
     const filterURL = "@Url.Action(nameof(WorkflowController.FilterSelected), "Workflow")";
 </script>
+<link rel="stylesheet" href="~/css/Workflow.css" />
+<script src="~/js/Workflow.js"></script>
 <div class="container">
     <div class="page-headline d-flex justify-content-between">
 
@@ -43,28 +45,31 @@
                             Vyhledat
                         </button>
                     </div>
-                    <div id="DataSetStates" class="state-filters">
+                    <div class="row" style="margin-top:15px;">
 
-                        @foreach (var value in FilterType.SearchTypes)
-                        {
+                        <div class="col-3"></div>
+                        <div class="col-6">
 
+                            <div style="">
+                                <button class="btn-light" onclick="setListView();">Listové zobrazení</button>
+                                <button class="btn-light" onclick="setTableView();">Tabulkové zobrazení</button>
 
-                            <span class="workflow-set-states states-enum"
-                                  data-value="@value"
-                                  onclick="EnumStateClicked(this)">@value</span>
-                            }
-
+                            </div>
+                        </div>
+                        <div class="col-3"></div>
                     </div>
                 </div>
             </div>
 
             <div class="m-md-1">
-                <div style="margin-bottom: 7px;">
-                    <div id="Workflows">
-                        @await Html.PartialAsync("Partial/_Workflows", Model.AllWorkflow)
+                    <div style="margin-bottom: 7px;">
+                        <div id="Workflows">
+                            @await Html.PartialAsync("Partial/_Workflows", Model.AllWorkflow)
+                        </div>
                     </div>
                 </div>
-            </div>
+            
+
         </div>
     </div>
 </div>
