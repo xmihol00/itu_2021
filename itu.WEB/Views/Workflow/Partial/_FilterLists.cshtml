@@ -1,61 +1,112 @@
-@*//=================================================================================================================
-// Projekt:     VUT, FIT, ITU, celosemestralni projekt
-// Datum:       28. 11. 2021
-// Autor:       Vítek Hnatovskyj
-// Kontakt:     xhnato00@stud.fit.vutbr.cz
-//=================================================================================================================*@
+@*//================================================================    =================================================
+    // Projekt:     VUT, FIT, ITU, celosemestralni projekt
+    // Datum:       28. 11. 2021
+    // Autor:       Vítek Hnatovskyj
+    // Kontakt:     xhnato00@stud.fit.vutbr.cz
+    //=================================================================================================================*@
 
 @model SearchDTO
 
-        <ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
-            <li class="list-group-item list-item-search">Agendy</li>
-            @foreach (var agenda in Model.Agendas)
+<ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
+    <li class="list-group-item list-item-search">Agendy</li>
+    @foreach (var agenda in Model.Agendas)
+    {
+        if (agenda == null || agenda.Id == null || agenda.Name == null)
+        {
+            continue;
+        }
+        if (Model.SelectedAgendaIds != null && Model.SelectedAgendaIds.Contains(agenda.Id))
+        {
+            <li id=@("Agenda" + agenda.Id)
+                class="list-group-item list-item-search selected-state-enum"
+                onclick="Filter(null, this)"
+                value="@(agenda.Name)">
+                @(agenda.Name)
+                <i class="fas fa-times close-cross-right"></i>
+            </li>
+        }
+        else
+        {
+            <li id=@("Agenda" + agenda.Id)
+                class="list-group-item list-item-search"
+                onclick="Filter(null, this)"
+                value="@(agenda.Name)">
+                @(agenda.Name)
 
+            </li>
+        }
+
+    }
+
+
+</ul>
+<ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
+    <li class="list-group-item list-item-search">Modely workflow</li>
+    @foreach (var model in Model.WorkflowModels)
+    {
+        if (model == null || model.Id == null || model.Name == null)
+        {
+            continue;
+        }
+        if (Model.SelectedWorkflowModelsIds != null && Model.SelectedWorkflowModelsIds.Contains(model.Id))
+        {
+            <li id=@("Model" + model.Id)
+                class="list-group-item list-item-search selected-state-enum"
+                onclick="Filter(null, this)"
+                value="@(model.Name)">
+                @(model.Name)
+                <i class="fas fa-times close-cross-right"></i>
+            </li>
+        }
+        else
+        {
+            <li id=@("Model" + model.Id)
+                class="list-group-item list-item-search"
+                onclick="Filter(null, this)"
+                value="@(model.Name)">
+                @(model.Name)
+
+            </li>
+        }
+
+    }
+
+
+</ul>
+<ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
+    <li class="list-group-item list-item-search">Typ úkolu</li>
+    @if (Model.ActiveTasks != null)
+    {
+
+        foreach (var task in Model.ActiveTasks)
+        {
+            if (task == null || task.Id == null || task.FileType == null)
             {
-                <li id=@("Agenda" + agenda.Id)
+                continue;
+            }
+            if (Model.SelectedTaskIds != null && Model.SelectedTaskIds.Contains(task.Id))
+            {
+                <li id=@("Task" + task.Id)
+                    class="list-group-item list-item-search selected-state-enum"
+                    onclick="Filter(null, this)"
+                    value="@(task.FileType)">
+                    @(task.FileType)
+                    <i class="fas fa-times close-cross-right"></i>
+                </li>
+            }
+            else
+            {
+                <li id=@("Task" + task.Id)
                     class="list-group-item list-item-search"
                     onclick="Filter(null, this)"
-                    value="@(agenda.Name)">
-                    @(agenda.Name)
+                    value="@(task.FileType)">
+                    @(task.FileType)
 
                 </li>
             }
 
+        }
 
-        </ul>
-                <ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
-                    <li class="list-group-item list-item-search">Modely workflow</li>
-                    @foreach (var model in Model.WorkflowModels)
+    }
 
-                    {
-                        <li id=@("Model" + model.Id)
-                            class="list-group-item list-item-search"
-                            onclick="Filter(null, this)"
-                            value="@(model.Name)">
-                            @(model.Name)
-
-                        </li>
-                    }
-
-
-                </ul>
-                        <ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
-                            <li class="list-group-item list-item-search">Typ úkolu</li>
-                            @if (Model.ActiveTasks != null)
-                            {
-
-                                foreach (var task in Model.ActiveTasks)
-
-                                {
-                                    <li id=@("Task" + task.Id)
-                                        class="list-group-item list-item-search"
-                                        onclick="Filter(null, this)"
-                                        value="@(task.FileType)">
-                                        @(task.FileType)
-
-                                    </li>
-                                }
-
-                            }
-
-                        </ul>
+</ul>

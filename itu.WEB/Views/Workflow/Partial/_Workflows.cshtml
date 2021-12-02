@@ -1,13 +1,13 @@
 @*//=================================================================================================================
-// Projekt:     VUT, FIT, ITU, celosemestralni projekt
-// Datum:       28. 11. 2021
-// Autor:       Vítek Hnatovskyj
-// Kontakt:     xhnato00@stud.fit.vutbr.cz
-//=================================================================================================================*@
+    // Projekt:     VUT, FIT, ITU, celosemestralni projekt
+    // Datum:       28. 11. 2021
+    // Autor:       Vítek Hnatovskyj
+    // Kontakt:     xhnato00@stud.fit.vutbr.cz
+    //=================================================================================================================*@
 
 @model List<AllWorkflowDTO>
 
-<div>
+<div id="listView">
     @for (int i = 0; i < Model.Count; i++)
     {
 
@@ -15,17 +15,7 @@
             <div class="row">
                 <div class="col-md-4 border-right">
                     <div class="workflow-tasks-overview">
-
-                        @{ for (int j = 0; j < 4; j++)
-                            {
-                                if (Model[i].Tasks.Count > j && Model[i].Tasks[j] != null)
-                                {
-                                    <div class="row">
-                                        <span id="test(@j)" class="" style="margin-top: -2px;">@Model[i].Tasks[j].Id - @Model[i].Tasks[j].End</span>
-                                    </div>
-                                }
-                            }
-                        }
+                        @await Html.PartialAsync("../Model/svg", (Model[i].Agenda.Id, 0, 150, 80))
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -64,7 +54,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <p style="word-break:break-word">Agenda: <a>@Model[i].Agenda.Id</a></p>
+                            <p style="word-break:break-word">Agenda: <a href="~/Agenda/Detail/@(Model[i].Agenda.Id)">@Model[i].Agenda.Name</a></p>
                         </div>
 
                         <div class="col-6">
@@ -79,4 +69,55 @@
 
     }
 </div>
+<div id="tableView" hidden>
 
+    <div class="row" style="text-align:center; word-break:break-word;">
+        <div class="col-2 border-right">
+            <span class="workflow-set-states states-enum">Datum ukončení Workflow</span>
+        </div>
+        <div class="col-2 border-right">
+            <span class="workflow-set-states states-enum">Název workflow</span>
+        </div>
+        <div class="col-2 border-right">
+            <span class="workflow-set-states states-enum">Odkaz na agendu</span>
+        </div>
+        <div class="col-2 border-right">
+            <span class="workflow-set-states states-enum">Datum ukončení aktuálního úkolu</span>
+        </div>
+        <div class="col-2 border-right">
+            <span class="workflow-set-states states-enum">Stav workflow</span>
+        </div>
+        <div class="col-2">
+            <span class="workflow-set-states states-enum">Odkaz na aktuální úkol</span>
+        </div>
+    </div>
+    <hr />
+    @{
+        foreach (var workflow in Model)
+        {
+            <div class="row border-bottom" style="text-align:center;">
+                <div class="col-2 border-right">
+                    <span class="">@workflow.ExpectedEnd</span>
+                </div>
+                <div class="col-2 border-right">
+                    <span class="">@workflow.Name</span>
+                </div>
+
+                <div class="col-2 border-right">
+                    <span class=""><a href="~/Agenda/Detail/@(workflow.Agenda.Id)">@workflow.Agenda.Name</a></span>
+                </div>
+                <div class="col-2 border-right">
+                    <span class="">@workflow.CurrentTask.End</span>
+                </div>
+                <div class="col-2 border-right">
+                    <span class="">@workflow.State</span>
+                </div>
+                <div class="col-2">
+                    <span class="">@workflow.CurrentTask.Id</span>
+                </div>
+            </div>
+
+        }
+    }
+
+</div>

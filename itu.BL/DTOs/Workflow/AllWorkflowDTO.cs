@@ -5,6 +5,7 @@
 // Kontakt:     xhnato00@stud.fit.vutbr.cz
 //=================================================================================================================
 using itu.Common.Enums;
+using itu.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,23 @@ namespace itu.BL.DTOs.Workflow
         public List<WorkflowTaskOverviewDTO> Tasks { get; set; }
         public WorkflowTaskOverviewDTO CurrentTask { get; set; }
         public WorkflowAgendaOverviewDTO Agenda { get; set; }
+        public ModelWorkflowEntity ModelWorkflow { get; set; }
 
     }
+    class ItemEqualityComparer : IEqualityComparer<AllWorkflowDTO>
+    {
+        public bool Equals(AllWorkflowDTO x, AllWorkflowDTO y)
+        {
+            // Two items are equal if their keys are equal.
+            return x.Id == y.Id;
+        }
+
+        public int GetHashCode(AllWorkflowDTO obj)
+        {
+            return obj.Id.GetHashCode();
+        }
+    }
+
+
 }
+
