@@ -30,12 +30,23 @@ document.addEventListener("DOMContentLoaded", function()
     CheckCompulsory();
     SetCountDown();
     
+    window.addEventListener("beforeunload", OnLeave);
+    
     let task = document.getElementById("IdOfTaskId");
     if (task != null)
     {
         TaskId = task.value;
     }
 });
+
+function OnLeave(event)
+{
+    if (Changes)
+    {
+        event.preventDefault();
+        return "Opravdu chcete stránku opustit, máte neuložené změny?"; 
+    }
+}
 
 function SetCountDown()
 {
@@ -650,7 +661,7 @@ function Deny()
     document.getElementById("AcceptId").checked = false;
     document.getElementById("ReasonLabelId").innerText = "Důvod odmítnutí";
 }
-
+``
 
 function DiscardPrompt()
 {
@@ -676,12 +687,14 @@ function HideModal(event)
 
 function AgendaCB()
 {
+    window.removeEventListener("beforeunload", OnLeave);
     window.location = "/Agenda/Detail/" + AgendaId;
     document.getElementById("LeaveModId").style.display = "none";
 }
 
 function WorkflowCB()
 {
+    window.removeEventListener("beforeunload", OnLeave);
     window.location = "/Workflow/Detail/" + WorkflowId;
     document.getElementById("LeaveModId").style.display = "none";
 }
@@ -738,7 +751,11 @@ function SolvedClicked()
 {
     if (Changes)
     {
-        Callback = () => window.location = "/Task/Solved";
+        Callback = () => 
+        {
+            window.removeEventListener("beforeunload", OnLeave);
+            window.location = "/Task/Solved";
+        }
         document.getElementById("LeaveModId").style.display = "block";
         document.addEventListener("click", HideModal);
     }
@@ -753,7 +770,11 @@ function DelayedClicked()
 {
     if (Changes)
     {
-        Callback = () => window.location = "/Task/Delayed";
+        Callback = () => 
+        {
+            window.removeEventListener("beforeunload", OnLeave);
+            window.location = "/Task/Delayed";
+        }
         document.getElementById("LeaveModId").style.display = "block";
         document.addEventListener("click", HideModal);
     }
@@ -768,7 +789,11 @@ function ActiveClicked()
 {
     if (Changes)
     {
-        Callback = () => window.location = "/";
+        Callback = () => 
+        {
+            window.removeEventListener("beforeunload", OnLeave);
+            window.location = "/";
+        }
         document.getElementById("LeaveModId").style.display = "block";
         document.addEventListener("click", HideModal);
     }
@@ -783,7 +808,11 @@ function NavClicked(event, string)
 {
     if (Changes)
     {
-        Callback = () => window.location = string;
+        Callback = () => 
+        {
+            window.removeEventListener("beforeunload", OnLeave);
+            window.location = string;
+        } 
         document.getElementById("LeaveModId").style.display = "block";
         document.addEventListener("click", HideModal);
         event.preventDefault();
@@ -800,3 +829,4 @@ function SaveAndLeave()
 {
     document.getElementById("TaskSaveId").click();
 }
+
