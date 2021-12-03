@@ -50,8 +50,8 @@ function Filter(element = null, filer = null) {
             }
         }
     }
-    
-   
+
+
     $.ajax(
         {
             async: true,
@@ -72,5 +72,38 @@ function Filter(element = null, filer = null) {
 
 }
 
+function showTaskDetail(taskId) {
+    let info = document.getElementById("Detail" + taskId);
+    if (info.hidden == false) {
+        info.hidden = true;
+    } else {
+        info.hidden = false;
 
+    }
+}
+
+function ShowModelDetail(element) {
+    $.ajax(
+        {
+            async: true,
+            type: "GET",
+            url: "/Agenda/ModelDetail/" + element.id,
+        })
+        .done(function (result) {
+            document.getElementById("SvgDataId").innerHTML = result;
+            document.getElementById("SvgDetailId").style.display = "block";
+            document.addEventListener("click", HideModelDetail);
+        })
+        .fail(function () {
+            ShowAlert("Detail modelu se nepodařilo zobrazit.", true);
+        });
+}
+
+function HideModelDetail(event) {
+    let modal = document.getElementById("SvgDetailId");
+    if (event == null || modal == event.target) {
+        modal.style.display = "none";
+        document.removeEventListener("click", HideModelDetail);
+    }
+}
 

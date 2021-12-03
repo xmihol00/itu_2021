@@ -1,0 +1,138 @@
+﻿
+@model DetailTaskDTO
+@switch (Model)
+{
+    case IAssignmentDTO assignment:
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Prvotní odhad ceny</label>
+            </div>
+            <span class="form-control border-dark-flat text-default">@assignment.PriceGues.ToPrice()</span>
+            <div class="input-group-append">
+                <label class="input-group-text">@assignment.Currency</label>
+            </div>
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(assignment.Benefit) ? "comp-bckg" : "")">Přínos organizaci</label>
+            </div>
+            <p class="form-control border-dark-flat text-default area-min-h">@assignment.Benefit</p>
+        </div>
+        break;
+
+    case IAcceptationDTO acceptation:
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label id="ReasonLabelId" class="input-group-text task-prep-wdth">@(acceptation.Accepted ? "Důvod přijetí" : "Důvod odmítnutí")</label>
+            </div>
+            <p class="form-control border-dark-flat text-default area-min-h">@acceptation.Reason</p>
+        </div>
+        break;
+
+    case IAssessmentDTO assessment:
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Závěr posudku</label>
+            </div>
+            <p class="form-control border-dark-flat text-default area-min-h">@assessment.Conclusion</p>
+        </div>
+        break;
+
+    case IEstimateDTO estimate:
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Odhad ceny</label>
+            </div>
+            <span class="form-control border-dark-flat text-default">@estimate.EstimatePrice.ToPrice()</span>
+            <div class="input-group-append">
+                <label class="input-group-text">@estimate.Currency</label>
+            </div>
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Maximální cena</label>
+            </div>
+            <span class="form-control border-dark-flat text-default">@estimate.MaxPrice.ToPrice()</span>
+            <div class="input-group-append">
+                <label class="input-group-text">@estimate.Currency</label>
+            </div>
+        </div>
+        break;
+
+    case IContractDTO contract:
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Finální cena</label>
+            </div>
+            <span class="form-control border-dark-flat text-default">@contract.FinalPrice</span>
+            <div class="input-group-append">
+                <span class="input-group-text">@contract.Currency</span>
+            </div>
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Typ smlouvy</label>
+            </div>
+            <span class="form-control border-dark-flat text-default">@contract.ContractType.ToLabel()</span>
+        </div>
+        break;
+
+    case IPublishDTO publish:
+        <div class="d-flex justify-content-between mb-2">
+            <div class="w-50">
+                <div class="pr-1">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text task-prep-wdth">Datum zveřejnění</label>
+                        </div>
+                        <span class="form-control border-dark-flat text-default">@publish.PublishStart.ToString("yyyy-MM-dd")</span>
+                    </div>
+                </div>
+            </div>
+            <div class="w-50">
+                <div class="pl-1">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text task-prep-wdth">Datum ukončení</label>
+                        </div>
+                        <span class="form-control border-dark-flat text-default">@publish.PublishEnd.ToString("yyyy-MM-dd")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        break;
+
+    case IArchivationDTO archivation:
+        <div class="d-flex justify-content-between mb-2">
+            <div class="w-50">
+                <div class="pr-1">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text task-prep-wdth">Číslo archivace</label>
+                        </div>
+                        <span class="form-control border-dark-flat text-default">@archivation.Number</span>
+                    </div>
+                </div>
+            </div>
+            <div class="w-50">
+                <div class="pl-1">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text task-prep-wdth">Datum zrušení</label>
+                        </div>
+                        <span class="form-control border-dark-flat text-default">@archivation.Cancallation.ToString("dd. MM. yyyy")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text task-prep-wdth">Umístění archivace</label>
+            </div>
+            <span class="form-control border-dark-flat text-default">@archivation.Location.ToLabel()</span>
+        </div>
+        break;
+
+    default:
+        break;
+}
