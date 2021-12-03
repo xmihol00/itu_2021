@@ -3,6 +3,7 @@
     padding-inline: 8px;
     margin-bottom: 5px;
     padding-top: 5px;
+    background-color: var(--color-bg-light);
 }
 
 .workflow-set-states {
@@ -94,6 +95,9 @@
 
 .list-group-item {
     background-color: var(--color-bg)
+}
+.search-headder{
+    color: var(--color-text-default);
 }
 
 .list-group-item {

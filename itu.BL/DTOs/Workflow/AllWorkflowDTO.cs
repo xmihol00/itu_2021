@@ -6,6 +6,7 @@
 //=================================================================================================================
 using itu.Common.Enums;
 using itu.DAL.Entities;
+using itu.DAL.Entities.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +25,12 @@ namespace itu.BL.DTOs.Workflow
         public WorkflowTaskOverviewDTO CurrentTask { get; set; }
         public WorkflowAgendaOverviewDTO Agenda { get; set; }
         public ModelWorkflowEntity ModelWorkflow { get; set; }
-
+       
     }
     class ItemEqualityComparer : IEqualityComparer<AllWorkflowDTO>
     {
         public bool Equals(AllWorkflowDTO x, AllWorkflowDTO y)
         {
-            // Two items are equal if their keys are equal.
             return x.Id == y.Id;
         }
 
@@ -39,7 +39,7 @@ namespace itu.BL.DTOs.Workflow
             return obj.Id.GetHashCode();
         }
     }
-
+    
 
 }
 

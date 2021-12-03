@@ -26,8 +26,10 @@ namespace itu.BL.DTOs.Workflow
         public DateTime ExpectedEnd { get; set; }
 
         public IdNameAgendaDTO Agenda { get; set; }
-        public IdNameModelDTO ModelWorkflow { get; set; }
+        public IdNameModelDTO ModelWorkflowIdName { get; set; }
+        public ModelWorkflowEntity ModelWorkflow { get; set; }
         public List<DetailTaskDTO> Tasks { get; set; }
+        public TaskEntity CurrentTask { get; set; }
         public List<AllFileDTO> Files { get; set; }
     }
 }

@@ -14,23 +14,25 @@
         <div id=@Model[i].Id class="workflow-div-overview border-bottom">
             <div class="row">
                 <div class="col-md-4 border-right">
-                    <div class="workflow-tasks-overview">
-                        @await Html.PartialAsync("../Model/svg", (Model[i].Agenda.Id, 0, 150, 80))
+                    <div class="workflow-tasks-overview" style="margin-left:-5%;">
+                        @await Html.PartialAsync("../Model/svg", (Model[i].Agenda.Id, Model[i].CurrentTask.Order, 240, 180))
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="row">
 
                         <div class="col-6">
-                            @* odkaz na akci vracejici detail datove sady *@
-                            <p style="word-break:break-word">@Model[i].ExpectedEnd</p>
+                            Model worklfow
+                            <h5><p style="word-break:break-word">@Model[i].ModelWorkflow.Name</p></h5>
                         </div>
                         <div class="col-6">
-                            <span class="" style="margin-top: -2px;">@Model[i].CurrentTask.End</span>
+                            Dokončení aktuálního úkolu
+                            <h5><span class="" style="margin-top: -2px;">@Model[i].CurrentTask.End</span></h5>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
+                            Název workflow
                             @if (Model[i].Name == null)
                             {
                                 <h3 style="color:grey">
@@ -49,31 +51,33 @@
                         </div>
 
                         <div class="col-6">
-                            <span class="" style="margin-top: -2px;">Stav: @Model[i].State</span>
+                            Stav workflow
+                            <h5><span class="" style="margin-top: -2px;">@Model[i].State</span></h5>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <p style="word-break:break-word">Agenda: <a href="~/Agenda/Detail/@(Model[i].Agenda.Id)">@Model[i].Agenda.Name</a></p>
+                            Agenda
+                            <h5><p style="word-break:break-word"><a href="~/Agenda/Detail/@(Model[i].Agenda.Id)">@Model[i].Agenda.Name</a></p></h5>
                         </div>
 
                         <div class="col-6">
-                            <span class="" style="margin-top: -2px;"> <a>@Model[i].CurrentTask.Id</a></span>
+                            Typ aktualního úkolu
+                            <h5><span class="" style="margin-top: -2px;"> <a>@Model[i].CurrentTask.ToLabel()</a></span></h5>
                         </div>
                     </div>
 
-                    <hr style="margin-bottom: -3px;">
                 </div>
             </div>
         </div>
 
     }
 </div>
-<div id="tableView" hidden>
+<div id="tableView" class="list-group-item" hidden>
 
     <div class="row" style="text-align:center; word-break:break-word;">
-        <div class="col-2 border-right">
-            <span class="workflow-set-states states-enum">Datum ukončení Workflow</span>
+        <div class="col-4 border-right">
+            <span class="workflow-set-states states-enum">Model workflow</span>
         </div>
         <div class="col-2 border-right">
             <span class="workflow-set-states states-enum">Název workflow</span>
@@ -87,20 +91,18 @@
         <div class="col-2 border-right">
             <span class="workflow-set-states states-enum">Stav workflow</span>
         </div>
-        <div class="col-2">
-            <span class="workflow-set-states states-enum">Odkaz na aktuální úkol</span>
-        </div>
+       
     </div>
     <hr />
     @{
         foreach (var workflow in Model)
         {
             <div class="row border-bottom" style="text-align:center;">
-                <div class="col-2 border-right">
-                    <span class="">@workflow.ExpectedEnd</span>
+                <div class="col-4 border-right">
+                    <span class="">@workflow.ModelWorkflow.Name</span>
                 </div>
                 <div class="col-2 border-right">
-                    <span class="">@workflow.Name</span>
+                    <span class=""><a href="~/Workflow/Detail/@(workflow.Id)">@workflow.Name</a></span>
                 </div>
 
                 <div class="col-2 border-right">
@@ -112,9 +114,7 @@
                 <div class="col-2 border-right">
                     <span class="">@workflow.State</span>
                 </div>
-                <div class="col-2">
-                    <span class="">@workflow.CurrentTask.Id</span>
-                </div>
+                
             </div>
 
         }

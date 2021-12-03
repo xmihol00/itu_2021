@@ -43,7 +43,7 @@ namespace itu.WEB.Controllers
             overview.SearchOptions = await _workflow.GetFiltersFiltered(overview.AllWorkflow);
 
             overview.SearchOptions.SelectedAgendaIds = filters.AgendaIds;
-            overview.SearchOptions.SelectedTaskIds = filters.TaskIds;
+            overview.SearchOptions.SelectedStates = filters.States;
             overview.SearchOptions.SelectedWorkflowModelsIds = filters.WorkflowModelsIds;
 
             Task<string> filtersTask = this.RenderViewAsync("Partial/_FilterLists", overview.SearchOptions);

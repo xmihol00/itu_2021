@@ -79,15 +79,12 @@ namespace itu.DAL.Repositories
         {
             return _context.ModelWorkflows.FirstOrDefaultAsync(x => x.Id == id);
         }
-        //public async Task<List<WorkflowEntity>> GetWorkflowsByTask(List<string> types)
-        //{
-        //    List<WorkflowEntity> workflows = new List<WorkflowEntity>();
-        //    foreach (var type in types)
-        //    {
-        //        workflows.Add(_context.Workflows.Include(a => a.Tasks).Where(x ));
-        //    }
-        //    return workflows;
-        //}
+
+        public Task<TaskEntity> GetCurrentTask(int id)
+        {
+            return _context.Tasks.FirstAsync(x => x.WorkflowId == id && x.Active == true);
+        }
+        
 
 
     }

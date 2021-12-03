@@ -16,11 +16,13 @@
         </div>
         <div class="row">
             <div class="col-6 float-left">
-                <span style="float:left;"><h4> @Model.ExpectedEnd </h4></span>
+                Předpokládaný čas ukončení workflow
+                <span style=""><h4> @Model.ExpectedEnd </h4></span>
             </div>
-            <div class="col-6 float-right">
-                <span style="float:right"><h4>Stav: @Model.State </h4></span>
-            </div>
+            <div class="col-6 float-right"  style="text-align:right;">
+                
+                    <span style="float:right">Stav<h4>@Model.State.ToLabel() </h4></span>
+</div>
         </div>
         <div class="row" style=" margin-top:-2%;">
             <div class="col">
@@ -30,10 +32,10 @@
 
         <div class="row">
             <div class="col">
-                <span style="float: left;"><h4><a href="~/Agenda/Overview">@Model.Agenda.Name</a></h4></span>
+                <span style="float: left;">Název agendy<h4><a href="~/Agenda/Detail/@(Model.Agenda.Id)">@Model.Agenda.Name</a></h4></span>
             </div>
-            <div class="col">
-                <span style="float: right;"><h4><a href="~/">@Model.ModelWorkflow.Name</a></h4></span>
+            <div class="col"  style="text-align:right;">
+                <span style="float: right;">Název modelu<h4>@Model.ModelWorkflowIdName.Name</a></h4></span>
             </div>
         </div>
     </div>
@@ -49,7 +51,7 @@
     <div class="row" style="margin-top:50px;">
         <div class="col-1"></div>
         <div class="col-6" style="margin-top: 10px;">
-            @await Html.PartialAsync("../Model/svg", (Model.Agenda.Id, 0, 260, 210))
+            @await Html.PartialAsync("../Model/svg", (Model.Agenda.Id, Model.CurrentTask.Order, 260, 210))
         </div>
         <div class="col-5" style="">
             <h3>Soubory workflow</h3>
@@ -75,7 +77,7 @@
     </div>
 
 
-    <div class="row" style="text-align:center;">
+    <div class="row" style="text-align:center; margin-top:25px;">
         <div class="col-3 border-right">
             <span class="workflow-set-states states-enum">Datum zahájení</span>
         </div>
@@ -98,7 +100,7 @@
                     <span class="">@task.Start</span>
                 </div>
                 <div class="col-2 border-right">
-                    <span class="">TBD</span>
+                    <span class="">@*@Model.ModelWorkflow.WorkflowTasks.First(x => x.ModelTask.Id == task.Id).ModelTask.Type.ToLabel()*@</span>
                 </div>
 
                 <div class="col-4 border-right">

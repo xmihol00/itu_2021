@@ -40,7 +40,7 @@
 
 
 </ul>
-<ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
+<ul id="ModelList" class="list-group" style="margin-bottom: 1rem">
     <li class="list-group-item list-item-search">Modely workflow</li>
     @foreach (var model in Model.WorkflowModels)
     {
@@ -73,34 +73,34 @@
 
 
 </ul>
-<ul id="AgendaList" class="list-group" style="margin-bottom: 1rem">
-    <li class="list-group-item list-item-search">Typ úkolu</li>
-    @if (Model.ActiveTasks != null)
+<ul id="StateList" class="list-group" style="margin-bottom: 1rem">
+    <li class="list-group-item list-item-search search-headder">Stav workflow</li>
+    @if (Model.States != null)
     {
 
-        foreach (var task in Model.ActiveTasks)
+        foreach (var state in Model.States)
         {
-            if (task == null || task.Id == null || task.FileType == null)
+            if (state == null)
             {
                 continue;
             }
-            if (Model.SelectedTaskIds != null && Model.SelectedTaskIds.Contains(task.Id))
+            if (Model.SelectedStates != null && Model.SelectedStates.Contains(state))
             {
-                <li id=@("Task" + task.Id)
+                <li id=@("State" + state)
                     class="list-group-item list-item-search selected-state-enum"
                     onclick="Filter(null, this)"
-                    value="@(task.FileType)">
-                    @(task.FileType)
+                    value="@(state)">
+                    @(state.ToLabel())
                     <i class="fas fa-times close-cross-right"></i>
                 </li>
             }
             else
             {
-                <li id=@("Task" + task.Id)
+                <li id=@("State" + state)
                     class="list-group-item list-item-search"
                     onclick="Filter(null, this)"
-                    value="@(task.FileType)">
-                    @(task.FileType)
+                    value="@(state)">
+                    @(state.ToLabel())
 
                 </li>
             }
