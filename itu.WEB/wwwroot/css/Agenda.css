@@ -83,15 +83,14 @@ h1, h2, h3, p, td {
 }
 
 .model-li {
-  border-color: var(--color-border);
+  background-color: var(--color-bg-light) !important;
   border-width: 2px;
   border-top: 2px solid var(--color-border) !important;
-  background: var(--color-bg-light);
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   margin-bottom: 0.5rem;
   border-radius: var(--value-bradius);
-  cursor: default;
+  cursor: default !important;
 }
 
 .model-svg {
@@ -104,4 +103,8 @@ h1, h2, h3, p, td {
   width: 660px; 
   height: 560px;
   cursor: default;
+}
+
+.modal-content {
+  background: var(--color-bg-modal) !important;
 }

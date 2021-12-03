@@ -32,6 +32,7 @@
   --color-bg-input: #ced4da;
   --value-bradius: 0.25rem;
   --color-hr: #dee2e6;
+  --color-bg-modal: #fff;
 }
 
 @media (prefers-color-scheme:dark) {
@@ -60,6 +61,7 @@
     --color-bg-input: #343a40;
     --value-bradius: 0.25rem;
     --color-hr: #dee2e6;
+    --color-bg-modal: #282828;
   }
 }
 

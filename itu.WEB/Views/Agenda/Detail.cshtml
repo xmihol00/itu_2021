@@ -93,7 +93,7 @@
 <div class="row m-0 mt-2">
     <div class="col-6 border-right">
         <div>
-            <h2 class="text-center">Role agendy</h2>
+            <h2 class="text-center mb-1">Role agendy</h2>
             <div id="RolesId" class="row pl-1">
                 @await Html.PartialAsync("Partial/_Roles", (Model.Roles, Model.Users, admin))
             </div>
@@ -101,7 +101,7 @@
     </div>
     <div class="col-6" id="WFModelsId">
         <h2 class="text-center">Modely workflow</h2>
-        <ul class="list-group mt-1">
+        <ul class="list-group" style="margin-top: calc(0.25rem + 8px);">
             @foreach (var mod in Model.Models)
             {
                 <li class="list-group-item d-flex justify-content-start model-li" onmouseenter="MouseInRoleCB(arguments[0])" onmouseleave="MouseOutRoleCB(arguments[0])">
