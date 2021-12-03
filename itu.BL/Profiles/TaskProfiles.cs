@@ -162,7 +162,8 @@ namespace itu.BL.Profiles
                 .ForMember(dst => dst.AgendaId, opt => opt.MapFrom(src => src.Workflow.AgendaId))
                 .ForMember(dst => dst.Files, opt => opt.MapFrom(src => src.Workflow.Files));
 
-            CreateMap<TaskEntity, WorkflowTaskOverviewDTO>();
+            CreateMap<TaskEntity, WorkflowTaskOverviewDTO>()
+                .ForMember(dst => dst.Type, opt => opt.MapFrom(src => src.ToLabel()));
             CreateMap<TaskEntity, IdTypeTaskDTO>();
         }
     }

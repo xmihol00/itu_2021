@@ -11,7 +11,7 @@
     <li class="list-group-item list-item-search">Agendy</li>
     @foreach (var agenda in Model.Agendas)
     {
-        if (agenda == null || agenda.Id == null || agenda.Name == null)
+        if (agenda == null || agenda.Id == 0 || agenda.Name == null)
         {
             continue;
         }
@@ -44,7 +44,7 @@
     <li class="list-group-item list-item-search">Modely workflow</li>
     @foreach (var model in Model.WorkflowModels)
     {
-        if (model == null || model.Id == null || model.Name == null)
+        if (model == null || model.Id == 0 || model.Name == null)
         {
             continue;
         }
@@ -80,10 +80,6 @@
 
         foreach (var state in Model.States)
         {
-            if (state == null)
-            {
-                continue;
-            }
             if (Model.SelectedStates != null && Model.SelectedStates.Contains(state))
             {
                 <li id=@("State" + state)

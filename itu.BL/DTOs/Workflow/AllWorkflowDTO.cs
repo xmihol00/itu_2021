@@ -24,9 +24,9 @@ namespace itu.BL.DTOs.Workflow
         public List<WorkflowTaskOverviewDTO> Tasks { get; set; }
         public WorkflowTaskOverviewDTO CurrentTask { get; set; }
         public WorkflowAgendaOverviewDTO Agenda { get; set; }
-        public ModelWorkflowEntity ModelWorkflow { get; set; }
-       
+        public ModelWorkflowEntity ModelWorkflow { get; set; }   
     }
+
     class ItemEqualityComparer : IEqualityComparer<AllWorkflowDTO>
     {
         public bool Equals(AllWorkflowDTO x, AllWorkflowDTO y)
@@ -39,7 +39,5 @@ namespace itu.BL.DTOs.Workflow
             return obj.Id.GetHashCode();
         }
     }
-    
-
 }
 

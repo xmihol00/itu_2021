@@ -21,16 +21,16 @@ namespace itu.Common.Enums
             switch (value)
             {
                 case WorkflowStateEnum.Active:
-                    return "AktivnÌ";
+                    return "Aktivn√≠";
 
                 case WorkflowStateEnum.Stopped:
                     return "Pozastaveno";
 
                 case WorkflowStateEnum.Finished:
-                    return "DokonËeno";
+                    return "Dokonƒçeno";
 
                 case WorkflowStateEnum.Canceled:
-                    return "Zruöeno";
+                    return "Zru≈°eno";
 
                 default:
                     return "";
