@@ -4,6 +4,7 @@
 // Autor:       Vítek Hnatovskyj
 // Kontakt:     xhnato00@stud.fit.vutbr.cz
 //=================================================================================================================
+using itu.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace itu.BL.DTOs.Workflow.Search
 {
     public class WorkflowSearchDTO
     {
-        public List<int> TaskIds { get; set; }
+        public List<WorkflowStateEnum> States { get; set; }
         public List<int> AgendaIds { get; set; }
         public List<int> WorkflowModelsIds { get; set; }
       

@@ -3,6 +3,8 @@ using itu.BL.DTOs.Agenda;
 using itu.BL.DTOs.Task;
 using itu.BL.DTOs.Workflow;
 using itu.BL.DTOs.Workflow.Search;
+using itu.Common.Enums;
+using itu.DAL.Entities;
 using itu.DAL.Repositories;
 using System;
 using System.Collections.Generic;
@@ -17,12 +19,15 @@ namespace itu.BL.Facades
         private readonly WorkflowRepository _workflow;
         private readonly AgendaRepository _agendas;
         private readonly TaskRepository _tasks;
+        private readonly ModelWorkflowRepository _modelWorkflow;
         private readonly IMapper _mapper;
-        public WorkflowFacade(WorkflowRepository workflow, TaskRepository tasks, AgendaRepository agendas, IMapper mapper)
+        public WorkflowFacade(WorkflowRepository workflow, TaskRepository tasks, AgendaRepository agendas, 
+                              ModelWorkflowRepository modelWorkflow, IMapper mapper)
         {
             _workflow = workflow;
             _tasks = tasks;
             _agendas = agendas;
+            _modelWorkflow = modelWorkflow;
             _mapper = mapper;
         }
         public async Task<OverviewWorkflowDTO> GetOverview()
@@ -30,13 +35,18 @@ namespace itu.BL.Facades
             OverviewWorkflowDTO overview = new OverviewWorkflowDTO();
 
             overview.AllWorkflow = _mapper.Map<List<AllWorkflowDTO>>(await _workflow.GetAllWorkflows());
+            overview.SearchOptions = new SearchDTO();
+            overview.SearchOptions.States = new List<WorkflowStateEnum>();
 
             foreach (var workflow in overview.AllWorkflow)
             {
                 workflow.CurrentTask = workflow.Tasks.FirstOrDefault(x => x.Active == true);
+                if (workflow.State != null && !overview.SearchOptions.States.Contains(workflow.State))
+                {
+                    overview.SearchOptions.States.Add(workflow.State);
+                }
             }
-
-            overview.SearchOptions = new SearchDTO();
+            
             overview.SearchOptions.ActiveTasks = _mapper.Map<List<IdTypeTaskDTO>>(await _tasks.GetActive());
             overview.SearchOptions.Agendas = _mapper.Map<List<IdNameAgendaDTO>>(await _agendas.All());
             overview.SearchOptions.WorkflowModels = _mapper.Map<List<IdNameModelDTO>>(await _workflow.GetAllModels());
@@ -56,11 +66,15 @@ namespace itu.BL.Facades
         public async Task<DetailWorkflowDTO> GetDetail(int id)
         {
             DetailWorkflowDTO detail = new DetailWorkflowDTO();
-            detail = _mapper.Map<DetailWorkflowDTO>(await _workflow.GetDetail(id));
+            WorkflowEntity wf = await _workflow.GetDetail(id);
+            detail = _mapper.Map<DetailWorkflowDTO>(wf);
 
             List<int> taskIds = new List<int>();
             detail.Tasks.ForEach(x => taskIds.Add(x.Id));
             detail.Tasks = new List<DetailTaskDTO>();
+            detail.CurrentTask = (await _workflow.GetCurrentTask(id));
+            detail.ModelWorkflowIdName = new IdNameModelDTO() { Id= detail.ModelWorkflow.Id, Name = detail.ModelWorkflow.Name };
+            detail.ExpectedEnd = detail.CurrentTask.End.AddDays(_modelWorkflow.RemainingDificulty(wf.ModelWorkflowId, detail.CurrentTask.Order));
 
             foreach (int taskId in taskIds)
             {
@@ -127,12 +141,14 @@ namespace itu.BL.Facades
             search.ActiveTasks = new List<IdTypeTaskDTO>();
             search.Agendas = new List<IdNameAgendaDTO>();
             search.WorkflowModels = new List<IdNameModelDTO>();
+            search.States = new List<WorkflowStateEnum>();
             foreach (var workflow in workflows)
             {
-                if (workflow.CurrentTask != null && !search.ActiveTasks.Contains(new IdTypeTaskDTO() { Id = workflow.CurrentTask.Id }))
+                if(workflow.State != null && !search.States.Contains(workflow.State))
                 {
-                    search.ActiveTasks.Add(_mapper.Map<IdTypeTaskDTO>(workflow.CurrentTask));
+                    search.States.Add(workflow.State);
                 }
+
                 if (workflow.Agenda != null && !search.Agendas.Contains(new IdNameAgendaDTO() { Id = workflow.Agenda.Id }))
                 {
                     search.Agendas.Add(_mapper.Map<IdNameAgendaDTO>(workflow.Agenda));
@@ -143,7 +159,6 @@ namespace itu.BL.Facades
                 }
             }
 
-            search.ActiveTasks = search.ActiveTasks.Distinct(new IdTypeTaskDTOEqualityComparer()).ToList();
             search.Agendas = search.Agendas.Distinct(new IdNameAgendaDTOEqualityComparer()).ToList();
             search.WorkflowModels= search.WorkflowModels.Distinct(new IdNameModelDTOEqualityComparer()).ToList();
 

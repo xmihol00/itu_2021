@@ -32,5 +32,17 @@ namespace itu.DAL.Repositories
                             .ThenInclude(x => x.ModelTask)
                          .FirstAsync(x => x.Id == modelId);
         }
+
+        public int RemainingDificulty(int id, int order)
+        {
+            return _dbSet.Include(x => x.WorkflowTasks)
+                           .ThenInclude(x => x.ModelTask)
+                         .Where(x => x.Id == id)
+                         .SelectMany(x => x.WorkflowTasks)
+                         .Where(x => x.Order > order)
+                         .Select(x => x.ModelTask.Difficulty)
+                         .AsEnumerable()
+                         .Aggregate(0, (res, x) => res + x);
+        }
     }
 }

@@ -6,108 +6,126 @@
     //=================================================================================================================*@
 
 @model DetailWorkflowDTO
-    <link rel="stylesheet" href="~/css/Task.css" />
-    <link rel="stylesheet" href="~/css/Workflow.css" />
-    <script src="/js/Task.js"></script>
-    <div class="detail-container border-left border-right border-bottom">
+<link rel="stylesheet" href="~/css/Task.css" />
+<link rel="stylesheet" href="~/css/Workflow.css" />
+<script src="/js/Task.js"></script>
+<script src="/js/Workflow.js"></script>
+<div class="detail-container border-left border-right border-bottom">
 
-        <div class="page-headline d-flex justify-content-between">
-            <h1 class="headline-color">Detail workflow</h1>
+    <div class="page-headline d-flex justify-content-between">
+        <h1 class="headline-color">Detail workflow</h1>
+    </div>
+    <div class="row">
+        <div class="col-6 float-left">
+            Předpokládaný čas ukončení workflow
+            <span style=""><h4> @Model.ExpectedEnd.ToString("dd. MM. yyyy") </h4></span>
         </div>
-        <div class="row">
-            <div class="col-6 float-left">
-                <span style="float:left;"><h4> @Model.ExpectedEnd </h4></span>
-            </div>
-            <div class="col-6 float-right">
-                <span style="float:right"><h4>Stav: @Model.State </h4></span>
-            </div>
-        </div>
-        <div class="row" style=" margin-top:-2%;">
-            <div class="col">
-                <span style="text-align:center;"><h2> @Model.Name</h2></span>
-            </div>
-        </div>
+        <div class="col-6 float-right" style="text-align:right;">
 
-        <div class="row">
-            <div class="col">
-                <span style="float: left;"><h4><a href="~/Agenda/Overview">@Model.Agenda.Name</a></h4></span>
-            </div>
-            <div class="col">
-                <span style="float: right;"><h4><a href="~/">@Model.ModelWorkflow.Name</a></h4></span>
-            </div>
+            <span style="float:right">Stav<h4>@Model.State.ToLabel() </h4></span>
+        </div>
+    </div>
+    <div class="row" style=" margin-top:-2%;">
+        <div class="col">
+            <span style="text-align:center;"><h1> @Model.Name</h1></span>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
+        <div class="col">
+            <span style="float: left;">Název agendy<h4><a href="~/Agenda/Detail/@(Model.Agenda.Id)">@Model.Agenda.Name</a></h4></span>
+        </div>
+        <div class="col" style="text-align:right;">
+            <span style="float: right;">Název modelu<h4>@Model.ModelWorkflowIdName.Name</a></h4></span>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top:20px;">
+    <div class="col-1"></div>
+    <div class="col-10">
 
         @Model.Description
-        </div>
-        <div class="col-1"></div>
     </div>
-    <div class="row" style="margin-top:50px;">
-        <div class="col-1"></div>
-        <div class="col-6" style="margin-top: 10px;">
-            @await Html.PartialAsync("../Model/svg", (Model.Agenda.Id, 0, 260, 210))
+    <div class="col-1"></div>
+</div>
+<div class="row" style="margin-top:50px;">
+    <div class="col-1"></div>
+    <div class="col-6" style="margin-top: 10px;">
+        <div class="model-svg" id="@Model.Agenda.Id" onclick="ShowModelDetail(this)">
+            @await Html.PartialAsync("../Model/svg", (Model.Agenda.Id, Model.CurrentTask.Order, 360, 310))
         </div>
-        <div class="col-5" style="">
-            <h3>Soubory workflow</h3>
-            <div class="files-div mb-2">
-                <div class="input-group mb-2" style="margin-left: 1px;">
-                    <div class="input-group-prepend w-50">
-                        <label class="input-group-text w-100">Soubory</label>
-                    </div>
-                    <input id="Upload" type="file" onchange="FileChosen(this)" multiple />
-                    <div class="input-group-append w-50">
-                        <label class="input-group-text d-flex justify-content-end w-100">
+    </div>
+    <div class="col-5" style="">
+        <h3>Soubory workflow</h3>
+        <div class="files-div mb-2">
+            <div class="input-group mb-2" style="margin-left: 1px;">
+                <div class="input-group-prepend w-50">
+                    <label class="input-group-text w-100">Soubory</label>
+                </div>
+                <input id="Upload" type="file" onchange="FileChosen(this)" multiple />
+                <div class="input-group-append w-50">
+                    <label class="input-group-text d-flex justify-content-end w-100">
 
-                        </label>
-                    </div>
+                    </label>
                 </div>
-                <div id="NewFilesId" class="new-files">
-                </div>
-                <div id="FilesId">
-                    @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
-                </div>
+            </div>
+            <div id="NewFilesId" class="new-files">
+            </div>
+            <div id="FilesId">
+                @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
             </div>
         </div>
     </div>
+</div>
 
 
-    <div class="row" style="text-align:center;">
-        <div class="col-3 border-right">
-            <span class="workflow-set-states states-enum">Datum zahájení</span>
-        </div>
-        <div class="col-2 border-right">
-            <span class="workflow-set-states states-enum">Typ</span>
-        </div>
-        <div class="col-4 border-right">
-            <span class="workflow-set-states states-enum">Popis</span>
-        </div>
-        <div class="col-3">
-            <span class="workflow-set-states states-enum">Datum ukončení</span>
-        </div>
+<div class="row" style="text-align:center; margin-top:25px;">
+    <div class="col-3 border-right">
+        <span class="workflow-set-states states-enum">Datum zahájení</span>
     </div>
-    <hr />
-    @{
-        foreach (var task in Model.Tasks)
-        {
-            <div class="row @if (task.Active == true) { @("active-task-detail-workflow")} " style="text-align:center;">
-                <div class="col-3 border-right">
-                    <span class="">@task.Start</span>
-                </div>
-                <div class="col-2 border-right">
-                    <span class="">TBD</span>
-                </div>
-
-                <div class="col-4 border-right">
-                    <span class="">@task.Note</span>
-                </div>
-                <div class="col-3">
-                    <span class="">@task.End</span>
-                </div>
+    <div class="col-2 border-right">
+        <span class="workflow-set-states states-enum">Typ</span>
+    </div>
+    <div class="col-4 border-right">
+        <span class="workflow-set-states states-enum">Popis</span>
+    </div>
+    <div class="col-3">
+        <span class="workflow-set-states states-enum">Datum ukončení</span>
+    </div>
+</div>
+<hr />
+@{
+    foreach (var task in Model.Tasks)
+    {
+        <div class="row @if (task.Active == true) { @("active-task-detail-workflow")} " style=" cursor: pointer; text-align: center;" onclick="showTaskDetail('@task.Id');">
+            <div class="col-3 border-right">
+                <span class="">@task.Start</span>
+            </div>
+            <div class="col-2 border-right">
+                <span class="">@task.ToLabel()</span>
             </div>
 
-        }
+            <div class="col-4 border-right">
+                <span class="">@task.Note</span>
+            </div>
+            <div class="col-3">
+                <span class="">@task.End</span>
+            </div>
+        </div>
+        <div id="@("Detail" + task.Id)" hidden style="margin-top:10px;">
+            @await Html.PartialAsync("Partial/_TaskSolved", task)
+        </div>
     }
+}
+<div id="SvgDetailId" class="modal">
+    <div class="modal-content mb-3">
+        <h2 class="text-center">Náhled modelu workflow</h2>
+        <div class="d-flex justify-content-center">
+            <div class="model-svg-detail" id="SvgDataId"></div>
+        </div>
+        <div class="d-flex justify-content-center m-3">
+            <button class="btn btn-primary mb-0" onclick="HideModelDetail()">Zavřít</button>
+        </div>
+    </div>
+</div>
