@@ -84,7 +84,7 @@ namespace itu.BL.Facades
             role.UserId = edited.UserId;
             await _agendaRoleRepository.Save();
             
-            return _mapper.Map<AgendaDetailDTO>(await _repository.Detail(role.AgendaId));
+            return await Detail(role.AgendaId);
         }
 
         public async Task RemoveModel(int modelId, int agedaId)
@@ -148,6 +148,7 @@ namespace itu.BL.Facades
             note.After = workflow.State;
             note.WorkflowId = workflow.Id;
             note.Note = state.Note;
+            note.Created = DateTime.Now;
             await _noteRespository.Create(note);
             await _repository.Save();
 
@@ -203,7 +204,7 @@ namespace itu.BL.Facades
             _agendaRoleRepository.Delete(role);
             await _agendaRoleRepository.Save();
             
-            return _mapper.Map<AgendaDetailDTO>(await _repository.Detail(role.AgendaId));
+            return await Detail(role.AgendaId);
         }
 
         public async Task<AgendaDetailDTO> AddRole(NewRoleDTO role, int userId)
@@ -212,7 +213,7 @@ namespace itu.BL.Facades
             await _agendaRoleRepository.Create(roleEntity);
             await _agendaRoleRepository.Save();
             
-            return _mapper.Map<AgendaDetailDTO>(await _repository.Detail(role.AgendaId));
+            return await Detail(role.AgendaId);
         }
     }
 }

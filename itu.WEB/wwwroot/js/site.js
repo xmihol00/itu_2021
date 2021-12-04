@@ -16,7 +16,6 @@ SignalConnection.on("NewTask", function(result)
     let alertDiv = document.getElementById("TaskAlertId");
     let tmp = document.createElement("div");
     tmp.innerHTML = result;
-    console.log(tmp.firstChild);
     alertDiv.appendChild(tmp.firstChild);
     alertDiv.style.display = "block";
 });

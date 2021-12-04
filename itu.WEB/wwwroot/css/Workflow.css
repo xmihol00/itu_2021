@@ -1,4 +1,13 @@
-﻿.workflow-div-overview {
+﻿/*
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autori:      Vítek Hnatovskyj
+// Kontakty:    xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================
+*/
+
+.workflow-div-overview {
     margin-inline: -8px;
     padding-inline: 8px;
     margin-bottom: 5px;
@@ -133,4 +142,10 @@
     color: var(--color-text-default);
     background-color: var(--color-focus);
     font-weight: 600;
+}
+
+.model-svg {
+    width: 400px; 
+    height: 361px;
+    cursor: pointer;
 }

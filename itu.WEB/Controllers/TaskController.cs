@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using itu.BL.DTOs.Agenda;
 using itu.BL.DTOs.File;
 using itu.BL.DTOs.Task;
 using itu.BL.Facades;
@@ -291,6 +292,26 @@ namespace itu.WEB.Controllers
             catch
             {
                 return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateTaskWorkflow(TaskWorkflowEditDTO edit)
+        {
+            try
+            {
+                (AgendaDetailDTO agenda, AllTaskDTO task) = await _facade.UpdateTaskWorkflow(edit);
+                if (task != null)
+                {
+                    await _hubContext.Clients
+                                    .Group(edit.UserId.ToString())
+                                    .SendAsync("NewTask", await this.RenderViewAsync("Partial/_TaskAlert", task));
+                }
+                return PartialView("../Agenda/Partial/_AgendaWorkflows", agenda);
+            }
+            catch
+            {
+                return BadRequest();
             }
         }
     }

@@ -12,8 +12,8 @@
 <script src="/js/Workflow.js"></script>
 <div class="detail-container border-left border-right border-bottom">
 
-    <div class="page-headline d-flex justify-content-between">
-        <h1 class="headline-color">Detail workflow</h1>
+    <div class="page-headline d-flex justify-content-between p-0">
+        <h1 class="page-name">Detail workflow</h1>
     </div>
     <div class="row">
         <div class="col-6 float-left">
@@ -44,76 +44,95 @@
 <div class="row" style="margin-top:20px;">
     <div class="col-1"></div>
     <div class="col-10">
-
-        @Model.Description
+        <div class="d-flex">
+            <div>
+                <div class="model-svg" id="@Model.ModelWorkflowIdName.Id" data-order="@Model.CurrentTask.Order" 
+                     onclick="ShowModelDetail(this)">
+                    @await Html.PartialAsync("../Model/svg", (Model.ModelWorkflow.Id, Model.CurrentTask.Order, 400, 360))
+                </div>
+                <div>
+                    <h3>Poznámky</h3>
+                    @if (Model.Notes.Count == 0)
+                    {
+                        <p>Workflow nemá žádné poznámky.</p>          
+                    }
+                    else
+                    {
+                        <table class="table table-borderless table-sm border-top">
+                            @foreach (AllNoteDTO note in Model.Notes)
+                            {
+                                <tr class="mb-0">
+                                    <td style="min-width:100px">@note.Created.ToString("dd. MM. yyyy"):</td>
+                                    <td id="DescriptionId">změna stavu z <b><i>@note.Before.ToLabel()</i></b> na <b><i>@note.After.ToLabel()</i></b></td>
+                                </tr>
+                                <tr class="mb-2 border-bottom">
+                                    <td>Text poznámky:</td>
+                                    <td id="AdminId">@note.Note</td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </div>
+            </div>
+            <div class="pl-3">
+                <h3>Popis</h3>
+                <p>@Model.Description</p>
+                <h3>Soubory workflow</h3>
+                <div class="files-div mb-2">
+                    <div class="input-group mb-2" style="margin-left: 1px;">
+                        <div class="input-group-prepend w-50">
+                            <label class="input-group-text w-100">Soubory</label>
+                        </div>
+                        <input id="Upload" type="file" onchange="FileChosen(this)" multiple />
+                        <div class="input-group-append w-50">
+                            <label class="input-group-text d-flex justify-content-end w-100"></label>
+                        </div>
+                    </div>
+                    <div id="NewFilesId" class="new-files">
+                    </div>
+                    <div id="FilesId">
+                        @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-1"></div>
 </div>
-<div class="row" style="margin-top:50px;">
-    <div class="col-1"></div>
-    <div class="col-6" style="margin-top: 10px;">
-        <div class="model-svg" id="@Model.Agenda.Id" onclick="ShowModelDetail(this)">
-            @await Html.PartialAsync("../Model/svg", (Model.Agenda.Id, Model.CurrentTask.Order, 360, 310))
-        </div>
-    </div>
-    <div class="col-5" style="">
-        <h3>Soubory workflow</h3>
-        <div class="files-div mb-2">
-            <div class="input-group mb-2" style="margin-left: 1px;">
-                <div class="input-group-prepend w-50">
-                    <label class="input-group-text w-100">Soubory</label>
-                </div>
-                <input id="Upload" type="file" onchange="FileChosen(this)" multiple />
-                <div class="input-group-append w-50">
-                    <label class="input-group-text d-flex justify-content-end w-100">
-
-                    </label>
-                </div>
-            </div>
-            <div id="NewFilesId" class="new-files">
-            </div>
-            <div id="FilesId">
-                @await Html.PartialAsync("../File/Partial/_Files", Model.Files)
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <div class="row" style="text-align:center; margin-top:25px;">
     <div class="col-3 border-right">
         <span class="workflow-set-states states-enum">Datum zahájení</span>
     </div>
-    <div class="col-2 border-right">
+    <div class="col-3 border-right">
         <span class="workflow-set-states states-enum">Typ</span>
     </div>
-    <div class="col-4 border-right">
-        <span class="workflow-set-states states-enum">Popis</span>
+    <div class="col-3 border-right">
+        <span class="workflow-set-states states-enum">Priorita</span>
     </div>
     <div class="col-3">
         <span class="workflow-set-states states-enum">Datum ukončení</span>
     </div>
 </div>
-<hr />
+<hr class="mt-1 m-1"/>
 @{
     foreach (var task in Model.Tasks)
     {
         <div class="row @if (task.Active == true) { @("active-task-detail-workflow")} " style=" cursor: pointer; text-align: center;" onclick="showTaskDetail('@task.Id');">
             <div class="col-3 border-right">
-                <span class="">@task.Start</span>
+                <div class="mt-2">@task.Start</div>
             </div>
-            <div class="col-2 border-right">
-                <span class="">@task.ToLabel()</span>
+            <div class="col-3 border-right">
+                <div class="mt-2">@task.ToLabel()</div>
             </div>
-
-            <div class="col-4 border-right">
-                <span class="">@task.Note</span>
+            <div class="col-3 border-right pt-1" style="height: 40px;">
+                <div class="priority @task.Priority mt-0">@task.Priority.ToLabel()</div>
             </div>
             <div class="col-3">
-                <span class="">@task.End</span>
+                <div class="mt-2">@task.End</div>
             </div>
         </div>
-        <div id="@("Detail" + task.Id)" hidden style="margin-top:10px;">
+        <div id="@("Detail" + task.Id)" hidden style="margin-top:10px;" class="pl-5 pr-5">
             @await Html.PartialAsync("Partial/_TaskSolved", task)
         </div>
     }

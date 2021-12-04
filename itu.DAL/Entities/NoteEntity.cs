@@ -20,6 +20,7 @@ namespace itu.DAL.Entities
         public string Note { get; set; }
         public WorkflowStateEnum Before { get; set; }
         public WorkflowStateEnum After { get; set; }
+        public DateTime Created { get; set; }
         public int WorkflowId { get; set; }
         public WorkflowEntity Workflow { get; set; }
     }

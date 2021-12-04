@@ -31,9 +31,10 @@ namespace itu.DAL.Repositories
                 .Include(a => a.Agenda)
                 .Include(b => b.Files)
                 .Include(c => c.ModelWorkflow)
-                .ThenInclude(e => e.WorkflowTasks)
-                .ThenInclude(g => g.ModelTask)
+                    .ThenInclude(e => e.WorkflowTasks)
+                        .ThenInclude(g => g.ModelTask)
                 .Include(d => d.Tasks)
+                .Include(x => x.Notes)
                 .FirstAsync(x => x.Id == id);
         }
 

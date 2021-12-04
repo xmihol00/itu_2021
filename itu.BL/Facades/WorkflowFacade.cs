@@ -41,7 +41,7 @@ namespace itu.BL.Facades
             foreach (var workflow in overview.AllWorkflow)
             {
                 workflow.CurrentTask = workflow.Tasks.FirstOrDefault(x => x.Active == true);
-                if (workflow.State != null && !overview.SearchOptions.States.Contains(workflow.State))
+                if (!overview.SearchOptions.States.Contains(workflow.State))
                 {
                     overview.SearchOptions.States.Add(workflow.State);
                 }
@@ -51,14 +51,6 @@ namespace itu.BL.Facades
             overview.SearchOptions.Agendas = _mapper.Map<List<IdNameAgendaDTO>>(await _agendas.All());
             overview.SearchOptions.WorkflowModels = _mapper.Map<List<IdNameModelDTO>>(await _workflow.GetAllModels());
 
-            foreach (var workflow in overview.AllWorkflow)
-            {
-                workflow.ExpectedEnd = workflow.CurrentTask.End;
-                foreach (var task in workflow.ModelWorkflow.WorkflowTasks)
-                {
-                    workflow.ExpectedEnd.AddDays(task.ModelTask.Difficulty);
-                }
-            }
             return overview;
         }
 
@@ -99,8 +91,6 @@ namespace itu.BL.Facades
                 filterSet = true;
             }
 
-
-            //allWorkflows.AddRange(_workflow.GetWorkflowsByTask(search.TaskNames));
             if(search.SearchString != null && search.SearchString.Length != 0)
             {
                 if(filterSet == false)
@@ -117,25 +107,16 @@ namespace itu.BL.Facades
                 }
             }
 
-
             foreach (var workflow in allWorkflows)
             {
                 workflow.CurrentTask = workflow.Tasks.FirstOrDefault(x => x.Active == true);
             }
             allWorkflows = allWorkflows.Distinct(new ItemEqualityComparer()).ToList();
-            
-            foreach(var workflow in allWorkflows)
-            {
-                workflow.ExpectedEnd = workflow.CurrentTask.End;
-                foreach(var task in workflow.ModelWorkflow.WorkflowTasks)
-                {
-                    workflow.ExpectedEnd.AddDays(task.ModelTask.Difficulty);
-                }
-            }
+
             return allWorkflows;
         }
 
-        public async Task<SearchDTO> GetFiltersFiltered(List<AllWorkflowDTO> workflows)
+        public SearchDTO GetFiltersFiltered(List<AllWorkflowDTO> workflows)
         {
             SearchDTO search = new SearchDTO();
             search.ActiveTasks = new List<IdTypeTaskDTO>();
@@ -144,7 +125,7 @@ namespace itu.BL.Facades
             search.States = new List<WorkflowStateEnum>();
             foreach (var workflow in workflows)
             {
-                if(workflow.State != null && !search.States.Contains(workflow.State))
+                if(!search.States.Contains(workflow.State))
                 {
                     search.States.Add(workflow.State);
                 }

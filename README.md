@@ -42,3 +42,5 @@
 | u9                  | test            |
 | u10                 | test            |
 
+## Testování
+Aplikace byla vyvíjena a testována na aktuálních verzích prohlížečů *Mozila Firefox*, *Opera* a *Google Chrome*.

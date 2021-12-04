@@ -46,7 +46,8 @@ function Filter(element = null, filer = null) {
                 agendaIds.push(id);
             } else if (filer.id.includes("State")) {
                 id = filer.id.replace("State", '');
-                states.push(id);
+                if (!states.includes(id))
+                    states.push(id);
             }
         }
     }
@@ -87,7 +88,7 @@ function ShowModelDetail(element) {
         {
             async: true,
             type: "GET",
-            url: "/Agenda/ModelDetail/" + element.id,
+            url: "/Agenda/ModelDetail/" + element.id + "/" + element.getAttribute("data-order"),
         })
         .done(function (result) {
             document.getElementById("SvgDataId").innerHTML = result;

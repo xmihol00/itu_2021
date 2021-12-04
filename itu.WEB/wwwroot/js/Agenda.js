@@ -169,8 +169,8 @@ function AddRole(element) {
     })
     .done(function (result) 
     {
-        document.getElementById("RolesId").innerHTML = result.Roles;
-        document.getElementById("RunningWorkflowsId").innerHTML = result.Workflows;
+        document.getElementById("RolesId").innerHTML = result.roles;
+        document.getElementById("RunningWorkflowsId").innerHTML = result.workflows;
         ShowAlert("Role úspěšně přidána.");
     })
     .fail(function() 
@@ -195,8 +195,8 @@ function EditRole(element) {
     .done(function (result) 
     {
         let roles = document.getElementById("RolesId");
-        roles.innerHTML = result.Roles;
-        document.getElementById("RunningWorkflowsId").innerHTML = result.Workflows;
+        roles.innerHTML = result.roles;
+        document.getElementById("RunningWorkflowsId").innerHTML = result.workflows;
         ShowAlert("Role úspěšně přidána.");
         
         if (roles.getElementsByTagName("select").length == 0)
@@ -223,8 +223,8 @@ function RemoveRole(element) {
     })
     .done(function (result) 
     {
-        document.getElementById("RolesId").innerHTML = result.Roles;
-        document.getElementById("RunningWorkflowsId").innerHTML = result.Workflows;
+        document.getElementById("RolesId").innerHTML = result.roles;
+        document.getElementById("RunningWorkflowsId").innerHTML = result.workflows;
         ShowAlert("Role úspěšně odebrána.");
     })
     .fail(function() 
@@ -433,7 +433,7 @@ function SaveWorkflow(id)
     {
         async: true,
         type: "POST",
-        url: "/Task/UpdateCurrent",
+        url: "/Task/UpdateTaskWorkflow",
         data: jsonData
     })
     .done(function(result) 

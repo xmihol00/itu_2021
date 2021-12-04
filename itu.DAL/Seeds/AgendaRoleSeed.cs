@@ -31,21 +31,21 @@ namespace itu.DAL.Seeds
             {
                 Id = 2,
                 AgendaId = 3,
-                UserId = 1,
+                UserId = 2,
                 Type = TaskTypeEnum.Acceptation,
             },
             new AgendaRoleEntity()
             {
                 Id = 3,
                 AgendaId = 3,
-                UserId = 1,
+                UserId = 2,
                 Type = TaskTypeEnum.Assessment,
             },
             new AgendaRoleEntity()
             {
                 Id = 4,
                 AgendaId = 3,
-                UserId = 1,
+                UserId = 3,
                 Type = TaskTypeEnum.Estimate,
             },
             new AgendaRoleEntity()
@@ -81,6 +81,13 @@ namespace itu.DAL.Seeds
             {
                 Id = 10,
                 AgendaId = 1,
+                UserId = 3,
+                Type = TaskTypeEnum.Acceptation,
+            },
+            new AgendaRoleEntity()
+            {
+                Id = 21,
+                AgendaId = 1,
                 UserId = 2,
                 Type = TaskTypeEnum.Acceptation,
             },
@@ -88,13 +95,35 @@ namespace itu.DAL.Seeds
             {
                 Id = 19,
                 AgendaId = 1,
-                Type = TaskTypeEnum.Contract,
+                UserId = 5,
+                Type = TaskTypeEnum.Assignment,
+            },
+            new AgendaRoleEntity()
+            {
+                Id = 24,
+                AgendaId = 1,
+                UserId = 3,
+                Type = TaskTypeEnum.Assessment,
             },
             new AgendaRoleEntity()
             {
                 Id = 20,
                 AgendaId = 1,
+                UserId = 1,
                 Type = TaskTypeEnum.Estimate,
+            },
+            new AgendaRoleEntity()
+            {
+                Id = 22,
+                AgendaId = 1,
+                UserId = 1,
+                Type = TaskTypeEnum.Contract,
+            },
+            new AgendaRoleEntity()
+            {
+                Id = 23,
+                AgendaId = 1,
+                Type = TaskTypeEnum.Archivation,
             },
 
 
@@ -130,7 +159,7 @@ namespace itu.DAL.Seeds
             {
                 Id = 15,
                 AgendaId = 2,
-                UserId = 2,
+                UserId = 3,
                 Type = TaskTypeEnum.Contract,
             },
             new AgendaRoleEntity()
@@ -151,7 +180,7 @@ namespace itu.DAL.Seeds
             {
                 Id = 18,
                 AgendaId = 2,
-                UserId = 2,
+                UserId = 1,
                 Type = TaskTypeEnum.Archivation,
             },
         };

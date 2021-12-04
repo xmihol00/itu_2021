@@ -49,7 +49,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 11, 4, 12, 47, 54, 69, DateTimeKind.Local).AddTicks(3937),
+                            Creation = new DateTime(2021, 11, 5, 0, 14, 9, 61, DateTimeKind.Local).AddTicks(3669),
                             Description = "Agenda správující jednoduchuché nákupy bez vúběrových řízení",
                             Name = "Nákupy"
                         },
@@ -57,7 +57,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             AdministratorId = 2,
-                            Creation = new DateTime(2021, 11, 29, 12, 47, 54, 70, DateTimeKind.Local).AddTicks(5844),
+                            Creation = new DateTime(2021, 11, 30, 0, 14, 9, 62, DateTimeKind.Local).AddTicks(8565),
                             Description = "Agenda spravující menší a střední zakázky",
                             Name = "Malé a střední zakázky"
                         },
@@ -65,7 +65,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 10, 5, 12, 47, 54, 70, DateTimeKind.Local).AddTicks(5865),
+                            Creation = new DateTime(2021, 10, 6, 0, 14, 9, 62, DateTimeKind.Local).AddTicks(8590),
                             Description = "Agenda spravující důležité velké zakázky",
                             Name = "Velké zakázky"
                         });
@@ -150,21 +150,21 @@ namespace itu.DAL.Migrations
                             Id = 2,
                             AgendaId = 3,
                             Type = 1,
-                            UserId = 1
+                            UserId = 2
                         },
                         new
                         {
                             Id = 3,
                             AgendaId = 3,
                             Type = 2,
-                            UserId = 1
+                            UserId = 2
                         },
                         new
                         {
                             Id = 4,
                             AgendaId = 3,
                             Type = 3,
-                            UserId = 1
+                            UserId = 3
                         },
                         new
                         {
@@ -199,19 +199,48 @@ namespace itu.DAL.Migrations
                             Id = 10,
                             AgendaId = 1,
                             Type = 1,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 21,
+                            AgendaId = 1,
+                            Type = 1,
                             UserId = 2
                         },
                         new
                         {
                             Id = 19,
                             AgendaId = 1,
-                            Type = 4
+                            Type = 0,
+                            UserId = 5
+                        },
+                        new
+                        {
+                            Id = 24,
+                            AgendaId = 1,
+                            Type = 2,
+                            UserId = 3
                         },
                         new
                         {
                             Id = 20,
                             AgendaId = 1,
-                            Type = 3
+                            Type = 3,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 22,
+                            AgendaId = 1,
+                            Type = 4,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 23,
+                            AgendaId = 1,
+                            Type = 6
                         },
                         new
                         {
@@ -246,7 +275,7 @@ namespace itu.DAL.Migrations
                             Id = 15,
                             AgendaId = 2,
                             Type = 4,
-                            UserId = 2
+                            UserId = 3
                         },
                         new
                         {
@@ -267,7 +296,7 @@ namespace itu.DAL.Migrations
                             Id = 18,
                             AgendaId = 2,
                             Type = 6,
-                            UserId = 2
+                            UserId = 1
                         });
                 });
 
@@ -785,6 +814,9 @@ namespace itu.DAL.Migrations
                     b.Property<int>("Before")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
@@ -1008,18 +1040,18 @@ namespace itu.DAL.Migrations
                             Description = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam rhoncus aliquam metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
                             ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModelWorkflowId = 5,
-                            Name = "1. testovací úkol",
+                            Name = "Stavba depa",
                             State = 0
                         },
                         new
                         {
                             Id = 2,
-                            AgendaId = 2,
+                            AgendaId = 1,
                             Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam rhoncus aliquam metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui.",
                             ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModelWorkflowId = 2,
-                            Name = "2. testovací úkol",
+                            Name = "Nákup dárků na Vánoce",
                             State = 0
                         },
                         new
@@ -1030,18 +1062,18 @@ namespace itu.DAL.Migrations
                             Description = "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
                             ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModelWorkflowId = 1,
-                            Name = "3. testovací úkol",
+                            Name = "Nová kopírka",
                             State = 0
                         },
                         new
                         {
                             Id = 4,
-                            AgendaId = 2,
+                            AgendaId = 1,
                             Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
                             ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModelWorkflowId = 2,
-                            Name = "4. testovací úkol",
+                            ModelWorkflowId = 6,
+                            Name = "Nákup zahradních strojů",
                             State = 0
                         },
                         new
@@ -1052,30 +1084,30 @@ namespace itu.DAL.Migrations
                             Description = "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
                             ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModelWorkflowId = 3,
-                            Name = "5. testovací úkol",
+                            Name = "Úklid prostor budovy",
                             State = 0
                         },
                         new
                         {
                             Id = 6,
-                            AgendaId = 3,
+                            AgendaId = 2,
                             Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut.",
                             ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModelWorkflowId = 5,
-                            Name = "6. testovací úkol",
+                            ModelWorkflowId = 4,
+                            Name = "Návrh vzhledu nové stanice",
                             State = 0
                         },
                         new
                         {
                             Id = 7,
-                            AgendaId = 2,
+                            AgendaId = 1,
                             Creation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Donec odio tempus molestie, porttitor ut, iaculis quis. Per inceptos hymenaeos. Sed vel lectus. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.",
+                            Description = "Dnec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut.",
                             ExpectedEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModelWorkflowId = 4,
-                            Name = "7. testovací úkol",
-                            State = 0
+                            ModelWorkflowId = 1,
+                            Name = "Nákup dronů",
+                            State = 2
                         });
                 });
 
@@ -1104,19 +1136,99 @@ namespace itu.DAL.Migrations
                         new
                         {
                             Id = 2,
-                            Active = true,
+                            Active = false,
                             DelayReason = "dovolená",
-                            End = new DateTime(2021, 11, 27, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(571),
+                            End = new DateTime(2021, 11, 22, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(2242),
                             Note = "Přijato bez výhrad",
-                            Order = 0,
+                            Order = 2,
                             Priority = 2,
-                            Start = new DateTime(2021, 11, 27, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(1086),
-                            UserId = 1,
-                            WorkflowId = 2,
+                            Start = new DateTime(2021, 11, 19, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(4372),
+                            UserId = 2,
+                            WorkflowId = 1,
                             Accepted = true,
-                            Currency = 0,
-                            PriceGues = 0.0,
+                            Benefit = "Testovací předvyplněný úkol obsahující i přínos organizaci.",
+                            Currency = 1,
+                            PriceGues = 7369821.0,
                             Reason = "Pěkně vypracováno"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Active = true,
+                            End = new DateTime(2021, 12, 10, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6540),
+                            Order = 2,
+                            Priority = 0,
+                            Start = new DateTime(2021, 11, 30, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6542),
+                            UserId = 2,
+                            WorkflowId = 2,
+                            Accepted = false,
+                            Currency = 0,
+                            PriceGues = 0.0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Active = false,
+                            End = new DateTime(2021, 12, 3, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6557),
+                            Order = 2,
+                            Priority = 2,
+                            Start = new DateTime(2021, 11, 30, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6560),
+                            UserId = 3,
+                            WorkflowId = 4,
+                            Accepted = true,
+                            Benefit = "Místo 8 zahradnílů nám budou stačit 4.",
+                            Currency = 2,
+                            PriceGues = 3335.4099999999999,
+                            Reason = "Ano, to by se mělo vyplatit.."
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Active = false,
+                            End = new DateTime(2021, 11, 22, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6575),
+                            Note = "Cena je měsíčně.",
+                            Order = 2,
+                            Priority = 2,
+                            Start = new DateTime(2021, 11, 17, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6577),
+                            UserId = 1,
+                            WorkflowId = 5,
+                            Accepted = true,
+                            Benefit = "Nebudeme muset zaměstnancum platit přesčasy za úklid.",
+                            Currency = 0,
+                            PriceGues = 23515.41,
+                            Reason = "Snad se to vyplatí."
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Active = false,
+                            End = new DateTime(2021, 11, 13, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8083),
+                            Order = 2,
+                            Priority = 2,
+                            Start = new DateTime(2021, 11, 6, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8085),
+                            UserId = 1,
+                            WorkflowId = 6,
+                            Accepted = true,
+                            Benefit = "Uvidíme i pohled z jiného úhlu.",
+                            Currency = 0,
+                            PriceGues = 245321.0,
+                            Reason = "Ano, tuto investici je možné ospravedlnit."
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Active = false,
+                            End = new DateTime(2021, 11, 15, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(9140),
+                            Order = 2,
+                            Priority = 2,
+                            Start = new DateTime(2021, 11, 9, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(9142),
+                            UserId = 3,
+                            WorkflowId = 7,
+                            Accepted = true,
+                            Benefit = "Potřebujeme drony pro střežení pozemku!",
+                            Currency = 2,
+                            PriceGues = 1450.0,
+                            Reason = "To bude super!"
                         });
                 });
 
@@ -1138,14 +1250,14 @@ namespace itu.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 7,
+                            Id = 21,
                             Active = true,
-                            End = new DateTime(2021, 12, 8, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(2460),
-                            Order = 0,
-                            Priority = 1,
-                            Start = new DateTime(2021, 11, 28, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(2465),
+                            End = new DateTime(2021, 12, 21, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(9120),
+                            Order = 6,
+                            Priority = 3,
+                            Start = new DateTime(2021, 12, 3, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(9129),
                             UserId = 1,
-                            WorkflowId = 7,
+                            WorkflowId = 6,
                             Cancallation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Location = 0,
                             Number = 0
@@ -1164,14 +1276,15 @@ namespace itu.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 3,
-                            Active = true,
-                            End = new DateTime(2021, 12, 16, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(1339),
-                            Order = 0,
-                            Priority = 1,
-                            Start = new DateTime(2021, 12, 2, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(1345),
-                            UserId = 1,
-                            WorkflowId = 3
+                            Id = 4,
+                            Active = false,
+                            End = new DateTime(2021, 12, 2, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(5888),
+                            Order = 4,
+                            Priority = 2,
+                            Start = new DateTime(2021, 11, 28, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(5898),
+                            UserId = 2,
+                            WorkflowId = 1,
+                            Conclusion = "Vše se zdá být v pořádku, cena odpovídá."
                         });
                 });
 
@@ -1194,18 +1307,101 @@ namespace itu.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Active = true,
-                            DelayReason = "Testovací důvod vrácení",
-                            End = new DateTime(2021, 12, 7, 12, 47, 54, 71, DateTimeKind.Local).AddTicks(8014),
+                            Active = false,
+                            End = new DateTime(2021, 11, 19, 0, 14, 9, 65, DateTimeKind.Local).AddTicks(9232),
                             Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
                             Order = 1,
                             Priority = 3,
-                            Start = new DateTime(2021, 12, 1, 12, 47, 54, 71, DateTimeKind.Local).AddTicks(9696),
+                            Start = new DateTime(2021, 11, 15, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(917),
                             UserId = 1,
                             WorkflowId = 1,
                             Benefit = "Testovací předvyplněný úkol obsahující i přínos organizaci.",
                             Currency = 1,
-                            PriceGues = 4368.1999999999998
+                            PriceGues = 7369821.0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Active = false,
+                            End = new DateTime(2021, 11, 30, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6533),
+                            Order = 1,
+                            Priority = 3,
+                            Start = new DateTime(2021, 11, 27, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6535),
+                            UserId = 5,
+                            WorkflowId = 2,
+                            Benefit = "Všichni nás pak budou mít rádi :).",
+                            Currency = 0,
+                            PriceGues = 26320.0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Active = true,
+                            End = new DateTime(2022, 1, 14, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6545),
+                            Order = 1,
+                            Priority = 2,
+                            Start = new DateTime(2021, 12, 4, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6547),
+                            UserId = 1,
+                            WorkflowId = 3,
+                            Currency = 0,
+                            PriceGues = 0.0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Active = false,
+                            End = new DateTime(2021, 11, 30, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6550),
+                            Order = 1,
+                            Priority = 2,
+                            Start = new DateTime(2021, 11, 20, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6552),
+                            UserId = 5,
+                            WorkflowId = 4,
+                            Benefit = "Místo 8 zahradnílů nám budou stačit 4.",
+                            Currency = 2,
+                            PriceGues = 3335.4099999999999
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Active = false,
+                            End = new DateTime(2021, 11, 17, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6568),
+                            Note = "Cena je měsíčně.",
+                            Order = 1,
+                            Priority = 1,
+                            Start = new DateTime(2021, 11, 10, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6570),
+                            UserId = 1,
+                            WorkflowId = 5,
+                            Benefit = "Nebudeme muset zaměstnancum platit přesčasy za úklid.",
+                            Currency = 0,
+                            PriceGues = 23515.41
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Active = false,
+                            End = new DateTime(2021, 11, 6, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8077),
+                            Order = 1,
+                            Priority = 1,
+                            Start = new DateTime(2021, 10, 26, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8079),
+                            UserId = 1,
+                            WorkflowId = 6,
+                            Benefit = "Uvidíme i pohled z jiného úhlu.",
+                            Currency = 0,
+                            PriceGues = 245321.0
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Active = false,
+                            End = new DateTime(2021, 11, 9, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(9134),
+                            Order = 1,
+                            Priority = 1,
+                            Start = new DateTime(2021, 11, 1, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(9136),
+                            UserId = 1,
+                            WorkflowId = 7,
+                            Benefit = "Potřebujeme drony pro střežení pozemku!",
+                            Currency = 2,
+                            PriceGues = 1450.0
                         });
                 });
 
@@ -1232,15 +1428,45 @@ namespace itu.DAL.Migrations
                         {
                             Id = 5,
                             Active = true,
-                            End = new DateTime(2021, 12, 8, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(1981),
-                            Order = 0,
-                            Priority = 2,
-                            Start = new DateTime(2021, 11, 30, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(1988),
+                            End = new DateTime(2021, 12, 20, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6501),
+                            Order = 5,
+                            Priority = 1,
+                            Start = new DateTime(2021, 12, 2, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6510),
                             UserId = 1,
-                            WorkflowId = 5,
+                            WorkflowId = 1,
                             ContractType = 0,
                             Currency = 0,
                             FinalPrice = 0.0
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Active = false,
+                            End = new DateTime(2021, 12, 1, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6580),
+                            Note = "Je to DPP.",
+                            Order = 3,
+                            Priority = 3,
+                            Start = new DateTime(2021, 11, 22, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6582),
+                            UserId = 3,
+                            WorkflowId = 5,
+                            ContractType = 4,
+                            Currency = 0,
+                            FinalPrice = 25600.0,
+                            PriceChangeReason = "Je teď těžké sehnat uklízeče, nutno zvýčit odměnu."
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Active = false,
+                            End = new DateTime(2021, 12, 1, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8102),
+                            Order = 4,
+                            Priority = 3,
+                            Start = new DateTime(2021, 11, 22, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8104),
+                            UserId = 3,
+                            WorkflowId = 6,
+                            ContractType = 2,
+                            Currency = 0,
+                            FinalPrice = 225000.0
                         });
                 });
 
@@ -1262,17 +1488,45 @@ namespace itu.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 4,
-                            Active = true,
-                            End = new DateTime(2021, 12, 8, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(1579),
-                            Order = 0,
+                            Id = 3,
+                            Active = false,
+                            End = new DateTime(2021, 11, 28, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(4700),
+                            Order = 3,
                             Priority = 0,
-                            Start = new DateTime(2021, 11, 25, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(1584),
+                            Start = new DateTime(2021, 11, 22, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(4709),
+                            UserId = 3,
+                            WorkflowId = 1,
+                            Currency = 1,
+                            EstimatePrice = 8632148.0,
+                            MaxPrice = 10000000.0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Active = true,
+                            End = new DateTime(2021, 12, 31, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6564),
+                            Order = 3,
+                            Priority = 0,
+                            Start = new DateTime(2021, 12, 3, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(6566),
                             UserId = 1,
                             WorkflowId = 4,
                             Currency = 0,
                             EstimatePrice = 0.0,
                             MaxPrice = 0.0
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Active = false,
+                            End = new DateTime(2021, 11, 22, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8096),
+                            Order = 3,
+                            Priority = 2,
+                            Start = new DateTime(2021, 11, 13, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8098),
+                            UserId = 2,
+                            WorkflowId = 6,
+                            Currency = 0,
+                            EstimatePrice = 225000.0,
+                            MaxPrice = 275000.0
                         });
                 });
 
@@ -1291,16 +1545,29 @@ namespace itu.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 6,
+                            Id = 15,
                             Active = true,
-                            End = new DateTime(2021, 12, 2, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(2230),
-                            Order = 0,
-                            Priority = 3,
-                            Start = new DateTime(2021, 12, 3, 12, 47, 54, 72, DateTimeKind.Local).AddTicks(2235),
-                            UserId = 1,
-                            WorkflowId = 6,
+                            End = new DateTime(2021, 12, 14, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8063),
+                            Order = 4,
+                            Priority = 1,
+                            Start = new DateTime(2021, 12, 1, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8072),
+                            UserId = 2,
+                            WorkflowId = 5,
                             PublishEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishStart = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Active = false,
+                            End = new DateTime(2021, 12, 3, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8108),
+                            Order = 5,
+                            Priority = 1,
+                            Start = new DateTime(2021, 12, 1, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8109),
+                            UserId = 2,
+                            WorkflowId = 6,
+                            PublishEnd = new DateTime(2022, 1, 29, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8493),
+                            PublishStart = new DateTime(2021, 12, 30, 0, 14, 9, 66, DateTimeKind.Local).AddTicks(8111)
                         });
                 });
 
