@@ -37,6 +37,11 @@ namespace itu.DAL.Repositories
                 .FirstAsync(x => x.Id == id);
         }
 
+        public Task<WorkflowEntity> GetForEdit(int id)
+        {
+            return _context.Workflows.FirstAsync(x => x.Id == id);
+        }
+
         public Task<List<ModelWorkflowEntity>> GetAllModels()
         {
             return _context.ModelWorkflows.ToListAsync();

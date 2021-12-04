@@ -8,6 +8,7 @@
 using AutoMapper;
 using itu.BL.DTOs.Agenda;
 using itu.BL.DTOs.User;
+using itu.BL.DTOs.Workflow;
 using itu.Common.Enums;
 using itu.DAL.Entities;
 using System;
@@ -51,6 +52,16 @@ namespace itu.BL.Profiles
             CreateMap<NewRoleDTO, AgendaRoleEntity>();
 
             CreateMap<ModelWorkflowEntity, AgendaModelDTO>();
+
+            CreateMap<WorkflowEntity, AllWorkflowAgendaDTO>()
+                .ForMember(dst => dst.UserId, opt => opt.MapFrom(src => src.Tasks.First().UserId))
+                .ForMember(dst => dst.UserName, opt => opt.MapFrom(src => src.Tasks.First().User.FirstName + " " + src.Tasks.First().User.LastName))
+                .ForMember(dst => dst.TaskId, opt => opt.MapFrom(src => src.Tasks.First().Id))
+                .ForMember(dst => dst.Priority, opt => opt.MapFrom(src => src.Tasks.First().Priority))
+                .ForMember(dst => dst.End, opt => opt.MapFrom(src => src.Tasks.First().End))
+                .ForMember(dst => dst.TaskType, opt => opt.MapFrom(src => src.Tasks.First().ToType()))
+                .ForMember(dst => dst.TaskOrder, opt => opt.MapFrom(src => src.Tasks.First().Order))
+                .ForMember(dst => dst.ModelId, opt => opt.MapFrom(src => src.ModelWorkflowId));
         }
     }
 }

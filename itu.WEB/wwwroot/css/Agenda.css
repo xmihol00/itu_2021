@@ -79,7 +79,7 @@ h1, h2, h3, p, td {
 }
 
 .vis-hidden {
-  visibility: hidden;
+  visibility: block;
 }
 
 .model-li {
@@ -107,4 +107,22 @@ h1, h2, h3, p, td {
 
 .modal-content {
   background: var(--color-bg-modal) !important;
+}
+
+.model-svg-wf {
+  width: 350px; 
+  height: 301px;
+  cursor: pointer;
+}
+
+.edit-wf-width {
+  width: 140px;
+}
+
+.wf-link {
+  color: var(--color-focus) !important;
+}
+
+.wf-link:hover {
+  color: var(--color-text-default) !important;
 }

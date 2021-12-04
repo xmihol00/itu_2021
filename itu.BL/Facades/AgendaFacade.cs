@@ -28,11 +28,13 @@ namespace itu.BL.Facades
         private readonly ModelWorkflowRepository _modelWorkflowRespository; 
         private readonly WorkflowRepository _workflowRespository; 
         private readonly TaskRepository _taskRespository;
+        private readonly NoteRepository _noteRespository;
         private readonly IMapper _mapper;
 
         public AgendaFacade(AgendaRepository repository, UserRepository userRepository, AgendaRoleRepository agendaRoleRepository, 
                             AgendaModelRepository agendaModelRepository, ModelWorkflowRepository modelWorkflowRespository, 
-                            WorkflowRepository workflowRespository, TaskRepository taskRespository, IMapper mapper)
+                            WorkflowRepository workflowRespository, TaskRepository taskRespository, NoteRepository noteRespository, 
+                            IMapper mapper)
         {
             _repository = repository;
             _userRepository = userRepository;
@@ -41,6 +43,7 @@ namespace itu.BL.Facades
             _modelWorkflowRespository = modelWorkflowRespository;
             _workflowRespository = workflowRespository;
             _taskRespository = taskRespository;
+            _noteRespository = noteRespository;
             _mapper = mapper;
         }
 
@@ -63,21 +66,25 @@ namespace itu.BL.Facades
 
         public async Task<AgendaDetailDTO> Detail(int id)
         {
-            var agenda = _mapper.Map<AgendaDetailDTO>(await _repository.Detail(id));    
+            var detail = await _repository.Detail(id);
+            detail.Workflows = detail.Workflows.Where(x => x.State == WorkflowStateEnum.Active || x.State == WorkflowStateEnum.Stopped).ToList();
+            foreach(var wf in detail.Workflows)
+            {
+                wf.Tasks = wf.Tasks.Where(x => x.Active).ToList();
+            }
+            var agenda = _mapper.Map<AgendaDetailDTO>(detail);
             agenda.Users = _mapper.Map<List<AllUserDTO>>(await _userRepository.All());
             agenda.Runable = agenda.Roles.All(x => x.UserId != 0);
             return agenda;
         }
 
-        public async Task<(List<AgendaRoleDTO>, List<AllUserDTO>, bool)> EditRole(EditedRoleDTO edited, int userId)
+        public async Task<AgendaDetailDTO> EditRole(EditedRoleDTO edited, int userId)
         {
             var role = await _agendaRoleRepository.Detail(edited.Id);
             role.UserId = edited.UserId;
             await _agendaRoleRepository.Save();
-            var roles = _mapper.Map<List<AgendaRoleDTO>>(await _agendaRoleRepository.AllOfAgenda(role.AgendaId));
-            var users = _mapper.Map<List<AllUserDTO>>(await _userRepository.All());
-            var adminId = await _repository.AdminId(role.AgendaId);
-            return (roles, users, userId == adminId);
+            
+            return _mapper.Map<AgendaDetailDTO>(await _repository.Detail(role.AgendaId));
         }
 
         public async Task RemoveModel(int modelId, int agedaId)
@@ -87,9 +94,9 @@ namespace itu.BL.Facades
             await _agendaModelRepository.Save();
         }
 
-        public (int modelId, int active, int width, int height) ModelDetail(int id)
+        public (int modelId, int active, int width, int height) ModelDetail(int id, int order = 0)
         {
-            return (id, 0, 660, 560);
+            return (id, order, 660, 560);
         }
 
         public async Task RunWorkflow(RunWorkflowDTO dto)
@@ -130,6 +137,21 @@ namespace itu.BL.Facades
             await _taskRespository.Save();
 
             transaction.Commit();
+        }
+
+        public async Task<AgendaDetailDTO> ChangeWorfklowState(WorkflowStateDTO state)
+        {
+            var workflow = await _workflowRespository.GetForEdit(state.WorkflowId);
+            var note = new NoteEntity();
+            note.Before = workflow.State;
+            workflow.State = state.State;
+            note.After = workflow.State;
+            note.WorkflowId = workflow.Id;
+            note.Note = state.Note;
+            await _noteRespository.Create(note);
+            await _repository.Save();
+
+            return _mapper.Map<AgendaDetailDTO>(await _repository.Detail(state.AgendaId));
         }
 
         public async Task AddModel(AddModelDTO dto)
@@ -175,26 +197,22 @@ namespace itu.BL.Facades
             await _repository.Save();
         }
 
-        public async Task<(List<AgendaRoleDTO>, List<AllUserDTO>, bool)> RemoveRole(int id, int userId)
+        public async Task<AgendaDetailDTO> RemoveRole(int id, int userId)
         {
             var role = await _agendaRoleRepository.Detail(id);
             _agendaRoleRepository.Delete(role);
             await _agendaRoleRepository.Save();
-            var roles = _mapper.Map<List<AgendaRoleDTO>>(await _agendaRoleRepository.AllOfAgenda(role.AgendaId));
-            var users = _mapper.Map<List<AllUserDTO>>(await _userRepository.All());
-            var adminId = await _repository.AdminId(role.AgendaId);
-            return (roles, users, userId == adminId);
+            
+            return _mapper.Map<AgendaDetailDTO>(await _repository.Detail(role.AgendaId));
         }
 
-        public async Task<(List<AgendaRoleDTO>, List<AllUserDTO>, bool)> AddRole(NewRoleDTO role, int userId)
+        public async Task<AgendaDetailDTO> AddRole(NewRoleDTO role, int userId)
         {
             var roleEntity = _mapper.Map<AgendaRoleEntity>(role);
             await _agendaRoleRepository.Create(roleEntity);
             await _agendaRoleRepository.Save();
-            var roles = _mapper.Map<List<AgendaRoleDTO>>(await _agendaRoleRepository.AllOfAgenda(role.AgendaId));
-            var users = _mapper.Map<List<AllUserDTO>>(await _userRepository.All());
-            var adminId = await _repository.AdminId(role.AgendaId);
-            return (roles, users, userId == adminId);
+            
+            return _mapper.Map<AgendaDetailDTO>(await _repository.Detail(role.AgendaId));
         }
     }
 }

@@ -61,6 +61,7 @@ namespace itu.WEB
             services.AddScoped<AgendaRoleRepository>();
             services.AddScoped<ModelWorkflowRepository>();
             services.AddScoped<AgendaModelRepository>();
+            services.AddScoped<NoteRepository>();
 
             services.AddScoped<BaseFacade>();
             services.AddScoped<UserFacade>();

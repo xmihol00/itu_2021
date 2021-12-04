@@ -15,10 +15,14 @@
     const AgendaId = @Model.Id;
     const Users = @(Html.Raw(JsonConvert.SerializeObject(Model.Users)));
 </script>
+<style>
+    .container {
+        width: 75%;
+        max-width: 1500px;
+        min-width: 1150px;
+    }
+</style>
 <link rel="stylesheet" href="~/css/Agenda.css" />
-<link rel="stylesheet" href="~/css/Workflow.css" />
-<link rel="stylesheet" href="~/css/Task.css" />
-<script src="/js/Task.js"></script>
 <script src="/js/Agenda.js"></script>
 <div class="d-flex justify-content-between mr-2 ml-2">
     <h1 class="page-name">Detail agendy</h1>
@@ -95,7 +99,7 @@
         <div>
             <h2 class="text-center mb-1">Role agendy</h2>
             <div id="RolesId" class="row pl-1">
-                @await Html.PartialAsync("Partial/_Roles", (Model.Roles, Model.Users, admin))
+                @await Html.PartialAsync("Partial/_Roles", Model)
             </div>
         </div>
     </div>
@@ -104,7 +108,7 @@
         <ul class="list-group" style="margin-top: calc(0.25rem + 8px);">
             @foreach (var mod in Model.Models)
             {
-                <li class="list-group-item d-flex justify-content-start model-li" onmouseenter="MouseInRoleCB(arguments[0])" onmouseleave="MouseOutRoleCB(arguments[0])">
+                <li class="list-group-item d-flex justify-content-start model-li" >
                     <div>
                         <div class="model-svg" id="@mod.Id" onclick="ShowModelDetail(this)">
                             @await Html.PartialAsync("../Model/svg", (mod.Id, 0, 235, 190))
@@ -118,7 +122,7 @@
                             </div>
                             @if (admin)
                             {
-                                <div class="d-flex justify-content-between pl-3 vis-hidden">
+                                <div class="d-flex justify-content-between pl-3">
                                     @if (Model.Runable)
                                     {
                                         <button class="btn btn-sm btn-primary" id="@mod.Id" onclick="ShowRunWF(this)">Spustit</button>
@@ -138,6 +142,9 @@
     </div>
 </div>
 <hr style="margin-top: 7px;">
+<div id="RunningWorkflowsId">
+    @await Html.PartialAsync("Partial/_AgendaWorkflows", Model)
+</div>
 
 <div id="AddModelId" class="modal">
     <div id="AddModelBodyId" class="modal-content mb-3">
@@ -157,28 +164,24 @@
         <form action="/Agenda/RunWorkflow" method="POST">
             <input type="hidden" name="AgendaId" value="@Model.Id" />
             <input type="hidden" name="ModelId" value="" id="ModelInputId" />
-            <div class="input-group mb-2">
-                @*
-            *@<div class="input-group-prepend">
-                @*
-            *@<label class="input-group-text comp-bckg" style="width: 165px;">Název workflow</label>
-        </div>
-        <input autocomplete="off" class="form-control" name="Name" id="RunNameId" oninput="RunWorkflowCheck()" />
+            <div class="input-group mb-2">@*
+                *@<div class="input-group-prepend">@*
+                    *@<label class="input-group-text comp-bckg" style="width: 165px;">Název workflow</label>
+                </div>
+                <input autocomplete="off" class="form-control" name="Name" id="RunNameId" oninput="RunWorkflowCheck()" />
+            </div>
+            <div class="input-group mb-2">@*
+                    *@<div class="input-group-prepend">@*
+                    *@<label class="input-group-text comp-bckg" style="width: 165px;">Popis cíle workflow</label>
+                </div>
+                <textarea class="form-control" name="Description" id="RunDescId" oninput="RunWorkflowCheck()"></textarea>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-danger mb-0" onclick="HideAddWF()">Zrušit</button>
+                <button type="submit" class="btn btn-success mb-0" id="RunWFBtnId" disabled>Spustit</button>
+            </div>
+        </form>
     </div>
-    <div class="input-group mb-2">
-        @*
-    *@<div class="input-group-prepend">
-        @*
-    *@<label class="input-group-text comp-bckg" style="width: 165px;">Popis cíle workflow</label>
-</div>
-<textarea class="form-control" name="Description" id="RunDescId" oninput="RunWorkflowCheck()"></textarea>
-</div>
-<div class="d-flex justify-content-between">
-    <button type="button" class="btn btn-danger mb-0" onclick="HideAddWF()">Zrušit</button>
-    <button type="submit" class="btn btn-success mb-0" id="RunWFBtnId" disabled>Spustit</button>
-</div>
-</form>
-</div>
 </div>
 
 <div id="SvgDetailId" class="modal">
@@ -187,8 +190,41 @@
         <div class="d-flex justify-content-center">
             <div class="model-svg-detail" id="SvgDataId"></div>
         </div>
-        <div class="d-flex justify-content-center m-3">
+        <div class="d-flex justify-content-center mt-3">
             <button class="btn btn-primary mb-0" onclick="HideModelDetail()">Zavřít</button>
+        </div>
+    </div>
+</div>
+
+<div id="ResumeWorkflowId" class="modal">
+    <div class="modal-content mb-2">
+        <h2 class="text-center">Zadejte důvod obnovení</h2>
+        <div class="input-group mb-3">@*
+            *@<div class="input-group-prepend">@*
+                *@<label class="input-group-text edit-wf-width comp-bckg">Důvod obnovení</label>
+            </div>
+            <textarea id="ResumeDescId" class="form-control" oninput="ResumeInput(this)"></textarea>
+        </div>
+        <div class="d-flex justify-content-around">
+            <button class="btn btn-danger mb-0" onclick="HideResumeWF()">Zrušit</button>
+            <button id="ResumeBtnId" class="btn btn-success mb-0" onclick="ResumeWorkflow(CurrentWorkflowId)" disabled>Obnovit</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="StopWorkflowId" class="modal">
+    <div class="modal-content mb-2">
+        <h2 class="text-center">Zadejte důvod zastavení</h2>
+        <div class="input-group mb-3">@*
+            *@<div class="input-group-prepend">@*
+                *@<label class="input-group-text edit-wf-width comp-bckg">Důvod zastavení</label>
+            </div>
+            <textarea id="StopDescId" class="form-control" oninput="StopInput(this)"></textarea>
+        </div>
+        <div class="d-flex justify-content-around">
+            <button class="btn btn-danger mb-0" onclick="HideStopWF()">Zrušit</button>
+            <button id="StopBtnId" class="btn btn-success mb-0" onclick="StopWorkflow()" disabled>Zastavit</button>
         </div>
     </div>
 </div>

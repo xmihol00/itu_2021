@@ -5,6 +5,8 @@
 // Kontakt:     xfiala60@stud.fit.vutbr.cz
 //=================================================================================================================
 
+var CurrentWorkflowId = 0;
+
 function EditationStart() {
     let normals = document.getElementsByClassName("normal");
     for (let normal of normals) {
@@ -102,38 +104,25 @@ function CancelData() {
     document.getElementById("DataEditId").style.display = "none";
 }
 
-function MouseInRole(event) {
-    for (let element of event.target.getElementsByClassName("vis-hidden")) {
-        element.style.visibility = "visible";
-    }
-}
-
-function MouseOutRole(event) {
-    for (let element of event.target.getElementsByClassName("vis-hidden")) {
+function AddNewRole(element) {
+    for (let element of document.getElementsByClassName("vis-hidden")) {
         element.style.visibility = "hidden";
     }
-}
-
-var MouseInRoleCB = MouseInRole;
-var MouseOutRoleCB = MouseOutRole;
-
-function AddNewRole(element) {
     element.style.display = "none";
     element.nextSibling.style.display = "block";
     element.nextSibling.nextSibling.style.display = "block";
-    MouseInRoleCB = () => {};
-    MouseOutRoleCB = () => {};
     let parent = element.parentNode.parentNode;
     const sel = CreteSelect(parent.getElementsByClassName("user"));
     parent.append(sel);
 }
 
 function RolesCancel(element) {
+    for (let element of document.getElementsByClassName("vis-hidden")) {
+        element.style.visibility = "visible";
+    }
     element.style.display = "none";
     element.previousSibling.style.display = "block";
     element.nextSibling.style.display = "none";
-    MouseInRoleCB = MouseInRole;
-    MouseOutRoleCB = MouseOutRole;
     document.getElementById("GeneratedSelId").remove();
 }
 
@@ -180,9 +169,8 @@ function AddRole(element) {
     })
     .done(function (result) 
     {
-        document.getElementById("RolesId").innerHTML = result;
-        MouseInRoleCB = MouseInRole;
-        MouseOutRoleCB = MouseOutRole;
+        document.getElementById("RolesId").innerHTML = result.Roles;
+        document.getElementById("RunningWorkflowsId").innerHTML = result.Workflows;
         ShowAlert("Role úspěšně přidána.");
     })
     .fail(function() 
@@ -207,9 +195,8 @@ function EditRole(element) {
     .done(function (result) 
     {
         let roles = document.getElementById("RolesId");
-        roles.innerHTML = result;
-        MouseInRoleCB = MouseInRole;
-        MouseOutRoleCB = MouseOutRole;
+        roles.innerHTML = result.Roles;
+        document.getElementById("RunningWorkflowsId").innerHTML = result.Workflows;
         ShowAlert("Role úspěšně přidána.");
         
         if (roles.getElementsByTagName("select").length == 0)
@@ -236,9 +223,8 @@ function RemoveRole(element) {
     })
     .done(function (result) 
     {
-        document.getElementById("RolesId").innerHTML = result;
-        MouseInRoleCB = MouseInRole;
-        MouseOutRoleCB = MouseOutRole;
+        document.getElementById("RolesId").innerHTML = result.Roles;
+        document.getElementById("RunningWorkflowsId").innerHTML = result.Workflows;
         ShowAlert("Role úspěšně odebrána.");
     })
     .fail(function() 
@@ -332,7 +318,7 @@ function ShowModelDetail(element) {
     {
         async: true,
         type: "GET",
-        url: "/Agenda/ModelDetail/" + element.id,
+        url: "/Agenda/ModelDetail/" + element.id + "/" + element.getAttribute("data-order"),
     })
     .done(function (result) 
     {
@@ -370,7 +356,7 @@ function RemoveModel(element) {
     .fail(function() 
     {
         ShowAlert("Model workflow se nepodařilo odebrat.", true);
-    });    
+    });
 }
 
 function RunWorkflowCheck() {
@@ -419,4 +405,158 @@ function CreateAgendaCheck() {
     }
 
     document.getElementById("CreateBtnId").disabled = dis;
+}
+
+function EditWorkflow(id)
+{
+    document.getElementById(id).style.display = "block";
+    document.getElementById('D' + id).style.display = "none";
+
+    let text = document.getElementById('T' + id);
+    text.style.height = text.scrollHeight + "px";
+}
+
+function CalcelEditWorkflow(id)
+{
+    document.getElementById(id).style.display = "none";
+    document.getElementById('D' + id).style.display = "flex";
+}
+
+function SaveWorkflow(id)
+{
+    let form = document.getElementById(id)
+    let formData = new FormData(form);
+    let jsonData = Object.fromEntries(formData.entries());
+    jsonData.UserId = form.getElementsByTagName("select")[1].value;
+
+    $.ajax(
+    {
+        async: true,
+        type: "POST",
+        url: "/Task/UpdateCurrent",
+        data: jsonData
+    })
+    .done(function(result) 
+    {
+        document.getElementById("RunningWorkflowsId").innerHTML = result;
+        ShowAlert("Údaje o workflow úspěšně změněny.");
+    })
+    .fail(function() 
+    {
+        ShowAlert("Údaje o workflow se nepodařilo změnit.", true);
+    });
+}
+
+function ShowResumeWF(id)
+{
+    CurrentWorkflowId = id;
+    document.getElementById("ResumeWorkflowId").style.display = "block";
+    document.addEventListener("click", HideResumeWF);
+}
+
+function HideResumeWF(event)
+{
+    let modal = document.getElementById("ResumeWorkflowId");
+    if (event == null || modal == event.target)
+    {
+        modal.style.display = "none";
+        document.removeEventListener("click", HideResumeWF);
+    }    
+}
+
+function ShowStopWF(id)
+{
+    CurrentWorkflowId = id;
+    document.getElementById("StopWorkflowId").style.display = "block";
+    document.addEventListener("click", HideStopWF);
+}
+
+function HideStopWF(event)
+{
+    let modal = document.getElementById("StopWorkflowId");
+    if (event == null || modal == event.target)
+    {
+        modal.style.display = "none";
+        document.removeEventListener("click", HideStopWF);
+    }    
+}
+
+function StopWorkflow()
+{
+    let state = {};
+    state.WorkflowId = CurrentWorkflowId;
+    state.AgendaId = AgendaId;
+    state.State = "Stopped";
+    state.Note = document.getElementById("StopDescId").value;
+
+    $.ajax(
+    {
+        async: true,
+        type: "POST",
+        url: "/Agenda/ChangeWorfklowState",
+        data: state
+    })
+    .done(function(result) 
+    {
+        document.getElementById("RunningWorkflowsId").innerHTML = result;
+        HideStopWF()
+        ShowAlert("Workflow úspěšně zastaveno.");
+    })
+    .fail(function() 
+    {
+        ShowAlert("Workflow se nepodařilo zastavit.", true);
+    });
+}
+
+function ResumeWorkflow()
+{
+    let state = {};
+    state.WorkflowId = CurrentWorkflowId;
+    state.AgendaId = AgendaId;
+    state.State = "Active";
+    state.Note = document.getElementById("ResumeDescId").value;
+
+    $.ajax(
+    {
+        async: true,
+        type: "POST",
+        url: "/Agenda/ChangeWorfklowState",
+        data: state
+    })
+    .done(function(result) 
+    {
+        document.getElementById("RunningWorkflowsId").innerHTML = result;
+        HideResumeWF();
+        ShowAlert("Workflow úspěšně obnoveno.");
+    })
+    .fail(function() 
+    {
+        ShowAlert("Workflow se nepodařilo obnovit.", true);
+    });
+}
+
+function ResumeInput(input)
+{
+    let btn = document.getElementById("ResumeBtnId");
+    if (!input.value || !input.value.trim()) {
+        input.parentNode.firstChild.firstChild.classList.add("comp-bckg");
+        btn.disabled = true;
+    }
+    else {
+        input.parentNode.firstChild.firstChild.classList.remove("comp-bckg");
+        btn.disabled = false;
+    }    
+}
+
+function StopInput(input)
+{
+    let btn = document.getElementById("StopBtnId");
+    if (!input.value || !input.value.trim()) {
+        input.parentNode.firstChild.firstChild.classList.add("comp-bckg");
+        btn.disabled = true;
+    }
+    else {
+        input.parentNode.firstChild.firstChild.classList.remove("comp-bckg");
+        btn.disabled = false;
+    }    
 }
