@@ -17,6 +17,7 @@ namespace itu.DAL.Entities
     public class NoteEntity
     {
         public int Id { get; set; }
+        public string Note { get; set; }
         public WorkflowStateEnum Before { get; set; }
         public WorkflowStateEnum After { get; set; }
         public int WorkflowId { get; set; }

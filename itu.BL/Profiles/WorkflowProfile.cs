@@ -26,6 +26,9 @@ namespace itu.BL.Profiles
             CreateMap<ModelWorkflowEntity, IdNameModelDTO>();
             CreateMap<WorkflowAgendaOverviewDTO, IdNameAgendaDTO>();
             CreateMap<WorkflowTaskOverviewDTO, IdTypeTaskDTO>();
+
+            CreateMap<AgendaEntity, WorkflowAgendaOverviewDTO>();
+            CreateMap<AgendaEntity, IdNameAgendaDTO>();
         }
 
     }

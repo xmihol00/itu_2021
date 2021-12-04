@@ -47,19 +47,31 @@ namespace itu.WEB.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRole(NewRoleDTO role)
         {
-            return PartialView("Partial/_Roles", await _facade.AddRole(role, ViewBag.Id));
+            var response = new RolesResponseDTO();
+            AgendaDetailDTO dto = await _facade.AddRole(role, ViewBag.Id);
+            response.Roles = await this.RenderViewAsync("Partial/_Roles", dto, true);
+            response.Workflows = await this.RenderViewAsync("Partial/_AgendaWorkflows", dto, true);
+            return Ok(dto);
         }
 
         [HttpPost]
         public async Task<IActionResult> EditRole(EditedRoleDTO role)
         {
-            return PartialView("Partial/_Roles", await _facade.EditRole(role, ViewBag.Id));
+            var response = new RolesResponseDTO();
+            AgendaDetailDTO dto = await _facade.EditRole(role, ViewBag.Id);
+            response.Roles = await this.RenderViewAsync("Partial/_Roles", dto, true);
+            response.Workflows = await this.RenderViewAsync("Partial/_AgendaWorkflows", dto, true);
+            return Ok(dto);
         }
 
         [HttpGet]
         public async Task<IActionResult> RemoveRole(int id)
         {
-            return PartialView("Partial/_Roles", await _facade.RemoveRole(id, ViewBag.Id));
+            var response = new RolesResponseDTO();
+            AgendaDetailDTO dto = await _facade.RemoveRole(id, ViewBag.Id);
+            response.Roles = await this.RenderViewAsync("Partial/_Roles", dto, true);
+            response.Workflows = await this.RenderViewAsync("Partial/_AgendaWorkflows", dto, true);
+            return Ok(dto);
         }
 
         [HttpPost]
@@ -97,9 +109,10 @@ namespace itu.WEB.Controllers
         }
 
         [HttpGet]
-        public IActionResult ModelDetail(int id)
+        [Route("Agenda/ModelDetail/{id}/{order}")]
+        public IActionResult ModelDetail(int id, int order)
         {
-            return PartialView("../Model/svg", _facade.ModelDetail(id));
+            return PartialView("../Model/svg", _facade.ModelDetail(id, order));
         }
 
         [HttpGet]
@@ -108,6 +121,12 @@ namespace itu.WEB.Controllers
         {
             await _facade.RemoveModel(modelId, agendaId);
             return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeWorfklowState(WorkflowStateDTO change)
+        {
+            return PartialView("Partial/_AgendaWorkflows", await _facade.ChangeWorfklowState(change));
         }
     }
 }

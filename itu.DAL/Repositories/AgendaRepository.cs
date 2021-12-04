@@ -35,6 +35,7 @@ namespace itu.DAL.Repositories
                          .Include(x => x.Administrator)
                          .Include(x => x.Workflows)
                             .ThenInclude(x => x.Tasks)
+                                .ThenInclude(x => x.User)
                          .Include(x => x.Workflows)
                             .ThenInclude(x => x.ModelWorkflow) 
                          .Include(x => x.AgendaModels)

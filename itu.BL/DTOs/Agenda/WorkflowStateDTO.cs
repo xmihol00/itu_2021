@@ -14,19 +14,11 @@ using itu.Common.Enums;
 
 namespace itu.BL.DTOs.Agenda
 {
-    public class AllWorkflowAgendaDTO
+    public class WorkflowStateDTO
     {
-        public int Id { get; set; }
-        public int TaskId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public PriorityEnum Priority { get; set; }
-        public DateTime End { get; set; }
-        public TaskTypeEnum TaskType { get; set; }
-        public int TaskOrder { get; set; }
-        public int ModelId { get; set; }
+        public int AgendaId { get; set; }
+        public int WorkflowId { get; set; }
         public WorkflowStateEnum State { get; set; }
+        public string Note { get; set; }
     }
 }

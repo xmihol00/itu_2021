@@ -1,0 +1,144 @@
+@model AgendaDetailDTO
+@{
+    bool admin = Model.AdministratorId == ViewBag.Id;
+}
+<h2 class="text-center">Běžící workflow</h2>
+<ul class="list-group ml-4 mr-4" style="margin-top: calc(0.25rem + 8px);">
+    @foreach (var workflow in Model.Workflows)
+    {
+        <li class="list-group-item d-flex justify-content-start model-li" >
+            <div class="model-svg-wf" id="@workflow.ModelId" data-order="@workflow.TaskOrder" onclick="ShowModelDetail(this)">
+                @await Html.PartialAsync("../Model/svg", (workflow.ModelId, workflow.TaskOrder, 350, 300))
+            </div>
+            <div class="w-100">
+                @if (admin)
+                {
+                    <form class="pl-3" style="display: none;" id="WF @workflow.Id">
+                        <input type="hidden" name="WorkflowId" value="@workflow.Id" />
+                        <input type="hidden" name="TaskId" value="@workflow.TaskId" />
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text edit-wf-width">Název workflow</label>
+                            </div>
+                            <input type="text" class="form-control" value="@workflow.Name" name="Name" />
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text edit-wf-width">Název workflow</label>
+                            </div>
+                            <textarea id="TWF @workflow.Id" name="Description" class="form-control">@workflow.Description</textarea>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text edit-wf-width">Datum vyřešení</label>
+                                    </div>
+                                    <input type="date" class="form-control" name="End"
+                                           min='@DateTime.Now.ToString("yyyy-MM-dd")' value='@workflow.End.ToString("yyyy-MM-dd")'/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text edit-wf-width">Priorita</label>
+                                    </div>
+                                    <select class="form-control @workflow.TaskType" name="Priority">
+                                        @foreach (var prio in Enum.GetValues<PriorityEnum>())
+                                        {
+                                            if (prio== workflow.Priority)
+                                            {
+                                                <option value="@prio" selected>@prio.ToLabel()</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@prio">@prio.ToLabel()</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text edit-wf-width">Řešitel úkolu</label>
+                                    </div>
+                                    <select class="form-control @workflow.TaskType" name="UserId">
+                                        @foreach (var role in Model.Roles.Where(x => x.Role == workflow.TaskType))
+                                        {
+                                            if (role.UserId == workflow.UserId)
+                                            {
+                                                <option value="@role.UserId" selected>@role.UserName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@role.UserId">@role.UserName</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-around">
+                                    <button type="button" class="btn btn-danger" onclick="CalcelEditWorkflow('WF @workflow.Id')">Zrušit</button>
+                                    <button type="button" class="btn btn-success" onclick="SaveWorkflow('WF @workflow.Id')">Uložit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+                <div class="pl-3 mt-1 vertical-justify-between" id="DWF @workflow.Id">
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <a href="/Workflow/Detail/@workflow.Id"><h3 class="wf-link">@workflow.Name</h3></a>
+                            <div>
+                                @if (admin)
+                                {
+                                    <button class="btn btn-sm btn-secondary" onclick="EditWorkflow('WF @workflow.Id')"><i class="fas fa-edit cursor"></i></button>
+                                }
+                            </div>
+                        </div>
+                        <p class="mb-0" style="color: black;">@workflow.Description</p>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-md-4">
+                                <div class="text-center">Očekávané datum vyřešení úkolu</div>
+                                <h4 class="text-center">@workflow.End.ToString("dd. MM. yyyy")</h4>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">Typ úkolu</div>
+                                <h4 class="text-center">@workflow.TaskType.ToLabel()</h4>
+                            </div> 
+                            <div class="col-md-2">
+                                <div class="text-center">Priorita</div>
+                                <div class="priority @workflow.Priority mt-0">@workflow.Priority.ToLabel()</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">Řešitel</div>
+                                <h4 class="text-center">@workflow.UserName</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-center mb-2">
+                            @if(admin)
+                            {
+                                @if (workflow.State == WorkflowStateEnum.Active)
+                                {
+                                    <span class="mt-auto mb-auto mr-2">Probíhá: </span>
+                                    <button class="btn btn-danger" onclick="ShowStopWF('@workflow.Id')">Zastavit</button>
+                                }
+                                else
+                                {
+                                    <span class="mt-auto mb-auto mr-2">Zastaveno: </span>
+                                    <button class="btn btn-primary" onclick="ShowResumeWF('@workflow.Id')">Obnovit</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
