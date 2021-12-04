@@ -20,10 +20,26 @@
                     </div>
                 </div>
                 <div class="col-md-8">
+                    
+                    <div class="row">
+                      
+                        <div class="col-4">
+                            Stav workflow
+                            <h5><span class="" style="margin-top: -2px;">@Model[i].State.ToLabel()</span></h5>
+                        </div>
+                        <div class="col-4">
+                            Typ aktualního úkolu
+                            <h5><span class="" style="margin-top: -2px;"> <a>@Model[i].CurrentTask.Type</a></span></h5>
+                        </div>
+                        <div class="col-4">
+                            Očekávané dokončení úkolu
+                            <h5><span class="" style="margin-top: -2px;">@Model[i].CurrentTask.End.ToString("dd. MM. yyyy")</span></h5>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-3"></div>
                         <div class="col-6" style="text-align:center;">
-                            Název workflow
+
                             @if (Model[i].Name == null)
                             {
                                 <h3 style="color:grey">
@@ -41,23 +57,7 @@
                         </div>
                         <div class="col-3"></div>
                     </div>
-                    <div class="row">
-                      
-                        <div class="col-4">
-                            Stav workflow
-                            <h5><span class="" style="margin-top: -2px;">@Model[i].State.ToLabel()</span></h5>
-                        </div>
-                        <div class="col-4">
-                            Typ aktualního úkolu
-                            <h5><span class="" style="margin-top: -2px;"> <a>@Model[i].CurrentTask.Type</a></span></h5>
-                        </div>
-                        <div class="col-4">
-                            Očekávané dokončení úkolu
-                            <h5><span class="" style="margin-top: -2px;">@Model[i].CurrentTask.End.ToString("dd. MM. yyyy")</span></h5>
-                        </div>
-                    </div>
-                
-                    <div class="row">
+                    <div class="row" style="margin-top:20px">
                         <div class="col-6">
                             Model worklfow
                             <h5><p style="word-break:break-word">@Model[i].ModelWorkflow.Name</p></h5>
