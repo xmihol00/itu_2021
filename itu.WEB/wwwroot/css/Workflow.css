@@ -170,3 +170,7 @@ h4{
 {
     color: var(--color-text-default);
 }
+
+tr, td {
+    color: var(--color-text-default);
+}

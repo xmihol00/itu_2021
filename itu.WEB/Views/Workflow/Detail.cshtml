@@ -55,7 +55,7 @@
                     @await Html.PartialAsync("../Model/svg", (Model.ModelWorkflow.Id, Model.CurrentTask?.Order ?? 0, 400, 360))
                 </div>
                 <div>
-                    <h3>Poznámky</h3>
+                    <h3 class="mt-2">Poznámky</h3>
                     @if (Model.Notes.Count == 0)
                     {
                         <p>Workflow nemá žádné poznámky.</p>

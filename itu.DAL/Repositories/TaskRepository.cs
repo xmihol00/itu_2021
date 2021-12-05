@@ -99,7 +99,8 @@ namespace itu.DAL.Repositories
 
         public int TaskOfUserCount(int userId)
         {
-            return _dbSet.Where(x => x.UserId == userId && x.Active)
+            return _dbSet.Include(x => x.Workflow)
+                         .Where(x => x.UserId == userId && x.Active && x.Workflow.State == WorkflowStateEnum.Active)
                          .Count();
         }
 
