@@ -93,6 +93,7 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    color: var(--color-text-default)!important;
 }
 
 .page-headline {
@@ -153,7 +154,15 @@
 }
 
 .model-svg {
-    width: 400px; 
+    width: 400px;
     height: 361px;
     cursor: pointer;
+    background-color: var(--color-bg-transparent);
+}
+h4{
+    color: var(--color-text-default);
+}
+.custom-text
+{
+    color: var(--color-text-default);
 }
