@@ -11,18 +11,20 @@
 2. SQL server, stačí verze Express, dostupné z https://www.microsoft.com/en-us/sql-server/sql-server-downloads.
 
 ## Návod pro lokální spuštění.
+Následuje návod pro lokální spuštení na platfomách Linux (testovováno na Ubuntu 20.04) a Windows (testováno na Windows 10). V případě problému se spuštěním kontaktujte Davida Miholu na emailu xmihol00@fit.stud.vutbr.cz nebo tel. čísle 774 826 266.
+
 ### Windows
 1. Rozbalit zazipovaný archiv,
 2. do programu Visual Studio 2019 nainstalovat vývojové balíky *.NET desktop development* a *APS.NET and web development*,
-3. otevřít *Knihovna.sln* v programu Visual Studio 2019,
-4. obnovit knihovny na straně klienta kliknutím pravým tlačítkem na soubor *Knihovna.WEB/libman.json* a vybrání možnosti *Restore Client-Side Libraries*  (Tento soubor obsahuje výčet použitých klientských knihoven.),
+3. otevřít *itu_2021.sln* v programu Visual Studio 2019,
+4. obnovit knihovny na straně klienta kliknutím pravým tlačítkem na soubor *itu.WEB/libman.json* a vybrání možnosti *Restore Client-Side Libraries*  (Tento soubor obsahuje výčet použitých klientských knihoven.),
 5. spustit ladění. (databáze by se měla vytvořit automaticky a automaticky by se pomocí ORM mělo vytvořit i její schéma a nahrát seed data. V případě, že se tak nestane, pokračujte bodem 3 a 4 v návodu pro Linux.)
 
 ### Linux
 1. Rozbalit zazipovaný archiv,
 2. otevřít adresář ve Visual Studio Code,
 3. vytvořit prázdnou databázi,
-4. nahradit hodnotu *"DB"* v *appsettings.json* za např. `Server=127.0.0.1;uid=uzivatel;Password=silne_heslo;Database=Knihovna;`,
+4. nahradit hodnotu *"DB"* v *appsettings.json* za např. `Server=127.0.0.1;uid=uzivatel;Password=silne_heslo;Database=ITU;`,
 5. obnovit knihovny na straně klienta dle návodu od Microsoft, dostupné z https://docs.microsoft.com/cs-cz/aspnet/core/client-side/libman/libman-cli?view=aspnetcore-6.0,
 6. spustit ladění, konfigurace databáze opět proběhne pomocí ORM.
 
@@ -42,5 +44,5 @@
 | u9                  | test            |
 | u10                 | test            |
 
-## Testování
+## Vývoj a testování
 Aplikace byla vyvíjena a testována na aktuálních verzích prohlížečů *Mozila Firefox*, *Opera* a *Google Chrome*.
