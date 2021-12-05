@@ -329,7 +329,7 @@ namespace itu.DAL.Seeds
                 WorkflowId = 7,
                 Active = false,
                 End = DateTime.Now.AddDays(-26),
-                Priority = PriorityEnum.High,
+                Priority = PriorityEnum.Urgent,
                 Start = DateTime.Now.AddDays(-34),
                 Order = 1,
                 Benefit = "Potřebujeme drony pro střežení pozemku!",
@@ -351,6 +351,51 @@ namespace itu.DAL.Seeds
                 Currency = CurrencyEnum.USD,
                 Accepted = true,
                 Reason = "To bude super!"
+            },
+
+
+            new AssignmentEntity()
+            {
+                Id = 24,
+                UserId = 1,
+                WorkflowId = 8,
+                Active = false,
+                End = DateTime.Now.AddDays(-26),
+                Priority = PriorityEnum.High,
+                Start = DateTime.Now.AddDays(-32),
+                Order = 1,
+                Benefit = "Musíme se naučit kouzlit.",
+                PriceGues = 8521,
+                Currency = CurrencyEnum.EUR,
+            },
+            new AcceptationEntity()
+            {
+                Id = 25,
+                UserId = 2,
+                WorkflowId = 8,
+                Active = false,
+                End = DateTime.Now.AddDays(-20),
+                Priority = PriorityEnum.Urgent,
+                Start = DateTime.Now.AddDays(-26),
+                Order = 2,
+                Benefit = "Musíme se naučit kouzlit.",
+                PriceGues = 8521,
+                Currency = CurrencyEnum.EUR,
+                Accepted = false,
+                Reason = "Kouzlit si můžete po pracovní době!"
+            },
+
+
+            new AssignmentEntity()
+            {
+                Id = 26,
+                UserId = 1,
+                WorkflowId = 9,
+                Active = true,
+                End = DateTime.Now.AddDays(10),
+                Priority = PriorityEnum.Low,
+                Start = DateTime.Now.AddDays(-1),
+                Order = 1,
             },
         };
 

@@ -39,8 +39,8 @@ namespace itu.WEB.Controllers
         {
             SearchResultDTO result = new SearchResultDTO();
             OverviewWorkflowDTO overview = new OverviewWorkflowDTO();
-            overview.AllWorkflow = _workflow.GetOverviewFiltered(filters);
-            overview.SearchOptions = _workflow.GetFiltersFiltered(overview.AllWorkflow);
+            overview.AllWorkflow = await _workflow.GetOverviewFiltered(filters);
+            overview.SearchOptions = await _workflow.GetFilters();
 
             overview.SearchOptions.SelectedAgendaIds = filters.AgendaIds;
             overview.SearchOptions.SelectedStates = filters.States;

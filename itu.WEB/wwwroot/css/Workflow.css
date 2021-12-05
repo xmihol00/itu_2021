@@ -123,7 +123,8 @@
 
 
 .list-group-item:first-child {
-    border-top-width: 1px
+    border-top-width: 1px;
+    color: #000;
 }
 
 .border-right {
@@ -139,8 +140,15 @@
 }
 
 .selected-state-enum {
-    color: var(--color-text-default);
+    color: var(--color-text-inverted);
     background-color: var(--color-focus);
+    font-weight: 600;
+}
+
+.selected-state-enum:hover {
+    color: var(--color-text-default);
+    background-color: var(--color-bg);
+    border: solid 1px var(--color-focus) !important;
     font-weight: 600;
 }
 

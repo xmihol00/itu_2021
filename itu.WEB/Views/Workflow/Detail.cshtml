@@ -17,8 +17,15 @@
     </div>
     <div class="row">
         <div class="col-6 float-left">
-            Předpokládaný čas ukončení workflow
-            <span style=""><h4> @Model.ExpectedEnd.ToString("dd. MM. yyyy") </h4></span>
+                @if (Model.ExpectedEnd < DateTime.MaxValue)
+                {
+                    <span>
+                        Předpokládaný čas ukončení workflow
+                        <h4>
+                            @Model.ExpectedEnd.ToString("dd. MM. yyyy")
+                        </h4>
+                    </span>
+                }
         </div>
         <div class="col-6 float-right" style="text-align:right;">
 
@@ -46,9 +53,9 @@
     <div class="col-10">
         <div class="d-flex">
             <div>
-                <div class="model-svg" id="@Model.ModelWorkflowIdName.Id" data-order="@Model.CurrentTask.Order" 
+                <div class="model-svg" id="@Model.ModelWorkflowIdName.Id" data-order="@Model.CurrentTask?.Order" 
                      onclick="ShowModelDetail(this)">
-                    @await Html.PartialAsync("../Model/svg", (Model.ModelWorkflow.Id, Model.CurrentTask.Order, 400, 360))
+                    @await Html.PartialAsync("../Model/svg", (Model.ModelWorkflow.Id, Model.CurrentTask?.Order ?? 0, 400, 360))
                 </div>
                 <div>
                     <h3>Poznámky</h3>
@@ -108,7 +115,7 @@
         <span class="workflow-set-states states-enum">Typ</span>
     </div>
     <div class="col-3 border-right">
-        <span class="workflow-set-states states-enum">Priorita</span>
+        <span class="workflow-set-states states-enum">Řešitel</span>
     </div>
     <div class="col-3">
         <span class="workflow-set-states states-enum">Datum ukončení</span>
@@ -120,16 +127,16 @@
     {
         <div class="row @if (task.Active == true) { @("active-task-detail-workflow")} " style=" cursor: pointer; text-align: center;" onclick="showTaskDetail('@task.Id');">
             <div class="col-3 border-right">
-                <div class="mt-2">@task.Start</div>
+                <div class="mt-1 mb-1">@task.Start.ToString("dd. MM. yyyy")</div>
             </div>
             <div class="col-3 border-right">
-                <div class="mt-2">@task.ToLabel()</div>
+                <div class="mt-1 mb-1">@task.ToLabel()</div>
             </div>
-            <div class="col-3 border-right pt-1" style="height: 40px;">
-                <div class="priority @task.Priority mt-0">@task.Priority.ToLabel()</div>
+            <div class="col-3 border-right">
+                <div class="mt-1 mb-1">@task.UserName</div>
             </div>
             <div class="col-3">
-                <div class="mt-2">@task.End</div>
+                <div class="mt-1 mb-1">@task.End.ToString("dd. MM. yyyy")</div>
             </div>
         </div>
         <div id="@("Detail" + task.Id)" hidden style="margin-top:10px;" class="pl-5 pr-5">

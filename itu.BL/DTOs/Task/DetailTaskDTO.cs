@@ -30,6 +30,7 @@ namespace itu.BL.DTOs.Task
         public bool Active { get; set; }
         public int WorkflowId { get; set; }
         public int AgendaId { get; set; }
+        public string UserName { get; set; }
         public List<AllFileDTO> Files { get; set; }
 
         public string ToAction()

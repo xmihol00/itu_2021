@@ -83,6 +83,24 @@ namespace itu.DAL.Seeds
                 State = WorkflowStateEnum.Finished,
                 ModelWorkflowId = 1
             },
+            new WorkflowEntity()
+            {
+                Id = 8,
+                AgendaId = 1,
+                Name = "Nákup kouzelnických hůlek",
+                Description = "Dnec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut.",
+                State = WorkflowStateEnum.Canceled,
+                ModelWorkflowId = 2
+            },
+            new WorkflowEntity()
+            {
+                Id = 9,
+                AgendaId = 3,
+                Name = "Výstavba silnice",
+                Description = "Dnec odio tempus molestie, porttitor ut, iaculis quis, sem. Donec quis nibh at felis congue commodo. Nam quis nulla. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Integer pellentesque quam vel velit. In sem justo, commodo ut.",
+                State = WorkflowStateEnum.Stopped,
+                ModelWorkflowId = 5
+            },
         };
 
         public static void SeedWorkflows(this ModelBuilder modelBuilder)

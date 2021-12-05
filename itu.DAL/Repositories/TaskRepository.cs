@@ -25,7 +25,7 @@ namespace itu.DAL.Repositories
             return _dbSet.Include(x => x.Workflow)
                          .OrderBy(x => x.End.Date)
                             .ThenBy(x => x.Priority)
-                         .Where(x => x.UserId == userId && x.Active == true)
+                         .Where(x => x.UserId == userId && x.Active == true && x.Workflow.State == WorkflowStateEnum.Active)
                          .ToListAsync();
         }
 
@@ -43,7 +43,8 @@ namespace itu.DAL.Repositories
             return _dbSet.Include(x => x.Workflow)
                          .OrderBy(x => x.End.Date)
                             .ThenBy(x => x.Priority)
-                         .Where(x => x.UserId == userId && x.Active == true && x.End.Date < DateTime.Now.Date)
+                         .Where(x => x.UserId == userId && x.Active == true && 
+                                x.End.Date < DateTime.Now.Date && x.Workflow.State == WorkflowStateEnum.Active)
                          .ToListAsync();
         }
 
@@ -60,6 +61,7 @@ namespace itu.DAL.Repositories
         {
             return _dbSet.Include(x => x.Workflow)
                             .ThenInclude(x => x.Agenda)
+                         .Include(x => x.User)
                          .Include(x => x.Workflow)
                             .ThenInclude(x => x.Files)
                          .FirstOrDefaultAsync(x => x.Id == taskId);

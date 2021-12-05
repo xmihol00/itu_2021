@@ -46,8 +46,7 @@ function Filter(element = null, filer = null) {
                 agendaIds.push(id);
             } else if (filer.id.includes("State")) {
                 id = filer.id.replace("State", '');
-                if (!states.includes(id))
-                    states.push(id);
+                states.push(id);
             }
         }
     }
