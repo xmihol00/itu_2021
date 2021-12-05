@@ -27,7 +27,10 @@
 <div class="d-flex justify-content-between mr-2 ml-2">
     <h1 class="page-name">Detail agendy</h1>
     <div id="Buttons" class="mt-auto mb-auto d-flex">
-        <button class="btn btn-primary mr-2" style="white-space: nowrap" onclick="ShowAddModel()">Přidat model</button>
+        @if (admin)
+        {
+            <button class="btn btn-primary mr-2" style="white-space: nowrap" onclick="ShowAddModel()">Přidat model</button>
+        }
     </div>
 </div>
 <hr class="page-title-line">

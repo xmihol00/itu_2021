@@ -1,4 +1,11 @@
-﻿using System;
+﻿//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Vítek Hnatovskyj
+// Kontakt:     xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,8 +46,8 @@ namespace itu.WEB.Controllers
         {
             SearchResultDTO result = new SearchResultDTO();
             OverviewWorkflowDTO overview = new OverviewWorkflowDTO();
-            overview.AllWorkflow = _workflow.GetOverviewFiltered(filters);
-            overview.SearchOptions = await _workflow.GetFiltersFiltered(overview.AllWorkflow);
+            overview.AllWorkflow = await _workflow.GetOverviewFiltered(filters);
+            overview.SearchOptions = await _workflow.GetFilters();
 
             overview.SearchOptions.SelectedAgendaIds = filters.AgendaIds;
             overview.SearchOptions.SelectedStates = filters.States;

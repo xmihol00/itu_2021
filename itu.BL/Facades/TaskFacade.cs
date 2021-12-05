@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using itu.BL.DTOs.Agenda;
 using itu.BL.DTOs.File;
 using itu.BL.DTOs.Task;
 using itu.Common.Enums;
@@ -26,11 +27,16 @@ namespace itu.BL.Facades
     public class TaskFacade
     {
         private readonly TaskRepository _repository;
+        private readonly WorkflowRepository _workflowRepository;
+        private readonly AgendaRepository _agendaRepository;
         private readonly IMapper _mapper;
 
-        public TaskFacade(TaskRepository repository, IMapper mapper)
+        public TaskFacade(TaskRepository repository, WorkflowRepository workflowRepository, AgendaRepository agendaRepository, 
+                          IMapper mapper)
         {
             _repository = repository;
+            _workflowRepository = workflowRepository;
+            _agendaRepository = agendaRepository;
             _mapper = mapper;
         }
 
@@ -267,6 +273,25 @@ namespace itu.BL.Facades
             return _mapper.Map<DetailTaskDTO>(task);
         }
 
+        public async Task<(AgendaDetailDTO, AllTaskDTO)> UpdateTaskWorkflow(TaskWorkflowEditDTO edit)
+        {
+            TaskEntity task = await _repository.Detail(edit.TaskId);
+            AllTaskDTO dto = null;
+            task.Workflow.Name = edit.Name;
+            task.Workflow.Description = edit.Description;
+            
+            task.Priority = edit.Priority;
+            task.End = edit.End;
+            if (task.UserId != edit.UserId)
+            {
+                task.UserId = edit.UserId;
+                dto = _mapper.Map<AllTaskDTO>(task);
+            }
+            await _repository.Save();
+
+            return (_mapper.Map<AgendaDetailDTO>(await _agendaRepository.Detail(task.Workflow.AgendaId)), dto);
+        }
+
         public async Task<SolvedDTO> PublicationSolve(int userId, PublishPostDTO dto)
         {
             TaskEntity task = await _repository.Detail(userId, dto.Id);
@@ -460,6 +485,8 @@ namespace itu.BL.Facades
                         created = assignment;
                         break;
                 }
+
+                created.Priority = current.Priority;
             }
 
             await _repository.Save();

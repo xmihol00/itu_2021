@@ -178,7 +178,7 @@
             </div>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                    <label id="ReasonLabelId" class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(acceptation.Reason) ? "comp-bckg" : "")">Důvod přijetí</label>
+                    <label id="ReasonLabelId" class="input-group-text task-prep-wdth comp @(String.IsNullOrWhiteSpace(acceptation.Reason) ? "comp-bckg" : "")">@(acceptation.Accepted ? "Důvod přijetí" : "Důvod odmítnutí")</label>
                 </div>
                 <textarea id="ReasonId" name="Reason" class="form-control" >@acceptation.Reason</textarea>
             </div>

@@ -27,7 +27,7 @@ namespace itu.BL.Profiles
                 .ForMember(dst => dst.Workflows, opt => opt.MapFrom(src => src.Workflows.Where(x => x.State == WorkflowStateEnum.Active)
                                                                                         .Select(x => x.ModelWorkflow).GroupBy(x => x.Name)))
                 .ForMember(dst => dst.UserCount, opt => opt.MapFrom(src => src.AgendaRoles.Where(x => x.UserId != 0).Select(x => x.UserId).Distinct().Count()))
-                .ForMember(dst => dst.NotFilledRoleCount, opt => opt.MapFrom(src => src.AgendaRoles.Where(x => x.UserId == 0).Select(x => x.UserId).Count()));
+                .ForMember(dst => dst.NotFilledRoleCount, opt => opt.MapFrom(src => src.AgendaRoles.Where(x => x.UserId == null).Count()));
  
             CreateMap<IGrouping<string, ModelWorkflowEntity>, WorkflowCountDTO>()
                 .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.Key))

@@ -1,4 +1,11 @@
-﻿using itu.DAL.Entities;
+﻿//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       David Mihola
+// Kontakt:     xmihol00@stud.fit.vutbr.cz
+//=================================================================================================================
+
+using itu.DAL.Entities;
 using itu.DAL.Entities.Tasks;
 using itu.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,11 @@
-﻿using itu.Common.Enums;
+﻿//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Vítek Hnatovskyj
+// Kontakt:     xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================
+
+using itu.Common.Enums;
 using itu.DAL.Entities;
 using itu.DAL.Entities.HelperClasses;
 using System;
@@ -31,9 +38,10 @@ namespace itu.DAL.Repositories
                 .Include(a => a.Agenda)
                 .Include(b => b.Files)
                 .Include(c => c.ModelWorkflow)
-                .ThenInclude(e => e.WorkflowTasks)
-                .ThenInclude(g => g.ModelTask)
+                    .ThenInclude(e => e.WorkflowTasks)
+                        .ThenInclude(g => g.ModelTask)
                 .Include(d => d.Tasks)
+                .Include(x => x.Notes)
                 .FirstAsync(x => x.Id == id);
         }
 
@@ -61,7 +69,6 @@ namespace itu.DAL.Repositories
                 .Where(x => x.Agenda.Id == id));
             }
             return workflows;
-            //return _dbSet.Where(x => Ids.All(y => x.Agenda.Id == y)).ToList();
         }
         public List<WorkflowEntity> GetWorkflowsByModel(List<int> Ids)
         {
@@ -77,7 +84,6 @@ namespace itu.DAL.Repositories
                 .Where(x => x.ModelWorkflow.Id == id));
             }
             return workflows;
-            //return _dbSet.Where(x => Ids.All(y => x.ModelWorkflow.Id == y)).ToList();
         }
 
         public Task<ModelWorkflowEntity> GetWorkflowModel(int id)
@@ -87,10 +93,7 @@ namespace itu.DAL.Repositories
 
         public Task<TaskEntity> GetCurrentTask(int id)
         {
-            return _context.Tasks.FirstAsync(x => x.WorkflowId == id && x.Active == true);
+            return _context.Tasks.FirstOrDefaultAsync(x => x.WorkflowId == id && x.Active == true);
         }
-        
-
-
     }
 }

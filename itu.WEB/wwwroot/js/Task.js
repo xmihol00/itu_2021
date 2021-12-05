@@ -111,7 +111,6 @@ function SolveTask(id)
     })
     .done(function (result) 
     {
-        Changes = false;
         document.getElementById("LeaveModId").style.display = "none";
         document.getElementById("DetailDiv").innerHTML = result;
         
@@ -120,7 +119,7 @@ function SolveTask(id)
         ed.remove();
         let clk = document.getElementById("CLK");
         CountDown();
-
+        
         document.getElementById("Card" + TaskId).classList.remove("card-selected");
         document.getElementById("Select" + TaskId).style.display = "none";
         document.getElementById("Unselect" + TaskId).style.display = "block";
@@ -129,9 +128,10 @@ function SolveTask(id)
         let select = document.getElementById("Select" + TaskId);
         select.style.display = "block";
         select.appendChild(clk);
-
+        
         document.getElementById("Unselect" + TaskId).style.display = "none";
         CheckCompulsory();
+        Changes = false;
     })
     .fail(function() 
     {
@@ -436,7 +436,7 @@ function DeleteFile(id)
     .done(function(result)
     {
         document.getElementById("FilesId").innerHTML = result;
-        ShowAlert("Soubor byl úspěšně smazán");
+        ShowAlert("Soubor byl úspěšně smazán.");
     })
     .fail(function() 
     {
@@ -636,11 +636,20 @@ function Solve(type)
     })
     .done(function (result) 
     {
-        document.getElementById("BodyId").innerHTML = result;
-        TaskId = document.getElementById("IdOfTaskId").value;
-        SetCountDown();
-        CheckCompulsory();
-        document.getElementById("TaskCountId").innerText = document.getElementsByClassName("card").length;
+        let body = document.getElementById("BodyId");
+        body.innerHTML = result;
+        let tid = document.getElementById("IdOfTaskId");
+        if (tid)
+        {
+            TaskId = tid.value;
+            SetCountDown();
+            CheckCompulsory();
+        }
+        else
+        {
+            clearInterval(CountDownInterval);
+        } 
+        document.getElementById("TaskCountId").innerText = body.getElementsByClassName("card").length;
         Changes = false;
         ShowAlert("Úkol byl úspěšně vyřešen.");
     })
@@ -702,7 +711,6 @@ function WorkflowCB()
 function AgendaClicked(id)
 {
     AgendaId = id;
-    console.log(Changes);
     if (Changes)
     {
         Callback = AgendaCB;

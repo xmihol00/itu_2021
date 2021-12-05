@@ -20,7 +20,6 @@ namespace itu.BL.DTOs.Workflow.Search
         public uint Results { get; set; }
         public List<IdNameAgendaDTO> Agendas { get; set; }
         public List<IdNameModelDTO> WorkflowModels { get; set; }
-        public List<IdTypeTaskDTO> ActiveTasks { get; set; }
         public List<WorkflowStateEnum> States { get; set; }
         public List<WorkflowStateEnum> SelectedStates { get; set; }
         public List<int> SelectedAgendaIds { get; set; }

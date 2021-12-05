@@ -23,7 +23,6 @@ namespace itu.BL.DTOs.Task
         public string WorkflowName { get; set; }
         public string AgendaName { get; set; }
         public string Note { get; set; }
-        public string Requirements { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public PriorityEnum Priority { get; set; }
@@ -31,6 +30,7 @@ namespace itu.BL.DTOs.Task
         public bool Active { get; set; }
         public int WorkflowId { get; set; }
         public int AgendaId { get; set; }
+        public string UserName { get; set; }
         public List<AllFileDTO> Files { get; set; }
 
         public string ToAction()

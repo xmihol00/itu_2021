@@ -1,10 +1,10 @@
 @*//=================================================================================================================
-    // Projekt:     VUT, FIT, ITU, celosemestralni projekt
-    // Datum:       28. 11. 2021
-    // Autor:       Vítek Hnatovskyj
-    // Kontakt:     xhnato00@stud.fit.vutbr.cz
-    //=================================================================================================================*@
-
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Vítek Hnatovskyj
+// Kontakt:     xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================
+*@
 @model List<AllWorkflowDTO>
 
 <div id="listView">
@@ -14,49 +14,49 @@
             <div class="row">
                 <div class="col-md-4 border-right">
                     <div class="workflow-tasks-overview" style="margin-left:-5%;">
-                        <div class="model-svg" id="@Model[i].Agenda.Id" onclick="ShowModelDetail(this)">
-                            @await Html.PartialAsync("../Model/svg", (Model[i].Agenda.Id, Model[i].CurrentTask.Order, 240, 180))
+                        <div data-order="@Model[i].CurrentTask?.Order" class="c-pointer" id="@Model[i].ModelWorkflow.Id" onclick="ShowModelDetail(this)">
+                            @await Html.PartialAsync("../Model/svg", (Model[i].ModelWorkflow.Id, Model[i].CurrentTask?.Order ?? 0, 240, 180))
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    
                     <div class="row">
-                      
                         <div class="col-4">
                             Stav workflow
                             <h5><span class="" style="margin-top: -2px;">@Model[i].State.ToLabel()</span></h5>
                         </div>
-                        <div class="col-4">
-                            Typ aktualního úkolu
-                            <h5><span class="" style="margin-top: -2px;"> <a>@Model[i].CurrentTask.Type</a></span></h5>
-                        </div>
-                        <div class="col-4">
-                            Očekávané dokončení úkolu
-                            <h5><span class="" style="margin-top: -2px;">@Model[i].CurrentTask.End.ToString("dd. MM. yyyy")</span></h5>
-                        </div>
+                        @if (@Model[i].CurrentTask != null)
+                        {
+                            <div class="col-4">
+                                Typ aktualního úkolu
+                                <h5><span class="" style="margin-top: -2px;"> <a>@Model[i].CurrentTask.Type</a></span></h5>
+                            </div>
+                            <div class="col-4">
+                                Očekávané dokončení úkolu
+                                <h5><span class="" style="margin-top: -2px;">@Model[i].CurrentTask.End.ToString("dd. MM. yyyy")</span></h5>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-8">
+                                <h5>Workflow nemá aktivní úkol</h5>
+                            </div>
+                        }
                     </div>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6" style="text-align:center;">
-
-                            @if (Model[i].Name == null)
-                            {
-                                <h3 style="color:grey">
-                                    @("Nepojmenovaná workflow")
-                                </h3>
-                            }
-                            else
-                            {
-                                <h5>
-                                    <a href="~/Workflow/Detail/@(Model[i].Id)">
-                                        @(Model[i].Name)
-                                    </a>
-                                </h5>
-                            }
-                        </div>
-                        <div class="col-3"></div>
-                    </div>
+                    @if (Model[i].Name == null)
+                    {
+                        <h2 class="text-center" style="color:grey">
+                            @("Nepojmenovaná workflow")
+                        </h2>
+                    }
+                    else
+                    {
+                        <h2 class="text-center">
+                            <a href="~/Workflow/Detail/@(Model[i].Id)">
+                                @(Model[i].Name)
+                            </a>
+                        </h2>
+                    }
                     <div class="row" style="margin-top:20px">
                         <div class="col-6">
                             Model worklfow
@@ -66,24 +66,20 @@
                             Agenda
                             <h5><p style="word-break:break-word"><a href="~/Agenda/Detail/@(Model[i].Agenda.Id)">@Model[i].Agenda.Name</a></p></h5>
                         </div>
-
-
                     </div>
-
                 </div>
             </div>
         </div>
-
     }
 </div>
 <div id="tableView" class="list-group-item" style="cursor:default!important;" hidden>
 
     <div class="row" style="text-align:center; word-break:break-word;">
-        <div class="col-2 border-right">
-            <span class="workflow-set-states states-enum">Model workflow</span>
-        </div>
         <div class="col-4 border-right">
             <span class="workflow-set-states states-enum">Název workflow</span>
+        </div>
+        <div class="col-2 border-right">
+            <span class="workflow-set-states states-enum">Model workflow</span>
         </div>
         <div class="col-2 border-right">
             <span class="workflow-set-states states-enum">Odkaz na agendu</span>
@@ -101,22 +97,27 @@
         foreach (var workflow in Model)
         {
         <div class="row border-bottom" style="text-align:center;">
-            <div class="col-2 border-right">
-                <span class=""><a href="~/Workflow/Detail/@(workflow.Id)">@workflow.Name</a></span>
-            </div>
             <div class="col-4 border-right">
                 <span class="">@workflow.ModelWorkflow.Name</span>
             </div>
-
-
+            <div class="col-2 border-right">
+                <span class=""><a href="~/Workflow/Detail/@(workflow.Id)">@workflow.Name</a></span>
+            </div>
             <div class="col-2 border-right">
                 <span class=""><a href="~/Agenda/Detail/@(workflow.Agenda.Id)">@workflow.Agenda.Name</a></span>
             </div>
             <div class="col-2 border-right">
-                <span class="">@workflow.CurrentTask.End.ToString("dd. MM. yyyy")</span>
+                @if (@workflow.CurrentTask != null)
+                {
+                    <span>@workflow.CurrentTask.End.ToString("dd. MM. yyyy")</span>
+                }
+                else
+                {
+                    <span>nemá aktivní úkol</span>
+                }
             </div>
             <div class="col-2 border-right">
-                <span class="">@workflow.State</span>
+                <span class="">@workflow.State.ToLabel()</span>
             </div>
 
         </div>

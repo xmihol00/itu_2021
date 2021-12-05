@@ -51,7 +51,7 @@ namespace itu.WEB.Controllers
             AgendaDetailDTO dto = await _facade.AddRole(role, ViewBag.Id);
             response.Roles = await this.RenderViewAsync("Partial/_Roles", dto, true);
             response.Workflows = await this.RenderViewAsync("Partial/_AgendaWorkflows", dto, true);
-            return Ok(dto);
+            return Ok(response);
         }
 
         [HttpPost]
@@ -61,7 +61,7 @@ namespace itu.WEB.Controllers
             AgendaDetailDTO dto = await _facade.EditRole(role, ViewBag.Id);
             response.Roles = await this.RenderViewAsync("Partial/_Roles", dto, true);
             response.Workflows = await this.RenderViewAsync("Partial/_AgendaWorkflows", dto, true);
-            return Ok(dto);
+            return Ok(response);
         }
 
         [HttpGet]
@@ -71,7 +71,7 @@ namespace itu.WEB.Controllers
             AgendaDetailDTO dto = await _facade.RemoveRole(id, ViewBag.Id);
             response.Roles = await this.RenderViewAsync("Partial/_Roles", dto, true);
             response.Workflows = await this.RenderViewAsync("Partial/_AgendaWorkflows", dto, true);
-            return Ok(dto);
+            return Ok(response);
         }
 
         [HttpPost]

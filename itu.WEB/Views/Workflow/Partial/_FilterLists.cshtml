@@ -1,9 +1,11 @@
-@*//================================================================    =================================================
-    // Projekt:     VUT, FIT, ITU, celosemestralni projekt
-    // Datum:       28. 11. 2021
-    // Autor:       Vítek Hnatovskyj
-    // Kontakt:     xhnato00@stud.fit.vutbr.cz
-    //=================================================================================================================*@
+@*
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Vítek Hnatovskyj
+// Kontakt:     xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================
+*@
 
 @model SearchDTO
 
@@ -22,7 +24,7 @@
                 onclick="Filter(null, this)"
                 value="@(agenda.Name)">
                 @(agenda.Name)
-                <i class="fas fa-times close-cross-right"></i>
+                <i class="fas fa-times float-right mt-1"></i>
             </li>
         }
         else
@@ -35,10 +37,7 @@
 
             </li>
         }
-
     }
-
-
 </ul>
 <ul id="ModelList" class="list-group" style="margin-bottom: 1rem">
     <li class="list-group-item list-item-search">Modely workflow</li>
@@ -55,7 +54,7 @@
                 onclick="Filter(null, this)"
                 value="@(model.Name)">
                 @(model.Name)
-                <i class="fas fa-times close-cross-right"></i>
+                <i class="fas fa-times float-right mt-1"></i>
             </li>
         }
         else
@@ -68,16 +67,12 @@
 
             </li>
         }
-
     }
-
-
 </ul>
 <ul id="StateList" class="list-group" style="margin-bottom: 1rem">
     <li class="list-group-item list-item-search search-headder">Stav workflow</li>
     @if (Model.States != null)
     {
-
         foreach (var state in Model.States)
         {
             if (Model.SelectedStates != null && Model.SelectedStates.Contains(state))
@@ -87,7 +82,7 @@
                     onclick="Filter(null, this)"
                     value="@(state)">
                     @(state.ToLabel())
-                    <i class="fas fa-times close-cross-right"></i>
+                    <i class="fas fa-times float-right mt-1"></i>
                 </li>
             }
             else
@@ -100,9 +95,6 @@
 
                 </li>
             }
-
         }
-
     }
-
 </ul>

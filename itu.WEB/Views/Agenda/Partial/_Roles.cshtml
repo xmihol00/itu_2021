@@ -42,12 +42,15 @@
                         @if (String.IsNullOrEmpty(role.UserName))
                         {
                             filled = false;
-                            <select id="@($"Sel{group.Key}Id")" class="form-control mb-2" name="@role.Id">
-                                @foreach (var user in Model.Users)
-                                {
-                                    <option value="@user.Id">@user.FullName</option>
-                                }           
-                            </select>
+                            if (admin)
+                            {
+                                <select id="@($"Sel{group.Key}Id")" class="form-control mb-2" name="@role.Id">
+                                    @foreach (var user in Model.Users)
+                                    {
+                                        <option value="@user.Id">@user.FullName</option>
+                                    }           
+                                </select>
+                            }
                         }
                         else
                         {

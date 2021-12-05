@@ -31,5 +31,6 @@ namespace itu.BL.DTOs.Workflow
         public List<DetailTaskDTO> Tasks { get; set; }
         public TaskEntity CurrentTask { get; set; }
         public List<AllFileDTO> Files { get; set; }
+        public List<AllNoteDTO> Notes { get; set; }
     }
 }

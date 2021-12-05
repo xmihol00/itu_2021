@@ -1,9 +1,11 @@
-﻿@*//=================================================================================================================
-    // Projekt:     VUT, FIT, ITU, celosemestralni projekt
-    // Datum:       28. 11. 2021
-    // Autor:       Vítek Hnatovskyj
-    // Kontakt:     xhnato00@stud.fit.vutbr.cz
-    //=================================================================================================================*@
+﻿@*
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Vítek Hnatovskyj
+// Kontakt:     xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================
+*@
 
 @model OverviewWorkflowDTO
 <script>
@@ -11,13 +13,10 @@
 </script>
 <link rel="stylesheet" href="~/css/Workflow.css" />
 <script src="~/js/Workflow.js"></script>
-<div class="container">
-    <div class="page-headline d-flex justify-content-between">
-
-        <h1 class="headline-color">Přehled workflow</h1>
-
+<div class="container mt-0">
+    <div class="page-headline d-flex justify-content-between p-0">
+        <h1 class="page-name">Přehled workflow</h1>
     </div>
-
     <div class="row">
         <div class="col-12 col-md-3">
             <div id="FilterLists" class="mt-2">
@@ -36,9 +35,7 @@
                                    autocomplete="off"
                                    class="search-bar-input"
                                    placeholder="Vyhledávání dle názvu workflow" />
-                            <div id="SuggestionList" class="list-suggestion">
-
-                            </div>
+                            <div id="SuggestionList" class="list-suggestion"></div>
                         </div>
                         <button id="Search" type="button" class="btn btn-primary"
                                 style="margin-left: -1%;" onclick="Filter()">
@@ -46,28 +43,24 @@
                         </button>
                     </div>
                     <div class="row" style="margin-top:15px;">
-
                         <div class="col-3"></div>
                         <div class="col-6">
-
                             <div style="">
                                 <button class="btn-primary" onclick="setListView();">Listové zobrazení</button>
                                 <button class="btn-primary" onclick="setTableView();">Tabulkové zobrazení</button>
-
                             </div>
                         </div>
                         <div class="col-3"></div>
                     </div>
                 </div>
             </div>
-
             <div class="m-md-1">
-                    <div style="margin-bottom: 7px;">
-                        <div id="Workflows">
-                            @await Html.PartialAsync("Partial/_Workflows", Model.AllWorkflow)
-                        </div>
+                <div style="margin-bottom: 7px;">
+                    <div id="Workflows">
+                        @await Html.PartialAsync("Partial/_Workflows", Model.AllWorkflow)
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>

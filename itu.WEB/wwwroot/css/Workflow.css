@@ -1,4 +1,13 @@
-﻿.workflow-div-overview {
+﻿/*
+//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autori:      Vítek Hnatovskyj
+// Kontakty:    xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================
+*/
+
+.workflow-div-overview {
     margin-inline: -8px;
     padding-inline: 8px;
     margin-bottom: 5px;
@@ -84,6 +93,7 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    color: var(--color-text-default)!important;
 }
 
 .page-headline {
@@ -114,11 +124,16 @@
 
 
 .list-group-item:first-child {
-    border-top-width: 1px
+    border-top-width: 1px;
+    color: #000;
 }
 
 .border-right {
     border-right: solid 1px var(--color-bg-input) !important;
+}
+
+.border-left {
+    border-left: solid 1px var(--color-bg-input) !important;
 }
 
 .border-bottom {
@@ -130,7 +145,32 @@
 }
 
 .selected-state-enum {
-    color: var(--color-text-default);
+    color: var(--color-text-inverted);
     background-color: var(--color-focus);
     font-weight: 600;
+}
+
+.selected-state-enum:hover {
+    color: var(--color-text-default);
+    background-color: var(--color-bg);
+    border: solid 1px var(--color-focus) !important;
+    font-weight: 600;
+}
+
+.model-svg {
+    width: 400px;
+    height: 361px;
+    cursor: pointer;
+    background-color: var(--color-bg-transparent);
+}
+h4{
+    color: var(--color-text-default);
+}
+.custom-text
+{
+    color: var(--color-text-default);
+}
+
+tr, td {
+    color: var(--color-text-default);
 }
