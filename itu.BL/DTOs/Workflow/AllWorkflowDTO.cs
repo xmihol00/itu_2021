@@ -4,6 +4,7 @@
 // Autor:       Vítek Hnatovskyj
 // Kontakt:     xhnato00@stud.fit.vutbr.cz
 //=================================================================================================================
+
 using itu.Common.Enums;
 using itu.DAL.Entities;
 using itu.DAL.Entities.Tasks;

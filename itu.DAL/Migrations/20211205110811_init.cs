@@ -1,4 +1,6 @@
-﻿using System;
+﻿// vygenerovano
+
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace itu.DAL.Migrations

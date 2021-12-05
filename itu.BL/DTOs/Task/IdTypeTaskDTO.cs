@@ -1,4 +1,11 @@
-﻿using itu.Common.Enums;
+﻿//=================================================================================================================
+// Projekt:     VUT, FIT, ITU, celosemestralni projekt
+// Datum:       28. 11. 2021
+// Autor:       Vítek Hnatovskyj
+// Kontakt:     xhnato00@stud.fit.vutbr.cz
+//=================================================================================================================
+
+using itu.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +23,6 @@ namespace itu.BL.DTOs.Task
     {
         public bool Equals(IdTypeTaskDTO x, IdTypeTaskDTO y)
         {
-            // Two items are equal if their keys are equal.
             return x.Id == y.Id;
         }
 
