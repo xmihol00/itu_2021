@@ -436,7 +436,7 @@ function DeleteFile(id)
     .done(function(result)
     {
         document.getElementById("FilesId").innerHTML = result;
-        ShowAlert("Soubor byl úspěšně smazán");
+        ShowAlert("Soubor byl úspěšně smazán.");
     })
     .fail(function() 
     {

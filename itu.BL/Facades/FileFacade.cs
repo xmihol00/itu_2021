@@ -54,7 +54,7 @@ namespace itu.BL.Facades
             await _repository.Create(newFile);
             await _repository.Save();
 
-            return _mapper.Map<List<AllFileDTO>>(await _repository.AllFiles(taskId));
+            return _mapper.Map<List<AllFileDTO>>(await _repository.AllFiles(task.WorkflowId));
         }
 
         public async Task<List<AllFileDTO>> Delete(int id)

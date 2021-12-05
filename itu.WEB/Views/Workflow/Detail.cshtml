@@ -11,7 +11,6 @@
 <script src="/js/Task.js"></script>
 <script src="/js/Workflow.js"></script>
 <div class="detail-container border-left border-right border-bottom">
-
     <div class="page-headline d-flex justify-content-between p-0">
         <h1 class="page-name">Detail workflow</h1>
     </div>
@@ -28,7 +27,6 @@
             }
         </div>
         <div class="col-6 float-right" style="text-align:right;">
-
             <span style="float:right">Stav<h4>@Model.State.ToLabel() </h4></span>
         </div>
     </div>
@@ -37,7 +35,6 @@
             <span style="text-align:center;"><h1> @Model.Name</h1></span>
         </div>
     </div>
-
     <div class="row">
         <div class="col">
             <span style="float: left;">Název agendy<h4><a href="~/Agenda/Detail/@(Model.Agenda.Id)">@Model.Agenda.Name</a></h4></span>

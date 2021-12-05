@@ -132,6 +132,10 @@
     border-right: solid 1px var(--color-bg-input) !important;
 }
 
+.border-left {
+    border-left: solid 1px var(--color-bg-input) !important;
+}
+
 .border-bottom {
     border-bottom: solid 1px var(--color-bg-input) !important;
 }
