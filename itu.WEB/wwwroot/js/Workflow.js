@@ -87,7 +87,7 @@ function ShowModelDetail(element) {
         {
             async: true,
             type: "GET",
-            url: "/Agenda/ModelDetail/" + element.id + "/" + element.getAttribute("data-order"),
+            url: "/Agenda/ModelDetail/" + element.id + "/" + (element.getAttribute("data-order") | 0),
         })
         .done(function (result) {
             document.getElementById("SvgDataId").innerHTML = result;

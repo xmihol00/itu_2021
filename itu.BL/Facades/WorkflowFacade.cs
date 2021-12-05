@@ -36,6 +36,11 @@ namespace itu.BL.Facades
 
             overview.AllWorkflow = _mapper.Map<List<AllWorkflowDTO>>(await _workflow.GetAllWorkflows());
             overview.SearchOptions = new SearchDTO();
+
+            foreach (var workflow in overview.AllWorkflow)
+            {
+                workflow.CurrentTask = workflow.Tasks.FirstOrDefault(x => x.Active == true);
+            }
           
             overview.SearchOptions.States = new List<WorkflowStateEnum>(){ 
                 WorkflowStateEnum.Active, 

@@ -49,7 +49,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 11, 5, 11, 8, 2, 118, DateTimeKind.Local).AddTicks(9965),
+                            Creation = new DateTime(2021, 11, 5, 12, 8, 11, 173, DateTimeKind.Local).AddTicks(1072),
                             Description = "Agenda správující jednoduchuché nákupy bez vúběrových řízení",
                             Name = "Nákupy"
                         },
@@ -57,7 +57,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 2,
                             AdministratorId = 2,
-                            Creation = new DateTime(2021, 11, 30, 11, 8, 2, 120, DateTimeKind.Local).AddTicks(2145),
+                            Creation = new DateTime(2021, 11, 30, 12, 8, 11, 174, DateTimeKind.Local).AddTicks(2576),
                             Description = "Agenda spravující menší a střední zakázky",
                             Name = "Malé a střední zakázky"
                         },
@@ -65,7 +65,7 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             AdministratorId = 1,
-                            Creation = new DateTime(2021, 10, 6, 11, 8, 2, 120, DateTimeKind.Local).AddTicks(2166),
+                            Creation = new DateTime(2021, 10, 6, 12, 8, 11, 174, DateTimeKind.Local).AddTicks(2598),
                             Description = "Agenda spravující důležité velké zakázky",
                             Name = "Velké zakázky"
                         });
@@ -318,17 +318,157 @@ namespace itu.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Data = new byte[] { 5, 7, 8, 9, 10 }
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
                         },
                         new
                         {
                             Id = 2,
-                            Data = new byte[] { 5, 7, 8, 9, 10 }
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
                         },
                         new
                         {
                             Id = 3,
-                            Data = new byte[] { 6, 6, 8, 9, 10 }
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Data = new byte[] { 100, 117, 109, 109, 121, 10 }
                         });
                 });
 
@@ -389,7 +529,7 @@ namespace itu.DAL.Migrations
                             Name = "soubor1.txt",
                             Number = "ID_7823",
                             Type = 0,
-                            Version = 1,
+                            Version = 2,
                             WorkflowId = 1
                         },
                         new
@@ -401,7 +541,315 @@ namespace itu.DAL.Migrations
                             Number = "ID_11",
                             Type = 2,
                             Version = 1,
+                            WorkflowId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FileDataId = 4,
+                            MIME = "text/plain",
+                            Name = "soubor2.txt",
+                            Number = "ID_11",
+                            Type = 2,
+                            Version = 3,
+                            WorkflowId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FileDataId = 5,
+                            MIME = "text/plain",
+                            Name = "soubor2.txt",
+                            Number = "ID_11",
+                            Type = 2,
+                            Version = 3,
+                            WorkflowId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            FileDataId = 6,
+                            MIME = "text/plain",
+                            Name = "vyhodnoceni.txt",
+                            Number = "ID_889",
+                            Type = 0,
+                            Version = 1,
                             WorkflowId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            FileDataId = 7,
+                            MIME = "text/plain",
+                            Name = "vypracovani prijeti.txt",
+                            Number = "ID_890",
+                            Type = 2,
+                            Version = 1,
+                            WorkflowId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            FileDataId = 8,
+                            MIME = "text/plain",
+                            Name = "odhad ceny.txt",
+                            Number = "ID_866",
+                            Type = 3,
+                            Version = 1,
+                            WorkflowId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            FileDataId = 9,
+                            MIME = "text/plain",
+                            Name = "odhad ceny.txt",
+                            Number = "ID_866",
+                            Type = 3,
+                            Version = 2,
+                            WorkflowId = 2
+                        },
+                        new
+                        {
+                            Id = 10,
+                            FileDataId = 10,
+                            MIME = "text/plain",
+                            Name = "potreba.txt",
+                            Number = "ID_12",
+                            Type = 0,
+                            Version = 1,
+                            WorkflowId = 4
+                        },
+                        new
+                        {
+                            Id = 11,
+                            FileDataId = 11,
+                            MIME = "text/plain",
+                            Name = "schvaleni.txt",
+                            Number = "ID_13",
+                            Type = 2,
+                            Version = 1,
+                            WorkflowId = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            FileDataId = 12,
+                            MIME = "text/plain",
+                            Name = "zadani.txt",
+                            Number = "ID_18",
+                            Type = 0,
+                            Version = 1,
+                            WorkflowId = 5
+                        },
+                        new
+                        {
+                            Id = 13,
+                            FileDataId = 13,
+                            MIME = "text/plain",
+                            Name = "zadani.txt",
+                            Number = "ID_18",
+                            Type = 0,
+                            Version = 2,
+                            WorkflowId = 5
+                        },
+                        new
+                        {
+                            Id = 14,
+                            FileDataId = 14,
+                            MIME = "text/plain",
+                            Name = "zadani.txt",
+                            Number = "ID_18",
+                            Type = 0,
+                            Version = 3,
+                            WorkflowId = 5
+                        },
+                        new
+                        {
+                            Id = 15,
+                            FileDataId = 15,
+                            MIME = "text/plain",
+                            Name = "schvaleni.txt",
+                            Number = "ID_19",
+                            Type = 2,
+                            Version = 1,
+                            WorkflowId = 5
+                        },
+                        new
+                        {
+                            Id = 16,
+                            FileDataId = 16,
+                            MIME = "text/plain",
+                            Name = "schvaleni.txt",
+                            Number = "ID_19",
+                            Type = 2,
+                            Version = 2,
+                            WorkflowId = 5
+                        },
+                        new
+                        {
+                            Id = 27,
+                            FileDataId = 27,
+                            MIME = "text/plain",
+                            Name = "smlouva.txt",
+                            Number = "ID_20",
+                            Type = 5,
+                            Version = 1,
+                            WorkflowId = 5
+                        },
+                        new
+                        {
+                            Id = 17,
+                            FileDataId = 17,
+                            MIME = "text/plain",
+                            Name = "abcd.txt",
+                            Number = "ID_189",
+                            Type = 0,
+                            Version = 1,
+                            WorkflowId = 6
+                        },
+                        new
+                        {
+                            Id = 18,
+                            FileDataId = 18,
+                            MIME = "text/plain",
+                            Name = "efgh.txt",
+                            Number = "ID_191",
+                            Type = 2,
+                            Version = 1,
+                            WorkflowId = 6
+                        },
+                        new
+                        {
+                            Id = 19,
+                            FileDataId = 19,
+                            MIME = "text/plain",
+                            Name = "ijkl.txt",
+                            Number = "ID_193",
+                            Type = 5,
+                            Version = 1,
+                            WorkflowId = 6
+                        },
+                        new
+                        {
+                            Id = 26,
+                            FileDataId = 26,
+                            MIME = "text/plain",
+                            Name = "nopl.txt",
+                            Number = "ID_194",
+                            Type = 3,
+                            Version = 1,
+                            WorkflowId = 6
+                        },
+                        new
+                        {
+                            Id = 20,
+                            FileDataId = 20,
+                            MIME = "text/plain",
+                            Name = ":D.txt",
+                            Number = "EDDDQ",
+                            Type = 0,
+                            Version = 2,
+                            WorkflowId = 6
+                        },
+                        new
+                        {
+                            Id = 21,
+                            FileDataId = 21,
+                            MIME = "text/plain",
+                            Name = ":).txt",
+                            Number = "EAAAQ",
+                            Type = 2,
+                            Version = 2,
+                            WorkflowId = 6
+                        },
+                        new
+                        {
+                            Id = 22,
+                            FileDataId = 22,
+                            MIME = "text/plain",
+                            Name = ":-).txt",
+                            Number = "EEEEQ",
+                            Type = 5,
+                            Version = 2,
+                            WorkflowId = 6
+                        },
+                        new
+                        {
+                            Id = 23,
+                            FileDataId = 23,
+                            MIME = "text/plain",
+                            Name = ";).txt",
+                            Number = "EEEEQ",
+                            Type = 5,
+                            Version = 3,
+                            WorkflowId = 6
+                        },
+                        new
+                        {
+                            Id = 24,
+                            FileDataId = 24,
+                            MIME = "text/plain",
+                            Name = ":0.txt",
+                            Number = "AEQQQ",
+                            Type = 3,
+                            Version = 2,
+                            WorkflowId = 6
+                        },
+                        new
+                        {
+                            Id = 25,
+                            FileDataId = 25,
+                            MIME = "text/plain",
+                            Name = ":].txt",
+                            Number = "VVQQQ",
+                            Type = 4,
+                            Version = 1,
+                            WorkflowId = 6
+                        },
+                        new
+                        {
+                            Id = 28,
+                            FileDataId = 28,
+                            MIME = "text/plain",
+                            Name = "fakt to potrebujeme.txt",
+                            Number = "2434",
+                            Type = 0,
+                            Version = 1,
+                            WorkflowId = 7
+                        },
+                        new
+                        {
+                            Id = 29,
+                            FileDataId = 29,
+                            MIME = "text/plain",
+                            Name = "ale opravdu to potrebujeme.txt",
+                            Number = "2434",
+                            Type = 0,
+                            Version = 2,
+                            WorkflowId = 7
+                        },
+                        new
+                        {
+                            Id = 30,
+                            FileDataId = 30,
+                            MIME = "text/plain",
+                            Name = "tak si to kupte.txt",
+                            Number = "2435",
+                            Type = 2,
+                            Version = 1,
+                            WorkflowId = 7
+                        },
+                        new
+                        {
+                            Id = 31,
+                            FileDataId = 31,
+                            MIME = "text/plain",
+                            Name = "hulky!!.txt",
+                            Number = "2435",
+                            Type = 0,
+                            Version = 1,
+                            WorkflowId = 8
                         });
                 });
 
@@ -1160,11 +1608,11 @@ namespace itu.DAL.Migrations
                             Id = 2,
                             Active = false,
                             DelayReason = "dovolená",
-                            End = new DateTime(2021, 11, 22, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(1040),
+                            End = new DateTime(2021, 11, 22, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(1305),
                             Note = "Přijato bez výhrad",
                             Order = 2,
                             Priority = 2,
-                            Start = new DateTime(2021, 11, 19, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(2527),
+                            Start = new DateTime(2021, 11, 19, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(2763),
                             UserId = 2,
                             WorkflowId = 1,
                             Accepted = true,
@@ -1177,10 +1625,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 7,
                             Active = true,
-                            End = new DateTime(2021, 12, 10, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4254),
+                            End = new DateTime(2021, 12, 10, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4473),
                             Order = 2,
                             Priority = 0,
-                            Start = new DateTime(2021, 11, 30, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4255),
+                            Start = new DateTime(2021, 11, 30, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4475),
                             UserId = 2,
                             WorkflowId = 2,
                             Accepted = false,
@@ -1191,10 +1639,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 10,
                             Active = false,
-                            End = new DateTime(2021, 12, 3, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4266),
+                            End = new DateTime(2021, 12, 3, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4573),
                             Order = 2,
                             Priority = 2,
-                            Start = new DateTime(2021, 11, 30, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4268),
+                            Start = new DateTime(2021, 11, 30, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4574),
                             UserId = 3,
                             WorkflowId = 4,
                             Accepted = true,
@@ -1207,11 +1655,11 @@ namespace itu.DAL.Migrations
                         {
                             Id = 13,
                             Active = false,
-                            End = new DateTime(2021, 11, 22, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4279),
+                            End = new DateTime(2021, 11, 22, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4586),
                             Note = "Cena je měsíčně.",
                             Order = 2,
                             Priority = 2,
-                            Start = new DateTime(2021, 11, 17, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4281),
+                            Start = new DateTime(2021, 11, 17, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4587),
                             UserId = 1,
                             WorkflowId = 5,
                             Accepted = true,
@@ -1224,10 +1672,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 17,
                             Active = false,
-                            End = new DateTime(2021, 11, 13, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5577),
+                            End = new DateTime(2021, 11, 13, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5844),
                             Order = 2,
                             Priority = 2,
-                            Start = new DateTime(2021, 11, 6, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5578),
+                            Start = new DateTime(2021, 11, 6, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5846),
                             UserId = 1,
                             WorkflowId = 6,
                             Accepted = true,
@@ -1240,10 +1688,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 23,
                             Active = false,
-                            End = new DateTime(2021, 11, 15, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6451),
+                            End = new DateTime(2021, 11, 15, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6688),
                             Order = 2,
                             Priority = 2,
-                            Start = new DateTime(2021, 11, 9, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6453),
+                            Start = new DateTime(2021, 11, 9, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6689),
                             UserId = 3,
                             WorkflowId = 7,
                             Accepted = true,
@@ -1256,10 +1704,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 25,
                             Active = false,
-                            End = new DateTime(2021, 11, 15, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6460),
+                            End = new DateTime(2021, 11, 15, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6697),
                             Order = 2,
                             Priority = 0,
-                            Start = new DateTime(2021, 11, 9, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6461),
+                            Start = new DateTime(2021, 11, 9, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6698),
                             UserId = 2,
                             WorkflowId = 8,
                             Accepted = false,
@@ -1290,10 +1738,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 21,
                             Active = true,
-                            End = new DateTime(2021, 12, 21, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6436),
+                            End = new DateTime(2021, 12, 21, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6674),
                             Order = 6,
                             Priority = 3,
-                            Start = new DateTime(2021, 12, 3, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6442),
+                            Start = new DateTime(2021, 12, 3, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6679),
                             UserId = 1,
                             WorkflowId = 6,
                             Cancallation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1316,10 +1764,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 4,
                             Active = false,
-                            End = new DateTime(2021, 12, 2, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(3732),
+                            End = new DateTime(2021, 12, 2, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(3965),
                             Order = 4,
                             Priority = 2,
-                            Start = new DateTime(2021, 11, 28, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(3738),
+                            Start = new DateTime(2021, 11, 28, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(3971),
                             UserId = 2,
                             WorkflowId = 1,
                             Conclusion = "Vše se zdá být v pořádku, cena odpovídá."
@@ -1346,11 +1794,11 @@ namespace itu.DAL.Migrations
                         {
                             Id = 1,
                             Active = false,
-                            End = new DateTime(2021, 11, 19, 11, 8, 2, 122, DateTimeKind.Local).AddTicks(8670),
+                            End = new DateTime(2021, 11, 19, 12, 8, 11, 176, DateTimeKind.Local).AddTicks(8957),
                             Note = "Testovaci předvyplněný úkol obsahující i poznámku.",
                             Order = 1,
                             Priority = 3,
-                            Start = new DateTime(2021, 11, 15, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(48),
+                            Start = new DateTime(2021, 11, 15, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(313),
                             UserId = 1,
                             WorkflowId = 1,
                             Benefit = "Testovací předvyplněný úkol obsahující i přínos organizaci.",
@@ -1361,10 +1809,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 6,
                             Active = false,
-                            End = new DateTime(2021, 11, 30, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4248),
+                            End = new DateTime(2021, 11, 30, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4468),
                             Order = 1,
                             Priority = 3,
-                            Start = new DateTime(2021, 11, 27, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4250),
+                            Start = new DateTime(2021, 11, 27, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4469),
                             UserId = 5,
                             WorkflowId = 2,
                             Benefit = "Všichni nás pak budou mít rádi :).",
@@ -1375,10 +1823,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 8,
                             Active = true,
-                            End = new DateTime(2022, 1, 14, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4257),
+                            End = new DateTime(2022, 1, 14, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4477),
                             Order = 1,
                             Priority = 2,
-                            Start = new DateTime(2021, 12, 4, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4259),
+                            Start = new DateTime(2021, 12, 4, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4479),
                             UserId = 1,
                             WorkflowId = 3,
                             Currency = 0,
@@ -1388,10 +1836,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 9,
                             Active = false,
-                            End = new DateTime(2021, 11, 30, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4261),
+                            End = new DateTime(2021, 11, 30, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4565),
                             Order = 1,
                             Priority = 2,
-                            Start = new DateTime(2021, 11, 20, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4263),
+                            Start = new DateTime(2021, 11, 20, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4568),
                             UserId = 5,
                             WorkflowId = 4,
                             Benefit = "Místo 8 zahradnílů nám budou stačit 4.",
@@ -1402,11 +1850,11 @@ namespace itu.DAL.Migrations
                         {
                             Id = 12,
                             Active = false,
-                            End = new DateTime(2021, 11, 17, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4275),
+                            End = new DateTime(2021, 11, 17, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4582),
                             Note = "Cena je měsíčně.",
                             Order = 1,
                             Priority = 1,
-                            Start = new DateTime(2021, 11, 10, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4277),
+                            Start = new DateTime(2021, 11, 10, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4583),
                             UserId = 1,
                             WorkflowId = 5,
                             Benefit = "Nebudeme muset zaměstnancum platit přesčasy za úklid.",
@@ -1417,10 +1865,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 16,
                             Active = false,
-                            End = new DateTime(2021, 11, 6, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5572),
+                            End = new DateTime(2021, 11, 6, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5840),
                             Order = 1,
                             Priority = 1,
-                            Start = new DateTime(2021, 10, 26, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5573),
+                            Start = new DateTime(2021, 10, 26, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5841),
                             UserId = 1,
                             WorkflowId = 6,
                             Benefit = "Uvidíme i pohled z jiného úhlu.",
@@ -1431,10 +1879,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 22,
                             Active = false,
-                            End = new DateTime(2021, 11, 9, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6447),
+                            End = new DateTime(2021, 11, 9, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6683),
                             Order = 1,
                             Priority = 0,
-                            Start = new DateTime(2021, 11, 1, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6448),
+                            Start = new DateTime(2021, 11, 1, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6684),
                             UserId = 1,
                             WorkflowId = 7,
                             Benefit = "Potřebujeme drony pro střežení pozemku!",
@@ -1445,10 +1893,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 24,
                             Active = false,
-                            End = new DateTime(2021, 11, 9, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6456),
+                            End = new DateTime(2021, 11, 9, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6693),
                             Order = 1,
                             Priority = 1,
-                            Start = new DateTime(2021, 11, 3, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6457),
+                            Start = new DateTime(2021, 11, 3, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6694),
                             UserId = 1,
                             WorkflowId = 8,
                             Benefit = "Musíme se naučit kouzlit.",
@@ -1459,10 +1907,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 26,
                             Active = true,
-                            End = new DateTime(2021, 12, 15, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6464),
+                            End = new DateTime(2021, 12, 15, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6701),
                             Order = 1,
                             Priority = 3,
-                            Start = new DateTime(2021, 12, 4, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(6465),
+                            Start = new DateTime(2021, 12, 4, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6702),
                             UserId = 1,
                             WorkflowId = 9,
                             Currency = 0,
@@ -1493,10 +1941,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 5,
                             Active = true,
-                            End = new DateTime(2021, 12, 20, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4223),
+                            End = new DateTime(2021, 12, 20, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4447),
                             Order = 5,
                             Priority = 1,
-                            Start = new DateTime(2021, 12, 2, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4230),
+                            Start = new DateTime(2021, 12, 2, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4452),
                             UserId = 1,
                             WorkflowId = 1,
                             ContractType = 0,
@@ -1507,11 +1955,11 @@ namespace itu.DAL.Migrations
                         {
                             Id = 14,
                             Active = false,
-                            End = new DateTime(2021, 12, 1, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4284),
+                            End = new DateTime(2021, 12, 1, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4590),
                             Note = "Je to DPP.",
                             Order = 3,
                             Priority = 3,
-                            Start = new DateTime(2021, 11, 22, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4285),
+                            Start = new DateTime(2021, 11, 22, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4592),
                             UserId = 3,
                             WorkflowId = 5,
                             ContractType = 4,
@@ -1523,10 +1971,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 19,
                             Active = false,
-                            End = new DateTime(2021, 12, 1, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5592),
+                            End = new DateTime(2021, 12, 1, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5860),
                             Order = 4,
                             Priority = 3,
-                            Start = new DateTime(2021, 11, 22, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5594),
+                            Start = new DateTime(2021, 11, 22, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5861),
                             UserId = 3,
                             WorkflowId = 6,
                             ContractType = 2,
@@ -1555,10 +2003,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 3,
                             Active = false,
-                            End = new DateTime(2021, 11, 28, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(2785),
+                            End = new DateTime(2021, 11, 28, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(3015),
                             Order = 3,
                             Priority = 0,
-                            Start = new DateTime(2021, 11, 22, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(2791),
+                            Start = new DateTime(2021, 11, 22, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(3021),
                             UserId = 3,
                             WorkflowId = 1,
                             Currency = 1,
@@ -1569,10 +2017,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 11,
                             Active = true,
-                            End = new DateTime(2021, 12, 31, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4272),
+                            End = new DateTime(2021, 12, 31, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4578),
                             Order = 3,
                             Priority = 0,
-                            Start = new DateTime(2021, 12, 3, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(4273),
+                            Start = new DateTime(2021, 12, 3, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(4579),
                             UserId = 1,
                             WorkflowId = 4,
                             Currency = 0,
@@ -1583,10 +2031,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 18,
                             Active = false,
-                            End = new DateTime(2021, 11, 22, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5587),
+                            End = new DateTime(2021, 11, 22, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5855),
                             Order = 3,
                             Priority = 2,
-                            Start = new DateTime(2021, 11, 13, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5589),
+                            Start = new DateTime(2021, 11, 13, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5856),
                             UserId = 2,
                             WorkflowId = 6,
                             Currency = 0,
@@ -1612,10 +2060,10 @@ namespace itu.DAL.Migrations
                         {
                             Id = 15,
                             Active = true,
-                            End = new DateTime(2021, 12, 14, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5488),
+                            End = new DateTime(2021, 12, 14, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5828),
                             Order = 4,
                             Priority = 1,
-                            Start = new DateTime(2021, 12, 1, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5496),
+                            Start = new DateTime(2021, 12, 1, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5835),
                             UserId = 2,
                             WorkflowId = 5,
                             PublishEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1625,14 +2073,14 @@ namespace itu.DAL.Migrations
                         {
                             Id = 20,
                             Active = false,
-                            End = new DateTime(2021, 12, 3, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5596),
+                            End = new DateTime(2021, 12, 3, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5865),
                             Order = 5,
                             Priority = 1,
-                            Start = new DateTime(2021, 12, 1, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5598),
+                            Start = new DateTime(2021, 12, 1, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5866),
                             UserId = 2,
                             WorkflowId = 6,
-                            PublishEnd = new DateTime(2022, 1, 29, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5922),
-                            PublishStart = new DateTime(2021, 12, 30, 11, 8, 2, 123, DateTimeKind.Local).AddTicks(5600)
+                            PublishEnd = new DateTime(2022, 1, 29, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(6168),
+                            PublishStart = new DateTime(2021, 12, 30, 12, 8, 11, 177, DateTimeKind.Local).AddTicks(5868)
                         });
                 });
 

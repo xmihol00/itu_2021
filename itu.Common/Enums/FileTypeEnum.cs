@@ -46,7 +46,7 @@ namespace itu.Common.Enums
                     return "zveřejnění";
                 
                 case FileTypeEnum.Contract:
-                    return "smouva";
+                    return "smlouva";
                 
                 case FileTypeEnum.Archivation:
                     return "archivace";
