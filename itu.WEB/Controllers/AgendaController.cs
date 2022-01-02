@@ -16,8 +16,6 @@ using itu.BL.Facades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.Serialization.Formatters.Soap;
-using System.Xml.Serialization;
 
 namespace itu.WEB.Controllers
 {
@@ -81,32 +79,7 @@ namespace itu.WEB.Controllers
 
         [HttpPost]
         public async Task<IActionResult> EditData(EditDataDTO data)
-        {
-            /*if (!Request.Body.CanSeek)
-            {
-                // We only do this if the stream isn't *already* seekable,
-                // as EnableBuffering will create a new stream instance
-                // each time it's called
-                Request.EnableBuffering();
-            }
-
-            Request.Body.Position = 0;
-
-            //new StringReader("<Products><Product><Id>1</Id><Name>My XML product</Name></Product><Product><Id>2</Id><Name>My second product</Name></Product></Products>");
-            TextReader reader = new StringReader(data.Description);
-            var xmlFormatter = new XmlSerializer(typeof(SOAPEnvelope));
-            List<Product> productList = null;
-            SOAPEnvelope env;
-            object obj;
-            try
-            {
-                env = (SOAPEnvelope)xmlFormatter.Deserialize(reader); 
-            }
-            catch (Exception e)
-            {
-                
-            }*/
-            
+        {          
             await _facade.EditData(data);
             return Ok();
         }
@@ -158,26 +131,5 @@ namespace itu.WEB.Controllers
         {
             return PartialView("Partial/_AgendaWorkflows", await _facade.ChangeWorfklowState(change));
         }
-    }
-
-    public class Product
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    } 
-
-    [XmlRoot(ElementName = "Body", Namespace = "http://schemas.xmlsoap.org/soap/envelope/")]
-    public class ResponseBody<T>
-    {
-        [XmlElement(Namespace = "http://xmlns.xyz.com/webservice/version")]
-        public T Product { get; set; }
-    }
-
-    [XmlType(Namespace = "http://schemas.xmlsoap.org/soap/envelope/")]
-    [XmlRoot(ElementName = "Envelope", Namespace = "http://schemas.xmlsoap.org/soap/envelope/")]
-    public class SOAPEnvelope
-    {
-        [XmlElement(ElementName = "Body", Namespace = "http://schemas.xmlsoap.org/soap/envelope/")]
-        public ResponseBody<Product> body { get; set; }
     }
 }
