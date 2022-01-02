@@ -127,6 +127,7 @@ namespace itu.BL.Facades
             var userId = await _repository.NextUserId(dto.AgendaId, firtModel.Type);
 
             var task = TaskEntity.Factory(firtModel.Type);
+            task.Order = 1;
             task.Start = DateTime.Now;
             task.End = DateTime.Now.AddDays(firtModel.Difficulty);
             task.UserId = userId.Value;
